@@ -1,0 +1,258 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+
+:root {
+    --purple: #4A4DE7;
+    --purple-light: #8A8DFF;
+    --blue-dark: #0B0E26;
+    --blue-mid: #1a1f4a;
+    --pink: #FF6B6B;
+    --yellow: #FFB347;
+    --green: #4AFF8B;
+}
+
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top, var(--blue-mid), var(--blue-dark));
+    color: #F5F6FF;
+}
+
+/* ===== HEADER ===== */
+header {
+    padding: 20px;
+    text-align: center;
+    background: rgba(20, 24, 60, 0.85);
+    border-bottom: 1px solid var(--purple);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+header h1 {
+    margin: 0;
+    font-family: 'Orbitron';
+    color: var(--purple-light);
+    letter-spacing: 3px;
+}
+
+nav {
+    margin-top: 15px;
+}
+
+nav a {
+    color: #C5C7F7;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    color: var(--yellow);
+}
+
+nav a.active {
+    color: var(--purple-light);
+    text-shadow: 0 0 8px var(--purple-light);
+}
+
+/* ===== FORMULAIRE CONTACT ===== */
+.form-container {
+    width: 90%;
+    max-width: 700px;
+    margin: 40px auto;
+    background: rgba(20,24,60,0.75);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid var(--purple);
+    box-shadow: 0 0 15px rgba(138,141,255,0.2);
+}
+/* ===== Styles spécifiques pour la page contact ===== */
+.auto-style1 {
+    text-align: center;
+}
+.auto-style2 {
+    color: #5659CA;
+}
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.img-box {
+    text-align: center;
+    cursor: pointer;
+}
+.img-box img {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: 0.3s;
+}
+.img-box img.selected {
+    border-color: #FFB347;
+    box-shadow: 0 0 15px #FFB347;
+}
+#msg.error {
+    color: #FF6B6B;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.btn-submit {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #5659CA;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-submit:hover {
+    background-color: #4547a1;
+}
+
+/* ===== GRID 4 IMAGES ===== */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.img-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.img-box label {
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--purple-light);
+    text-align: center;
+    text-shadow: 0 0 6px rgba(138,141,255,0.5);
+}
+
+.img-box img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid var(--purple);
+    box-shadow: 0 0 12px rgba(138,141,255,0.3);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.img-box img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 18px var(--purple-light);
+}
+
+.img-box img.selected {
+    border: 3px solid var(--yellow);
+    box-shadow: 0 0 18px var(--yellow);
+}
+
+/* ===== FORM INPUTS & TEXTAREA ===== */
+form label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    color: var(--purple-light);
+}
+
+form input,
+form textarea,
+form select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--purple);
+    color: white;
+    font-size: 15px;
+}
+
+form textarea {
+    height: 150px;
+    resize: none;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    border-color: var(--purple-light);
+    box-shadow: 0 0 10px var(--purple-light);
+    outline: none;
+}
+
+/* ===== BOUTON ENVOYER ===== */
+.btn-submit {
+    background: var(--purple);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    background: var(--purple-light);
+    transform: scale(1.05);
+}
+
+/* Animation fusée */
+.decollage {
+    animation: fly 1.2s ease forwards;
+}
+
+@keyframes fly {
+    0% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.05); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+/* Message succès ou erreur */
+#msg {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 600;
+}
+
+#msg.success {
+    color: var(--green);
+    text-shadow: 0 0 8px var(--green);
+}
+
+#msg.error {
+    color: var(--pink);
+    text-shadow: 0 0 8px var(--pink);
+}
+
+/* ===== FOOTER ===== */
+footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 15px;
+    color: var(--purple-light);
+    border-top: 1px solid var(--purple);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .image-grid {
+        grid-template-columns: 1fr;
+    }
+    .img-box img {
+        height: 200px;
+    }
+}

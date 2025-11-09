@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Galaxy Web</title>
+
+    <!-- Import du CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icônes (Font Awesome ou Lucide) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header>
+        <h1><i class="fas fa-satellite"></i> CONTACT</h1>
+        <nav>
+            <a href="default.html">Accueil</a>
+            <a href="works.html">Travaux</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="about.html">À propos</a>
+            <a href="shop.html">Boutique</a>
+            <a class="active" href="../contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- ===== FORMULAIRE DE CONTACT ===== -->
+    <section class="form-container">
+        <form id="contactForm">
+            <label for="nom">Nom complet</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom..." required>
+
+            <label for="email">Adresse e-mail</label>
+            <input type="email" id="email" name="email" placeholder="exemple@email.com" required>
+
+            <label for="sujet">Sujet</label>
+            <input type="text" id="sujet" name="sujet"  value="Contenu incorrect" readonly>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Écrivez votre message ici..." required></textarea>
+
+            <button type="submit" class="btn-submit">
+                <i class="fas fa-paper-plane"></i> Envoyer
+            </button>
+
+            <p id="msg"></p>
+        </form>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>Prowered by TEC_MAX 2025 © Version 1.0✨</p>
+    </footer>
+
+    <!-- ===== SCRIPT ===== -->
+    <script>
+    // Gestion du message de validation
+    const form = document.getElementById('contactForm');
+    const msg = document.getElementById('msg');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        msg.textContent = 'Message envoyé avec succès 🚀';
+        msg.className = 'success';
+
+        form.reset();
+
+        const button = document.querySelector('.btn-submit');
+        button.classList.add('decollage');
+        setTimeout(() => button.classList.remove('decollage'), 1500);
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Galaxy Web</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <h1><i class="fas fa-satellite"></i> CONTACT</h1>
+    <nav>
+        <a href="default.html">Accueil</a>
+        <a href="works.html">Travaux</a>
+        <a href="services.html">Services</a>
+        <a href="blog.html">Blog</a>
+        <a href="about.html">À propos</a>
+        <a href="shop.html">Boutique</a>
+        <a href="contact.html" class="active">Contact</a>
+    </nav>
+</header>
+
+<!-- ===== FORMULAIRE DE CONTACT ===== -->
+<section class="form-container">
+
+    <!-- === ZONE DE 4 IMAGES === -->
+    <div class="image-grid">
+        <div class="img-box">
+            <label>Contenu incorrect</label>
+            <img src="images/Contenu incorrect.jpg" alt="Contenu_incorrect" data-page="probleme/Contenu incorrect.html">
+        </div>
+        <div class="img-box">
+            <label>Problème technique</label>
+            <img src="images/Problème technique.jpg" alt="Problème_technique" data-page="probleme/Problème technique.html">
+        </div>
+        <div class="img-box">
+            <label>Problème de sécurité</label>
+            <img src="images/Problème de sécurité.jpg" alt="Problème_de_sécurité" data-page="probleme/Problème de sécurité.html">
+        </div>
+        <div class="img-box">
+            <label>Compte bloqué</label>
+            <img src="images/Compte bloqué.jpg" alt="Compte_bloqué" data-page="probleme/Compte bloqué.html">
+        </div>
+    </div>
+
+    <!-- FORMULAIRE -->
+    <form id="contactForm">
+        <!-- DROPDOWN LANGUE -->
+        <label for="language">Choisir la langue</label>
+        <select id="language" name="language">
+            <option value="" class="auto-style2">Choisir la langue</option>
+            <option value="fr" class="auto-style2">Français</option>
+            <option value="en" class="auto-style2">Anglais</option>
+            <option value="ar" class="auto-style2">Arabe</option>
+        </select>
+
+        <!-- BOUTON ENVOYER -->
+        <button type="submit" class="btn-submit">
+            <i class="fas fa-paper-plane"></i> Suivant
+        </button>
+
+        <!-- Inscription -->
+        <label for="nom">
+            <div class="auto-style1">
+                <span class="auto-style3">Vous n'êtes pas inscrit ? </span>
+                <span class="auto-style4">Inscrivez-vous</span>
+            </div>
+        </label>
+
+        <!-- MESSAGE D'ERREUR -->
+        <p id="msg"></p>
+    </form>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+        <p>Prowered by TEC_MAX 2025 © Version 1.0✨</p>
+</footer>
+
+<!-- ===== SCRIPT ===== -->
+<script>
+// Récupération des éléments
+const form = document.getElementById('contactForm');
+const msg = document.getElementById('msg');
+const languageSelect = document.getElementById('language');
+const images = document.querySelectorAll('.img-box img');
+
+let selectedPage = "";
+
+// ===== Gestion de la sélection d'image =====
+images.forEach(img => {
+    img.addEventListener('click', () => {
+        images.forEach(i => i.classList.remove('selected'));
+        img.classList.add('selected');
+        selectedPage = img.dataset.page; // Page à ouvrir
+    });
+});
+
+// ===== Gestion du formulaire =====
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    const language = languageSelect.value;
+
+    if (!selectedPage) {
+        msg.textContent = "Veuillez sélectionner un problème.";
+        msg.className = "error";
+        return;
+    }
+
+    if (!language) {
+        msg.textContent = "Veuillez choisir une langue.";
+        msg.className = "error";
+        return;
+    }
+
+    // Redirection vers la page correspondant à l'image avec paramètre langue
+    window.location.href = `${selectedPage}?lang=${encodeURIComponent(language)}`;
+});
+</script>
+
+</body>
+</html>
