@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="46208b49-aa9e-422d-9a6e-1ccb6ca2c1c8" name="Changes" comment="firsttt">
+      <change afterPath="$PROJECT_DIR$/prj webb/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prj webb/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prj webb/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prj webb/controller/GoogleLoginController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prj webb/controller/LoginController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prj webb/view/FrontOffice/assets/js/forgotpsw.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prj webb/view/FrontOffice/assets/js/login.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prj webb/view/FrontOffice/assets/js/profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/controller/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/controller/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/model/user.php" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/model/user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/view/badge.html" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/view/FrontOffice/badge.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/view/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/view/FrontOffice/assets/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/view/css/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/view/FrontOffice/assets/css/profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/view/css/register.css" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/view/FrontOffice/assets/css/register.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/view/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/view/FrontOffice/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/view/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/view/BackEnd/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/view/img/google-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/view/FrontOffice/assets/img/google-icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/view/js/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/view/FrontOffice/assets/js/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/view/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/view/FrontOffice/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/view/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/view/FrontOffice/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/view/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/view/FrontOffice/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/prj webb/view/updatepsw.html" beforeDir="false" afterPath="$PROJECT_DIR$/prj webb/view/FrontOffice/updatepsw.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Zaaaak11&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/alcoholic-lain/projet-web.git&quot;,
+    &quot;accountId&quot;: &quot;55be6606-3ede-44c9-bb62-a146e811ac6a&quot;
+  }
+}</component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="35G3YBQ5HvCDgLV2xV5rH73FrNo" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "user__branch",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/zak/PhpstormProjects/projet-web",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\zak\PhpstormProjects\projet-web" />
+      <recent name="C:\Users\zak\PhpstormProjects\projet-web\user" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-PS-252.27397.112" />
+        <option value="bundled-php-predefined-a98d8de5180a-b35feea871ed-com.jetbrains.php.sharedIndexes-PS-252.27397.112" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="46208b49-aa9e-422d-9a6e-1ccb6ca2c1c8" name="Changes" comment="" />
+      <created>1762722625695</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762722625695</updated>
+      <workItem from="1762722627003" duration="169000" />
+      <workItem from="1762722836504" duration="3019000" />
+      <workItem from="1762729548678" duration="68000" />
+    </task>
+    <task id="LOCAL-00001" summary="dfsdf">
+      <option name="closed" value="true" />
+      <created>1762722710526</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1762722710526</updated>
+    </task>
+    <task id="LOCAL-00002" summary="first">
+      <option name="closed" value="true" />
+      <created>1762723584276</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1762723584276</updated>
+    </task>
+    <task id="LOCAL-00003" summary="first">
+      <option name="closed" value="true" />
+      <created>1762723620728</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1762723620728</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="dfsdf" />
+    <MESSAGE value="first" />
+    <option name="LAST_COMMIT_MESSAGE" value="first" />
+  </component>
+</project>
