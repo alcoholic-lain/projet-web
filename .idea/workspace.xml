@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="HTML relatives à ma partie et intégration des templates">
-      <change afterPath="$PROJECT_DIR$/veiw/Admin/a_Innovation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/veiw/Client/src/details_Innovation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/veiw/Client/src/list_Innovation.html" afterDir="false" />
+    <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="a_innovatio&#10; et details_Innovation.html et list_">
+      <change afterPath="$PROJECT_DIR$/veiw/Client/assets/js/innovation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Admin/a_Innovation.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Admin/a_Innovation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Admin/assets/lala" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/assets/css/style_i_list.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/src/details_Innovation.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/src/details_Innovation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/src/list_Innovation.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/src/list_Innovation.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +25,8 @@
       <list>
         <option value="PHP File" />
         <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -74,6 +78,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
+    "JavaScript Debug.a_Innovation.html.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
@@ -82,7 +87,11 @@
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "C:/Users/hicham/Desktop/projet-web/model/Innovation",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -113,6 +122,7 @@
       <option name="presentableId" value="Default" />
       <updated>1762724591261</updated>
       <workItem from="1762724592785" duration="95000" />
+      <workItem from="1762726646404" duration="4340000" />
     </task>
     <task id="LOCAL-00001" summary="1st">
       <option name="closed" value="true" />
@@ -138,7 +148,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762725496288</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="a_innovatio&#10; et details_Innovation.html et list_">
+      <option name="closed" value="true" />
+      <created>1762726199782</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1762726199782</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,6 +166,7 @@
     <MESSAGE value="1st" />
     <MESSAGE value="2st" />
     <MESSAGE value="HTML relatives à ma partie et intégration des templates" />
-    <option name="LAST_COMMIT_MESSAGE" value="HTML relatives à ma partie et intégration des templates" />
+    <MESSAGE value="a_innovatio&#10; et details_Innovation.html et list_" />
+    <option name="LAST_COMMIT_MESSAGE" value="a_innovatio&#10; et details_Innovation.html et list_" />
   </component>
 </project>

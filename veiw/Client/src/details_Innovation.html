@@ -1,11 +1,35 @@
-<section class="container">
-    <h2>Détails de l’innovation</h2>
-    <p><strong>Titre :</strong> Innovation </p>
-    <p><strong>Description :</strong> Desc</p>
-    <p><strong>Votes :</strong> +120</p>
-    <p><strong>Commentaires :</strong></p>
-    <ul>
-        <li>Bravo pour l’idée !</li>
-        <li>Super utile dans le domaine spatial.</li>
-    </ul>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails de l'Innovation</title>
+    <link rel="stylesheet" href="../Assets/css/style_i_list.css">
+</head>
+<body>
+<header>
+    <h1>Détails de l'Innovation</h1>
+    <nav>
+        <a href="list.html">← Retour à la liste</a>
+    </nav>
+</header>
+
+<section class="details">
+    <h2 id="titre"></h2>
+    <p><strong>Description :</strong> <span id="desc"></span></p>
+    <p><strong>Date de création :</strong> <span id="date"></span></p>
+    <p><strong>Statut :</strong> <span id="statut"></span></p>
+
+    <h3>Commentaires</h3>
+    <ul id="commentaires"></ul>
+
+    <h3>Votes</h3>
+    <p><strong>👍 <span id="upvotes"></span></strong> | 👎 <span id="downvotes"></span></p>
 </section>
+
+<footer>
+    <p>&copy; 2025 - Innovation DB - Hichem Challakhi</p>
+</footer>
+
+<script src="../Assets/js/innovation.js"></script>
+</body>
+</html>
