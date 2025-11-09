@@ -34,7 +34,6 @@
     if (pseudo === "") {
       createLabel(pseudoInput, " Veuillez saisir votre pseudo", false);
       isFormValid = false;
-      pseudo.focus();
     } else {
       createLabel(pseudoInput, " Pseudo valide", true);
     }
@@ -87,7 +86,7 @@
     }
     //envoi si form valide
     if(isFormValid){
-  fetch("../controller/RegisterController.php", {
+  fetch("../../../controller/RegisterController.php", {
     method: 'POST',
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     body: `pseudo=${encodeURIComponent(pseudo)}&email=${encodeURIComponent(email)}&psw=${encodeURIComponent(psw)}&planet=${encodeURIComponent(planet)}`
