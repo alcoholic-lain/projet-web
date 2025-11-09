@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.profile-info img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+}
+
+.profile-details {
+    flex: 1;
+}
+
+.profile-details p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.profile-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.profile-actions button:hover {
+    background-color: #0056b3;
+}
+
+.change-password {
+    margin-top: 20px;
+}
+
+.change-password input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.change-password button {
+    background-color: #28a745;
+}
+
+.change-password button:hover {
+    background-color: #1e7e34;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TuniSpace - Connexion</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <h1 class="title">🚀 Mission Control</h1>
+            <p class="subtitle">Connectez-vous pour commencer votre aventure cosmique</p>
+
+            <form action="../controller/LoginController.php" method="POST" class="login-form">
+               
+
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email"  placeholder="exemple@tunisspace.com">
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password"  placeholder="••••••••••">
+                </div>
+
+                <button type="submit" class="btn-login">Se connecter</button>
+
+
+
+                 <div class="google-login">
+                        <p>— ou —</p>
+                        <a href="../controller/GoogleLoginController.php" class="btn-google">
+                            <img src="img/google-icon.png" alt="Google Icon"> 
+                            Se connecter avec Google
+                        </a>
+                    </div>
+                <p class="forgot">
+                    Vous avez oublié votre mot de passe ou souhaitez en créer un nouveau ?
+                    <a href="updatepsw.html">Cliquez ici</a>
+                </p>
+
+                <p class="signup">
+                    Pas encore astronaute ? <a href="register.html">Créez votre compte</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    <script src="js/login.js"></script>
+</body>
+</html>
