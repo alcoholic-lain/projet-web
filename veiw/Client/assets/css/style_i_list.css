@@ -178,3 +178,157 @@ footer {
     border-top: 1px solid #4A4DE7;
     background: rgba(20, 24, 60, 0.7);
 }
+/* === FORMULAIRE - AJOUT INNOVATION === */
+.form-container {
+    background: rgba(20, 24, 60, 0.9);
+    border: 1px solid #4A4DE7;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(74, 77, 231, 0.4);
+    padding: 50px 60px;
+    width: 520px;
+    margin: 80px auto;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container label {
+    color: #C5C7F7;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-container input,
+.form-container textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #4A4DE7;
+    background-color: rgba(255,255,255,0.05);
+    color: #F5F6FF;
+    font-size: 15px;
+    transition: 0.3s;
+    margin-bottom: 25px;
+}
+
+.form-container input:focus,
+.form-container textarea:focus {
+    outline: none;
+    border-color: #8A8DFF;
+    box-shadow: 0 0 10px #4A4DE7;
+}
+
+.form-container textarea {
+    resize: vertical;
+    min-height: 130px;
+}
+
+.form-container input[type="file"] {
+    border: none;
+    padding: 8px;
+    background: none;
+    color: #C5C7F7;
+}
+
+/* === BOUTON DE VALIDATION === */
+.btn-submit {
+    width: 100%;
+    background-color: #FFB347;
+    color: #0B0E26;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #ffcb6b;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 179, 71, 0.6);
+}
+
+/* === MESSAGES DE VALIDATION === */
+#msg {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+.success { color: #4AFF8B; }
+.error { color: #FF6B6B; }
+
+/* === EN-TÊTE DU FORMULAIRE === */
+header h1 {
+    font-family: 'Orbitron', sans-serif;
+    color: #8A8DFF;
+    font-size: 30px;
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+header nav {
+    margin-top: 10px;
+}
+
+header nav a {
+    color: #FFB347;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+    .form-container {
+        width: 90%;
+        padding: 30px 25px;
+    }
+
+    header h1 {
+        font-size: 22px;
+        flex-direction: column;
+        text-align: center;
+    }
+}
+/* === APERÇU D’IMAGE === */
+#apercu-image {
+    border: 1px solid #4A4DE7;
+    margin-top: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(74, 77, 231, 0.4);
+    animation: fadeIn 0.8s ease;
+}
+
+/* === EFFET DÉCOLLAGE SUR LE BOUTON === */
+.btn-submit.decollage {
+    animation: rocketLaunch 1.5s ease-in-out;
+}
+
+@keyframes rocketLaunch {
+    0% { transform: scale(1) translateY(0); box-shadow: 0 0 10px #FFB347; }
+    25% { transform: scale(1.1) translateY(-10px); box-shadow: 0 0 15px #ffcb6b; }
+    50% { transform: scale(1.2) translateY(-20px); box-shadow: 0 0 25px #FFD973; }
+    75% { transform: scale(1.1) translateY(-10px); opacity: 0.8; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
