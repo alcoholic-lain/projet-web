@@ -144,9 +144,138 @@ function rejeterInnovation(id) {
         document.getElementById(`statut-${id}`).textContent = inv.statut;
     }
 }
+function ajouterInnovation() {
+    const form = document.getElementById("form-innovation");
+    if (!form) return;
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const titre = document.getElementById("titre").value.trim();
+        const categorie = document.getElementById("categorie").value.trim();
+        const description = document.getElementById("description").value.trim();
+        const pieceJointe = document.getElementById("pieceJointe").files[0];
+        const msg = document.getElementById("msg");
+
+        if (!titre || !categorie || !description) {
+            msg.textContent = "⚠️ Tous les champs sont obligatoires.";
+            msg.className = "error";
+            return;
+        }
+
+        const newInnovation = {
+            id: innovations.length + 1,
+            titre,
+            categorie,
+            description,
+            dateCreation: new Date().toISOString().split("T")[0],
+            statut: "En attente",
+            commentaires: [],
+            votes: { up: 0, down: 0 },
+            piece: pieceJointe ? pieceJointe.name : null,
+        };
+
+        innovations.push(newInnovation);
+
+        msg.textContent = "✅ Innovation soumise avec succès !";
+        msg.className = "success";
+
+        // Réinitialiser le formulaire
+        form.reset();
+
+        // Rediriger vers la liste après 2 secondes
+        setTimeout(() => {
+            window.location.href = "list_Innovation.html";
+        }, 2000);
+    });
+}
+// ---------- ADD PAGE: preview + submit (no blocking) ----------
+function setupAddInnovationPage() {
+    const form = document.getElementById("form-innovation");
+    if (!form) return;
+
+    const titreEl = document.getElementById("titre");
+    const catEl = document.getElementById("categorie");
+    const descEl = document.getElementById("description");
+    const fileEl = document.getElementById("pieceJointe");
+    const msg = document.getElementById("msg");
+    const submitBtn = form.querySelector(".btn-submit");
+
+    // ---- Preview image (optional) ----
+    const preview = document.createElement("img");
+    preview.id = "apercu-image";
+    preview.style.display = "none";
+    preview.style.maxWidth = "100%";
+    preview.style.marginTop = "15px";
+    preview.style.borderRadius = "10px";
+    preview.style.boxShadow = "0 0 15px rgba(74,77,231,0.5)";
+    fileEl.parentNode.insertBefore(preview, fileEl.nextSibling);
+
+    fileEl.addEventListener("change", (e) => {
+        const f = e.target.files[0];
+        if (f && f.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = ev => {
+                preview.src = ev.target.result;
+                preview.style.display = "block";
+            };
+            reader.readAsDataURL(f);
+        } else {
+            preview.style.display = "none";
+            preview.src = "";
+        }
+    });
+
+    // ---- Submit handler (uses native validation) ----
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Trigger native ‘required’ checks; if invalid, stop here.
+        if (!form.reportValidity()) return;
+
+        // Small rocket animation – not blocking
+        submitBtn.classList.add("decollage");
+        setTimeout(() => submitBtn.classList.remove("decollage"), 1500);
+
+        // Build the new innovation (file is optional)
+        const newInnovation = {
+            id: innovations.length + 1,
+            titre: (titreEl.value || "").trim(),
+            categorie: (catEl.value || "").trim(),
+            description: (descEl.value || "").trim(),
+            dateCreation: new Date().toISOString().split("T")[0],
+            statut: "En attente",
+            commentaires: [],
+            votes: { up: 0, down: 0 },
+            piece: fileEl.files[0] ? fileEl.files[0].name : null
+        };
+
+        // Basic JS-level check in case attributes ‘required’ were removed
+        if (!newInnovation.titre || !newInnovation.categorie || !newInnovation.description) {
+            msg.textContent = "⚠️ Tous les champs (sauf la pièce jointe) sont obligatoires.";
+            msg.className = "error";
+            return;
+        }
+
+        innovations.push(newInnovation);
+
+        msg.textContent = "✅ Innovation soumise avec succès !";
+        msg.className = "success";
+        form.reset();
+        preview.style.display = "none";
+
+        // Redirect to list
+        setTimeout(() => { window.location.href = "list_Innovation.html"; }, 1800);
+    });
+}
+
 
 // === INITIALISATION ===
 document.addEventListener("DOMContentLoaded", () => {
+    const path = location.pathname;
+
+    if (path.includes("add_Innovation.html")) setupAddInnovationPage();
+    if (location.pathname.includes("add_Innovation.html")) ajouterInnovation();
     if (location.pathname.includes("list_Innovation.html")) afficherListe();
     if (location.pathname.includes("details_Innovation.html")) afficherDetails();
     if (location.pathname.includes("a_Innovation.html")) afficherAdmin();
