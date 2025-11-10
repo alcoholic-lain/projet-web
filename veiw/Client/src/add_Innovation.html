@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Soumettre une Innovation</title>
+    <link rel="stylesheet" href="../assets/css/style_i_list.css" />
+</head>
+<body>
+<header>
+    <h1>💡 Soumettre une nouvelle innovation</h1>
+    <nav>
+        <a href="list_Innovation.html">⬅ Retour à la liste</a>
+    </nav>
+</header>
+
+<section class="form-container">
+    <form id="form-innovation">
+        <label>Titre :</label>
+        <input type="text" id="titre" placeholder="Ex: Rover LunaNova" required>
+
+        <label>Catégorie :</label>
+        <input type="text" id="categorie" placeholder="Ex: Exploration Spatiale" required>
+
+        <label>Description :</label>
+        <textarea id="description" placeholder="Décris ton innovation..." required></textarea>
+
+        <label>Pièce jointe (optionnel) :</label>
+        <input type="file" id="pieceJointe" accept="image/*, .pdf">
+
+        <button type="submit" class="btn-forgot">Soumettre</button>
+    </form>
+
+    <p id="msg" style="margin-top:10px; font-weight:bold;"></p>
+</section>
+
+<script src="../assets/js/innovation.js"></script>
+</body>
+</html>
