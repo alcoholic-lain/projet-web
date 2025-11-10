@@ -17,7 +17,6 @@ body::before {
     position: fixed;
     width: 200%;
     height: 200%;
-    background: transparent url('stars.png') repeat;
     background-size: contain;
     animation: stars 200s linear infinite;
     z-index: 0;
