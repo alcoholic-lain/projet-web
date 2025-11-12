@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container-fluid h-100">
+    <div class="row h-100">
+
+        <!-- Sidebar -->
+        <div class="col-3 bg-white border-end p-3">
+            <h5>My Chats</h5>
+            <ul class="list-group">
+                <?php if (empty($convs)): ?>
+                <li class="list-group-item text-muted">No chats</li>
+                <?php else: ?>
+                <?php foreach ($convs as $c): ?>
+                <?php $active = (isset($conv) && $c['id'] == $conv['id']); ?>
+                <li class="list-group-item <?= $active ? 'active' : '' ?>">
+                    <a href="index.php?a=view&id=<?= $c['id'] ?>" class="text-decoration-none">
+                        <?= htmlspecialchars($c['title'] ?? 'Chat') ?>
+                        <?php if (!empty($c['is_group'])): ?>
+                        <span class="badge bg-primary ms-2">G</span>
+                        <?php endif; ?>
+                    </a>
+                </li>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </ul>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="col-9 d-flex flex-column h-100">
+            <?php if (isset($conv) && is_array($conv)): ?>
+            <div class="bg-white p-3 border-bottom d-flex align-items-center">
+                <h5 class="mb-0"><?= htmlspecialchars($conv['title']) ?></h5>
+                <div class="ms-auto">
+                    <?php foreach ($members as $m): ?>
+                    <img src="../../uploads/<?= htmlspecialchars($m['profile_picture']) ?>"
+                         class="rounded-circle me-1" width="28"
+                         alt="<?= htmlspecialchars($m['name'] ?? '') ?>">
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <div id="msgArea" class="flex-grow-1 overflow-auto p-3" style="height:70vh; background:#f8f9fa;">
+                <?php if (empty($msgs)): ?>
+                <p class="text-center text-muted">No messages</p>
+                <?php else: ?>
+                <?php foreach ($msgs as $m):
+                            $isMe = ($m['sender_id'] ?? 0) == ($_SESSION['user_id'] ?? 0);
+                        ?>
+                <div class="d-flex mb-2 <?= $isMe ? 'justify-content-end' : '' ?>">
+                    <div class="<?= $isMe ? 'bg-primary text-white' : 'bg-secondary text-white' ?>
+                                            rounded p-2" style="max-width:70%">
+                        <strong><?= htmlspecialchars($m['name'] ?? 'User') ?></strong><br>
+                        <?= nl2br(htmlspecialchars($m['message_text'] ?? '')) ?>
+                        <div class="small opacity-75">
+                            <?= isset($m['sent_at']) ? date('H:i', strtotime($m['sent_at'])) : '' ?>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+
+            <form method="post" action="index.php?a=send" class="p-3 bg-white border-top">
+                <input type="hidden" name="conv_id" value="<?= $conv['id'] ?>">
+                <div class="input-group">
+                    <input type="text" name="text" class="form-control" placeholder="Type..." required>
+                    <button class="btn btn-primary">Send</button>
+                </div>
+            </form>
+
+            <?php else: ?>
+            <div class="flex-grow-1 d-flex align-items-center justify-content-center">
+                <p class="text-muted">Select a chat</p>
+            </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/chat.js"></script>
+</body>
+</html>
