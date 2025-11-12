@@ -1,10 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Administration - Innovation DB</title>
+    <link rel="stylesheet" href="../Client/assets/css/style_i_list.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #1a1f4a, #0B0E26);
+            color: #F5F6FF;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(20, 24, 60, 0.9);
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #4A4DE7;
+            box-shadow: 0 0 15px rgba(74, 77, 231, 0.3);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #8A8DFF;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .dashboard {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .dashboard h2 {
+            text-align: center;
+            color: #FFB347;
+            margin-bottom: 40px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(20, 24, 60, 0.85);
+            border: 1px solid #4A4DE7;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(74, 77, 231, 0.5);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            color: #8A8DFF;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #B8BAFF;
+            margin-bottom: 20px;
+        }
+
+        .card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4AFF8B;
+            color: #0B0E26;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .card a:hover {
+            background-color: #3FE077;
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #4A4DE7;
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 100px;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: #8A8DFF;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFB347;
+        }
+    </style>
 </head>
 <body>
+<header>
+    <h1>🚀 Espace Administrateur</h1>
+    <p style="margin-top: 10px; opacity: 0.9;">Tableau de bord - Innovation DB</p>
+    <nav>
+        <a href="../Client/src/list_Innovation.html">Retour au Front Office</a>
+    </nav>
+</header>
 
+<main class="dashboard">
+    <h2>Gestion du système</h2>
+    
+    <div class="cards-container">
+        <div class="card">
+            <div class="card-icon">🚀</div>
+            <h3>Innovations</h3>
+            <p>Gérer les innovations soumises par les utilisateurs</p>
+            <a href="a_Innovation.html">Accéder</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🗂️</div>
+            <h3>Catégories</h3>
+            <p>Créer, modifier et supprimer des catégories</p>
+            <a href="a_Category.html">Accéder</a>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 - Innovation DB - Hichem Challakhi</p>
+</footer>
 </body>
 </html>
