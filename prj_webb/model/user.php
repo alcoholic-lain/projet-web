@@ -15,7 +15,7 @@ class User {
         $this->planet = $planet;
     }
 
-    // --- Affichage 
+    // --- Affichage
     public function show(): void {
         echo "<table border='1' cellpadding='5'>";
         echo "<tr><th>ID</th><th>Pseudo</th><th>Email</th><th>Planète</th></tr>";
