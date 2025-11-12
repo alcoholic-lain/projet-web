@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter une Catégorie</title>
+    <link rel="stylesheet" href="../Client/assets/css/style_i_list.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #1a1f4a, #0B0E26);
+            color: #F5F6FF;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(20, 24, 60, 0.9);
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #4A4DE7;
+            box-shadow: 0 0 15px rgba(74, 77, 231, 0.3);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #8A8DFF;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        nav a {
+            color: #8A8DFF;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFB347;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: rgba(20, 24, 60, 0.85);
+            border: 1px solid #4A4DE7;
+            border-radius: 10px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            color: #8A8DFF;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #4A4DE7;
+            border-radius: 5px;
+            background: rgba(10, 14, 38, 0.8);
+            color: #F5F6FF;
+            font-family: inherit;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #4AFF8B;
+            color: #0B0E26;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: #3FE077;
+        }
+
+        #msg {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: rgba(74, 255, 139, 0.2);
+            color: #4AFF8B;
+        }
+
+        .error {
+            background-color: rgba(255, 107, 107, 0.2);
+            color: #FF6B6B;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #4A4DE7;
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>➕ Ajouter une Catégorie</h1>
+    <nav>
+        <a href="a_Category.html">⬅ Retour à la liste</a>
+    </nav>
+</header>
+
+<section class="form-container">
+    <form id="form-category">
+        <label for="nom">Nom de la catégorie :</label>
+        <input type="text" id="nom" placeholder="Ex: Exploration Spatiale" required>
+
+        <label for="description">Description :</label>
+        <textarea id="description" placeholder="Décrivez la catégorie..." required></textarea>
+
+        <button type="submit">Créer la catégorie</button>
+    </form>
+
+    <div id="msg"></div>
+</section>
+
+<footer>
+    <p>&copy; 2025 - Innovation DB - Hichem Challakhi</p>
+</footer>
+
+<script src="../Client/assets/js/category.js"></script>
+</body>
+</html>
