@@ -2,121 +2,52 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Administration  Gestion des Innovations</title>
-    <link rel="stylesheet" href="../../Client/assets/css/style_i_list.css">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at top, #1a1f4a, #0B0E26);
-            color: #F5F6FF;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
+    <title>Administration – Gestion des Innovations</title>
 
-        header {
-            background: rgba(20, 24, 60, 0.9);
-            text-align: center;
-            padding: 20px 0;
-            border-bottom: 1px solid #4A4DE7;
-            box-shadow: 0 0 15px rgba(74, 77, 231, 0.3);
-        }
-
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            color: #8A8DFF;
-            font-size: 26px;
-            margin-bottom: 10px;
-        }
-
-        table {
-            width: 90%;
-            margin: 40px auto;
-            border-collapse: collapse;
-            background: rgba(20, 24, 60, 0.85);
-            border: 1px solid #4A4DE7;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        th, td {
-            padding: 12px 16px;
-            text-align: center;
-            border-bottom: 1px solid #2E317C;
-        }
-
-        th {
-            background: #1C2541;
-            color: #FFB347;
-            font-weight: bold;
-        }
-
-        tr:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        button {
-            padding: 8px 14px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .valider {
-            background-color: #4AFF8B;
-            color: #0B0E26;
-        }
-
-        .rejeter {
-            background-color: #FF6B6B;
-            color: #FFF;
-        }
-
-        .valider:hover, .rejeter:hover {
-            transform: scale(1.05);
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            border-top: 1px solid #4A4DE7;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-    </style>
+    <!-- CSS ADMIN GLOBAL -->
+    <link rel="stylesheet" href="../Client/assets/css/admin.css">
 </head>
+
 <body>
+
 <header>
-    <h1>🚀 Espace Administrateur – Innovation DB</h1>
+    <h1>🚀 Espace Administrateur – Gestion D'innovation </h1>
     <nav>
-        <a href="../../Client/src/list_Innovation.html" style="color:#8A8DFF; text-decoration:none;">Retour au Front Office</a>
+        <a href="index.html">Tableau de bord</a>
+        <a href="a_Innovation.html" style="color:#FFB347; font-weight:bold;">Innovations</a>
+        <a href="a_Category.html">Catégories</a>
+        <a href="../Client/src/list_Innovation.html">Front Office</a>
     </nav>
 </header>
 
 <main>
-    <h2 style="text-align:center; margin-top:30px;">Tableau de gestion des innovations</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>Titre</th>
-            <th>Catégorie</th>
-            <th>Date</th>
-            <th>Statut</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody id="admin-table"></tbody>
-    </table>
+    <div class="text-center">
+        <h2 style="margin-top:30px;">Tableau de gestion des innovations</h2>
+    </div>
+
+    <section>
+        <table>
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Catégorie</th>
+                <th>Date</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="admin-table"></tbody>
+        </table>
+    </section>
 </main>
 
 <footer>
-    <p>&copy; 2025 - Innovation DB - Hichem Challakhi</p>
+    <p>&copy; 2025 - Innovation  - Hichem Challakhi</p>
 </footer>
 
-<!-- Chemin exact vers ton JS -->
+<!-- JS -->
 <script src="../Client/assets/js/innovation.js"></script>
 
 </body>
+
 </html>
