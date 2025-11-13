@@ -1,282 +1,400 @@
 // =============================
-// INNOVATION MODULE JS
+// INNOVATION MODULE JS (BACKEND CONNECTED)
 // Auteur : Hichem Challakhi 🚀
 // =============================
 
-// === Données simulées ===
-const innovations = [
-    {
-        id: 1,
-        titre: "Rover LunaNova",
-        categorie: "Exploration Spatiale",
-        description:
-            "Rover autonome conçu pour explorer les zones ombrées du pôle Sud lunaire. Équipé de panneaux solaires pliables et d’une IA capable d’analyser les roches en temps réel.",
-        dateCreation: "2025-11-10",
-        statut: "En attente",
-        commentaires: [
-            "Projet prometteur pour la mission Artemis.",
-            "Très bon équilibre entre autonomie et durabilité."
-        ],
-        votes: { up: 132, down: 4 }
-    },
-    {
-        id: 2,
-        titre: "Satellite SolarNet",
-        categorie: "Énergie Orbitale",
-        description:
-            "Satellite géostationnaire collectant de l’énergie solaire et la retransmettant vers la Terre par faisceaux micro-ondes. Objectif : alimenter les stations lunaires.",
-        dateCreation: "2025-11-05",
-        statut: "En attente",
-        commentaires: [
-            "Idée innovante pour la transition énergétique spatiale.",
-            "Peut être combinée avec des infrastructures lunaires."
-        ],
-        votes: { up: 98, down: 6 }
-    }
-];
+const API = "/controller/components/InnovationController.php";
+const API_CAT = "/controller/components/CategoryController.php";
 
-// === LISTE (Front Office) ===
-function afficherListe() {
-    const table = document.getElementById("innovation-list");
-    if (!table) return;
+/* ============================================================
+   1️⃣ CHARGER LISTE DES CATÉGORIES (Pour add + edit)
+============================================================ */
+async function loadCategories() {
+    const select = document.getElementById("category_id");
+    if (!select) return;
 
-    table.innerHTML = `
-    <tr>
-      <th>Titre</th>
-      <th>Catégorie</th>
-      <th>Date</th>
-      <th>Statut</th>
-    </tr>
-  `;
+    try {
+        const res = await fetch(API_CAT);
+        const data = await res.json();
 
-    innovations.forEach((inv) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-      <td>${inv.titre}</td>
-      <td>${inv.categorie}</td>
-      <td>${inv.dateCreation}</td>
-      <td>${inv.statut}</td>
-    `;
-        row.style.cursor = "pointer";
-        row.addEventListener("click", () => {
-            window.location.href = `details_Innovation.html?id=${inv.id}`;
-        });
-        table.appendChild(row);
-    });
-}
+        if (!data.success) return;
 
-// === DETAILS (Front Office + Admin) ===
-function afficherDetails() {
-    const params = new URLSearchParams(window.location.search);
-    const id = parseInt(params.get("id"));
-    const inv = innovations.find((i) => i.id === id);
-    if (!inv) return;
-
-    document.getElementById("titre").textContent = inv.titre;
-    document.getElementById("desc").textContent = inv.description;
-    document.getElementById("date").textContent = inv.dateCreation;
-    document.getElementById("statut").textContent = inv.statut;
-    document.getElementById("upvotes").textContent = inv.votes.up;
-    document.getElementById("downvotes").textContent = inv.votes.down;
-
-    const ul = document.getElementById("commentaires");
-    inv.commentaires.forEach((c) => {
-        const li = document.createElement("li");
-        li.textContent = c;
-        ul.appendChild(li);
-    });
-
-    // Boutons admin s’ils existent dans la page détails
-    const btnValider = document.getElementById("btn-valider");
-    const btnRejeter = document.getElementById("btn-rejeter");
-
-    if (btnValider && btnRejeter) {
-        btnValider.addEventListener("click", () => {
-            inv.statut = "Validée ✅";
-            document.getElementById("statut").textContent = inv.statut;
+        data.records.forEach(cat => {
+            const opt = document.createElement("option");
+            opt.value = cat.id;
+            opt.textContent = cat.nom;
+            select.appendChild(opt);
         });
 
-        btnRejeter.addEventListener("click", () => {
-            inv.statut = "Rejetée ❌";
-            document.getElementById("statut").textContent = inv.statut;
-        });
+    } catch (err) {
+        console.error("Erreur chargement catégories :", err);
     }
 }
 
-// === ADMIN (Back Office) ===
-function afficherAdmin() {
-    const table = document.getElementById("admin-table");
-    if (!table) return;
-
-    table.innerHTML = "";
-    innovations.forEach((inv) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-      <td style="cursor:pointer; color:#8A8DFF;" onclick="ouvrirDetails(${inv.id})">${inv.titre}</td>
-      <td>${inv.categorie}</td>
-      <td>${inv.dateCreation}</td>
-      <td id="statut-${inv.id}">${inv.statut}</td>
-      <td>
-        <button class="valider" onclick="validerInnovation(${inv.id})">Valider</button>
-        <button class="rejeter" onclick="rejeterInnovation(${inv.id})">Rejeter</button>
-      </td>
-    `;
-        table.appendChild(row);
-    });
-}
-
-function ouvrirDetails(id) {
-    window.location.href = `../../Client/src/details_Innovation.html?id=${id}`;
-}
-
-function validerInnovation(id) {
-    const inv = innovations.find((i) => i.id === id);
-    if (inv) {
-        inv.statut = "Validée ✅";
-        document.getElementById(`statut-${id}`).textContent = inv.statut;
-    }
-}
-
-function rejeterInnovation(id) {
-    const inv = innovations.find((i) => i.id === id);
-    if (inv) {
-        inv.statut = "Rejetée ❌";
-        document.getElementById(`statut-${id}`).textContent = inv.statut;
-    }
-}
-function ajouterInnovation() {
+/* ============================================================
+   2️⃣ AJOUTER UNE INNOVATION
+============================================================ */
+async function setupAddInnovationPage() {
     const form = document.getElementById("form-innovation");
     if (!form) return;
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const titre = document.getElementById("titre").value.trim();
-        const categorie = document.getElementById("categorie").value.trim();
         const description = document.getElementById("description").value.trim();
-        const pieceJointe = document.getElementById("pieceJointe").files[0];
+        const category_id = document.getElementById("category_id").value;
         const msg = document.getElementById("msg");
 
-        if (!titre || !categorie || !description) {
+        if (!titre || !description || !category_id) {
             msg.textContent = "⚠️ Tous les champs sont obligatoires.";
-            msg.className = "error";
+            msg.style.color = "red";
             return;
         }
 
-        const newInnovation = {
-            id: innovations.length + 1,
-            titre,
-            categorie,
-            description,
-            dateCreation: new Date().toISOString().split("T")[0],
-            statut: "En attente",
-            commentaires: [],
-            votes: { up: 0, down: 0 },
-            piece: pieceJointe ? pieceJointe.name : null,
-        };
+        const payload = { titre, description, category_id };
 
-        innovations.push(newInnovation);
+        try {
+            const response = await fetch(API, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
 
-        msg.textContent = "✅ Innovation soumise avec succès !";
-        msg.className = "success";
+            const data = await response.json();
 
-        // Réinitialiser le formulaire
-        form.reset();
+            if (data.success) {
+                msg.textContent = "✅ Innovation ajoutée avec succès !";
+                msg.style.color = "lightgreen";
 
-        // Rediriger vers la liste après 2 secondes
-        setTimeout(() => {
-            window.location.href = "list_Innovation.html";
-        }, 2000);
+                setTimeout(() => {
+                    window.location.href = "list_Innovation.html";
+                }, 1500);
+            } else {
+                msg.textContent = "❌ " + data.message;
+                msg.style.color = "red";
+            }
+
+        } catch (err) {
+            console.error("Erreur ajout innovation :", err);
+            msg.textContent = "❌ Erreur serveur";
+            msg.style.color = "red";
+        }
     });
 }
-// ---------- ADD PAGE: preview + submit (no blocking) ----------
-function setupAddInnovationPage() {
-    const form = document.getElementById("form-innovation");
+
+/* ============================================================
+   3️⃣ AFFICHER LISTE DES INNOVATIONS (Front)
+============================================================ */
+async function afficherListe() {
+    const table = document.getElementById("innovation-list");
+    if (!table) return;
+
+    try {
+        const res = await fetch(API);
+        const data = await res.json();
+
+        table.innerHTML = `
+            <tr>
+                <th>Titre</th>
+                <th>Catégorie ID</th>
+                <th>Date</th>
+                <th>Statut</th>
+            </tr>
+        `;
+
+        data.records.forEach(inv => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td style="cursor:pointer;color:#6C63FF">
+                    ${inv.titre}
+                </td>
+                <td>${inv.category_id}</td>
+                <td>${inv.date_creation}</td>
+                <td>${inv.statut ?? "En attente"}</td>
+            `;
+
+            row.addEventListener("click", () => {
+                window.location.href = `/veiw/Client/src/details_Innovation.html?id=${inv.id}`;
+            });
+
+            table.appendChild(row);
+        });
+
+    } catch (err) {
+        console.error("Erreur chargement innovations :", err);
+        table.innerHTML = "<tr><td colspan='4'>Erreur de chargement</td></tr>";
+    }
+}
+
+/* ============================================================
+   4️⃣ AFFICHER DETAILS D'UNE INNOVATION
+============================================================ */
+async function afficherDetails() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    if (!id) return;
+
+    try {
+        const res = await fetch(`${API}?id=${id}`);
+        const inv = await res.json();
+
+        if (!inv || inv.success === false) return;
+
+        document.getElementById("titre").textContent = inv.titre;
+        document.getElementById("desc").textContent = inv.description;
+        document.getElementById("date").textContent = inv.date_creation;
+        document.getElementById("statut").textContent = inv.statut ?? "En attente";
+
+    } catch (err) {
+        console.error("Erreur chargement détails innovation :", err);
+    }
+}
+
+/* ============================================================
+   5️⃣ BACKOFFICE – LISTE + ACTIONS (Admin)
+============================================================ */
+async function afficherAdmin() {
+    const table = document.getElementById("admin-table");
+    if (!table) return;
+
+    try {
+        const res = await fetch(API);
+        const data = await res.json();
+
+        table.innerHTML = "";
+
+        data.records.forEach(inv => {
+            const row = document.createElement("tr");
+            row.id = `row-${inv.id}`;
+
+            row.innerHTML = `
+                <td onclick="ouvrirDetails(${inv.id})"
+                    style="cursor:pointer;color:#8A8DFF;">
+                    ${inv.titre}
+                </td>
+
+                <td>${inv.category_id}</td>
+                <td>${inv.date_creation}</td>
+
+                <td id="statut-${inv.id}">
+                    ${inv.statut ?? "En attente"}
+                </td>
+
+                <td>
+                    <button class="valider" onclick="validerInnovation(${inv.id})">Valider</button>
+                    <button class="rejeter" onclick="rejeterInnovation(${inv.id})">Rejeter</button>
+                    <button class="delete" onclick="deleteInnovation(${inv.id})">Supprimer</button>
+                </td>
+            `;
+
+            table.appendChild(row);
+        });
+
+    } catch (err) {
+        console.error("Erreur chargement admin :", err);
+        table.innerHTML = "<tr><td colspan='5'>Erreur chargement</td></tr>";
+    }
+}
+
+function ouvrirDetails(id) {
+    window.location.href = `/veiw/Client/src/details_Innovation.html?id=${inv.id}`;
+}
+
+/* ------------------------------------------------------------
+   VALIDATION / REJET
+------------------------------------------------------------ */
+async function validerInnovation(id) {
+    updateStatut(id, "Validée");
+}
+async function rejeterInnovation(id) {
+    updateStatut(id, "Rejetée");
+}
+
+async function updateStatut(id, statut) {
+    try {
+        const res = await fetch(API, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id: id,
+                statut: statut
+            })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+            document.getElementById(`statut-${id}`).textContent = statut;
+        }
+
+    } catch (err) {
+        console.error("Erreur changement statut :", err);
+    }
+}
+
+/* ------------------------------------------------------------
+   SUPPRIMER INNOVATION
+------------------------------------------------------------ */
+async function deleteInnovation(id) {
+    if (!confirm("Voulez-vous supprimer cette innovation ?")) return;
+
+    try {
+        const res = await fetch(API, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: id })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+            document.getElementById(`row-${id}`).remove();
+        }
+
+    } catch (err) {
+        console.error("Erreur suppression :", err);
+    }
+}
+
+/* ============================================================
+   6️⃣ EDITION (BackOffice)
+============================================================ */
+async function setupEditInnovationPage() {
+    const form = document.getElementById("form-edit-innovation");
     if (!form) return;
 
-    const titreEl = document.getElementById("titre");
-    const catEl = document.getElementById("categorie");
-    const descEl = document.getElementById("description");
-    const fileEl = document.getElementById("pieceJointe");
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    if (!id) return;
+
     const msg = document.getElementById("msg");
-    const submitBtn = form.querySelector(".btn-submit");
+    const titreEl = document.getElementById("titre");
+    const catSelect = document.getElementById("category_id");
+    const descEl = document.getElementById("description");
+    const statutEl = document.getElementById("statut");
+    const hiddenId = document.getElementById("innovation-id");
 
-    // ---- Preview image (optional) ----
-    const preview = document.createElement("img");
-    preview.id = "apercu-image";
-    preview.style.display = "none";
-    preview.style.maxWidth = "100%";
-    preview.style.marginTop = "15px";
-    preview.style.borderRadius = "10px";
-    preview.style.boxShadow = "0 0 15px rgba(74,77,231,0.5)";
-    fileEl.parentNode.insertBefore(preview, fileEl.nextSibling);
+    hiddenId.value = id;
 
-    fileEl.addEventListener("change", (e) => {
-        const f = e.target.files[0];
-        if (f && f.type.startsWith("image/")) {
-            const reader = new FileReader();
-            reader.onload = ev => {
-                preview.src = ev.target.result;
-                preview.style.display = "block";
-            };
-            reader.readAsDataURL(f);
-        } else {
-            preview.style.display = "none";
-            preview.src = "";
-        }
-    });
+    try {
+        const resCat = await fetch(API_CAT);
+        const dataCat = await resCat.json();
 
-    // ---- Submit handler (uses native validation) ----
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
+        dataCat.records.forEach(cat => {
+            const opt = document.createElement("option");
+            opt.value = cat.id;
+            opt.textContent = cat.nom;
+            catSelect.appendChild(opt);
+        });
+    } catch (err) {
+        console.error("Erreur chargement catégories :", err);
+    }
 
-        // Trigger native ‘required’ checks; if invalid, stop here.
-        if (!form.reportValidity()) return;
+    try {
+        const res = await fetch(`${API}?id=${id}`);
+        const inv = await res.json();
 
-        // Small rocket animation – not blocking
-        submitBtn.classList.add("decollage");
-        setTimeout(() => submitBtn.classList.remove("decollage"), 1500);
-
-        // Build the new innovation (file is optional)
-        const newInnovation = {
-            id: innovations.length + 1,
-            titre: (titreEl.value || "").trim(),
-            categorie: (catEl.value || "").trim(),
-            description: (descEl.value || "").trim(),
-            dateCreation: new Date().toISOString().split("T")[0],
-            statut: "En attente",
-            commentaires: [],
-            votes: { up: 0, down: 0 },
-            piece: fileEl.files[0] ? fileEl.files[0].name : null
-        };
-
-        // Basic JS-level check in case attributes ‘required’ were removed
-        if (!newInnovation.titre || !newInnovation.categorie || !newInnovation.description) {
-            msg.textContent = "⚠️ Tous les champs (sauf la pièce jointe) sont obligatoires.";
-            msg.className = "error";
+        if (!inv || inv.success === false) {
+            msg.textContent = "❌ Innovation introuvable";
+            msg.style.color = "red";
             return;
         }
 
-        innovations.push(newInnovation);
+        titreEl.value = inv.titre;
+        descEl.value = inv.description;
+        statutEl.value = inv.statut ?? "En attente";
+        catSelect.value = inv.category_id;
 
-        msg.textContent = "✅ Innovation soumise avec succès !";
-        msg.className = "success";
-        form.reset();
-        preview.style.display = "none";
+    } catch (err) {
+        console.error("Erreur chargement innovation :", err);
+        msg.textContent = "❌ Erreur serveur lors du chargement";
+        msg.style.color = "red";
+    }
 
-        // Redirect to list
-        setTimeout(() => { window.location.href = "list_Innovation.html"; }, 1800);
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const titre = titreEl.value.trim();
+        const description = descEl.value.trim();
+        const category_id = catSelect.value;
+        const statut = statutEl.value;
+
+        if (titre.length < 3) {
+            msg.textContent = "⚠️ Le titre doit contenir au moins 3 caractères.";
+            msg.style.color = "orange";
+            return;
+        }
+        if (description.length < 10) {
+            msg.textContent = "⚠️ La description doit contenir au moins 10 caractères.";
+            msg.style.color = "orange";
+            return;
+        }
+        if (!category_id) {
+            msg.textContent = "⚠️ Vous devez choisir une catégorie.";
+            msg.style.color = "orange";
+            return;
+        }
+
+        const payload = {
+            id: id,
+            titre,
+            description,
+            category_id,
+            statut
+        };
+
+        try {
+            const res = await fetch(API, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                msg.textContent = "✅ Innovation mise à jour avec succès !";
+                msg.style.color = "lightgreen";
+
+                setTimeout(() => {
+                    window.location.href = "a_Innovation.html";
+                }, 1500);
+
+            } else {
+                msg.textContent = "❌ " + (data.message || "Erreur de mise à jour");
+                msg.style.color = "red";
+            }
+
+        } catch (err) {
+            console.error("Erreur update :", err);
+            msg.textContent = "❌ Erreur serveur";
+            msg.style.color = "red";
+        }
     });
 }
 
-
-// === INITIALISATION ===
+/* ============================================================
+   7️⃣ INITIALISATION AUTO
+============================================================ */
 document.addEventListener("DOMContentLoaded", () => {
     const path = location.pathname;
 
-    if (path.includes("add_Innovation.html")) setupAddInnovationPage();
-    if (location.pathname.includes("add_Innovation.html")) ajouterInnovation();
-    if (location.pathname.includes("list_Innovation.html")) afficherListe();
-    if (location.pathname.includes("details_Innovation.html")) afficherDetails();
-    if (location.pathname.includes("a_Innovation.html")) afficherAdmin();
+    if (path.includes("add_Innovation.html")) {
+        loadCategories();
+        setupAddInnovationPage();
+    }
+
+    if (path.includes("list_Innovation.html"))
+        afficherListe();
+
+    if (path.includes("details_Innovation.html"))
+        afficherDetails();
+
+    if (path.includes("a_Innovation.html"))
+        afficherAdmin();
+
+    if (path.includes("edit_Innovation.html"))
+        setupEditInnovationPage();
 });
