@@ -4,12 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="a_innovatio&#10; et details_Innovation.html et list_ V0,001">
-      <change afterPath="$PROJECT_DIR$/veiw/Client/src/add_Innovation.html" afterDir="false" />
+    <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="c">
+      <change afterPath="$PROJECT_DIR$/IMPLEMENTATION_SUMMARY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TESTING_GUIDE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/components/CategoryController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/Innovation/schema.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_installation.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/veiw/Admin/edit_Category.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/veiw/Admin/edit_Innovation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/veiw/Client/assets/js/category_details.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/veiw/Client/assets/js/dashboard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/veiw/Client/assets/video/space.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/veiw/Client/src/category_details.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/css/style_i_list.css" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/assets/css/style_i_list.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Read-me.md" beforeDir="false" afterPath="$PROJECT_DIR$/Read-me.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/components/InnovationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/components/InnovationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/components/coms.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/components/feed.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Admin/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/veiw/Client/assets/js/innovation.js" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/assets/js/innovation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/lala" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/src/details_Innovation.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/src/details_Innovation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/src/list_Innovation.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/src/list_Innovation.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,10 +40,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="PHP File" />
         <option value="CSS File" />
-        <option value="JavaScript File" />
+        <option value="PHP File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -74,34 +92,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;JavaScript Debug.a_Innovation.html.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Innovation&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/hicham/Desktop/projet-web/model/Innovation&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "JavaScript Debug.a_Innovation.html.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "Innovation",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/hicham/Desktop/projet-web",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hicham\Desktop\projet-web" />
       <recent name="C:\Users\hicham\Desktop\projet-web\model\Innovation" />
       <recent name="C:\Users\hicham\Desktop\projet-web\model" />
       <recent name="C:\Users\hicham\Desktop\projet-web\controller\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hicham\Desktop\projet-web\veiw\Client\assets\js" />
       <recent name="C:\Users\hicham\Desktop\projet-web\veiw\Admin" />
     </key>
   </component>
@@ -122,7 +142,10 @@
       <updated>1762724591261</updated>
       <workItem from="1762724592785" duration="95000" />
       <workItem from="1762726646404" duration="6185000" />
-      <workItem from="1762779322736" duration="1900000" />
+      <workItem from="1762779322736" duration="3828000" />
+      <workItem from="1762796548098" duration="263000" />
+      <workItem from="1762979726514" duration="5027000" />
+      <workItem from="1763010373418" duration="754000" />
     </task>
     <task id="LOCAL-00001" summary="1st">
       <option name="closed" value="true" />
@@ -164,7 +187,151 @@
       <option name="project" value="LOCAL" />
       <updated>1762731067239</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Innovation JS">
+      <option name="closed" value="true" />
+      <created>1762781342594</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1762781342594</updated>
+    </task>
+    <task id="LOCAL-00007" summary="AJOUT D'Innovation HTML">
+      <option name="closed" value="true" />
+      <created>1762781387410</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1762781387410</updated>
+    </task>
+    <task id="LOCAL-00008" summary="SUPP LALA">
+      <option name="closed" value="true" />
+      <created>1762781399164</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1762781399164</updated>
+    </task>
+    <task id="LOCAL-00009" summary="CSS ADD_Innovation">
+      <option name="closed" value="true" />
+      <created>1762781418416</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1762781418416</updated>
+    </task>
+    <task id="LOCAL-00010" summary="CSS ADD_Innovation">
+      <option name="closed" value="true" />
+      <created>1762781496387</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1762781496387</updated>
+    </task>
+    <task id="LOCAL-00011" summary="WSPACE">
+      <option name="closed" value="true" />
+      <created>1762781507461</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1762781507461</updated>
+    </task>
+    <task id="LOCAL-00012" summary="1">
+      <option name="closed" value="true" />
+      <created>1762796809950</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1762796809950</updated>
+    </task>
+    <task id="LOCAL-00013" summary="css for backend">
+      <option name="closed" value="true" />
+      <created>1763010468131</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1763010468131</updated>
+    </task>
+    <task id="LOCAL-00014" summary="css for backend">
+      <option name="closed" value="true" />
+      <created>1763010816053</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1763010816053</updated>
+    </task>
+    <task id="LOCAL-00015" summary="css backup">
+      <option name="closed" value="true" />
+      <created>1763010857227</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1763010857227</updated>
+    </task>
+    <task id="LOCAL-00016" summary="a_categories.html pages entité category">
+      <option name="closed" value="true" />
+      <created>1763010934930</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1763010934930</updated>
+    </task>
+    <task id="LOCAL-00017" summary="a_Innovation.html.html pages entité innovation backend">
+      <option name="closed" value="true" />
+      <created>1763010966950</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1763010966950</updated>
+    </task>
+    <task id="LOCAL-00018" summary="ajout d'une category">
+      <option name="closed" value="true" />
+      <created>1763010991799</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1763010991799</updated>
+    </task>
+    <task id="LOCAL-00019" summary="ajout d'une innovation">
+      <option name="closed" value="true" />
+      <created>1763011006395</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011006395</updated>
+    </task>
+    <task id="LOCAL-00020" summary="delete">
+      <option name="closed" value="true" />
+      <created>1763011024350</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011024350</updated>
+    </task>
+    <task id="LOCAL-00021" summary="categories.html frontend(user)">
+      <option name="closed" value="true" />
+      <created>1763011056332</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011056332</updated>
+    </task>
+    <task id="LOCAL-00022" summary="category js">
+      <option name="closed" value="true" />
+      <created>1763011071384</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011071384</updated>
+    </task>
+    <task id="LOCAL-00023" summary="c">
+      <option name="closed" value="true" />
+      <created>1763011094189</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011094189</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,6 +343,22 @@
     <MESSAGE value="HTML relatives à ma partie et intégration des templates" />
     <MESSAGE value="a_innovatio&#10; et details_Innovation.html et list_" />
     <MESSAGE value="a_innovatio&#10; et details_Innovation.html et list_ V0,001" />
-    <option name="LAST_COMMIT_MESSAGE" value="a_innovatio&#10; et details_Innovation.html et list_ V0,001" />
+    <MESSAGE value="Innovation JS" />
+    <MESSAGE value="AJOUT D'Innovation HTML" />
+    <MESSAGE value="SUPP LALA" />
+    <MESSAGE value="CSS ADD_Innovation" />
+    <MESSAGE value="WSPACE" />
+    <MESSAGE value="1" />
+    <MESSAGE value="css for backend" />
+    <MESSAGE value="css backup" />
+    <MESSAGE value="a_categories.html pages entité category" />
+    <MESSAGE value="a_Innovation.html.html pages entité innovation backend" />
+    <MESSAGE value="ajout d'une category" />
+    <MESSAGE value="ajout d'une innovation" />
+    <MESSAGE value="delete" />
+    <MESSAGE value="categories.html frontend(user)" />
+    <MESSAGE value="category js" />
+    <MESSAGE value="c" />
+    <option name="LAST_COMMIT_MESSAGE" value="c" />
   </component>
 </project>
