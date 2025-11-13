@@ -2,34 +2,113 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Détails de l'Innovation</title>
-    <link rel="stylesheet" href="../Assets/css/style_i_list.css">
+    <title>Détails de l’Innovation – Innovation </title>
+    <link rel="stylesheet" href="../assets/css/user.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #1a1f4a, #0B0E26);
+            color: #F5F6FF;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(20, 24, 60, 0.9);
+            padding: 20px;
+            border-bottom: 1px solid #4A4DE7;
+            box-shadow: 0 0 15px rgba(74, 77, 231, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #8A8DFF;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        header a {
+            color: #8A8DFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 70%;
+            margin: 40px auto;
+            background: rgba(20, 24, 60, 0.95);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #4A4DE7;
+            box-shadow: 0 0 25px rgba(74, 77, 231, 0.4);
+        }
+
+        #titre {
+            font-size: 28px;
+            color: #FFB347;
+            margin-bottom: 10px;
+        }
+
+        .meta {
+            font-size: 14px;
+            color: #C3C6FF;
+            margin-bottom: 20px;
+        }
+
+        .badge-statut {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: bold;
+            background: #1C2541;
+            border: 1px solid #4A4DE7;
+            color: #F5F6FF;
+        }
+
+        #desc {
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #4A4DE7;
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
+
 <header>
-    <h1>Détails de l'Innovation</h1>
-    <nav>
-        <a href="list.html">← Retour à la liste</a>
-    </nav>
+    <h1>Détails de l’innovation</h1>
+    <a href="veiw/Client/src/list_Innovation.html">⬅ Retour à la liste</a>
 </header>
 
-<section class="details">
-    <h2 id="titre"></h2>
-    <p><strong>Description :</strong> <span id="desc"></span></p>
-    <p><strong>Date de création :</strong> <span id="date"></span></p>
-    <p><strong>Statut :</strong> <span id="statut"></span></p>
+<section class="container">
+    <h2 id="titre">Titre de l’innovation</h2>
 
-    <h3>Commentaires</h3>
-    <ul id="commentaires"></ul>
+    <div class="meta">
+        Date : <span id="date">--/--/----</span>
+        &nbsp;•&nbsp;
+        Statut : <span id="statut" class="badge-statut">En attente</span>
+    </div>
 
-    <h3>Votes</h3>
-    <p><strong>👍 <span id="upvotes"></span></strong> | 👎 <span id="downvotes"></span></p>
+    <p id="desc">
+        Description de l’innovation...
+    </p>
 </section>
 
 <footer>
-    <p>&copy; 2025 - Innovation DB - Hichem Challakhi</p>
+    <p>&copy; 2025 - Innovation  - Tunispace - Hichem Challakhi</p>
 </footer>
 
-<script src="../Assets/js/innovation.js"></script>
+<script src="../assets/js/innovation.js"></script>
 </body>
 </html>
