@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="VIDEO TO PUT IN THE BODY CSS &amp; BACKEND">
-      <change afterPath="$PROJECT_DIR$/test.php" afterDir="false" />
-    </list>
+    <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="WORKSPACE" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,7 +121,7 @@
       <workItem from="1762779322736" duration="3828000" />
       <workItem from="1762796548098" duration="263000" />
       <workItem from="1762979726514" duration="5027000" />
-      <workItem from="1763010373418" duration="1229000" />
+      <workItem from="1763010373418" duration="1284000" />
     </task>
     <task id="LOCAL-00001" summary="1st">
       <option name="closed" value="true" />
@@ -445,15 +443,37 @@
       <option name="project" value="LOCAL" />
       <updated>1763011550952</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="TEST FOR PDO &amp; OTHER SERVICE ...">
+      <option name="closed" value="true" />
+      <created>1763011627122</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011627122</updated>
+    </task>
+    <task id="LOCAL-00042" summary="WORKSPACE">
+      <option name="closed" value="true" />
+      <created>1763011642030</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011642030</updated>
+    </task>
+    <task id="LOCAL-00043" summary="WORKSPACE">
+      <option name="closed" value="true" />
+      <created>1763011651286</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011651286</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="css for backend" />
-    <MESSAGE value="css backup" />
     <MESSAGE value="a_categories.html pages entité category" />
     <MESSAGE value="a_Innovation.html.html pages entité innovation backend" />
     <MESSAGE value="ajout d'une category" />
@@ -477,6 +497,8 @@
     <MESSAGE value="LIST ALL INNOVATION" />
     <MESSAGE value="BDD OF INNOVATION" />
     <MESSAGE value="VIDEO TO PUT IN THE BODY CSS &amp; BACKEND" />
-    <option name="LAST_COMMIT_MESSAGE" value="VIDEO TO PUT IN THE BODY CSS &amp; BACKEND" />
+    <MESSAGE value="TEST FOR PDO &amp; OTHER SERVICE ..." />
+    <MESSAGE value="WORKSPACE" />
+    <option name="LAST_COMMIT_MESSAGE" value="WORKSPACE" />
   </component>
 </project>
