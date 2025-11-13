@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier une Catégorie</title>
+    <link rel="stylesheet" href="../Client/assets/css/admin.css">
+</head>
+
+<body>
+
+<header>
+    <h1>✏️ Modifier la Catégorie</h1>
+    <nav>
+        <a href="a_Category.html">⬅ Retour</a>
+    </nav>
+</header>
+
+<main class="section-box" style="max-width:600px;">
+    <form id="form-edit-category">
+
+        <input type="hidden" id="category-id">
+
+        <label>Nom :</label>
+        <input id="nom" required>
+
+        <label>Description :</label>
+        <textarea id="description" required></textarea>
+
+        <button type="submit" class="btn-add">Mettre à jour</button>
+    </form>
+
+    <p id="msg"></p>
+</main>
+
+<footer>
+    <p>&copy; 2025 - Innovation </p>
+</footer>
+
+<script src="../Client/assets/js/category.js"></script>
+
+</body>
+
+</html>
