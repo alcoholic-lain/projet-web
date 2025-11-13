@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+
+:root {
+    --purple: #4A4DE7;
+    --purple-light: #8A8DFF;
+    --blue-dark: #0B0E26;
+    --blue-mid: #1a1f4a;
+    --pink: #FF6B6B;
+    --yellow: #FFB347;
+    --green: #4AFF8B;
+}
+
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top, var(--blue-mid), var(--blue-dark));
+    color: #F5F6FF;
+}
+
+/* ===== HEADER ===== */
+header {
+    padding: 20px;
+    text-align: center;
+    background: rgba(20, 24, 60, 0.85);
+    border-bottom: 1px solid var(--purple);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+header h1 {
+    margin: 0;
+    font-family: 'Orbitron';
+    color: var(--purple-light);
+}
+
+nav a {
+    color: #C5C7F7;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+nav a:hover { color: var(--yellow); }
+
+/* ===== SECTIONS ===== */
+main, section {
+    width: 90%;
+    margin: 30px auto;
+}
+
+/* ===== BUTTONS ===== */
+.btn-add, .btn-edit, .btn-delete, .valider, .rejeter, .delete {
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: 0.25s;
+}
+
+/* --- AJOUTER --- */
+.btn-add {
+    background: var(--green);
+    color: var(--blue-dark);
+}
+
+/* --- MODIFIER --- */
+.btn-edit {
+    background: var(--yellow);
+    color: var(--blue-dark);
+}
+.btn-edit:hover {
+    transform: scale(1.05);
+    background-color: #ffcb6b;
+}
+
+/* --- SUPPRIMER --- */
+.btn-delete, .delete {
+    background: var(--pink);
+    color: white;
+}
+.btn-delete:hover, .delete:hover {
+    transform: scale(1.05);
+    background-color: #ff8585;
+}
+
+/* --- VALIDER --- */
+.valider {
+    background-color: var(--green);
+    color: var(--blue-dark);
+}
+.valider:hover {
+    transform: scale(1.05);
+    background-color: #3fe072;
+}
+
+/* --- REJETER --- */
+.rejeter {
+    background-color: var(--pink);
+    color: white;
+}
+.rejeter:hover {
+    transform: scale(1.05);
+    background-color: #ff8585;
+}
+
+/* ===== TABLE ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(20,24,60,0.9);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+th {
+    background: var(--purple);
+    padding: 12px;
+    font-size: 14px;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+tr:hover td {
+    background: rgba(138,141,255,0.15);
+}
+
+/* ===== FORMS ===== */
+form input,
+form textarea,
+form select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--purple);
+    color: white;
+    margin-bottom: 20px;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    border-color: var(--purple-light);
+    box-shadow: 0 0 10px var(--purple-light);
+}
+
+/* ===== FOOTER ===== */
+footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 15px;
+    color: var(--purple-light);
+    border-top: 1px solid var(--purple);
+}
