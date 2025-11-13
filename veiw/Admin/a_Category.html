@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Administration – Gestion des Catégories</title>
+    <link rel="stylesheet" href="../Client/assets/css/admin.css">
+</head>
+
+<body>
+
+<header>
+    <h1>🗂️ Espace Administrateur - Gestion des Catégories</h1>
+    <nav>
+        <a href="index.html">Tableau de bord</a>
+        <a href="a_Innovation.html">Innovations</a>
+        <a href="a_Category.html" style="color:#FFB347; font-weight:bold;">Catégories</a>
+        <a href="../Client/src/list_Innovation.html">Front Office</a>
+    </nav>
+</header>
+
+<main>
+    <div class="text-center">
+        <h2>Tableau des catégories</h2>
+        <a href="add_Category.html" class="btn-add">➕ Ajouter une catégorie</a>
+    </div>
+
+    <section class="section-box">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="category-table"></tbody>
+        </table>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 - Innovation  - Hichem Challakhi</p>
+</footer>
+
+<script src="../Client/assets/js/category.js"></script>
+
+</body>
+
+</html>
