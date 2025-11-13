@@ -2,27 +2,113 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des Innovations</title>
-    <link rel="stylesheet" href="../assets/css/style_i_list.css">
+    <title>Liste des Innovations – Innovation </title>
+    <link rel="stylesheet" href="../assets/css/user.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #1a1f4a, #0B0E26);
+            color: #F5F6FF;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(20, 24, 60, 0.9);
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #4A4DE7;
+            box-shadow: 0 0 15px rgba(74, 77, 231, 0.3);
+        }
+
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #8A8DFF;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        nav a {
+            color: #8A8DFF;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            width: 90%;
+            margin: 40px auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #FFB347;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(20, 24, 60, 0.9);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #4A4DE7;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: center;
+            border-bottom: 1px solid #2E317C;
+        }
+
+        th {
+            background: #1C2541;
+            color: #FFB347;
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #4A4DE7;
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
+
 <header>
-    <h1>🚀 Plateforme d'Innovation Spatiale</h1>
+    <h1>🌌 Innovation DB – Tunispace</h1>
     <nav>
-        <a href="list_Innovation.html">Accueil</a>
+        <a href="list_Innovation.html">Innovations</a>
+        <a href="add_Innovation.html">Proposer une innovation</a>
+        <a href="../../Admin/a_Innovation.html">Espace Admin</a>
     </nav>
 </header>
 
-<section>
-    <h2>Liste des innovations</h2>
-    <table id="innovation-list"></table>
-</section>
+<main>
+    <h2>Liste des innovations soumises</h2>
+
+    <table id="innovation-list">
+        <!-- Rempli dynamiquement par afficherListe() -->
+        <tr>
+            <th>Titre</th>
+            <th>Catégorie ID</th>
+            <th>Date</th>
+            <th>Statut</th>
+        </tr>
+    </table>
+</main>
 
 <footer>
-    <p>&copy; 2025 - Innovation DB - Hichem Challakhi</p>
+    <p>&copy; 2025 - Innovation  - Tunispace - Hichem Challakhi</p>
 </footer>
 
-<!-- le bon chemin -->
 <script src="../assets/js/innovation.js"></script>
 </body>
 </html>
