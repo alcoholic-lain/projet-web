@@ -4,30 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="c">
-      <change afterPath="$PROJECT_DIR$/IMPLEMENTATION_SUMMARY.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TESTING_GUIDE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/components/CategoryController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/Innovation/schema.sql" afterDir="false" />
+    <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="VIDEO TO PUT IN THE BODY CSS &amp; BACKEND">
       <change afterPath="$PROJECT_DIR$/test.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_installation.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/veiw/Admin/edit_Category.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/veiw/Admin/edit_Innovation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/veiw/Client/assets/js/category_details.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/veiw/Client/assets/js/dashboard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/veiw/Client/assets/video/space.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/veiw/Client/src/category_details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Read-me.md" beforeDir="false" afterPath="$PROJECT_DIR$/Read-me.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/components/InnovationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/components/InnovationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/components/coms.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/components/feed.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Admin/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/js/innovation.js" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/assets/js/innovation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/src/details_Innovation.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/src/details_Innovation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/src/list_Innovation.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/src/list_Innovation.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +123,7 @@
       <workItem from="1762779322736" duration="3828000" />
       <workItem from="1762796548098" duration="263000" />
       <workItem from="1762979726514" duration="5027000" />
-      <workItem from="1763010373418" duration="754000" />
+      <workItem from="1763010373418" duration="1229000" />
     </task>
     <task id="LOCAL-00001" summary="1st">
       <option name="closed" value="true" />
@@ -331,34 +309,174 @@
       <option name="project" value="LOCAL" />
       <updated>1763011094189</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="details de category_details.html frontend">
+      <option name="closed" value="true" />
+      <created>1763011156268</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011156268</updated>
+    </task>
+    <task id="LOCAL-00025" summary="js de details de category_details.html frontend">
+      <option name="closed" value="true" />
+      <created>1763011168509</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011168509</updated>
+    </task>
+    <task id="LOCAL-00026" summary="controlled category">
+      <option name="closed" value="true" />
+      <created>1763011195023</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011195023</updated>
+    </task>
+    <task id="LOCAL-00027" summary="delete">
+      <option name="closed" value="true" />
+      <created>1763011204707</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011204707</updated>
+    </task>
+    <task id="LOCAL-00028" summary="dashboard js">
+      <option name="closed" value="true" />
+      <created>1763011222834</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011222834</updated>
+    </task>
+    <task id="LOCAL-00029" summary="details innovation">
+      <option name="closed" value="true" />
+      <created>1763011248199</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011248199</updated>
+    </task>
+    <task id="LOCAL-00030" summary="MODIFY CATEGORY BACK">
+      <option name="closed" value="true" />
+      <created>1763011277120</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011277120</updated>
+    </task>
+    <task id="LOCAL-00031" summary="MODIFY INNOVATION BACK">
+      <option name="closed" value="true" />
+      <created>1763011294210</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011294210</updated>
+    </task>
+    <task id="LOCAL-00032" summary="delete">
+      <option name="closed" value="true" />
+      <created>1763011307899</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011307899</updated>
+    </task>
+    <task id="LOCAL-00033" summary="....">
+      <option name="closed" value="true" />
+      <created>1763011334306</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011334306</updated>
+    </task>
+    <task id="LOCAL-00034" summary="INDEX (FRONT-PAGE 4 ADMIN-BACKOFFICE)">
+      <option name="closed" value="true" />
+      <created>1763011375281</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011375281</updated>
+    </task>
+    <task id="LOCAL-00035" summary="INDEX (FRONT PAGE 4 USER-FRONTOFFICE)">
+      <option name="closed" value="true" />
+      <created>1763011410052</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011410052</updated>
+    </task>
+    <task id="LOCAL-00036" summary="JS 4 innovation">
+      <option name="closed" value="true" />
+      <created>1763011426246</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011426246</updated>
+    </task>
+    <task id="LOCAL-00037" summary="CONTROLLER FOR INNOVATION">
+      <option name="closed" value="true" />
+      <created>1763011449250</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011449250</updated>
+    </task>
+    <task id="LOCAL-00038" summary="LIST ALL INNOVATION">
+      <option name="closed" value="true" />
+      <created>1763011467087</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011467087</updated>
+    </task>
+    <task id="LOCAL-00039" summary="BDD OF INNOVATION">
+      <option name="closed" value="true" />
+      <created>1763011488573</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011488573</updated>
+    </task>
+    <task id="LOCAL-00040" summary="VIDEO TO PUT IN THE BODY CSS &amp; BACKEND">
+      <option name="closed" value="true" />
+      <created>1763011550952</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1763011550952</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1st" />
-    <MESSAGE value="2st" />
-    <MESSAGE value="HTML relatives à ma partie et intégration des templates" />
-    <MESSAGE value="a_innovatio&#10; et details_Innovation.html et list_" />
-    <MESSAGE value="a_innovatio&#10; et details_Innovation.html et list_ V0,001" />
-    <MESSAGE value="Innovation JS" />
-    <MESSAGE value="AJOUT D'Innovation HTML" />
-    <MESSAGE value="SUPP LALA" />
-    <MESSAGE value="CSS ADD_Innovation" />
-    <MESSAGE value="WSPACE" />
-    <MESSAGE value="1" />
     <MESSAGE value="css for backend" />
     <MESSAGE value="css backup" />
     <MESSAGE value="a_categories.html pages entité category" />
     <MESSAGE value="a_Innovation.html.html pages entité innovation backend" />
     <MESSAGE value="ajout d'une category" />
     <MESSAGE value="ajout d'une innovation" />
-    <MESSAGE value="delete" />
     <MESSAGE value="categories.html frontend(user)" />
     <MESSAGE value="category js" />
     <MESSAGE value="c" />
-    <option name="LAST_COMMIT_MESSAGE" value="c" />
+    <MESSAGE value="details de category_details.html frontend" />
+    <MESSAGE value="js de details de category_details.html frontend" />
+    <MESSAGE value="controlled category" />
+    <MESSAGE value="dashboard js" />
+    <MESSAGE value="details innovation" />
+    <MESSAGE value="MODIFY CATEGORY BACK" />
+    <MESSAGE value="MODIFY INNOVATION BACK" />
+    <MESSAGE value="delete" />
+    <MESSAGE value="...." />
+    <MESSAGE value="INDEX (FRONT-PAGE 4 ADMIN-BACKOFFICE)" />
+    <MESSAGE value="INDEX (FRONT PAGE 4 USER-FRONTOFFICE)" />
+    <MESSAGE value="JS 4 innovation" />
+    <MESSAGE value="CONTROLLER FOR INNOVATION" />
+    <MESSAGE value="LIST ALL INNOVATION" />
+    <MESSAGE value="BDD OF INNOVATION" />
+    <MESSAGE value="VIDEO TO PUT IN THE BODY CSS &amp; BACKEND" />
+    <option name="LAST_COMMIT_MESSAGE" value="VIDEO TO PUT IN THE BODY CSS &amp; BACKEND" />
   </component>
 </project>
