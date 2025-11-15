@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46208b49-aa9e-422d-9a6e-1ccb6ca2c1c8" name="Changes" comment="creation des fichiers d'update et de delete du user">
+    <list default="true" id="46208b49-aa9e-422d-9a6e-1ccb6ca2c1c8" name="Changes" comment="update dashboard">
+      <change afterPath="$PROJECT_DIR$/prj_webb/controller/resetPassword.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prj_webb/view/FrontOffice/profile.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/profile.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,33 +48,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;user__branch&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zak/PhpstormProjects/projet-web/prj_webb/controller&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.webide.settings.project.settings.php&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "user__branch",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/zak/PhpstormProjects/projet-web/prj_webb/view/FrontOffice",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\FrontOffice" />
       <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\controller" />
+      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\FrontOffice\assets\js" />
       <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\BackEnd" />
       <recent name="C:\Users\zak\PhpstormProjects\projet-web" />
-      <recent name="C:\Users\zak\PhpstormProjects\projet-web\user" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -103,6 +108,7 @@
       <workItem from="1763166855089" duration="11000" />
       <workItem from="1763225566556" duration="9000" />
       <workItem from="1763226328932" duration="5000" />
+      <workItem from="1763229765300" duration="251000" />
     </task>
     <task id="LOCAL-00001" summary="dfsdf">
       <option name="closed" value="true" />
@@ -184,7 +190,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763119984971</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="update dashboard">
+      <option name="closed" value="true" />
+      <created>1763229890978</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1763229890978</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,6 +211,7 @@
     <MESSAGE value="register controller done" />
     <MESSAGE value="creation du dashboard" />
     <MESSAGE value="creation des fichiers d'update et de delete du user" />
-    <option name="LAST_COMMIT_MESSAGE" value="creation des fichiers d'update et de delete du user" />
+    <MESSAGE value="update dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="update dashboard" />
   </component>
 </project>

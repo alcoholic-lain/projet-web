@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             window.location.href = "../BackEnd/dashboard.php";
                         } else if (data.role_id == 2) {
                             // Utilisateur
-                            window.location.href = "profile.html";
+                            window.location.href = "profile.php";
                         }
                     }, 1000);
                 } else {
