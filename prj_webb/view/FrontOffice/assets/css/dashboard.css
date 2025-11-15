@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+/* 🌌 Fond spatial */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top, #e4e7ff, #cdd4ff, #b5bbff);
+    color: #1A1A2E;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: url('../images/stars-light.png') repeat;
+    background-size: contain;
+    opacity: 0.25;
+    animation: stars 200s linear infinite;
+    z-index: 0;
+}
+
+@keyframes stars {
+    from { transform: translateY(0); }
+    to { transform: translateY(-1000px); }
+}
+
+/* 🚀 Container */
+.dashboard-container {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(138, 141, 255, 0.3);
+    border-radius: 20px;
+    padding: 40px;
+    margin-top: 60px;
+    width: 95%;
+    max-width: 1100px;
+    box-shadow: 0 0 25px rgba(138, 141, 255, 0.4);
+}
+
+/* 🪐 Titres */
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    font-size: 28px;
+    color: #4A4DE7;
+    text-shadow: 0 0 8px rgba(138, 141, 255, 0.4);
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin: 15px 0 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1A1A2E;
+}
+
+/* 🚪 Déconnexion */
+.btn-logout {
+    display: inline-block;
+    background: linear-gradient(90deg, #FFB347, #FFD976);
+    padding: 10px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #1A1A2E;
+    font-weight: 600;
+    float: right;
+    margin-bottom: 20px;
+    transition: .3s;
+    box-shadow: 0 0 10px rgba(255, 197, 91, 0.5);
+}
+
+.btn-logout:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #FFD976, #FFB347);
+}
+
+/* 📊 Tableau */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    font-size: 14px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(138, 141, 255, 0.3);
+}
+
+/* En-têtes */
+thead {
+    background: linear-gradient(45deg, #8A8DFF, #4A4DE7);
+    color: white;
+}
+
+thead th {
+    padding: 14px 10px;
+    text-align: left;
+    font-weight: 600;
+}
+
+/* Lignes du tableau */
+tbody tr {
+    background: rgba(255, 255, 255, 0.6);
+    transition: 0.2s;
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.45);
+}
+
+tbody tr:hover {
+    background: rgba(138, 141, 255, 0.15);
+}
+
+/* Cases */
+td {
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(138, 141, 255, 0.3);
+}
+
+/* ✏️ Boutons Modifier */
+.btn-edit {
+    background: linear-gradient(45deg, #76D9FF, #4AA6FF);
+    color: white;
+    padding: 7px 12px;
+    font-size: 13px;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-right: 5px;
+    transition: .3s;
+}
+
+.btn-edit:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 10px rgba(76, 136, 255, 0.6);
+}
+
+/* 🗑️ Boutons Supprimer */
+.btn-delete {
+    background: linear-gradient(45deg, #FF6A6A, #FF3D3D);
+    color: white;
+    padding: 7px 12px;
+    font-size: 13px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.btn-delete:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.6);
+}
+
+/* 📱 Responsive */
+@media (max-width: 700px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody tr {
+        margin-bottom: 15px;
+        padding: 12px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.75);
+    }
+
+    td {
+        border: none;
+        padding: 8px 0;
+        position: relative;
+    }
+
+    td:before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #4A4DE7;
+        display: block;
+        margin-bottom: 5px;
+    }
+}
