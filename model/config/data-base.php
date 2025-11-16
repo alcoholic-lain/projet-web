@@ -6,7 +6,7 @@
 
 class Database {
     private $host = "localhost";
-    private $db_name = "innovation_db";
+    private $db_name = "tunispace_database";
     private $username = "root";
     private $password = "";
     private $conn;

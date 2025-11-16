@@ -5,28 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/components/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/components/CategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/components/InnovationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/components/InnovationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Innovation/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/model/Innovation/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Admin/a_Category.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Admin/a_Category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Admin/a_Innovation.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Admin/a_Innovation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Admin/add_Category.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Admin/add_Category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Admin/edit_Category.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Admin/edit_Category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Admin/edit_Innovation.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Admin/edit_Innovation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Admin/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/css/1.css" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/assets/css/1.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/css/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/assets/css/admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/css/style_i_list.css" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/assets/css/style_i_list.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/css/user.css" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/assets/css/user.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/js/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/assets/js/category.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/js/category_details.js" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/assets/js/category_details.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/js/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/assets/js/dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/js/innovation.js" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/assets/js/innovation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/src/add_Innovation.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/src/add_Innovation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/src/categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/src/categories.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/src/category_details.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/src/category_details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/src/list_Innovation.html" beforeDir="false" afterPath="$PROJECT_DIR$/veiw/Client/src/list_Innovation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Innovation/schema.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/config/data-base.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/config/data-base.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +133,7 @@
       <workItem from="1763034198176" duration="382000" />
       <workItem from="1763113693228" duration="12453000" />
       <workItem from="1763286214402" duration="6528000" />
-      <workItem from="1763313454157" duration="14230000" />
+      <workItem from="1763313454157" duration="17058000" />
     </task>
     <task id="LOCAL-00001" summary="1st">
       <option name="closed" value="true" />
@@ -513,7 +495,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763286274785</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="update">
+      <option name="closed" value="true" />
+      <created>1763333282499</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1763333282499</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
