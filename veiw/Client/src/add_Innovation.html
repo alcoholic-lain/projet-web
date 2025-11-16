@@ -104,6 +104,19 @@
             opacity: 0.8;
             margin-top: 40px;
         }
+        /* Animation Shake */
+        .shake {
+            animation: shakeAnim 0.3s ease;
+        }
+
+        @keyframes shakeAnim {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(6px); }
+            75% { transform: translateX(-4px); }
+            100% { transform: translateX(0); }
+        }
+
     </style>
 </head>
 <body>
@@ -112,7 +125,7 @@
     <h1>💡 Soumettre une Innovation</h1>
     <nav>
         <a href="list_Innovation.html">Liste des innovations</a>
-        <a href="../../Admin/a_Innovation.html">Espace Admin</a>
+        <a href="../../Admin/index.html">Espace Admin</a>
     </nav>
 </header>
 
@@ -121,16 +134,16 @@
 
     <form id="form-innovation">
         <label for="titre">Titre de l’innovation :</label>
-        <input type="text" id="titre" placeholder="Ex : Rover LunaNova" required>
+        <input type="text" id="titre" placeholder="Ex : Rover LunaNova" >
 
         <label for="category_id">Catégorie :</label>
-        <select id="category_id" required>
+        <select id="category_id" >
             <option value="">-- Sélectionner une catégorie --</option>
             <!-- Options remplies dynamiquement par JS -->
         </select>
 
         <label for="description">Description :</label>
-        <textarea id="description" placeholder="Décris ton innovation de manière claire et inspirante..." required></textarea>
+        <textarea id="description" placeholder="Décris ton innovation de manière claire et inspirante..." ></textarea>
 
         <button type="submit" class="btn-submit">🚀 Envoyer l’innovation</button>
         <p id="msg"></p>
@@ -141,6 +154,7 @@
     <p>&copy; 2025 - Innovation  - Tunispace - Hichem Challakhi</p>
 </footer>
 
-<script src="../assets/js/innovation.js"></script>
+<script src="../assets/js/innovation.js" defer></script>
+
 </body>
 </html>

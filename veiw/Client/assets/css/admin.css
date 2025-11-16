@@ -15,7 +15,8 @@
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background: radial-gradient(circle at top, var(--blue-mid), var(--blue-dark));
+
+    background: radial-gradient(circle at top, #e4e7ff, #cdd4ff, #b5bbff);
     color: #F5F6FF;
 }
 
@@ -246,4 +247,203 @@ footer {
     color: #ffffff !important;
     padding: 10px;
 }
+/* ============================================================
+   🟣 DASHBOARD ADMIN (Index.html)
+   ============================================================ */
+
+body.admin-dashboard {
+    background: radial-gradient(circle at top, var(--blue-mid), var(--blue-dark));
+    color: #F5F6FF;
+}
+
+/* TITRES */
+.admin-dashboard h1 {
+    font-family: 'Orbitron';
+    color: var(--purple-light);
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.admin-dashboard h2 {
+    text-align: center;
+    color: var(--yellow);
+    margin-bottom: 40px;
+    font-family: 'Orbitron';
+}
+
+/* WRAPPER */
+.dashboard {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+/* CARDS GRID */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+/* CARD STYLE */
+.card {
+    background: rgba(20, 24, 60, 0.85);
+    border: 1px solid var(--purple);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+
+    /* Effet 3D */
+    transform-style: preserve-3d;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px) rotateX(6deg) rotateY(-6deg);
+    box-shadow:
+            0 15px 25px rgba(0,0,0,0.5),
+            0 0 25px rgba(138, 141, 255, 0.8);
+}
+
+.card-icon {
+    font-size: 55px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 8px rgba(138,141,255,0.6));
+}
+
+.card h3 {
+    font-family: 'Inter';
+    color: var(--purple-light);
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #B8BAFF;
+}
+
+/* CARD BUTTON */
+.card a {
+    display: inline-block;
+    padding: 10px 22px;
+    background-color: var(--green);
+    color: var(--blue-dark);
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(74,255,139,0.6);
+    transition: 0.25s ease;
+}
+
+.card a:hover {
+    background-color: #3FE077;
+    transform: translateZ(10px) scale(1.08);
+}
+
+/* NAV DASHBOARD */
+.admin-dashboard nav a {
+    color: var(--purple-light);
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.3s;
+}
+
+.admin-dashboard nav a:hover {
+    color: var(--yellow);
+}
+
+/* FOOTER */
+.admin-dashboard footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid var(--purple);
+    font-size: 14px;
+    opacity: 0.8;
+    margin-top: 60px;
+}
+/* ============================================================
+   🟦 SIDEBAR FUTURISTE
+   ============================================================ */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100vh;
+
+    background: rgba(11, 14, 38, 0.95);
+    border-right: 2px solid rgba(74, 77, 231, 0.4);
+
+    backdrop-filter: blur(8px);
+    padding-top: 30px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    box-shadow: 5px 0 20px rgba(74,77,231,0.25);
+    z-index: 999;
+}
+
+.sidebar h2 {
+    font-family: 'Orbitron';
+    color: var(--purple-light);
+    text-align: center;
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px rgba(138,141,255,0.8);
+}
+
+.sidebar a {
+    color: #D7D9FF;
+    text-decoration: none;
+
+    padding: 12px 20px;
+    margin: 0 15px;
+
+    border-radius: 8px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    transition: 0.25s ease;
+}
+
+.sidebar a:hover {
+    background: rgba(74, 77, 231, 0.4);
+    box-shadow: 0 0 12px rgba(138, 141, 255, 0.6);
+    transform: translateX(6px);
+}
+
+/* Icônes */
+.sidebar a span.icon {
+    font-size: 20px;
+}
+
+/* Contenu poussé à droite */
+.with-sidebar {
+    margin-left: 260px;
+}
+
+/* Responsive */
+@media screen and (max-width: 800px) {
+    .with-sidebar {
+        margin-left: 80px;
+    }
+    .sidebar {
+        width: 70px;
+    }
+
+    .sidebar h2 {
+        display: none;
+    }
+
+    .sidebar a {
+        justify-content: center;
+    }
+
+    .sidebar a span.text {
+        display: none;
+    }
 

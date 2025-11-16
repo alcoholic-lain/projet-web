@@ -3,7 +3,7 @@
 // Auteur : Hichem Challakhi 🚀
 // =============================
 
-const API_URL = "/controller/components/CategoryController.php";
+const API_URL = "http://localhost/projet-web/controller/components/CategoryController.php";
 
 /* ============================================================
    🔧 UTILITAIRE
@@ -76,7 +76,7 @@ async function loadCategoriesFront() {
         document.querySelectorAll(".category-card").forEach(card => {
             card.addEventListener("click", () => {
                 const id = card.dataset.id;
-                window.location.href = `/veiw/Client/src/category_details.html?id=${id}`;
+                window.location.href = `/projet-web/veiw/Client/src/category_details.html?id=${id}`;
             });
         });
 
@@ -144,6 +144,26 @@ function setupAddCategory() {
         if (!nom || !description) {
             msg.textContent = "⚠️ Tous les champs sont obligatoires.";
             msg.className = "error";
+            return;
+        }
+        // 2️⃣ Longueur min
+        if (nom.length < 3) {
+            msg.textContent = "⚠️ Le nom doit contenir au moins 3 caractères.";
+            msg.style.color = "#FF6B6B";
+            return;
+        }
+
+        if (description.length < 5) {
+            msg.textContent = "⚠️ La description doit être plus détaillée.";
+            msg.style.color = "#FF6B6B";
+            return;
+        }
+
+        // 3️⃣ Caractères interdits
+        const forbidden = /[<>$]/g;
+        if (forbidden.test(nom) || forbidden.test(description)) {
+            msg.textContent = "⚠️ Caractères spéciaux interdits (<, >, $).";
+            msg.style.color = "#FF6B6B";
             return;
         }
 
@@ -234,6 +254,26 @@ async function setupEditCategory() {
         if (!nom || !description) {
             msg.textContent = "⚠️ Tous les champs sont obligatoires.";
             msg.className = "error";
+            return;
+        }
+        // 2️⃣ Longueur min
+        if (nom.length < 3) {
+            msg.textContent = "⚠️ Le nom doit contenir au moins 3 caractères.";
+            msg.style.color = "#FF6B6B";
+            return;
+        }
+
+        if (description.length < 5) {
+            msg.textContent = "⚠️ La description doit être plus détaillée.";
+            msg.style.color = "#FF6B6B";
+            return;
+        }
+
+        // 3️⃣ Caractères interdits
+        const forbidden = /[<>$]/g;
+        if (forbidden.test(nom) || forbidden.test(description)) {
+            msg.textContent = "⚠️ Caractères spéciaux interdits (<, >, $).";
+            msg.style.color = "#FF6B6B";
             return;
         }
 

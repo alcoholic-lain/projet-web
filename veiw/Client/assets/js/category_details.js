@@ -1,5 +1,5 @@
-const API_CAT = "/controller/components/CategoryController.php";
-const API_INNOV = "/controller/components/InnovationController.php";
+const API_CAT = "http://localhost/projet-web/controller/components/CategoryController.php";
+const API_INNOV = "http://localhost/projet-web/controller/components/InnovationController.php";
 
 async function loadCategoryPage() {
     const params = new URLSearchParams(window.location.search);

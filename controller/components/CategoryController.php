@@ -10,8 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
     exit;
 }
 
-require_once "../../model/config/data-base.php";
-require_once "../../model/Innovation/Category.php";
+require_once __DIR__ . "/../../model/config/data-base.php";
+require_once __DIR__ . "/../../model/Innovation/Category.php";
 
 $db = (new Database())->getConnection();
 $categoryModel = new Category($db);
