@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mot de passe oublié</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mot de passe oublié</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <div class="forgot-container">
+<div class="forgot-container">
     <div class="forgot-card">
-      <h1 class="title">🔑 Mot de passe oublié</h1>
-      <p class="subtitle">Entrez votre email pour réinitialiser votre mot de passe</p>
-      
-      <form id="forgotPasswordForm">
-        <div class="input-group">
-          <label for="email">Adresse e-mail</label>
-          <input type="text" id="email" placeholder="exemple@mail.com" >
+        <h1 class="title">🔑 Mot de passe oublié</h1>
+        <p class="subtitle">Entrez votre email et votre pseudo pour réinitialiser votre mot de passe</p>
+
+        <form id="forgotPasswordForm">
+            <div class="input-group">
+                <label for="email">Adresse e-mail</label>
+                <input type="email" id="email" name="email" placeholder="exemple@mail.com" >
+
+                <label for="pseudo">Pseudo</label>
+                <input type="text" id="pseudo" name="pseudo" placeholder="pseudocosmic" >
+            </div>
+
+            <button type="submit" class="btn-forgot">Envoyer le lien</button>
+            <p id="message"></p>
+        </form>
+
+        <div class="login-link">
+            <a href="login.html">⬅ Retour à la connexion</a>
         </div>
-
-        <button type="submit" class="btn-forgot">Envoyer le lien</button>
-        <p id="message"></p>
-      </form>
-
-      <div class="login-link">
-        <a href="login.html">⬅ Retour à la connexion</a>
-      </div>
     </div>
-  </div>
+</div>
 
-  <script src="assets/forgotpsw.js"></script>
+<script src="assets/js/forgotpsw.js"></script>
 </body>
 </html>

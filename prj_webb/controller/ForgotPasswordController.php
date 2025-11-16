@@ -7,19 +7,25 @@ try {
     $conn = config::getConnexion();
 
     $email = trim($_POST['email'] ?? '');
+    $pseudo = trim($_POST['pseudo'] ?? '');
 
     if ($email === '') {
         echo json_encode(['success' => false, 'message' => 'Email manquant.']);
         exit;
     }
+    if ($pseudo === '') {
+        echo json_encode(['success' => false, 'message' => 'Pseudo manquant.']);
+        exit;
+    }
 
-    $stmt = $conn->prepare("SELECT id FROM user WHERE email = :email");
+    $stmt = $conn->prepare("SELECT id FROM user WHERE email = :email AND pseudo = :pseudo");
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
     $stmt->execute();
     $userData = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$userData) {
-        echo json_encode(['success' => false, 'message' => "Cet email n'existe pas."]);
+        echo json_encode(['success' => false, 'message' => "Cet email ou pseudo n'existe pas."]);
         exit;
     }
 

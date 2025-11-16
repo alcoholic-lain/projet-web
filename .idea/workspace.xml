@@ -4,8 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46208b49-aa9e-422d-9a6e-1ccb6ca2c1c8" name="Changes" comment="regler les styles des page">
-      <change afterPath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/resetpassword.js" afterDir="false" />
+    <list default="true" id="46208b49-aa9e-422d-9a6e-1ccb6ca2c1c8" name="Changes" comment="l ajout du controller de resetpassword">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/controller/ForgotPasswordController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/controller/resetPassword.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/BackEnd/dashboard.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/css/dashboard.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/css/edit_user.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/css/login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/css/profile.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/css/register.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/css/resetpassword.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/img/google-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/forgotpsw.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/profile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/register.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/resetpassword.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/badge.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/profile.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/resetpassword.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/updatepsw.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +76,7 @@
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "user__branch",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/zak/PhpstormProjects/projet-web/prj_webb/view/FrontOffice/assets/js",
+    "last_opened_file_path": "C:/Users/zak/PhpstormProjects/projet-web",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -67,11 +89,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\zak\PhpstormProjects\projet-web" />
+      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\controller" />
       <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\FrontOffice\assets\js" />
       <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\FrontOffice\assets\css" />
       <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\FrontOffice" />
-      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\controller" />
-      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\BackEnd" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -104,7 +126,7 @@
       <workItem from="1763166855089" duration="11000" />
       <workItem from="1763225566556" duration="9000" />
       <workItem from="1763226328932" duration="5000" />
-      <workItem from="1763229765300" duration="382000" />
+      <workItem from="1763229765300" duration="667000" />
     </task>
     <task id="LOCAL-00001" summary="dfsdf">
       <option name="closed" value="true" />
@@ -210,7 +232,23 @@
       <option name="project" value="LOCAL" />
       <updated>1763230133210</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="l ajout du resetpassword.js">
+      <option name="closed" value="true" />
+      <created>1763230170755</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1763230170755</updated>
+    </task>
+    <task id="LOCAL-00015" summary="l ajout du controller de resetpassword">
+      <option name="closed" value="true" />
+      <created>1763230222201</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1763230222201</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,6 +264,8 @@
     <MESSAGE value="update dashboard" />
     <MESSAGE value="update profile page avec linculsion du reset password" />
     <MESSAGE value="regler les styles des page" />
-    <option name="LAST_COMMIT_MESSAGE" value="regler les styles des page" />
+    <MESSAGE value="l ajout du resetpassword.js" />
+    <MESSAGE value="l ajout du controller de resetpassword" />
+    <option name="LAST_COMMIT_MESSAGE" value="l ajout du controller de resetpassword" />
   </component>
 </project>
