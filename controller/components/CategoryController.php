@@ -1,150 +1,206 @@
 <?php
-require_once __DIR__ . '/../../model/config/data-base.php';
-require_once __DIR__ . '/../../model/Innovation/Category.php';
+header("Content-Type: application/json; charset=utf-8");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-header('Content-Type: application/json; charset=utf-8');
-
-// Initialize DB & model
-$database = new Database();
-$db = $database->getConnection();
-if (!$db) {
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Erreur de connexion à la base de données']);
+// CORS preflight
+if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
+    http_response_code(200);
     exit;
 }
-$category = new Category($db);
 
-$method = $_SERVER['REQUEST_METHOD'];
+require_once "../../model/config/data-base.php";
+require_once "../../model/Innovation/Category.php";
 
-// Helper to read JSON body
-function getJsonBody() {
-    $raw = file_get_contents("php://input");
-    $data = json_decode($raw, true);
-    if (!is_array($data)) {
-        return null;
-    }
-    return $data;
+$db = (new Database())->getConnection();
+$categoryModel = new Category($db);
+
+/**
+ * Helper JSON
+ */
+function json_response($data, int $code = 200) {
+    http_response_code($code);
+    echo json_encode($data);
+    exit;
 }
 
-try {
-    if ($method === 'GET') {
-        // Single category ?id=
-        if (isset($_GET['id'])) {
-            $id = (int)$_GET['id'];
-            if ($id <= 0) {
-                http_response_code(400);
-                echo json_encode(['success' => false, 'message' => 'ID invalide']);
-                exit;
+$method = $_SERVER["REQUEST_METHOD"];
+
+/* ============================================================
+   1️⃣ GET
+============================================================ */
+if ($method === "GET") {
+
+    // GET ONE
+    if (isset($_GET["id"])) {
+        $id = (int) $_GET["id"];
+
+        try {
+            $cat = $categoryModel->getById($id);
+
+            if (!$cat) {
+                json_response([
+                    "success" => false,
+                    "message" => "Catégorie introuvable"
+                ], 404);
             }
-            $category->id = $id;
-            if ($category->readOne()) {
-                http_response_code(200);
-                echo json_encode([
-                    'id' => $category->id,
-                    'nom' => $category->nom,
-                    'description' => $category->description,
-                    'date_creation' => $category->date_creation
-                ]);
-            } else {
-                http_response_code(404);
-                echo json_encode(['success' => false, 'message' => 'Catégorie non trouvée']);
-            }
+
+            json_response($cat);
+        } catch (Exception $e) {
+            json_response([
+                "success" => false,
+                "message" => "Erreur serveur",
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // GET ALL
+    try {
+        $records = $categoryModel->getAll();
+
+        json_response([
+            "success" => true,
+            "records" => $records
+        ]);
+
+    } catch (Exception $e) {
+        json_response([
+            "success" => false,
+            "message" => "Erreur serveur",
+            "error" => $e->getMessage()
+        ], 500);
+    }
+}
+
+/* ============================================================
+   2️⃣ POST – Ajouter une catégorie
+============================================================ */
+if ($method === "POST") {
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    if (!$data || empty($data["nom"]) || empty($data["description"])) {
+        json_response([
+            "success" => false,
+            "message" => "Champs obligatoires manquants"
+        ], 400);
+    }
+
+    try {
+        $categoryModel->nom         = $data["nom"];
+        $categoryModel->description = $data["description"];
+
+        $ok = $categoryModel->create();
+
+        if ($ok) {
+            json_response([
+                "success" => true,
+                "message" => "Catégorie créée avec succès"
+            ], 201);
         } else {
-            // List all categories
-            $stmt = $category->readAll();
-            $records = [];
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $records[] = [
-                    'id' => (int)$row['id'],
-                    'nom' => $row['nom'],
-                    'description' => $row['description'],
-                    'date_creation' => $row['date_creation']
-                ];
-            }
-            http_response_code(200);
-            echo json_encode(['success' => true, 'records' => $records]);
+            json_response([
+                "success" => false,
+                "message" => "Erreur lors de la création"
+            ], 500);
         }
-    } elseif ($method === 'POST') {
-        $data = getJsonBody();
-        if ($data === null) {
-            http_response_code(400);
-            echo json_encode(['success' => false, 'message' => 'Corps JSON invalide']);
-            exit;
-        }
-        $nom = trim($data['nom'] ?? '');
-        $description = trim($data['description'] ?? '');
-        if ($nom === '' || $description === '') {
-            http_response_code(400);
-            echo json_encode(['success' => false, 'message' => 'Tous les champs sont obligatoires']);
-            exit;
-        }
-        $category->nom = $nom;
-        $category->description = $description;
-        if ($category->create()) {
-            http_response_code(201);
-            echo json_encode([
-                'success' => true,
-                'message' => 'Catégorie créée avec succès',
-                'id' => $category->id,
-                'nom' => $category->nom,
-                'description' => $category->description,
-                'date_creation' => $category->date_creation
+
+    } catch (Exception $e) {
+        json_response([
+            "success" => false,
+            "message" => "Erreur serveur",
+            "error" => $e->getMessage()
+        ], 500);
+    }
+}
+
+/* ============================================================
+   3️⃣ PUT – Modifier une catégorie
+============================================================ */
+if ($method === "PUT") {
+    $data = json_decode(file_get_contents("php://input"), true);
+    $id   = (int) ($data["id"] ?? 0);
+
+    if ($id <= 0) {
+        json_response([
+            "success" => false,
+            "message" => "ID invalide"
+        ], 400);
+    }
+
+    try {
+        $categoryModel->id          = $id;
+        $categoryModel->nom         = $data["nom"]         ?? "";
+        $categoryModel->description = $data["description"] ?? "";
+
+        $ok = $categoryModel->update();
+
+        if ($ok) {
+            json_response([
+                "success" => true,
+                "message" => "Catégorie mise à jour"
             ]);
         } else {
-            http_response_code(500);
-            echo json_encode(['success' => false, 'message' => 'Erreur lors de la création']);
+            json_response([
+                "success" => false,
+                "message" => "Échec de la mise à jour"
+            ], 500);
         }
-    } elseif ($method === 'PUT') {
-        $data = getJsonBody();
-        if ($data === null) {
-            http_response_code(400);
-            echo json_encode(['success' => false, 'message' => 'Corps JSON invalide']);
-            exit;
-        }
-        $id = (int)($data['id'] ?? 0);
-        $nom = trim($data['nom'] ?? '');
-        $description = trim($data['description'] ?? '');
-        if ($id <= 0 || $nom === '' || $description === '') {
-            http_response_code(400);
-            echo json_encode(['success' => false, 'message' => 'Données invalides']);
-            exit;
-        }
-        $category->id = $id;
-        $category->nom = $nom;
-        $category->description = $description;
-        if ($category->update()) {
-            http_response_code(200);
-            echo json_encode(['success' => true, 'message' => 'Catégorie mise à jour avec succès']);
-        } else {
-            http_response_code(500);
-            echo json_encode(['success' => false, 'message' => 'Erreur lors de la mise à jour']);
-        }
-    } elseif ($method === 'DELETE') {
-        $data = getJsonBody();
-        if ($data === null) {
-            http_response_code(400);
-            echo json_encode(['success' => false, 'message' => 'Corps JSON invalide']);
-            exit;
-        }
-        $id = (int)($data['id'] ?? 0);
-        if ($id <= 0) {
-            http_response_code(400);
-            echo json_encode(['success' => false, 'message' => 'ID invalide']);
-            exit;
-        }
-        $category->id = $id;
-        if ($category->delete()) {
-            http_response_code(200);
-            echo json_encode(['success' => true, 'message' => 'Catégorie supprimée avec succès']);
-        } else {
-            http_response_code(500);
-            echo json_encode(['success' => false, 'message' => 'Erreur lors de la suppression']);
-        }
-    } else {
-        http_response_code(405);
-        echo json_encode(['success' => false, 'message' => 'Méthode non autorisée']);
+
+    } catch (Exception $e) {
+        json_response([
+            "success" => false,
+            "message" => "Erreur serveur",
+            "error" => $e->getMessage()
+        ], 500);
     }
-} catch (Throwable $e) {
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Erreur serveur: ' . $e->getMessage()]);
 }
+
+/* ============================================================
+   4️⃣ DELETE – Supprimer une catégorie
+============================================================ */
+if ($method === "DELETE") {
+
+    $data = json_decode(file_get_contents("php://input"), true);
+    $id   = (int) ($data["id"] ?? 0);
+
+    if ($id <= 0) {
+        json_response([
+            "success" => false,
+            "message" => "ID invalide"
+        ], 400);
+    }
+
+    try {
+        $categoryModel->id = $id;
+
+        $ok = $categoryModel->delete();
+
+        if ($ok) {
+            json_response([
+                "success" => true,
+                "message" => "Catégorie supprimée"
+            ]);
+        } else {
+            json_response([
+                "success" => false,
+                "message" => "Échec de la suppression"
+            ], 500);
+        }
+
+    } catch (Exception $e) {
+        json_response([
+            "success" => false,
+            "message" => "Erreur serveur",
+            "error" => $e->getMessage()
+        ], 500);
+    }
+}
+
+/* ============================================================
+   5️⃣ Méthode non supportée
+============================================================ */
+json_response([
+    "success" => false,
+    "message" => "Méthode non supportée"
+], 405);

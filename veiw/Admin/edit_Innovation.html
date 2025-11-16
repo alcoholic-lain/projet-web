@@ -129,20 +129,23 @@
         <input type="hidden" id="innovation-id">
 
         <label>Titre :</label>
-        <input type="text" id="titre" required>
+        <input type="text" id="titre" >
 
         <label>Catégorie :</label>
-        <select id="category_id" required></select>
+        <select id="category_id" class="select-space" ></select>
 
         <label>Description :</label>
-        <textarea id="description" required></textarea>
+        <textarea id="description" ></textarea>
 
         <label>Statut :</label>
-        <select id="statut">
-            <option value="En attente">En attente</option>
-            <option value="Validée ✅">Validée ✅</option>
-            <option value="Rejetée ❌">Rejetée ❌</option>
-        </select>
+        <div class="select-wrapper">
+            <select id="statut" class="select-space">
+                <option value="En attente">🕒 En attente</option>
+                <option value="Validée">✅ Validée</option>
+                <option value="Rejetée">❌ Rejetée</option>
+            </select>
+        </div>
+
 
         <button type="submit" class="btn-submit">💾 Enregistrer</button>
 

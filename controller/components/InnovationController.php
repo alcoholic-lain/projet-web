@@ -1,155 +1,258 @@
 <?php
-header("Content-Type: application/json");
+header("Content-Type: application/json; charset=utf-8");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-require_once "../../model/config/data-base.php"; // ← IMPORTANT
+// Préflight CORS (utile si tu utilises PUT/DELETE en fetch)
+if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
+    http_response_code(200);
+    exit;
+}
+
+require_once "../../model/config/data-base.php";
 require_once "../../model/Innovation/Innovation.php";
 
 $db = (new Database())->getConnection();
+$innovationModel = new Innovation($db);
 
-/* ============================================================
-   1️⃣ GET innovations by category
-============================================================ */
-if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["category_id"])) {
-
-    $categoryId = intval($_GET["category_id"]);
-
-    $query = "SELECT * FROM innovations WHERE category_id = :cid ORDER BY date_creation DESC";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(":cid", $categoryId, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    echo json_encode([
-        "success" => true,
-        "records" => $records
-    ]);
+/**
+ * Helper pour réponse JSON
+ */
+function json_response($payload, int $code = 200) {
+    http_response_code($code);
+    echo json_encode($payload);
     exit;
 }
 
+$method = $_SERVER["REQUEST_METHOD"];
+
 /* ============================================================
-   2️⃣ GET one innovation by ID
+   1️⃣ GET – plusieurs cas :
+      - ?category_id=...  → innovations d’une catégorie
+      - ?id=...           → une innovation
+      - (rien)            → liste complète (admin)
 ============================================================ */
-if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["id"])) {
+if ($method === "GET") {
 
-    $id = intval($_GET["id"]);
+    // Cas 1 : innovations par catégorie (front visiteur / liste catégorie)
+    if (isset($_GET["category_id"])) {
+        $categoryId = (int) $_GET["category_id"];
 
-    $query = "SELECT * FROM innovations WHERE id = :id";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-    $stmt->execute();
+        try {
+            // ⚠️ On renvoie TOUTES les innovations de la catégorie
+            // (le filtrage "Validée seulement" peut se faire en JS côté visiteur)
+            $records = $innovationModel->getByCategory($categoryId, false);
 
-    $record = $stmt->fetch(PDO::FETCH_ASSOC);
+            json_response([
+                "success" => true,
+                "records" => $records
+            ]);
+        } catch (Exception $e) {
+            json_response([
+                "success" => false,
+                "message" => "Erreur lors du chargement des innovations par catégorie",
+                "error"   => $e->getMessage()
+            ], 500);
+        }
+    }
 
-    echo json_encode($record ?: ["success" => false, "message" => "Not found"]);
-    exit;
+    // Cas 2 : une innovation par ID
+    if (isset($_GET["id"])) {
+        $id = (int) $_GET["id"];
+
+        try {
+            $record = $innovationModel->getById($id);
+
+            if (!$record) {
+                json_response([
+                    "success" => false,
+                    "message" => "Innovation introuvable"
+                ], 404);
+            }
+
+            // Ici on renvoie directement l’objet (comme tu le faisais déjà)
+            echo json_encode($record);
+            exit;
+
+        } catch (Exception $e) {
+            json_response([
+                "success" => false,
+                "message" => "Erreur lors du chargement de l’innovation",
+                "error"   => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // Cas 3 : liste complète (admin)
+    try {
+        $records = $innovationModel->getAll(false);
+
+        json_response([
+            "success" => true,
+            "records" => $records
+        ]);
+
+    } catch (Exception $e) {
+        json_response([
+            "success" => false,
+            "message" => "Erreur lors du chargement des innovations",
+            "error"   => $e->getMessage()
+        ], 500);
+    }
 }
 
 /* ============================================================
-   3️⃣ GET all innovations (admin)
+   2️⃣ POST – Ajouter une innovation
 ============================================================ */
-if ($_SERVER["REQUEST_METHOD"] === "GET") {
-
-    $query = "SELECT * FROM innovations ORDER BY date_creation DESC";
-    $stmt = $db->query($query);
-    $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    echo json_encode([
-        "success" => true,
-        "records" => $records
-    ]);
-    exit;
-}
-
-/* ============================================================
-   4️⃣ ADD innovation (POST)
-============================================================ */
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
+if ($method === "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
 
-    $query = "INSERT INTO innovations (titre, description, category_id) 
-              VALUES (:titre, :description, :cid)";
+    if (!$data || empty($data["titre"]) || empty($data["description"]) || empty($data["category_id"])) {
+        json_response([
+            "success" => false,
+            "message" => "Champs obligatoires manquants"
+        ], 400);
+    }
 
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(":titre", $data["titre"]);
-    $stmt->bindParam(":description", $data["description"]);
-    $stmt->bindParam(":cid", $data["category_id"]);
+    try {
+        $innovationModel->titre       = $data["titre"];
+        $innovationModel->description = $data["description"];
+        $innovationModel->category_id = (int) $data["category_id"];
+        $innovationModel->statut      = $data["statut"] ?? "En attente";
 
-    $stmt->execute();
+        $ok = $innovationModel->create();
 
-    echo json_encode(["success" => true, "message" => "Innovation created"]);
-    exit;
+        if ($ok) {
+            json_response([
+                "success" => true,
+                "message" => "Innovation créée avec succès"
+            ], 201);
+        } else {
+            json_response([
+                "success" => false,
+                "message" => "Échec de la création de l’innovation"
+            ], 500);
+        }
+
+    } catch (Exception $e) {
+        json_response([
+            "success" => false,
+            "message" => "Erreur serveur lors de la création",
+            "error"   => $e->getMessage()
+        ], 500);
+    }
 }
 
 /* ============================================================
-   5️⃣ UPDATE innovation (PUT)
+   3️⃣ PUT – Mettre à jour :
+        - soit seulement le statut (Valider / Rejeter)
+        - soit tout (titre, description, category, statut)
 ============================================================ */
-/* ============================================================
-   5️⃣ UPDATE innovation (PUT)
-============================================================ */
-if ($_SERVER["REQUEST_METHOD"] === "PUT") {
-
+if ($method === "PUT") {
     $data = json_decode(file_get_contents("php://input"), true);
 
-    $id = intval($data["id"] ?? 0);
+    $id = (int) ($data["id"] ?? 0);
     if ($id <= 0) {
-        echo json_encode(["success" => false, "message" => "ID invalide"]);
-        exit;
+        json_response([
+            "success" => false,
+            "message" => "ID invalide"
+        ], 400);
     }
 
-    // Cas 1 : mise à jour du statut uniquement (validation / rejet)
-    if (isset($data["statut"]) && !isset($data["titre"]) && !isset($data["description"])) {
-        $query = "UPDATE innovations SET statut = :statut WHERE id = :id";
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(":statut", $data["statut"]);
-        $stmt->bindParam(":id", $id);
-        $stmt->execute();
+    try {
+        // Cas 1 : update uniquement du statut (validation / rejet)
+        if (isset($data["statut"]) && !isset($data["titre"]) && !isset($data["description"]) && !isset($data["category_id"])) {
 
-        echo json_encode(["success" => true, "message" => "Statut mis à jour"]);
-        exit;
+            $innovationModel->id = $id;
+            $ok = $innovationModel->updateStatut($data["statut"]);
+
+            if ($ok) {
+                json_response([
+                    "success" => true,
+                    "message" => "Statut mis à jour"
+                ]);
+            } else {
+                json_response([
+                    "success" => false,
+                    "message" => "Échec de la mise à jour du statut"
+                ], 500);
+            }
+        }
+
+        // Cas 2 : update complet (édition admin)
+        $innovationModel->id          = $id;
+        $innovationModel->titre       = $data["titre"]        ?? "";
+        $innovationModel->description = $data["description"]  ?? "";
+        $innovationModel->category_id = (int) ($data["category_id"] ?? 0);
+        $innovationModel->statut      = $data["statut"]       ?? "En attente";
+
+        $ok = $innovationModel->update();
+
+        if ($ok) {
+            json_response([
+                "success" => true,
+                "message" => "Innovation mise à jour"
+            ]);
+        } else {
+            json_response([
+                "success" => false,
+                "message" => "Échec de la mise à jour de l’innovation"
+            ], 500);
+        }
+
+    } catch (Exception $e) {
+        json_response([
+            "success" => false,
+            "message" => "Erreur serveur lors de la mise à jour",
+            "error"   => $e->getMessage()
+        ], 500);
     }
-
-    // Cas 2 : mise à jour complète (titre, description, category_id, statut éventuel)
-    $query = "UPDATE innovations
-              SET titre = :titre, description = :description, category_id = :cid
-              " . (isset($data["statut"]) ? ", statut = :statut " : "") . "
-              WHERE id = :id";
-
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(":titre", $data["titre"]);
-    $stmt->bindParam(":description", $data["description"]);
-    $stmt->bindParam(":cid", $data["category_id"]);
-    if (isset($data["statut"])) {
-        $stmt->bindParam(":statut", $data["statut"]);
-    }
-    $stmt->bindParam(":id", $id);
-
-    $stmt->execute();
-
-    echo json_encode(["success" => true, "message" => "Innovation updated"]);
-    exit;
 }
-
 
 /* ============================================================
-   6️⃣ DELETE innovation (DELETE)
+   4️⃣ DELETE – Supprimer une innovation
 ============================================================ */
-if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
-
+if ($method === "DELETE") {
     $data = json_decode(file_get_contents("php://input"), true);
+    $id   = (int) ($data["id"] ?? 0);
 
-    $query = "DELETE FROM innovations WHERE id = :id";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(":id", $data["id"]);
+    if ($id <= 0) {
+        json_response([
+            "success" => false,
+            "message" => "ID invalide pour suppression"
+        ], 400);
+    }
 
-    $stmt->execute();
+    try {
+        $innovationModel->id = $id;
+        $ok = $innovationModel->delete();
 
-    echo json_encode(["success" => true, "message" => "Innovation deleted"]);
-    exit;
+        if ($ok) {
+            json_response([
+                "success" => true,
+                "message" => "Innovation supprimée"
+            ]);
+        } else {
+            json_response([
+                "success" => false,
+                "message" => "Échec de la suppression"
+            ], 500);
+        }
+
+    } catch (Exception $e) {
+        json_response([
+            "success" => false,
+            "message" => "Erreur serveur lors de la suppression",
+            "error"   => $e->getMessage()
+        ], 500);
+    }
 }
 
-?>
+/* ============================================================
+   5️⃣ Méthode non supportée
+============================================================ */
+json_response([
+    "success" => false,
+    "message" => "Méthode non supportée"
+], 405);

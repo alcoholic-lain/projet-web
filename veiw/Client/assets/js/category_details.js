@@ -34,15 +34,24 @@ async function loadCategoryPage() {
         // Hide loading spinner
         loading.classList.add("hidden");
 
-        if (!data.success || data.records.length === 0) {
+        if (!data.success) {
+            empty.classList.remove("hidden");
+            return;
+        }
+
+        // ⭐ FILTRER VISITEUR :
+        // Ne garder QUE les innovations Validées
+        const validated = data.records.filter(inv => inv.statut === "Validée");
+
+        if (validated.length === 0) {
             empty.classList.remove("hidden");
             return;
         }
 
         // Fill grid
-        grid.innerHTML = data.records.map(innov => `
+        grid.innerHTML = validated.map(innov => `
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6 border cursor-pointer transition hover:shadow-xl"
-                onclick="window.location.href='details_Innovation.html?id=${innov.id}'">
+                onclick="window.location.href='details_Innovation.html?id=${innov.id}&from=visitor'">
 
                 <h3 class="text-xl font-bold mb-2">${innov.titre}</h3>
 

@@ -1,8 +1,9 @@
 <?php
 /**
  * Category Model (DB-backed)
- * Table: categories
+ * Table : categories
  */
+
 class Category {
     private $conn;
     private $table_name = "categories";
@@ -16,64 +17,56 @@ class Category {
         $this->conn = $db;
     }
 
-    // Read all categories
-    public function readAll() {
-        $query = "SELECT id, nom, description, date_creation FROM " . $this->table_name . " ORDER BY date_creation DESC";
-        $stmt = $this->conn->prepare($query);
+    /** Récupérer toutes les catégories */
+    public function getAll(): array {
+        $sql = "SELECT * FROM {$this->table_name} ORDER BY date_creation DESC";
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Read single category by id
-    public function readOne() {
-        $query = "SELECT id, nom, description, date_creation FROM " . $this->table_name . " WHERE id = :id LIMIT 0,1";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(":id", $this->id, PDO::PARAM_INT);
+    /** Récupérer une catégorie par ID */
+    public function getById(int $id): ?array {
+        $sql = "SELECT * FROM {$this->table_name} WHERE id = :id LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($row) {
-            $this->nom = $row['nom'];
-            $this->description = $row['description'];
-            $this->date_creation = $row['date_creation'];
-            return true;
-        }
-        return false;
+        return $row ?: null;
     }
 
-    // Create category
-    public function create() {
-        $query = "INSERT INTO " . $this->table_name . " (nom, description, date_creation)
-                  VALUES (:nom, :description, NOW())";
-        $stmt = $this->conn->prepare($query);
-        $this->nom = htmlspecialchars(strip_tags($this->nom));
-        $this->description = htmlspecialchars(strip_tags($this->description));
-        $stmt->bindParam(":nom", $this->nom);
-        $stmt->bindParam(":description", $this->description);
-        if ($stmt->execute()) {
-            $this->id = $this->conn->lastInsertId();
-            // fetch created row date_creation
-            $this->readOne();
-            return true;
-        }
-        return false;
-    }
+    /** Créer une catégorie */
+    public function create(): bool {
+        $sql = "INSERT INTO {$this->table_name}
+                (nom, description, date_creation)
+                VALUES (:nom, :description, NOW())";
 
-    // Update category
-    public function update() {
-        $query = "UPDATE " . $this->table_name . " SET nom = :nom, description = :description WHERE id = :id";
-        $stmt = $this->conn->prepare($query);
-        $this->nom = htmlspecialchars(strip_tags($this->nom));
-        $this->description = htmlspecialchars(strip_tags($this->description));
-        $stmt->bindParam(":nom", $this->nom);
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":nom",         $this->nom);
         $stmt->bindParam(":description", $this->description);
-        $stmt->bindParam(":id", $this->id, PDO::PARAM_INT);
+
         return $stmt->execute();
     }
 
-    // Delete category
-    public function delete() {
-        $query = "DELETE FROM " . $this->table_name . " WHERE id = :id";
-        $stmt = $this->conn->prepare($query);
+    /** Mettre à jour une catégorie */
+    public function update(): bool {
+        $sql = "UPDATE {$this->table_name}
+                SET nom = :nom,
+                    description = :description
+                WHERE id = :id";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":nom",         $this->nom);
+        $stmt->bindParam(":description", $this->description);
+        $stmt->bindParam(":id",          $this->id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
+    /** Supprimer une catégorie */
+    public function delete(): bool {
+        $sql = "DELETE FROM {$this->table_name} WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":id", $this->id, PDO::PARAM_INT);
         return $stmt->execute();
     }
