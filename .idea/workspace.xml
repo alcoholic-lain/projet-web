@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46208b49-aa9e-422d-9a6e-1ccb6ca2c1c8" name="Changes" comment="l ajout du controller de resetpassword">
+    <list default="true" id="46208b49-aa9e-422d-9a6e-1ccb6ca2c1c8" name="Changes" comment="modification de mot de passe par rapport a l email et le pseudo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prj_webb/controller/ForgotPasswordController.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/controller/resetPassword.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/BackEnd/dashboard.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/css/dashboard.css" beforeDir="false" />
@@ -17,7 +16,6 @@
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/css/resetpassword.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/css/style.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/img/google-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/forgotpsw.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/login.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/profile.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/register.js" beforeDir="false" />
@@ -27,7 +25,6 @@
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/profile.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/register.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/resetpassword.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/updatepsw.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,34 +63,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "user__branch",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/zak/PhpstormProjects/projet-web",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;user__branch&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/zak/PhpstormProjects/projet-web/prj_webb/view/FrontOffice&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.webide.settings.project.settings.php&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\zak\PhpstormProjects\projet-web" />
-      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\controller" />
-      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\FrontOffice\assets\js" />
-      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\FrontOffice\assets\css" />
       <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\FrontOffice" />
+      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\FrontOffice\assets\js" />
+      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\controller" />
+      <recent name="C:\Users\zak\PhpstormProjects\projet-web" />
+      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\FrontOffice\assets\css" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -127,6 +124,8 @@
       <workItem from="1763225566556" duration="9000" />
       <workItem from="1763226328932" duration="5000" />
       <workItem from="1763229765300" duration="667000" />
+      <workItem from="1763334166342" duration="159000" />
+      <workItem from="1763386218362" duration="235000" />
     </task>
     <task id="LOCAL-00001" summary="dfsdf">
       <option name="closed" value="true" />
@@ -248,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763230222201</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="modification de mot de passe par rapport a l email et le pseudo">
+      <option name="closed" value="true" />
+      <created>1763334377861</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1763334377861</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,6 +273,7 @@
     <MESSAGE value="regler les styles des page" />
     <MESSAGE value="l ajout du resetpassword.js" />
     <MESSAGE value="l ajout du controller de resetpassword" />
-    <option name="LAST_COMMIT_MESSAGE" value="l ajout du controller de resetpassword" />
+    <MESSAGE value="modification de mot de passe par rapport a l email et le pseudo" />
+    <option name="LAST_COMMIT_MESSAGE" value="modification de mot de passe par rapport a l email et le pseudo" />
   </component>
 </project>
