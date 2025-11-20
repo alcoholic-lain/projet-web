@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Administration - Innovation </title>
+    <link rel="stylesheet" href="../Client/assets/css/admin.css">
+
+</head>
+<body class="admin-dashboard with-sidebar">
+<div class="sidebar">
+    <h2>🚀 Admin</h2>
+
+    <a href="index.html">
+        <span class="icon">🏠</span>
+        <span class="text">Dashboard</span>
+    </a>
+
+    <a href="a_Category.html">
+        <span class="icon">🗂️</span>
+        <span class="text">Catégories</span>
+    </a>
+
+    <a href="a_Innovation.html">
+        <span class="icon">🚀</span>
+        <span class="text">Innovations</span>
+    </a>
+
+    <a href="../Client/src/list_Innovation.html">
+        <span class="icon">🌐</span>
+        <span class="text">Front Office</span>
+    </a>
+</div>
+
+<header>
+    <h1>🚀 Espace Administrateur</h1>
+    <p style="margin-top: 10px; opacity: 0.9;">Tableau de bord - Innovation </p>
+    <nav>
+        <a href="../Client/src/list_Innovation.html">Retour au Front Office</a>
+    </nav>
+</header>
+
+<main class="dashboard">
+    <h2>Gestion du système</h2>
+
+    <div class="cards-container">
+        <div class="card">
+            <div class="card-icon">🗂️</div>
+            <h3>Catégories</h3>
+            <p>Créer, modifier et supprimer des catégories</p>
+            <a href="a_Category.html">Accéder</a>
+
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🚀</div>
+            <h3>Innovations</h3>
+            <p>Gérer les innovations soumises par les utilisateurs</p>
+            <a href="a_Innovation.html">Accéder</a>
+        </div>
+    </div>
+    <!-- === STATS SECTION === -->
+    <section class="section-box" style="margin-top:60px;">
+
+        <h2 style="text-align:center; color:#FFB347;">📊 Statistiques du système</h2>
+
+        <div class="cards-container" style="margin-top:35px;">
+
+            <div class="card">
+                <h3>Total Innovations</h3>
+                <p id="stats-innov" style="font-size:32px; font-weight:bold;">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Catégories</h3>
+                <p id="stats-cat" style="font-size:32px; font-weight:bold;">0</p>
+            </div>
+
+            <div class="card">
+                <h3>En attente</h3>
+                <p id="stats-pending" style="font-size:32px; font-weight:bold;">0</p>
+            </div>
+
+        </div>
+
+        <!-- === GRAPHIQUE === -->
+        <div style="max-width:800px; margin:60px auto;">
+            <h3 style="text-align:center; color:#8A8DFF;">Répartition des innovations par catégorie</h3>
+            <canvas id="chartCats" style="margin-top:25px;"></canvas>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2025 - Innovation  - Hichem Challakhi</p>
+</footer>
+<script src="../Client/assets/js/dashboard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</body>
+
+</html>

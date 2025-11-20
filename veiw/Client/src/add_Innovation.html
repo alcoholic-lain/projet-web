@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Soumettre une Innovation – Innovation </title>
+    <link rel="stylesheet" href="../assets/css/user.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #1a1f4a, #0B0E26);
+            color: #F5F6FF;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(20, 24, 60, 0.9);
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #4A4DE7;
+            box-shadow: 0 0 15px rgba(74, 77, 231, 0.3);
+        }
+
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #8A8DFF;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        nav a {
+            color: #8A8DFF;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .form-container {
+            background: rgba(20, 24, 60, 0.9);
+            width: 55%;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #4A4DE7;
+            box-shadow: 0 0 25px rgba(74, 77, 231, 0.4);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #FFB347;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #FFB347;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: none;
+            background: #1C2541;
+            color: #F5F6FF;
+        }
+
+        textarea {
+            height: 130px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background-color: #4A4DE7;
+            color: white;
+            padding: 12px;
+            margin-top: 25px;
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #6C6FE8;
+            transform: scale(1.03);
+        }
+
+        #msg {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #4A4DE7;
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 40px;
+        }
+        /* Animation Shake */
+        .shake {
+            animation: shakeAnim 0.3s ease;
+        }
+
+        @keyframes shakeAnim {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(6px); }
+            75% { transform: translateX(-4px); }
+            100% { transform: translateX(0); }
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>💡 Soumettre une Innovation</h1>
+    <nav>
+        <a href="list_Innovation.html">Liste des innovations</a>
+        <a href="../../Admin/index.html">Espace Admin</a>
+    </nav>
+</header>
+
+<section class="form-container">
+    <h2>Proposer une nouvelle idée</h2>
+
+    <form id="form-innovation">
+        <label for="titre">Titre de l’innovation :</label>
+        <input type="text" id="titre" placeholder="Ex : Rover LunaNova" >
+
+        <label for="category_id">Catégorie :</label>
+        <select id="category_id" >
+            <option value="">-- Sélectionner une catégorie --</option>
+            <!-- Options remplies dynamiquement par JS -->
+        </select>
+
+        <label for="description">Description :</label>
+        <textarea id="description" placeholder="Décris ton innovation de manière claire et inspirante..." ></textarea>
+
+        <button type="submit" class="btn-submit">🚀 Envoyer l’innovation</button>
+        <p id="msg"></p>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2025 - Innovation  - Tunispace - Hichem Challakhi</p>
+</footer>
+
+<script src="../assets/js/innovation.js" defer></script>
+
+</body>
+</html>
