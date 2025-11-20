@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter une Catégorie</title>
+    <link rel="stylesheet" href="../Client/assets/css/admin.css">
+</head>
+
+<body class="with-sidebar">
+
+
+<div class="sidebar">
+    <h2>🚀 Admin</h2>
+
+    <a href="index.html">
+        <span class="icon">🏠</span>
+        <span class="text">Dashboard</span>
+    </a>
+
+    <a href="a_Category.html">
+        <span class="icon">🗂️</span>
+        <span class="text">Catégories</span>
+    </a>
+
+    <a href="a_Innovation.html">
+        <span class="icon">🚀</span>
+        <span class="text">Innovations</span>
+    </a>
+
+    <a href="../Client/src/list_Innovation.html">
+        <span class="icon">🌐</span>
+        <span class="text">Front Office</span>
+    </a>
+</div>
+
+<header>
+    <h1>➕ Ajouter une Catégorie</h1>
+    <nav>
+        <a href="a_Category.html">⬅ Retour</a>
+    </nav>
+</header>
+
+<main class="section-box" style="max-width:600px;">
+    <form id="form-category">
+        <label>Nom :</label>
+        <input id="nom" >
+
+        <label>Description :</label>
+        <textarea id="description" ></textarea>
+
+        <button type="submit" class="btn-add">Créer la catégorie</button>
+    </form>
+
+    <p id="msg"></p>
+</main>
+
+<footer>
+    <p>&copy; 2025 - Innovation </p>
+</footer>
+
+<script src="../Client/assets/js/category.js"></script>
+
+</body>
+</html>
