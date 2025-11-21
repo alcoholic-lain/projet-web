@@ -1,0 +1,232 @@
+:root {
+    --primary: #ff7f2a;
+    --secondary: #ff2a7f;
+    --accent: #ffb15a;
+    --dark: #050814;
+    --darker: #020309;
+    --light: #f9fafb;
+    --gray: #9ca3af;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: radial-gradient(circle at top, #181b33 0%, var(--dark) 45%, var(--darker) 100%);
+    color: var(--light);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ===== GALAXY CANVAS ===== */
+
+#galaxyCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(circle at top, #1c213f 0%, #050814 40%, #020309 100%);
+}
+
+.bg-animation {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: transparent;
+}
+
+/* ===== HEADER ===== */
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+    background: rgba(5, 8, 20, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 10px 0;
+}
+
+header > div,
+header > nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 25px rgba(255, 127, 42, 0.6);
+}
+
+header p {
+    font-size: 0.85rem;
+    color: var(--gray);
+}
+
+header nav a {
+    color: var(--light);
+    text-decoration: none;
+    margin-left: 18px;
+    font-size: 0.9rem;
+    opacity: 0.85;
+    transition: color 0.2s, opacity 0.2s;
+}
+
+header nav a:hover {
+    color: var(--primary);
+    opacity: 1;
+}
+
+/* ===== MAIN LAYOUT ===== */
+
+main {
+    max-width: 1100px;
+    margin: 110px auto 40px;
+    padding: 0 20px 30px;
+}
+
+/* Message */
+
+.msg-success {
+    background: rgba(22, 163, 74, 0.12);
+    border: 1px solid rgba(74, 222, 128, 0.5);
+    color: #bbf7d0;
+    border-radius: 999px;
+    padding: 10px 16px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+}
+
+/* ===== TABLE WRAPPER ===== */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: radial-gradient(circle at top left,
+    rgba(255, 127, 42, 0.12),
+    rgba(15, 23, 42, 0.98));
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(148, 163, 184, 0.7);
+}
+
+th, td {
+    padding: 12px 14px;
+    font-size: 0.9rem;
+}
+
+th {
+    text-align: left;
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: rgba(209, 213, 219, 0.95);
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(15, 23, 42, 0.9);
+}
+
+tbody tr:nth-child(odd) {
+    background: rgba(15, 23, 42, 0.75);
+}
+
+tbody tr:hover {
+    background: rgba(15, 23, 42, 1);
+    box-shadow:
+            0 0 18px rgba(255, 127, 42, 0.28),
+            0 0 32px rgba(255, 42, 127, 0.25);
+}
+
+td {
+    border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+}
+
+/* ===== BADGES ===== */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.badge-valid {
+    background: rgba(22, 163, 74, 0.12);
+    color: #bbf7d0;
+    border: 1px solid rgba(74, 222, 128, 0.7);
+}
+
+.badge-pending {
+    background: rgba(250, 204, 21, 0.12);
+    color: #facc15;
+    border: 1px solid rgba(250, 204, 21, 0.6);
+}
+
+.badge-refused {
+    background: rgba(239, 68, 68, 0.12);
+    color: #fecaca;
+    border: 1px solid rgba(248, 113, 113, 0.6);
+}
+
+/* ===== BUTTONS ===== */
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: #020617;
+    background: linear-gradient(120deg, var(--primary), var(--secondary));
+    box-shadow:
+            0 0 14px rgba(255, 127, 42, 0.8),
+            0 0 30px rgba(255, 42, 127, 0.7);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow:
+            0 0 18px rgba(255, 177, 90, 0.95),
+            0 0 38px rgba(255, 42, 127, 0.9);
+}
+
+/* ===== FOOTER ===== */
+
+footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--gray);
+    padding: 10px 0 22px;
+}

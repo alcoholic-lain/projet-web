@@ -1,73 +1,63 @@
 <?php
-/**
- * Category Model (DB-backed)
- * Table : categories
- */
 
-class Category {
-    private $conn;
-    private $table_name = "categories";
+class Category
+{
+    private ?int $id;
+    private string $nom;
+    private ?string $description;
+    private ?string $date_creation;
 
-    public $id;
-    public $nom;
-    public $description;
-    public $date_creation;
-
-    public function __construct($db) {
-        $this->conn = $db;
+    public function __construct(
+        ?int $id,
+        string $nom,
+        ?string $description,
+        ?string $date_creation
+    ) {
+        $this->id = $id;
+        $this->nom = $nom;
+        $this->description = $description;
+        $this->date_creation = $date_creation;
     }
 
-    /** Récupérer toutes les catégories */
-    public function getAll(): array {
-        $sql = "SELECT * FROM {$this->table_name} ORDER BY date_creation DESC";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // --- GETTERS ---
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
-    /** Récupérer une catégorie par ID */
-    public function getById(int $id): ?array {
-        $sql = "SELECT * FROM {$this->table_name} WHERE id = :id LIMIT 1";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $row ?: null;
+    public function getNom(): string
+    {
+        return $this->nom;
     }
 
-    /** Créer une catégorie */
-    public function create(): bool {
-        $sql = "INSERT INTO {$this->table_name}
-                (nom, description, date_creation)
-                VALUES (:nom, :description, NOW())";
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":nom",         $this->nom);
-        $stmt->bindParam(":description", $this->description);
-
-        return $stmt->execute();
+    public function getDescription(): ?string
+    {
+        return $this->description;
     }
 
-    /** Mettre à jour une catégorie */
-    public function update(): bool {
-        $sql = "UPDATE {$this->table_name}
-                SET nom = :nom,
-                    description = :description
-                WHERE id = :id";
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":nom",         $this->nom);
-        $stmt->bindParam(":description", $this->description);
-        $stmt->bindParam(":id",          $this->id, PDO::PARAM_INT);
-
-        return $stmt->execute();
+    public function getDateCreation(): ?string
+    {
+        return $this->date_creation;
     }
 
-    /** Supprimer une catégorie */
-    public function delete(): bool {
-        $sql = "DELETE FROM {$this->table_name} WHERE id = :id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":id", $this->id, PDO::PARAM_INT);
-        return $stmt->execute();
+    // --- SETTERS ---
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function setNom(string $nom): void
+    {
+        $this->nom = $nom;
+    }
+
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function setDateCreation(?string $date_creation): void
+    {
+        $this->date_creation = $date_creation;
     }
 }

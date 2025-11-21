@@ -5,10 +5,64 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="update">
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Public/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/components/Innovation/CategoryController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/components/Innovation/InnovationController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/a_Category.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/a_Innovation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/add_Category.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/add_Innovation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/edit_Category.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/edit_Innovation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/css/categories.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/css/details_innovation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/css/list_innovation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/js/add_innovation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/js/categories.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/js/details_innovation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/js/list_innovation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/src/add_Innovation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/src/details_Innovation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/src/list_Innovation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/assets/css/user.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/assets/js/user.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/navbar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Innovation/schema.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/config/data-base.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/config/data-base.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/components/CategoryController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/components/InnovationController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data set/user_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/css/add_innovation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Innovation/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Innovation/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Innovation/Commentaire.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Innovation/Innovation.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Innovation/Innovation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Innovation/PieceJointe.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Innovation/Vote.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Innovation/tunispace_database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/model/Innovation/tunispace_database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/config/data-base.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Admin/a_Category.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Admin/a_Innovation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Admin/add_Category.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Admin/edit_Category.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Admin/edit_Innovation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Admin/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/css/1.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/css/admin.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/css/style_i_list.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/css/user.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/js/category.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/js/category_details.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/js/dashboard.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/js/innovation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/video/space.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/src/add_Innovation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/src/categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/Innovation/src/categories.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/src/category_details.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/src/details_Innovation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/src/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiw/Client/src/list_Innovation.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,10 +75,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
-        <option value="PHP File" />
         <option value="HTML File" />
+        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="PHP File" />
       </list>
     </option>
   </component>
@@ -74,38 +128,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "JavaScript Debug.a_Innovation.html.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "Innovation",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/xampp/htdocs/projet-web",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript Debug.a_Innovation.html.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Innovation&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/xampp/htdocs/projet-web/view/Client&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\projet-web\view\Client" />
+      <recent name="C:\xampp\htdocs\projet-web\view\Admin" />
       <recent name="C:\Users\hicham\Desktop\projet-web" />
       <recent name="C:\Users\hicham\Desktop\projet-web\model\Innovation" />
       <recent name="C:\Users\hicham\Desktop\projet-web\model" />
-      <recent name="C:\Users\hicham\Desktop\projet-web\controller\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\hicham\Desktop\projet-web\veiw\Client\assets\js" />
-      <recent name="C:\Users\hicham\Desktop\projet-web\veiw\Admin" />
+      <recent name="C:\xampp\htdocs\projet-web\view\Client\Innovation\assets\js" />
+      <recent name="C:\xampp\htdocs\projet-web\view\Admin\Innovation" />
+      <recent name="C:\xampp\htdocs\projet-web\view\Admin\Innovation\assets\src" />
+      <recent name="C:\xampp\htdocs\projet-web\view\Client\Innovation" />
+      <recent name="C:\xampp\htdocs\projet-web\view\Client\src" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -133,7 +191,14 @@
       <workItem from="1763034198176" duration="382000" />
       <workItem from="1763113693228" duration="12453000" />
       <workItem from="1763286214402" duration="6528000" />
-      <workItem from="1763313454157" duration="17058000" />
+      <workItem from="1763313454157" duration="17362000" />
+      <workItem from="1763377786613" duration="905000" />
+      <workItem from="1763381275848" duration="305000" />
+      <workItem from="1763381747496" duration="264000" />
+      <workItem from="1763383886406" duration="4943000" />
+      <workItem from="1763659242307" duration="7036000" />
+      <workItem from="1763716580122" duration="21376000" />
+      <workItem from="1763739364948" duration="10720000" />
     </task>
     <task id="LOCAL-00001" summary="1st">
       <option name="closed" value="true" />
@@ -503,7 +568,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763333282499</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="update">
+      <option name="closed" value="true" />
+      <created>1763336459962</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1763336459962</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,16 +609,5 @@
     <MESSAGE value="TRASH THING DELETED" />
     <MESSAGE value="update" />
     <option name="LAST_COMMIT_MESSAGE" value="update" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/controller/components/CategoryController.php</url>
-          <line>16</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

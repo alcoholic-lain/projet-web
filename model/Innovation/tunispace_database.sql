@@ -1,115 +1,12 @@
--- ============================================================
--- 🚀 DATABASE SCHEMA – INNOVATION DB
--- Auteur : Hichem Challakhi
--- Description : Structure complète du système d’innovation
--- ============================================================
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : ven. 21 nov. 2025 à 14:42
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
 
-/* ------------------------------------------------------------
-   📌 1. Création de la base de données
------------------------------------------------------------- */
-CREATE DATABASE IF NOT EXISTS innovation_db
-CHARACTER SET utf8mb4
-COLLATE utf8mb4_unicode_ci;
-
-USE innovation_db;
-
-/* ------------------------------------------------------------
-   📌 2. Table : categories
-   - Contient toutes les catégories d'innovation
-   - Index sur nom et date de création pour optimiser les recherches
------------------------------------------------------------- */
-CREATE TABLE IF NOT EXISTS categories (
-                                          id INT AUTO_INCREMENT PRIMARY KEY,
-                                          nom VARCHAR(100) NOT NULL,
-    description TEXT,
-    date_creation DATETIME NOT NULL,
-    INDEX idx_nom (nom),
-    INDEX idx_date (date_creation)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/* ------------------------------------------------------------
-   📌 3. Table : innovations
-   - Contient les projets d'innovation
-   - Chaque innovation appartient à une catégorie
-   - Suppression de catégorie -> SET NULL
------------------------------------------------------------- */
-CREATE TABLE IF NOT EXISTS innovations (
-                                           id INT AUTO_INCREMENT PRIMARY KEY,
-                                           titre VARCHAR(200) NOT NULL,
-    categorie_id INT,
-    description TEXT,
-    date_creation DATETIME NOT NULL,
-    statut VARCHAR(50) DEFAULT 'En attente',
-    FOREIGN KEY (categorie_id) REFERENCES categories(id) ON DELETE SET NULL,
-    INDEX idx_titre (titre),
-    INDEX idx_statut (statut),
-    INDEX idx_date (date_creation)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/* ------------------------------------------------------------
-   📌 4. Table : pieces_jointes
-   - Gère les fichiers associés aux innovations
-   - Suppression d’une innovation -> suppression automatique des PJ
------------------------------------------------------------- */
-CREATE TABLE IF NOT EXISTS pieces_jointes (
-                                              id INT AUTO_INCREMENT PRIMARY KEY,
-                                              innovation_id INT NOT NULL,
-                                              nom_fichier VARCHAR(255) NOT NULL,
-    chemin VARCHAR(500) NOT NULL,
-    type_fichier VARCHAR(100),
-    date_upload DATETIME NOT NULL,
-    FOREIGN KEY (innovation_id) REFERENCES innovations(id) ON DELETE CASCADE,
-    INDEX idx_innovation (innovation_id)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/* ------------------------------------------------------------
-   📌 5. Table : commentaires
-   - Contient tous les commentaires liés à chaque innovation
-   - Suppression innovation -> suppression commentaires
------------------------------------------------------------- */
-CREATE TABLE IF NOT EXISTS commentaires (
-                                            id INT AUTO_INCREMENT PRIMARY KEY,
-                                            innovation_id INT NOT NULL,
-                                            auteur VARCHAR(100) NOT NULL,
-    contenu TEXT NOT NULL,
-    date_creation DATETIME NOT NULL,
-    FOREIGN KEY (innovation_id) REFERENCES innovations(id) ON DELETE CASCADE,
-    INDEX idx_innovation (innovation_id),
-    INDEX idx_date (date_creation)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/* ------------------------------------------------------------
-   📌 6. Table : votes
-   - Système de vote pour chaque innovation
-   - type_vote limité à "up" ou "down"
------------------------------------------------------------- */
-CREATE TABLE IF NOT EXISTS votes (
-                                     id INT AUTO_INCREMENT PRIMARY KEY,
-                                     innovation_id INT NOT NULL,
-                                     type_vote ENUM('up', 'down') NOT NULL,
-    date_vote DATETIME NOT NULL,
-    FOREIGN KEY (innovation_id) REFERENCES innovations(id) ON DELETE CASCADE,
-    INDEX idx_innovation (innovation_id),
-    INDEX idx_type (type_vote)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/* ------------------------------------------------------------
-   📌 7. Données initiales – catégories
------------------------------------------------------------- */
-INSERT INTO categories (nom, description, date_creation) VALUES
-                                                             ('Exploration Spatiale', 'Projets liés à l\'exploration de l\'espace et des planètes', NOW()),
-                                                             ('Énergie Orbitale', 'Solutions énergétiques pour l\'espace et les satellites', NOW()),
-('Habitats Lunaires', 'Conception et développement d\'habitats pour la Lune', NOW()),
-                                                             ('Robotique Spatiale', 'Robots et systèmes automatisés pour l\'espace', NOW()),
-('Propulsion Avancée', 'Nouvelles technologies de propulsion spatiale', NOW());
-
-/*
-   Ici je vais ajouter la base de mon ami
-*/
-
-
-CREATE DATABASE IF NOT EXISTS tunispace_database;
-USE tunispace_database;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -121,13 +18,71 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `tunispace_database`
+-- Base de données : `tunispace_database`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `confirmations_email`
+-- Structure de la table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `date_creation` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `categories`
+--
+
+INSERT INTO `categories` (`id`, `nom`, `description`, `date_creation`) VALUES
+(3, 'Habitats Lunaires', 'Conception et développement d\'habitats pour la Lune', '2025-11-12 23:48:06'),
+(4, 'Robotique Spatial', 'Robots et systèmes automatisés pour l\'espace', '2025-11-12 23:48:06'),
+(10, 'Robotique Spatiale', 'Robots et systèmes automatisés pour l\'espace', '2025-11-13 00:52:53'),
+(15, 'TOUTOU2', 'TEST_1', '2025-11-16 13:41:30'),
+(21, 'Exploration Spatiale', 'Projets liés à l\'exploration de l\'espace et des planètes', '2025-11-17 00:10:21'),
+(22, 'Énergie Orbitale', 'Solutions énergétiques pour l\'espace et les satellites', '2025-11-17 00:10:21'),
+(23, 'Habitats Lunaires', 'Conception et développement d\'habitats pour la Lune', '2025-11-17 00:10:21'),
+(24, 'Robotique Spatiale', 'Robots et systèmes automatisés pour l\'espace', '2025-11-17 00:10:21'),
+(25, 'Propulsion Avancée', 'Nouvelles technologies de propulsion spatiale', '2025-11-17 00:10:21'),
+(26, 'Exploration Spatiale', 'Projets liés à l\'exploration de l\'espace et des planètes', '2025-11-17 00:11:38'),
+(27, 'Énergie Orbitale', 'Solutions énergétiques pour l\'espace et les satellites', '2025-11-17 00:11:38'),
+(28, 'Habitats Lunaires', 'Conception et développement d\'habitats pour la Lune', '2025-11-17 00:11:38'),
+(29, 'Robotique Spatiale', 'Robots et systèmes automatisés pour l\'espace', '2025-11-17 00:11:38'),
+(30, 'Propulsion Avancée', 'Nouvelles technologies de propulsion spatiale', '2025-11-17 00:11:38'),
+(31, 'Exploration Spatiale', 'Projets liés à l\'exploration de l\'espace et des planètes', '2025-11-17 00:12:59'),
+(32, 'Énergie Orbitale', 'Solutions énergétiques pour l\'espace et les satellites', '2025-11-17 00:12:59'),
+(33, 'Habitats Lunaires', 'Conception et développement d\'habitats pour la Lune', '2025-11-17 00:12:59'),
+(34, 'Robotique Spatiale', 'Robots et systèmes automatisés pour l\'espace', '2025-11-17 00:12:59'),
+(35, 'Propulsion Avancée', 'Nouvelles technologies de propulsion spatiale', '2025-11-17 00:12:59'),
+(36, 'Exploration Spatiale', 'Projets liés à l\'exploration de l\'espace et des planète', '2025-11-17 00:24:33'),
+(37, 'Énergie Orbitale', 'Solutions énergétiques pour l\'espace et les satellites', '2025-11-17 00:24:33'),
+(38, 'Habitats Lunaires', 'Conception et développement d\'habitats pour la Lune', '2025-11-17 00:24:33'),
+(39, 'Robotique Spatiale', 'Robots et systèmes automatisés pour l\'espace', '2025-11-17 00:24:33'),
+(40, 'Propulsion Avancée', 'Nouvelles technologies de propulsion spatiale', '2025-11-17 00:24:33'),
+(43, 'lkm.m', '', '2025-11-20 20:04:53');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commentaires`
+--
+
+CREATE TABLE `commentaires` (
+  `id` int(11) NOT NULL,
+  `innovation_id` int(11) NOT NULL,
+  `auteur` varchar(100) NOT NULL,
+  `contenu` text NOT NULL,
+  `date_creation` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `confirmations_email`
 --
 
 CREATE TABLE `confirmations_email` (
@@ -141,7 +96,214 @@ CREATE TABLE `confirmations_email` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `logs_connexions`
+-- Structure de la table `conversations`
+--
+
+CREATE TABLE `conversations` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `is_group` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `conversations`
+--
+
+INSERT INTO `conversations` (`id`, `title`, `is_group`, `created_at`) VALUES
+(1, 'Alice & Bob', 0, '2025-11-17 12:18:18'),
+(2, 'Alice & Charlie', 0, '2025-11-17 12:18:18'),
+(3, 'Alice & David', 0, '2025-11-17 12:18:18'),
+(4, 'Alice & Eve', 0, '2025-11-17 12:18:18'),
+(5, 'Bob & Charlie', 0, '2025-11-17 12:18:18'),
+(6, 'Bob & David', 0, '2025-11-17 12:18:18'),
+(7, 'Bob & Eve', 0, '2025-11-17 12:18:18'),
+(8, 'Charlie & David', 0, '2025-11-17 12:18:18'),
+(9, 'Charlie & Eve', 0, '2025-11-17 12:18:18'),
+(10, 'David & Eve', 0, '2025-11-17 12:18:18'),
+(11, 'Study Group A', 1, '2025-11-17 12:18:18'),
+(12, 'Study Group B', 1, '2025-11-17 12:18:18'),
+(13, 'Gaming Squad', 1, '2025-11-17 12:18:18'),
+(14, 'Project Team 1', 1, '2025-11-17 12:18:18'),
+(15, 'Project Team 2', 1, '2025-11-17 12:18:18'),
+(16, 'Family Chat 1', 1, '2025-11-17 12:18:18'),
+(17, 'Family Chat 2', 1, '2025-11-17 12:18:18'),
+(18, 'Friends Forever', 1, '2025-11-17 12:18:18'),
+(19, 'Weekend Plans', 1, '2025-11-17 12:18:18'),
+(20, 'Music Lovers', 1, '2025-11-17 12:18:18'),
+(21, 'Anime Club', 1, '2025-11-17 12:18:18'),
+(22, 'Work Buddies', 1, '2025-11-17 12:18:18'),
+(23, 'Esprit G2', 1, '2025-11-17 12:18:18'),
+(24, 'Dev Chat', 1, '2025-11-17 12:18:18'),
+(25, 'Random', 1, '2025-11-17 12:18:18'),
+(26, 'Lab Group', 1, '2025-11-17 12:18:18'),
+(27, 'Dorm Chat', 1, '2025-11-17 12:18:18'),
+(28, 'Gym Bros', 1, '2025-11-17 12:18:18'),
+(29, 'Movie Night', 1, '2025-11-17 12:18:18'),
+(30, 'CS Project', 1, '2025-11-17 12:18:18');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `conversation_users`
+--
+
+CREATE TABLE `conversation_users` (
+  `conversation_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `is_admin` tinyint(1) NOT NULL DEFAULT 0,
+  `joined_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `conversation_users`
+--
+
+INSERT INTO `conversation_users` (`conversation_id`, `user_id`, `is_admin`, `joined_at`) VALUES
+(1, 1, 1, '2025-11-17 12:18:18'),
+(1, 2, 0, '2025-11-17 12:18:18'),
+(2, 1, 1, '2025-11-17 12:18:18'),
+(2, 3, 0, '2025-11-17 12:18:18'),
+(3, 1, 1, '2025-11-17 12:18:18'),
+(3, 4, 0, '2025-11-17 12:18:18'),
+(4, 1, 1, '2025-11-17 12:18:18'),
+(4, 5, 0, '2025-11-17 12:18:18'),
+(5, 2, 1, '2025-11-17 12:18:18'),
+(5, 3, 0, '2025-11-17 12:18:18'),
+(6, 2, 1, '2025-11-17 12:18:18'),
+(6, 4, 0, '2025-11-17 12:18:18'),
+(7, 2, 1, '2025-11-17 12:18:18'),
+(7, 5, 0, '2025-11-17 12:18:18'),
+(8, 3, 1, '2025-11-17 12:18:18'),
+(8, 4, 0, '2025-11-17 12:18:18'),
+(9, 3, 1, '2025-11-17 12:18:18'),
+(9, 5, 0, '2025-11-17 12:18:18'),
+(10, 4, 1, '2025-11-17 12:18:18'),
+(10, 5, 0, '2025-11-17 12:18:18'),
+(11, 1, 1, '2025-11-17 12:18:18'),
+(11, 2, 0, '2025-11-17 12:18:18'),
+(11, 3, 0, '2025-11-17 12:18:18'),
+(12, 4, 1, '2025-11-17 12:18:18'),
+(12, 5, 0, '2025-11-17 12:18:18'),
+(12, 6, 0, '2025-11-17 12:18:18'),
+(13, 2, 1, '2025-11-17 12:18:18'),
+(13, 3, 0, '2025-11-17 12:18:18'),
+(13, 4, 0, '2025-11-17 12:18:18'),
+(13, 5, 0, '2025-11-17 12:18:18'),
+(14, 1, 1, '2025-11-17 12:18:18'),
+(14, 4, 0, '2025-11-17 12:18:18'),
+(14, 7, 0, '2025-11-17 12:18:18'),
+(14, 8, 0, '2025-11-17 12:18:18'),
+(15, 2, 1, '2025-11-17 12:18:18'),
+(15, 5, 0, '2025-11-17 12:18:18'),
+(15, 8, 0, '2025-11-17 12:18:18'),
+(15, 9, 0, '2025-11-17 12:18:18'),
+(16, 1, 1, '2025-11-17 12:18:18'),
+(16, 6, 0, '2025-11-17 12:18:18'),
+(16, 7, 0, '2025-11-17 12:18:18'),
+(17, 3, 1, '2025-11-17 12:18:18'),
+(17, 8, 0, '2025-11-17 12:18:18'),
+(17, 9, 0, '2025-11-17 12:18:18'),
+(18, 4, 1, '2025-11-17 12:18:18'),
+(18, 5, 0, '2025-11-17 12:18:18'),
+(18, 6, 0, '2025-11-17 12:18:18'),
+(18, 7, 0, '2025-11-17 12:18:18'),
+(19, 2, 1, '2025-11-17 12:18:18'),
+(19, 3, 0, '2025-11-17 12:18:18'),
+(19, 8, 0, '2025-11-17 12:18:18'),
+(19, 10, 0, '2025-11-17 12:18:18'),
+(20, 1, 1, '2025-11-17 12:18:18'),
+(20, 3, 0, '2025-11-17 12:18:18'),
+(20, 5, 0, '2025-11-17 12:18:18'),
+(20, 7, 0, '2025-11-17 12:18:18'),
+(20, 9, 0, '2025-11-17 12:18:18'),
+(21, 1, 1, '2025-11-17 12:18:18'),
+(21, 8, 0, '2025-11-17 12:18:18'),
+(21, 9, 0, '2025-11-17 12:18:18'),
+(21, 10, 0, '2025-11-17 12:18:18'),
+(22, 2, 1, '2025-11-17 12:18:18'),
+(22, 4, 0, '2025-11-17 12:18:18'),
+(22, 6, 0, '2025-11-17 12:18:18'),
+(22, 8, 0, '2025-11-17 12:18:18'),
+(23, 3, 1, '2025-11-17 12:18:18'),
+(23, 5, 0, '2025-11-17 12:18:18'),
+(23, 7, 0, '2025-11-17 12:18:18'),
+(23, 9, 0, '2025-11-17 12:18:18'),
+(24, 1, 1, '2025-11-17 12:18:18'),
+(24, 2, 0, '2025-11-17 12:18:18'),
+(24, 3, 0, '2025-11-17 12:18:18'),
+(24, 4, 0, '2025-11-17 12:18:18'),
+(24, 5, 0, '2025-11-17 12:18:18'),
+(25, 6, 1, '2025-11-17 12:18:18'),
+(25, 7, 0, '2025-11-17 12:18:18'),
+(25, 8, 0, '2025-11-17 12:18:18'),
+(25, 9, 0, '2025-11-17 12:18:18'),
+(25, 10, 0, '2025-11-17 12:18:18'),
+(26, 1, 1, '2025-11-17 12:18:18'),
+(26, 6, 0, '2025-11-17 12:18:18'),
+(26, 9, 0, '2025-11-17 12:18:18'),
+(27, 2, 1, '2025-11-17 12:18:18'),
+(27, 7, 0, '2025-11-17 12:18:18'),
+(27, 10, 0, '2025-11-17 12:18:18'),
+(28, 4, 1, '2025-11-17 12:18:18'),
+(28, 6, 0, '2025-11-17 12:18:18'),
+(28, 10, 0, '2025-11-17 12:18:18'),
+(29, 3, 1, '2025-11-17 12:18:18'),
+(29, 5, 0, '2025-11-17 12:18:18'),
+(29, 8, 0, '2025-11-17 12:18:18'),
+(30, 1, 1, '2025-11-17 12:18:18'),
+(30, 3, 0, '2025-11-17 12:18:18'),
+(30, 6, 0, '2025-11-17 12:18:18'),
+(30, 10, 0, '2025-11-17 12:18:18');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `innovations`
+--
+
+CREATE TABLE `innovations` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `titre` varchar(200) NOT NULL,
+  `description` text DEFAULT NULL,
+  `date_creation` datetime NOT NULL,
+  `statut` varchar(50) DEFAULT 'En attente',
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `innovations`
+--
+
+INSERT INTO `innovations` (`id`, `user_id`, `titre`, `description`, `date_creation`, `statut`, `category_id`) VALUES
+(11, 66, 'TOUTOU2', 'TOUTOU2', '0000-00-00 00:00:00', 'Validée', 15),
+(22, 66, 'abcdef', 'weeweew', '2025-11-16 20:44:27', 'Rejetée', 18),
+(26, 66, 'TOUTOU1', 'testest', '2025-11-17 00:38:55', 'En attente', 41),
+(27, 66, 'm', ',.m.,k', '2025-11-17 13:09:38', 'Validée', 36),
+(28, 66, ',j,,j,j', '.m,.m,.m', '2025-11-20 19:45:00', 'Validée', 36),
+(29, 66, 'l;lm,.ém', 'klm,.m,.m', '2025-11-20 20:13:51', 'En attente', 21),
+(30, 66, 'sdsds', 'sdsd', '2025-11-21 10:18:26', 'En attente', 28);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `innovation_with_category`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `innovation_with_category` (
+`id` int(11)
+,`titre` varchar(200)
+,`description` text
+,`date_creation` datetime
+,`statut` varchar(50)
+,`categorie_nom` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `logs_connexions`
 --
 
 CREATE TABLE `logs_connexions` (
@@ -155,7 +317,121 @@ CREATE TABLE `logs_connexions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
+-- Structure de la table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `conversation_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `messages`
+--
+
+INSERT INTO `messages` (`id`, `conversation_id`, `user_id`, `content`, `created_at`) VALUES
+(1, 1, 1, 'Hi Bob, this is Alice in conversation 1', '2025-11-17 12:18:18'),
+(2, 1, 2, 'Hey Alice! Nice to chat.', '2025-11-17 12:18:18'),
+(3, 2, 1, 'Hi Charlie, Alice here in convo 2', '2025-11-17 12:18:18'),
+(4, 2, 3, 'Hi Alice!', '2025-11-17 12:18:18'),
+(5, 3, 1, 'Hi David, we need to talk about project.', '2025-11-17 12:18:18'),
+(6, 3, 4, 'Sure, tell me.', '2025-11-17 12:18:18'),
+(7, 4, 1, 'Hi Eve, how are you?', '2025-11-17 12:18:18'),
+(8, 4, 5, 'I am good, thanks Alice.', '2025-11-17 12:18:18'),
+(9, 5, 2, 'Yo Charlie, it\'s Bob', '2025-11-17 12:18:18'),
+(10, 5, 3, 'Hey Bob!', '2025-11-17 12:18:18'),
+(11, 6, 2, 'David, are you coming later?', '2025-11-17 12:18:18'),
+(12, 6, 4, 'Yes, I will.', '2025-11-17 12:18:18'),
+(13, 7, 2, 'Eve, did you see this?', '2025-11-17 12:18:18'),
+(14, 7, 5, 'Not yet, send it.', '2025-11-17 12:18:18'),
+(15, 8, 3, 'David, ready for the exam?', '2025-11-17 12:18:18'),
+(16, 8, 4, 'Almost, still revising.', '2025-11-17 12:18:18'),
+(17, 9, 3, 'Eve, group homework?', '2025-11-17 12:18:18'),
+(18, 9, 5, 'Working on it.', '2025-11-17 12:18:18'),
+(19, 10, 4, 'Eve, let\'s meet after class.', '2025-11-17 12:18:18'),
+(20, 10, 5, 'Ok David.', '2025-11-17 12:18:18'),
+(21, 11, 1, 'Welcome to Study Group A!', '2025-11-17 12:18:18'),
+(22, 11, 2, 'Thanks for the invite.', '2025-11-17 12:18:18'),
+(23, 11, 3, 'Let\'s ace this.', '2025-11-17 12:18:18'),
+(24, 12, 4, 'Study Group B starting.', '2025-11-17 12:18:18'),
+(25, 12, 5, 'Hi everyone.', '2025-11-17 12:18:18'),
+(26, 12, 6, 'Hello!', '2025-11-17 12:18:18'),
+(27, 13, 2, 'Gaming squad, tonight?', '2025-11-17 12:18:18'),
+(28, 13, 3, 'I\'m in.', '2025-11-17 12:18:18'),
+(29, 13, 4, 'Me too.', '2025-11-17 12:18:18'),
+(30, 14, 1, 'Project Team 1 kickoff.', '2025-11-17 12:18:18'),
+(31, 14, 4, 'Let\'s go.', '2025-11-17 12:18:18'),
+(32, 14, 7, 'I\'m here.', '2025-11-17 12:18:18'),
+(33, 14, 8, 'Hi all.', '2025-11-17 12:18:18'),
+(34, 15, 2, 'Project Team 2 meeting.', '2025-11-17 12:18:18'),
+(35, 15, 5, 'Ok.', '2025-11-17 12:18:18'),
+(36, 15, 8, 'Got it.', '2025-11-17 12:18:18'),
+(37, 15, 9, 'Cool.', '2025-11-17 12:18:18'),
+(38, 16, 1, 'Family Chat 1, hello!', '2025-11-17 12:18:18'),
+(39, 16, 6, 'Hi there.', '2025-11-17 12:18:18'),
+(40, 16, 7, 'Hey!', '2025-11-17 12:18:18'),
+(41, 17, 3, 'Family Chat 2 checking in.', '2025-11-17 12:18:18'),
+(42, 17, 8, 'Hi!', '2025-11-17 12:18:18'),
+(43, 17, 9, 'Hello.', '2025-11-17 12:18:18'),
+(44, 18, 4, 'Friends Forever ❤️', '2025-11-17 12:18:18'),
+(45, 18, 5, 'Always.', '2025-11-17 12:18:18'),
+(46, 18, 6, 'For sure.', '2025-11-17 12:18:18'),
+(47, 18, 7, 'Yesss.', '2025-11-17 12:18:18'),
+(48, 19, 2, 'Weekend plans?', '2025-11-17 12:18:18'),
+(49, 19, 3, 'Let\'s go out.', '2025-11-17 12:18:18'),
+(50, 19, 8, 'I\'m in.', '2025-11-17 12:18:18'),
+(51, 19, 10, 'Same.', '2025-11-17 12:18:18'),
+(52, 20, 1, 'Music Lovers, new playlist.', '2025-11-17 12:18:18'),
+(53, 20, 3, 'Drop the link.', '2025-11-17 12:18:18'),
+(54, 20, 5, 'Nice tracks.', '2025-11-17 12:18:18'),
+(55, 20, 7, 'Love it.', '2025-11-17 12:18:18'),
+(56, 20, 9, 'Fire.', '2025-11-17 12:18:18'),
+(57, 21, 1, 'Anime Club tonight.', '2025-11-17 12:18:18'),
+(58, 21, 8, 'Can\'t wait.', '2025-11-17 12:18:18'),
+(59, 21, 9, 'Same here.', '2025-11-17 12:18:18'),
+(60, 21, 10, 'Let\'s go.', '2025-11-17 12:18:18'),
+(61, 22, 2, 'Work buddies, standup in 10.', '2025-11-17 12:18:18'),
+(62, 22, 4, 'Ok.', '2025-11-17 12:18:18'),
+(63, 22, 6, 'On my way.', '2025-11-17 12:18:18'),
+(64, 22, 8, 'Got it.', '2025-11-17 12:18:18'),
+(65, 23, 3, 'Esprit G2 lecture starts now.', '2025-11-17 12:18:18'),
+(66, 23, 5, 'Thanks.', '2025-11-17 12:18:18'),
+(67, 23, 7, 'Here.', '2025-11-17 12:18:18'),
+(68, 23, 9, 'Joining.', '2025-11-17 12:18:18'),
+(69, 24, 1, 'Dev Chat: merge conflict again.', '2025-11-17 12:18:18'),
+(70, 24, 2, 'haha.', '2025-11-17 12:18:18'),
+(71, 24, 3, 'classic.', '2025-11-17 12:18:18'),
+(72, 24, 4, 'lol.', '2025-11-17 12:18:18'),
+(73, 24, 5, 'We fix it.', '2025-11-17 12:18:18'),
+(74, 25, 6, 'Random chat time.', '2025-11-17 12:18:18'),
+(75, 25, 7, 'What\'s up.', '2025-11-17 12:18:18'),
+(76, 25, 8, 'All good.', '2025-11-17 12:18:18'),
+(77, 25, 9, 'Same.', '2025-11-17 12:18:18'),
+(78, 25, 10, 'Nice.', '2025-11-17 12:18:18'),
+(79, 26, 1, 'Lab Group meeting at 2 PM.', '2025-11-17 12:18:18'),
+(80, 26, 6, 'Ok.', '2025-11-17 12:18:18'),
+(81, 26, 9, 'Fine by me.', '2025-11-17 12:18:18'),
+(82, 27, 2, 'Dorm Chat noise complaints.', '2025-11-17 12:18:18'),
+(83, 27, 7, 'Oops.', '2025-11-17 12:18:18'),
+(84, 27, 10, 'Sorry.', '2025-11-17 12:18:18'),
+(85, 28, 4, 'Gym Bros, leg day.', '2025-11-17 12:18:18'),
+(86, 28, 6, 'Nooo.', '2025-11-17 12:18:18'),
+(87, 28, 10, 'Let\'s do it.', '2025-11-17 12:18:18'),
+(88, 29, 3, 'Movie Night picks?', '2025-11-17 12:18:18'),
+(89, 29, 5, 'Action.', '2025-11-17 12:18:18'),
+(90, 29, 8, 'Comedy.', '2025-11-17 12:18:18'),
+(91, 30, 1, 'CS Project deadline soon.', '2025-11-17 12:18:18'),
+(92, 30, 3, 'We\'re close.', '2025-11-17 12:18:18'),
+(93, 30, 6, 'Need more coffee.', '2025-11-17 12:18:18'),
+(94, 30, 10, 'Same 😂', '2025-11-17 12:18:18');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -165,7 +441,7 @@ CREATE TABLE `password_resets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `password_resets`
+-- Déchargement des données de la table `password_resets`
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
@@ -231,7 +507,22 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Structure de la table `pieces_jointes`
+--
+
+CREATE TABLE `pieces_jointes` (
+  `id` int(11) NOT NULL,
+  `innovation_id` int(11) NOT NULL,
+  `nom_fichier` varchar(255) NOT NULL,
+  `chemin` varchar(500) NOT NULL,
+  `type_fichier` varchar(100) DEFAULT NULL,
+  `date_upload` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `roles`
 --
 
 CREATE TABLE `roles` (
@@ -241,7 +532,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `roles`
+-- Déchargement des données de la table `roles`
 --
 
 INSERT INTO `roles` (`id`, `nom`, `description`) VALUES
@@ -252,7 +543,7 @@ INSERT INTO `roles` (`id`, `nom`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 CREATE TABLE `user` (
@@ -266,7 +557,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
+-- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `statut`, `role_id`, `planet`) VALUES
@@ -275,33 +566,142 @@ INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `statut`, `role_id`, `p
 (69, 'zaktheastroA', 'zak.thea@gmail.com', '$2y$10$eZEcuHxVhmDdrExhohNgC.H2pPtQZQ6IBnAcHKCQ3FDGXGm.rNMLC', 'banni', 2, 'mars'),
 (70, 'Nour___', 'nournour2862005@gmail.com', '$2y$10$/lIqkE12ly./qzuRkErao.uTyxjnI61K4NGb8c.3JoxiQxP/DGFfS', 'actif', 2, 'mars');
 
+-- --------------------------------------------------------
+
 --
--- Indexes for dumped tables
+-- Structure de la table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `role` enum('front','back') NOT NULL DEFAULT 'front',
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `password_hash`, `role`, `is_active`, `created_at`) VALUES
+(1, 'alice', 'alice@example.com', 'pass123', 'back', 1, '2025-11-17 12:18:18'),
+(2, 'bob', 'bob@example.com', 'pass123', 'front', 1, '2025-11-17 12:18:18'),
+(3, 'charlie', 'charlie@example.com', 'pass123', 'front', 1, '2025-11-17 12:18:18'),
+(4, 'david', 'david@example.com', 'pass123', 'front', 1, '2025-11-17 12:18:18'),
+(5, 'eve', 'eve@example.com', 'pass123', 'front', 1, '2025-11-17 12:18:18'),
+(6, 'frank', 'frank@example.com', 'pass123', 'front', 1, '2025-11-17 12:18:18'),
+(7, 'grace', 'grace@example.com', 'pass123', 'front', 1, '2025-11-17 12:18:18'),
+(8, 'heidi', 'heidi@example.com', 'pass123', 'front', 1, '2025-11-17 12:18:18'),
+(9, 'ivan', 'ivan@example.com', 'pass123', 'front', 1, '2025-11-17 12:18:18'),
+(10, 'judy', 'judy@example.com', 'pass123', 'front', 1, '2025-11-17 12:18:18');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `votes`
+--
+
+CREATE TABLE `votes` (
+  `id` int(11) NOT NULL,
+  `innovation_id` int(11) NOT NULL,
+  `type_vote` enum('up','down') NOT NULL,
+  `date_vote` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `innovation_with_category`
+--
+DROP TABLE IF EXISTS `innovation_with_category`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `innovation_with_category`  AS SELECT `i`.`id` AS `id`, `i`.`titre` AS `titre`, `i`.`description` AS `description`, `i`.`date_creation` AS `date_creation`, `i`.`statut` AS `statut`, `c`.`nom` AS `categorie_nom` FROM (`innovations` `i` left join `categories` `c` on(`i`.`category_id` = `c`.`id`)) ;
+
+--
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `confirmations_email`
+-- Index pour la table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_nom` (`nom`),
+  ADD KEY `idx_date` (`date_creation`);
+
+--
+-- Index pour la table `commentaires`
+--
+ALTER TABLE `commentaires`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_innovation` (`innovation_id`),
+  ADD KEY `idx_date` (`date_creation`);
+
+--
+-- Index pour la table `confirmations_email`
 --
 ALTER TABLE `confirmations_email`
   ADD PRIMARY KEY (`id`),
   ADD KEY `utilisateur_id` (`utilisateur_id`);
 
 --
--- Indexes for table `logs_connexions`
+-- Index pour la table `conversations`
+--
+ALTER TABLE `conversations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `conversation_users`
+--
+ALTER TABLE `conversation_users`
+  ADD PRIMARY KEY (`conversation_id`,`user_id`),
+  ADD KEY `fk_conv_user_user` (`user_id`);
+
+--
+-- Index pour la table `innovations`
+--
+ALTER TABLE `innovations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_titre` (`titre`),
+  ADD KEY `idx_statut` (`statut`),
+  ADD KEY `idx_date` (`date_creation`),
+  ADD KEY `fk_category_innov` (`category_id`),
+  ADD KEY `fk_innov_user` (`user_id`);
+
+--
+-- Index pour la table `logs_connexions`
 --
 ALTER TABLE `logs_connexions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `utilisateur_id` (`utilisateur_id`);
 
 --
--- Indexes for table `roles`
+-- Index pour la table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_messages_conversation` (`conversation_id`),
+  ADD KEY `fk_messages_user` (`user_id`);
+
+--
+-- Index pour la table `pieces_jointes`
+--
+ALTER TABLE `pieces_jointes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_innovation` (`innovation_id`);
+
+--
+-- Index pour la table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nom` (`nom`);
 
 --
--- Indexes for table `user`
+-- Index pour la table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
@@ -310,55 +710,151 @@ ALTER TABLE `user`
   ADD KEY `fk_role` (`role_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Index pour la table `votes`
+--
+ALTER TABLE `votes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_innovation` (`innovation_id`),
+  ADD KEY `idx_type` (`type_vote`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `confirmations_email`
+-- AUTO_INCREMENT pour la table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT pour la table `commentaires`
+--
+ALTER TABLE `commentaires`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `confirmations_email`
 --
 ALTER TABLE `confirmations_email`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `logs_connexions`
+-- AUTO_INCREMENT pour la table `conversations`
+--
+ALTER TABLE `conversations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT pour la table `innovations`
+--
+ALTER TABLE `innovations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT pour la table `logs_connexions`
 --
 ALTER TABLE `logs_connexions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `roles`
+-- AUTO_INCREMENT pour la table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+
+--
+-- AUTO_INCREMENT pour la table `pieces_jointes`
+--
+ALTER TABLE `pieces_jointes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT pour la table `votes`
+--
+ALTER TABLE `votes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `confirmations_email`
+-- Contraintes pour la table `commentaires`
+--
+ALTER TABLE `commentaires`
+  ADD CONSTRAINT `commentaires_ibfk_1` FOREIGN KEY (`innovation_id`) REFERENCES `innovations` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `confirmations_email`
 --
 ALTER TABLE `confirmations_email`
   ADD CONSTRAINT `confirmations_email_ibfk_1` FOREIGN KEY (`utilisateur_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `logs_connexions`
+-- Contraintes pour la table `conversation_users`
+--
+ALTER TABLE `conversation_users`
+  ADD CONSTRAINT `fk_conv_user_conversation` FOREIGN KEY (`conversation_id`) REFERENCES `conversations` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_conv_user_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `innovations`
+--
+ALTER TABLE `innovations`
+  ADD CONSTRAINT `fk_innov_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `logs_connexions`
 --
 ALTER TABLE `logs_connexions`
   ADD CONSTRAINT `logs_connexions_ibfk_1` FOREIGN KEY (`utilisateur_id`) REFERENCES `user` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `user`
+-- Contraintes pour la table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `fk_messages_conversation` FOREIGN KEY (`conversation_id`) REFERENCES `conversations` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_messages_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `fk_role` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `votes`
+--
+ALTER TABLE `votes`
+  ADD CONSTRAINT `votes_ibfk_1` FOREIGN KEY (`innovation_id`) REFERENCES `innovations` (`id`) ON DELETE CASCADE;
 COMMIT;
 
-
-
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
