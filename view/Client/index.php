@@ -31,8 +31,18 @@
 
 <!-- ==================== HERO ==================== -->
 <section id="hero">
-    <h1>Private. Fast. Beautiful.</h1>
-    <p>Messaging, reimagined.</p>
+    <section class="univers-story">
+        <h1>L’histoire de l’Univers & de l’astronomie</h1>
+
+
+
+        <p>
+            À travers ce site, nous t’invitons à <strong>voyager dans l’espace et dans le temps</strong> :
+            découvrir la naissance des étoiles, explorer les planètes, comprendre les galaxies et plonger au cœur des plus grands
+            mystères du cosmos. Prépare-toi à embarquer pour une exploration sans limite… celle de l’Univers.
+        </p>
+    </section>
+
 </section>
 
 

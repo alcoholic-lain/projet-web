@@ -1,0 +1,172 @@
+/* =======================================
+   LAYOUT COMPLET (OBLIGATOIRE POUR CHAQUE PAGE)
+======================================= */
+
+:root {
+    --sidebar-width: 240px;
+    --sidebar-bg: #0d1117;
+    --sidebar-hover: #1e2633;
+    --sidebar-text: #cbd5e1;
+    --bg: #0c0f14;
+    --text: #e6edf3;
+    --card-bg: rgba(255,255,255,0.06);
+    --card-border: rgba(255,255,255,0.12);
+    --accent: #b38cff;
+}
+
+body.light {
+    --sidebar-bg: #f6f6f8;
+    --sidebar-hover: #e9ecf3;
+    --sidebar-text: #222;
+    --bg: #ffffff;
+    --text: #000;
+    --card-bg: rgba(255,255,255,0.65);
+    --card-border: rgba(0,0,0,0.12);
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    padding: 20px 18px;
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    overflow-y: auto;
+    z-index: 1000;
+    transition: width .3s ease;
+}
+
+body.sidebar-collapsed .sidebar {
+    width: 80px;
+}
+
+/* ===== HEADER ===== */
+header {
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-width);
+    right: 0;
+    height: 65px;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    z-index: 900;
+    transition: left .3s ease;
+}
+
+body.sidebar-collapsed header {
+    left: 80px;
+}
+
+/* ===== MAIN ===== */
+main {
+    margin-top: 90px;
+    margin-left: var(--sidebar-width);
+    padding: 30px;
+    transition: margin-left .3s ease;
+}
+
+body.sidebar-collapsed main {
+    margin-left: 80px;
+}
+
+.dashboard-inner {
+    max-width: 900px;
+    margin: auto;
+}
+
+/* =======================================
+   PAGE ADD INNOVATION
+======================================= */
+
+.section-title-main {
+    font-size: 26px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.page-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ====== BUTTON RETOUR ====== */
+.btn-add {
+    padding: 8px 16px;
+    background: linear-gradient(135deg,#555,#999);
+    color: #fff;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: 0.25s ease;
+}
+
+.btn-add:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 14px rgba(0,0,0,.35);
+}
+
+/* ====== FORM ====== */
+.section-box {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-top: 16px;
+}
+
+label {
+    margin-top: 14px;
+    margin-bottom: 6px;
+    display: block;
+    font-weight: 600;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.07);
+    color: var(--text);
+}
+
+textarea { height: 120px; resize: vertical; }
+
+.btn-submit {
+    margin-top: 20px;
+    padding: 12px;
+    width: 100%;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    background: linear-gradient(135deg,#8a4bff,#c083ff);
+    color: white;
+    box-shadow: 0 6px 18px rgba(140,80,255,0.35);
+    transition: 0.25s;
+}
+
+.btn-submit:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 28px rgba(140,80,255,0.55);
+}
+/* Ajustement du bouton menu */
+header .menu-toggle, header .menu-icon {
+    margin-left: -35px !important;
+}
+

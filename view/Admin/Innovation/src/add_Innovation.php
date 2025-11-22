@@ -18,17 +18,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $category_id = (int) $_POST['category_id'];
     $statut = trim($_POST['statut']);
     $user_id = 66;
+
     if ($titre === "" || $description === "" || $category_id <= 0) {
         $error = "⚠️ Tous les champs sont obligatoires.";
     } else {
         $innovation = new Innovation(
-                null,           // id (null)
+                null,
                 $titre,
                 $description,
                 $category_id,
-                $user_id,       // OBLIGATOIRE
+                $user_id,
                 $statut,
-                null            // date_creation -> générée par SQL
+                null
         );
 
         if ($innCtrl->addInnovation($innovation)) {
@@ -40,82 +41,92 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Ajouter Innovation</title>
-    <link rel="stylesheet" href="../assets/css/admin.css">
 
+    <!-- CSS GLOBAL (layout + sidebar + header) -->
+    <link rel="stylesheet" href="../../assets/css/admin.css">
+
+    <!-- CSS SPÉCIFIQUE PAGE -->
+    <link rel="stylesheet" href="../assets/css/add_Innovation.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 
-<body class="with-sidebar">
+<body class="admin-dashboard with-sidebar">
 
-<div class="sidebar">
-    <h2>🚀 Admin</h2>
+<!-- SIDEBAR GLOBAL -->
+<?php include __DIR__ . "/../../layout/sidebar.php"; ?>
 
-    <a href="../../index.php">
-        <span class="icon">🏠</span><span class="text">Dashboard</span>
-    </a>
+<!-- HEADER GLOBAL -->
+<?php include __DIR__ . "/../../layout/header.php"; ?>
 
-    <a href="a_Category.php">
-        <span class="icon">🗂️</span><span class="text">Catégories</span>
-    </a>
+<main>
+    <div class="dashboard-inner">
 
-    <a href="a_Innovation.php" style="color:#FFB347; font-weight:bold;">
-        <span class="icon">🚀</span><span class="text">Innovations</span>
-    </a>
+        <!-- TITRE DE LA PAGE -->
+        <div class="page-header-row">
+            <h2 class="section-title-main">🚀 + Ajouter une Innovation</h2>
 
-    <a href="../../../Client/index.php">
-        <span class="icon">🌐</span><span class="text">Front Office</span>
-    </a>
-</div>
+            <a href="a_Innovation.php" class="btn-add">⬅ Retour</a>
+        </div>
 
-<header>
-    <h1>🚀 Ajouter une Innovation</h1>
-    <nav>
-        <a href="a_Innovation.php">⬅ Retour</a>
-    </nav>
-</header>
+        <p>Créer un nouveau projet d’innovation</p>
 
-<main class="section-box">
-    <?php if ($error): ?>
-        <p class="error"><?= htmlspecialchars($error) ?></p>
-    <?php endif; ?>
+        <!-- MESSAGE D’ERREUR -->
+        <?php if ($error): ?>
+            <p class="error"><?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
 
-    <form method="post">
+        <!-- FORMULAIRE -->
+        <form method="post">
+            <div class="section-box">
 
-        <label for="titre">Titre</label>
-        <input type="text" id="titre" name="titre" required>
+                <label for="titre">Titre</label>
+                <input type="text" id="titre" name="titre" >
 
-        <label>Description</label>
-        <textarea name="description" required></textarea>
+                <label for="description">Description</label>
+                <textarea id="description" name="description" ></textarea>
 
-        <label>Catégorie</label>
-        <select name="category_id" required>
-            <option value="">-- Choisir --</option>
-            <?php foreach ($categories as $cat): ?>
-                <option value="<?= $cat['id'] ?>">
-                    <?= htmlspecialchars($cat['nom']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+                <label>Catégorie</label>
+                <select name="category_id" required>
+                    <option value="">— Choisir une catégorie —</option>
 
-        <label>Statut</label>
-        <select name="statut">
-            <option value="En attente">En attente</option>
-            <option value="Validée">Validée</option>
-            <option value="Rejetée">Rejetée</option>
-        </select>
+                    <?php foreach ($categories as $cat): ?>
+                        <option value="<?= $cat['id'] ?>">
+                            <?= htmlspecialchars($cat['nom']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
 
-        <button class="btn-add">Créer Innovation</button>
-    </form>
+                <label for="statut">Statut</label>
+                <select name="statut" id="statut">
+                    <option value="En attente">En attente</option>
+                    <option value="Validée">Validée</option>
+                    <option value="Rejetée">Rejetée</option>
+                </select>
+
+                <button class="btn-submit">Créer Innovation</button>
+
+            </div>
+        </form>
+
+    </div>
 </main>
 
 <footer>
     <p>&copy; 2025 - Innovation - Hichem Challakhi</p>
 </footer>
-<script src="../assets/js/admin.js"></script>
+
+<!-- JS GLOBAL -->
+<script src="../../assets/js/admin.js"></script>
+
+<!-- JS SPÉCIFIQUE PAGE -->
+<script src="../assets/js/add_Innovation.js"></script>
 
 </body>
 </html>

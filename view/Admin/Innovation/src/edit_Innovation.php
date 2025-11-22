@@ -8,44 +8,50 @@ require_once __DIR__ . "/../../../../model/Innovation/Innovation.php";
 $catCtrl = new CategoryController();
 $innCtrl = new InnovationController();
 
-$id = intval($_GET['id'] ?? 0);
+// Récupérer ID
+$id = intval($_GET["id"] ?? 0);
+
+// Récupération innovation existante
 $data = $innCtrl->getInnovation($id);
-$user_id = (int)$data['user_id'];
-$date_creation = $data['date_creation'];
 
+if (!$data) {
+    die("⚠️ Innovation introuvable.");
+}
 
-if (!$data) die("⚠️ Innovation introuvable.");
-
+// Récupération catégories
 $categories = $catCtrl->listCategories();
+
 $error = null;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Soumission formulaire
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $titre = trim($_POST['titre']);
-    $description = trim($_POST['description']);
-    $category_id = (int) $_POST['category_id'];
-    $statut = trim($_POST['statut']);
+    $titre = trim($_POST["titre"]);
+    $description = trim($_POST["description"]);
+    $categorie = intval($_POST["category_id"]);
+    $statut = trim($_POST["statut"]);
+    $user_id = $data["user_id"]; // garder user original
 
-    if ($titre === "" || $description === "" || $category_id <= 0) {
+    if ($titre === "" || $description === "" || $categorie <= 0) {
         $error = "⚠️ Tous les champs sont obligatoires.";
     } else {
+
         $innovation = new Innovation(
                 $id,
                 $titre,
                 $description,
-                $category_id,
+                $categorie,
                 $user_id,
                 $statut,
-                $date_creation
+                $data["date_creation"]
         );
 
-
-
-        if ($innCtrl->updateInnovation($innovation)) {
+        try {
+            $innCtrl->updateInnovation($innovation);
             header("Location: a_Innovation.php?msg=updated");
             exit;
-        } else {
-            $error = "Erreur lors de la mise à jour.";
+        } catch (Exception $e) {
+            $error = $e->getMessage();
         }
     }
 }
@@ -55,78 +61,81 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Modifier Innovation</title>
-    <link rel="stylesheet" href="../assets/css/admin.css">
+
+    <!-- CSS GLOBAL -->
+    <link rel="stylesheet" href="../../assets/css/admin.css">
+
+    <!-- CSS SPÉCIFIQUE -->
+    <link rel="stylesheet" href="../assets/css/edit_Innovation.css">
 
 </head>
 
-<body class="with-sidebar">
+<body class="admin-dashboard with-sidebar">
 
-<div class="sidebar">
-    <h2>🚀 Admin</h2>
+<!-- SIDEBAR GLOBAL -->
+<?php include __DIR__ . "/../../layout/sidebar.php"; ?>
 
-    <a href="../../index.php">
-        <span class="icon">🏠</span><span class="text">Dashboard</span>
-    </a>
+<!-- HEADER GLOBAL -->
+<?php include __DIR__ . "/../../layout/header.php"; ?>
 
-    <a href="a_Category.php">
-        <span class="icon">🗂️</span><span class="text">Catégories</span>
-    </a>
+<main>
+    <div class="dashboard-inner">
 
-    <a href="a_Innovation.php" style="color:#FFB347; font-weight:bold;">
-        <span class="icon">🚀</span><span class="text">Innovations</span>
-    </a>
+        <div class="page-header-row">
+            <h2 class="section-title-main">✏️ Modifier l’Innovation</h2>
+            <a href="a_Innovation.php" class="btn-add">⬅ Retour</a>
+        </div>
 
-    <a href="../../../Client/index.php">
-        <span class="icon">🌐</span><span class="text">Front Office</span>
-    </a>
-</div>
+        <?php if ($error): ?>
+            <p class="error">❌ <?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
 
-<header>
-    <h1>✏️ Modifier une Innovation</h1>
-    <nav>
-        <a href="a_Innovation.php">⬅ Retour</a>
-    </nav>
-</header>
+        <form method="POST">
+            <div class="section-box">
 
-<main class="section-box">
+                <label for="titre">Titre</label>
+                <input type="text" id="titre" name="titre"
+                       value="<?= htmlspecialchars($data['titre']) ?>" >
 
-    <?php if ($error): ?>
-        <p class="error"><?= htmlspecialchars($error) ?></p>
-    <?php endif; ?>
+                <label>Description</label>
+                <textarea id="description" name="description" ><?=
+                    htmlspecialchars($data['description']) ?></textarea>
 
-    <form method="post">
+                <label>Catégorie</label>
+                <select name="category_id" required>
+                    <?php foreach ($categories as $cat): ?>
+                        <option value="<?= $cat['id'] ?>"
+                                <?= ($cat['id'] == $data['category_id']) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($cat['nom']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
 
-        <label for="titre">Titre</label>
-        <input type="text" name="titre" value="<?= htmlspecialchars($data['titre']) ?>">
 
-        <label>Description</label>
-        <textarea name="description"><?= htmlspecialchars($data['description']) ?></textarea>
+                <label for="statut">Statut</label>
+                <select name="statut">
+                    <option value="En attente" <?= $data["statut"]=="En attente"?"selected":"" ?>>En attente</option>
+                    <option value="Validée"   <?= $data["statut"]=="Validée"?"selected":"" ?>>Validée</option>
+                    <option value="Rejetée"   <?= $data["statut"]=="Rejetée"?"selected":"" ?>>Rejetée</option>
+                </select>
 
-        <label>Catégorie</label>
-        <select name="category_id">
-            <?php foreach ($categories as $cat): ?>
-                <option value="<?= $cat['id'] ?>"
-                        <?= ($cat['id'] == $data['category_id']) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($cat['nom']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+                <button class="btn-submit">Mettre à jour</button>
 
-        <label>Statut</label>
-        <select name="statut">
-            <option value="En attente" <?= ($data['statut']=="En attente"?'selected':'') ?>>En attente</option>
-            <option value="Validée" <?= ($data['statut']=="Validée"?'selected':'') ?>>Validée</option>
-            <option value="Rejetée" <?= ($data['statut']=="Rejetée"?'selected':'') ?>>Rejetée</option>
-        </select>
+            </div>
+        </form>
 
-        <button class="btn-add">Mettre à jour</button>
-
-    </form>
+    </div>
 </main>
 
 <footer>
     <p>&copy; 2025 - Innovation - Hichem Challakhi</p>
 </footer>
-<script src="../assets/js/admin.js"></script>
+
+<!-- JS GLOBAL -->
+<script src="../../assets/js/admin.js"></script>
+
+<!-- JS SPÉCIFIQUE -->
+<script src="../assets/js/edit_Innovation.js"></script>
+
 </body>
 </html>

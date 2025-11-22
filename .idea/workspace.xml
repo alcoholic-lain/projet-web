@@ -5,64 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/Public/index.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/components/Innovation/CategoryController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/components/Innovation/InnovationController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/a_Category.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/a_Innovation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/add_Category.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/add_Innovation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/edit_Category.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/edit_Innovation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Admin/index.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/css/categories.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/css/details_innovation.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/css/list_innovation.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/js/add_innovation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/js/categories.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/js/details_innovation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/js/list_innovation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/src/add_Innovation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/src/details_Innovation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/src/list_Innovation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Client/assets/css/user.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Client/assets/js/user.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Client/index.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/Client/navbar.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/a_Category.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/a_Innovation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/add_Category.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/add_Innovation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/edit_Category.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/edit_Innovation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/js/a_Category.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/js/a_Innovation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/js/add_Category.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/js/add_Innovation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/js/edit_Category.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/js/edit_Innovation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/assets/css/admin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/assets/js/admin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/layout/header.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Admin/layout/sidebar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/components/CategoryController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/components/InnovationController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data set/user_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/css/add_innovation.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Innovation/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Innovation/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Innovation/Commentaire.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Innovation/Innovation.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Innovation/Innovation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Innovation/PieceJointe.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Innovation/Vote.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Innovation/tunispace_database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/model/Innovation/tunispace_database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/config/data-base.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Admin/a_Category.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Admin/a_Innovation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Admin/add_Category.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Admin/edit_Category.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Admin/edit_Innovation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Admin/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/css/1.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/css/admin.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/css/style_i_list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/css/user.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/js/category.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/js/category_details.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/js/dashboard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/js/innovation.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/assets/video/space.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/src/add_Innovation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/src/categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/Innovation/src/categories.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/src/category_details.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/src/details_Innovation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/src/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiw/Client/src/list_Innovation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/src/a_Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/a_Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/src/a_Innovation.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/a_Innovation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/src/add_Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/add_Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/src/add_Innovation.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/add_Innovation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/src/edit_Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/edit_Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/src/edit_Innovation.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/edit_Innovation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Client/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Client/navbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/navbar.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,9 +44,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="PHP File" />
         <option value="CSS File" />
         <option value="JavaScript File" />
-        <option value="PHP File" />
       </list>
     </option>
   </component>
@@ -198,7 +166,7 @@
       <workItem from="1763383886406" duration="4943000" />
       <workItem from="1763659242307" duration="7036000" />
       <workItem from="1763716580122" duration="21376000" />
-      <workItem from="1763739364948" duration="10720000" />
+      <workItem from="1763739364948" duration="28569000" />
     </task>
     <task id="LOCAL-00001" summary="1st">
       <option name="closed" value="true" />
@@ -576,7 +544,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763336459962</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="update">
+      <option name="closed" value="true" />
+      <created>1763753236907</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1763753236907</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

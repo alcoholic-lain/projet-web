@@ -3,24 +3,31 @@ require_once __DIR__ . "/../../../../config.php";
 require_once __DIR__ . "/../../../../controller/components/Innovation/CategoryController.php";
 require_once __DIR__ . "/../../../../model/Innovation/Category.php";
 
-$controller = new CategoryController();
+$catCtrl = new CategoryController();
 
+// Récupération ID
 $id = intval($_GET["id"] ?? 0);
-$data = $controller->getCategory($id);
 
-if (!$data) die("⚠️ Catégorie introuvable.");
+// Récupération catégorie existante
+$data = $catCtrl->getCategory($id);
+
+if (!$data) {
+    die("⚠️ Catégorie introuvable.");
+}
 
 $error = null;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Soumission du formulaire
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $nom = trim($_POST["nom"]);
     $description = trim($_POST["description"]);
 
-    if ($nom === "") {
-        $error = "⚠️ Le nom est obligatoire.";
+    if ($nom === "" || $description === "") {
+        $error = "⚠️ Tous les champs sont obligatoires.";
     } else {
-        $cat = new Category(
+
+        $category = new Category(
                 $id,
                 $nom,
                 $description,
@@ -28,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         try {
-            $controller->updateCategory($cat);
+            $catCtrl->updateCategory($category);
             header("Location: a_Category.php?msg=updated");
             exit;
         } catch (Exception $e) {
@@ -42,66 +49,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Modifier Catégorie</title>
-    <link rel="stylesheet" href="../assets/css/admin.css">
 
+    <!-- CSS GLOBAL -->
+    <link rel="stylesheet" href="../../assets/css/admin.css">
+
+    <!-- CSS SPÉCIFIQUE -->
+    <link rel="stylesheet" href="../assets/css/edit_Category.css">
 </head>
 
-<body class="with-sidebar">
+<body class="admin-dashboard with-sidebar">
 
-<div class="sidebar">
-    <h2>🚀 Admin</h2>
+<!-- SIDEBAR -->
+<?php include __DIR__ . "/../../layout/sidebar.php"; ?>
 
-    <a href="../../index.php">
-        <span class="icon">🏠</span>
-        <span class="text">Dashboard</span>
-    </a>
+<!-- HEADER -->
+<?php include __DIR__ . "/../../layout/header.php"; ?>
 
-    <a href="a_Category.php" style="color:#FFB347;">
-        <span class="icon">🗂️</span>
-        <span class="text">Catégories</span>
-    </a>
+<main>
+    <div class="dashboard-inner">
 
-    <a href="a_Innovation.php">
-        <span class="icon">🚀</span>
-        <span class="text">Innovations</span>
-    </a>
+        <div class="page-header-row">
+            <h2 class="section-title-main">🗂️ Modifier la Catégorie</h2>
+            <a href="a_Category.php" class="btn-add">⬅ Retour</a>
+        </div>
 
-    <a href="../../../Client/index.php">
-        <span class="icon">🌐</span>
-        <span class="text">Front Office</span>
-    </a>
-</div>
+        <?php if ($error): ?>
+            <p class="error">❌ <?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
 
-<header>
-    <h1>✏️ Modifier la Catégorie</h1>
-    <nav>
-        <a href="a_Category.php">⬅ Retour</a>
-    </nav>
-</header>
+        <form method="POST">
+            <div class="section-box">
 
-<main class="section-box">
+                <label for="nom">Nom de la catégorie</label>
+                <input type="text" id="nom" name="nom"
+                       value="<?= htmlspecialchars($data['nom']) ?>" >
 
-    <?php if ($error): ?>
-        <p class="error">❌ <?= htmlspecialchars($error) ?></p>
-    <?php endif; ?>
+                <label>Description</label>
+                <textarea id="description" name="description"><?=
+                    htmlspecialchars($data['description']) ?></textarea>
 
-    <form method="post">
+                <button class="btn-submit">Mettre à jour</button>
 
-        <label>Nom</label>
-        <input type="text" name="nom" value="<?= htmlspecialchars($data['nom']) ?>">
+            </div>
+        </form>
 
-        <label>Description</label>
-        <textarea name="description"><?= htmlspecialchars($data['description']) ?></textarea>
-
-        <button class="btn-add">Mettre à jour</button>
-
-    </form>
-
+    </div>
 </main>
 
 <footer>
     <p>&copy; 2025 - Innovation - Hichem Challakhi</p>
 </footer>
-<script src="../assets/js/admin.js"></script>
+
+<!-- JS GLOBAL -->
+<script src="../../assets/js/admin.js"></script>
+
+<!-- JS PAGE -->
+<script src="../assets/js/edit_Category.js"></script>
+
 </body>
 </html>

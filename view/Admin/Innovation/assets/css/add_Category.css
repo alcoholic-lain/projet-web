@@ -1,0 +1,146 @@
+/* =======================================
+   Page : add_Category.php – Style complet
+======================================= */
+
+/* IMPORT LAYOUT STYLE (copie locale) */
+:root {
+    --sidebar-width: 240px;
+    --sidebar-bg: #0d1117;
+    --sidebar-hover: #1e2633;
+    --sidebar-text: #cbd5e1;
+    --bg: #0c0f14;
+    --text: #e6edf3;
+    --card-bg: rgba(255,255,255,0.06);
+    --card-border: rgba(255,255,255,0.12);
+    --accent: #b38cff;
+}
+
+/* Mode clair */
+body.light {
+    --sidebar-bg: #f6f6f8;
+    --sidebar-hover: #e9ecf3;
+    --sidebar-text: #222;
+    --bg: #ffffff;
+    --text: #000;
+    --card-bg: rgba(255,255,255,0.65);
+    --card-border: rgba(0,0,0,0.12);
+}
+
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+}
+
+/* ===== MAIN LAYOUT ===== */
+main {
+    margin-top: 85px;
+    margin-left: var(--sidebar-width);
+    padding: 30px;
+    transition: margin-left 0.35s ease;
+}
+body.sidebar-collapsed main {
+    margin-left: 80px;
+}
+
+.dashboard-inner {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-title-main {
+    font-size: 26px;
+    margin-bottom: 16px;
+}
+
+.page-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ===== FORM BOX ===== */
+.section-box {
+    background: var(--card-bg);
+    border-radius: 14px;
+    border: 1px solid var(--card-border);
+    padding: 24px;
+    margin-top: 16px;
+}
+
+.form-box label {
+    display: block;
+    font-weight: 600;
+    margin-top: 14px;
+    margin-bottom: 6px;
+}
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.07);
+    color: var(--text);
+}
+textarea { height: 120px; resize: vertical; }
+.form-box input,
+.form-box textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.07);
+    color: var(--text);
+    font-size: 14px;
+}
+
+.form-box textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+/* ===== SUBMIT BUTTON ===== */
+.btn-submit {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+
+    background: linear-gradient(135deg, #8a4bff, #c083ff);
+    color: white;
+    box-shadow: 0 6px 18px rgba(140,80,255,0.35);
+    transition: 0.25s;
+}
+
+.btn-submit:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 26px rgba(140,80,255,0.55);
+}
+
+/* Retour (btn-add style) */
+.btn-add {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 50px;
+    text-decoration: none;
+    background: linear-gradient(135deg, #555, #777);
+    color: #fff;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.btn-add:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+}
+
+/* Messages */
+.error {
+    color: #fb7185;
+}

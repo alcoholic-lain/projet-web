@@ -1,0 +1,48 @@
+/* PAGE : Ajouter Catégorie */
+.section-box {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 24px;
+    border-radius: 14px;
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+input, textarea {
+    width: 100%;
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--text);
+}
+
+textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.btn-submit {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 14px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg,#8a4bff,#c083ff);
+    color: white;
+    box-shadow: 0 6px 18px rgba(140,80,255,0.35);
+    transition: 0.25s ease;
+}
+
+.btn-submit:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 26px rgba(140,80,255,0.55);
+}
