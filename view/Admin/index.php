@@ -21,16 +21,30 @@ foreach ($innovations as $inn) {
         $totalPending++;
     }
 }
-
 /* === STATS FOR GRAPH === */
-$catCounts = [];
-foreach ($innovations as $inn) {
-    $cat = $inn['category_id'];
-    if (!isset($catCounts[$cat])) {
-        $catCounts[$cat] = 0;
-    }
-    $catCounts[$cat]++;
+
+// 1. Tableau : id => nom
+$categoryNames = [];
+foreach ($categories as $c) {
+    $categoryNames[$c['id']] = $c['nom'];
 }
+
+// 2. Initialiser toutes les catégories à 0 (même si elles sont vides)
+$catCounts = [];
+foreach ($categories as $c) {
+    $catCounts[$c['nom']] = 0;
+}
+
+// 3. Ajouter les innovations existantes
+foreach ($innovations as $inn) {
+    $catId = $inn['category_id'];
+    $catName = $categoryNames[$catId] ?? null;
+
+    if ($catName) {
+        $catCounts[$catName]++;
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">

@@ -146,8 +146,8 @@ header nav a:hover {
 #hero::before {
     content: "";
     position: absolute;
-    left: 50%;
-    top: 60%; /* 🔥 Descendu encore (55% → 60%) */
+    left: 10%;
+    top: 30%; /* 🔥 Descendu encore (55% → 60%) */
     transform: translate(-50%, -50%);
     width: 360px;   /* 🔥 Taille optimisée (380 → 360) */
     height: 360px;

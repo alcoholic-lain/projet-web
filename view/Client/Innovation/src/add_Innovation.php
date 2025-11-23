@@ -11,30 +11,34 @@ $catCtrl = new CategoryController();
 $categories = $catCtrl->listCategories();
 
 // Traitement PHP uniquement si le JS a validé (validated = 1)
-if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["validated"] ?? "0") === "1") {
-
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $titre        = trim($_POST["titre"] ?? "");
     $description  = trim($_POST["description"] ?? "");
     $categorie_id = (int)($_POST["categorie_id"] ?? 0);
-    $innovation = new Innovation(
-            null,
-            $titre,
-            $description,
-            $categorie_id,
-            66,     // ← ICI tu mets un user_id existant
-            "En attente"
-    );
 
-    $innCtrl->addInnovation($innovation);
-    header("Location: list_Innovation.php?msg=added");
-    exit;
+    if ($titre === "" || $description === "" || $categorie_id <= 0) {
+        $error = "⚠️ Tous les champs sont obligatoires.";
+    } else {
+        $innovation = new Innovation(
+                null,
+                $titre,
+                $description,
+                $categorie_id,
+                66,            // à remplacer plus tard par $_SESSION
+                "En attente"
+        );
+        $innCtrl->addInnovation($innovation);
+        header("Location: list_Innovation.php?msg=added");
+        exit;
+    }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="fr" class="light">
 <head>
     <meta charset="UTF-8">
-    <title>Soumettre une Innovation – Innovation DB</title>
+    <title>Soumettre une Innovation </title>
 
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>

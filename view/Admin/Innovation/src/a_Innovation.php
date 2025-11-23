@@ -7,6 +7,12 @@ require_once __DIR__ . "/../../../../model/Innovation/Innovation.php";
 
 $ctrl = new InnovationController();
 $error = null;
+// ==== VARIABLES POUR HEADER + SIDEBAR ====
+$pageTitle     = "🚀 Gestion des Innovations";
+$pageSubtitle  = "Administration des projets d’innovation";
+
+$activeMenu = 'innovations';
+$activeSub  = isset($_GET['pending']) ? 'innovations_pending' : 'innovations_all';
 
 // Gestion suppression
 if (isset($_GET['delete'])) {
@@ -23,8 +29,20 @@ if (isset($_GET['delete'])) {
 }
 
 // Récupération des innovations
+// Récupération des innovations
 try {
     $innovations = $ctrl->listInnovations();
+
+    // FILTRE : si ?pending est dans l'URL → ne garder que les innovations en attente
+    if (isset($_GET['pending'])) {
+        $innovations = array_filter($innovations, function($i) {
+            return $i['statut'] === 'En attente';
+        });
+
+        // Active la sous-catégorie dans le sidebar
+        $activeSub = 'innovations_pending';
+    }
+
 } catch (Exception $e) {
     $innovations = [];
     $error = $e->getMessage();
@@ -32,19 +50,14 @@ try {
 
 $msg = $_GET['msg'] ?? null;
 
-// ==== VARIABLES POUR HEADER + SIDEBAR ====
-$pageTitle     = "🚀 Gestion des Innovations";
-$pageSubtitle  = "Administration des projets d’innovation";
-
-$activeMenu = 'innovations';
-$activeSub  = 'innovations_all';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title><?= $pageTitle ?></title>
-
+    <!-- CSS GLOBAL ADMIN -->
+    <link rel="stylesheet" href="../../assets/css/admin.css">
     <!-- CSS SPÉCIFIQUE À CETTE PAGE -->
     <link rel="stylesheet" href="../assets/css/a_Innovation.css">
 
@@ -132,7 +145,8 @@ $activeSub  = 'innovations_all';
 <footer>
     <p>&copy; 2025 - Innovation - Hichem Challakhi</p>
 </footer>
-
+<!-- JS GLOBAL ADMIN -->
+<script src="../../assets/js/admin.js"></script>
 <!-- JS SPÉCIFIQUE À CETTE PAGE -->
 <script src="../assets/js/a_Innovation.js"></script>
 

@@ -11,13 +11,26 @@ if (sidebarToggle) {
 }
 
 // === Theme toggle (jour / nuit) ===
-if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
+const themeSwitch = document.querySelector(".theme-switcher");
+
+if (themeSwitch) {
+    themeSwitch.addEventListener("click", () => {
         body.classList.toggle("light");
-        // Optionnel : on peut stocker la préférence dans localStorage
-        // localStorage.setItem("theme", body.classList.contains("light") ? "light" : "dark");
+
+        // Sauvegarde du thème
+        localStorage.setItem(
+            "theme",
+            body.classList.contains("light") ? "light" : "dark"
+        );
     });
 }
+
+// Charger thème sauvegardé
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "light") {
+    body.classList.add("light");
+}
+
 
 // === Dropdown menus (Catégories / Innovations) ===
 dropdowns.forEach(drop => {

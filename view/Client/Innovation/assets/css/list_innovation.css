@@ -230,3 +230,61 @@ footer {
     color: var(--gray);
     padding: 10px 0 22px;
 }
+.btn-return {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    background: #ff4b3a;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-return:hover {
+    transform: translateY(-5px);
+    box-shadow:
+            0 0 18px rgba(255, 177, 90, 0.95),
+            0 0 38px rgba(255, 42, 127, 0.9);
+}
+.cs-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+    background: rgba(5, 8, 20, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cs-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cs-logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.cs-nav a {
+    color: var(--light);
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 0.95rem;
+    opacity: 0.85;
+    transition: color 0.2s, opacity 0.2s;
+}
+
+.cs-nav a:hover {
+    color: var(--primary);
+    opacity: 1;
+}

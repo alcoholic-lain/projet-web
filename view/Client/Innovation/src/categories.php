@@ -13,7 +13,7 @@ $categories = $catCtrl->listCategories();
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Catégories – Innovation DB</title>
+    <title>Catégories</title>
 
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -87,13 +87,10 @@ $categories = $catCtrl->listCategories();
                     data-name="<?= strtolower(htmlspecialchars($cat['nom'])) ?>"
             >
                 <div class="cs-card-header">
-                    <div class="cs-pill">
+                    <h3 class="cs-pill">
                         <i class="fas fa-galaxy"></i>
-                        ID #<?= (int)$cat['id'] ?>
-                    </div>
-                    <h3 class="cs-card-title">
                         <?= htmlspecialchars($cat['nom']) ?>
-                    </h3>
+                        </h3>
                 </div>
                 <p class="cs-card-desc">
                     <?= htmlspecialchars($cat['description'] ?: "Aucune description fournie.") ?>

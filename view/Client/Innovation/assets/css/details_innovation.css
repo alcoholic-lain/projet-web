@@ -31,25 +31,46 @@ body {
 }
 
 /* Header */
+
 .cs-header {
     position: fixed;
-    top:0; width:100%;
-    background: rgba(5,8,20,0.92);
-    backdrop-filter: blur(14px);
-    padding: 12px 0;
-    z-index:20;
-    border-bottom:1px solid rgba(255,255,255,0.08);
+    top: 0;
+    width: 100%;
+    z-index: 20;
+    background: rgba(5, 8, 20, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
-.cs-container {
-    max-width:1100px;
-    margin:auto;
-    padding:0 20px;
-    display:flex; justify-content:space-between; align-items:center;
-}
-.cs-logo { font-size:1.4rem; font-weight:700; color:var(--primary); text-decoration:none; }
-.cs-nav a { color:var(--light); margin-left:20px; opacity:.8; text-decoration:none; }
-.cs-nav a:hover, .cs-nav-active { color:var(--primary) !important; opacity:1; }
 
+.cs-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cs-logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.cs-nav a {
+    color: var(--light);
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 0.95rem;
+    opacity: 0.85;
+    transition: color 0.2s, opacity 0.2s;
+}
+.cs-nav a:hover {
+    color: var(--primary);
+    opacity: 1;
+}
 /* Main */
 .cs-main {
     max-width:900px;
@@ -154,3 +175,10 @@ body {
     color:var(--gray);
     padding:30px 0;
 }
+.bg-animation {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: transparent;
+}
+

@@ -22,6 +22,12 @@ if (!empty($innovation["category_id"])) {
 <head>
     <meta charset="UTF-8">
     <title>Détails Innovation</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+    <!-- Tailwind (pour la grille de base, textes, etc.) -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="stylesheet" href="../assets/css/details_innovation.css">
 </head>
@@ -29,15 +35,20 @@ if (!empty($innovation["category_id"])) {
 <body>
 
 <canvas id="galaxyCanvas"></canvas>
-<div class="bg-animation"></div>
+<!-- FOND ANIMÉ TYPE CHAIN SUMMIT -->
+<div class="bg-animation">
+    <div class="neural-network" id="neuralNetwork"></div>
+    <div class="particles" id="particles"></div>
+</div>
 
 <header class="cs-header">
     <div class="cs-container">
-        <a class="cs-logo" href="#">Innovation</a>
+        <a href="../../index.php" class="cs-logo">Innovation</a>
         <nav class="cs-nav">
+            <a href="../../index.php">Accueil</a>
             <a href="categories.php">Catégories</a>
-            <a href="list_Innovation.php" class="cs-nav-active">Innovations</a>
-            <a href="add_Innovation.php">Ajouter</a>
+            <a href="add_Innovation.php">Ajouter une Innovation</a>
+            <a href="list_Innovation.php?user=66">Mes innovations</a>
         </nav>
     </div>
 </header>
@@ -70,9 +81,11 @@ if (!empty($innovation["category_id"])) {
             <?= nl2br(htmlspecialchars($innovation["description"])) ?>
         </p>
 
-        <a href="list_Innovation.php" class="post-back">
+        <a href="list_Innovation.php?categorie=<?= htmlspecialchars($innovation['category_id'] ?? '') ?>"
+           class="post-back">
             ← Retour aux innovations
         </a>
+
 
     </div>
 </main>

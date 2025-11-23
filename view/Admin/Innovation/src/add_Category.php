@@ -4,8 +4,12 @@ require_once __DIR__ . "/../../../../controller/components/Innovation/CategoryCo
 require_once __DIR__ . "/../../../../model/Innovation/Category.php";
 
 $catCtrl = new CategoryController();
-
 $error = null;
+
+// Activation sidebar
+$activeMenu = 'categories';
+$activeSub  = 'categories_add';
+
 
 // Soumission du formulaire
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

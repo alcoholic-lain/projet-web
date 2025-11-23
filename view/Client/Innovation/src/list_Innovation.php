@@ -8,18 +8,17 @@ require_once __DIR__ . "/../../../../model/Innovation/Category.php";
 $innCtrl = new InnovationController();
 $catCtrl = new CategoryController();
 
-$userMode = isset($_GET['user']);         // ?user=1  → Mes innovations
+$userMode = isset($_GET['user']) || isset($_GET['userid']);
+     // ?user  → Mes innovations
 $catMode  = isset($_GET['categorie']);    // ?categorie=ID → Innovations validées d'une catégorie
 
 // Mode 1 : MES INNOVATIONS
 if ($userMode) {
-    // !!! Remplacer 1 par $_SESSION['user_id'] lorsque login sera actif
-    $userId = 1;
-
+    $userId = isset($_GET['user']) ? intval($_GET['user']) : intval($_GET['userid']);
     $innovations = $innCtrl->listInnovationsByUser($userId);
+}
 
-// Mode 2 : AFFICHER PAR CATÉGORIE
-} elseif ($catMode) {
+ elseif ($catMode) {
     $catId = intval($_GET['categorie']);
 
     $innovations = $innCtrl->listInnovationsByCategory($catId);
@@ -39,7 +38,7 @@ $msg = $_GET['msg'] ?? null;
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des Innovations – Innovation</title>
+    <title>Liste des Innovations </title>
 
     <!-- Future Galaxy Web3 CSS -->
     <link rel="stylesheet" href="../assets/css/list_innovation.css">
@@ -47,7 +46,7 @@ $msg = $_GET['msg'] ?? null;
 
 <body>
 
-<header>
+<header class="cs-header">
     <div>
         <h1>
             <?php if ($userMode): ?>
@@ -69,16 +68,22 @@ $msg = $_GET['msg'] ?? null;
             <?php endif; ?>
         </p>
     </div>
-
-    <nav>
-        <a href="../../index.php">🏠 Accueil</a>
-        <a href="categories.php" class="cs-nav-active">Catégories</a>
-        <a href="add_Innovation.php">➕ Ajouter une innovation</a>
-        <a href="list_Innovation.php?user=1">📁 Mes innovations</a>
-    </nav>
+    <div class="cs-container">
+        <nav class="cs-nav">
+            <a href="../../index.php">Accueil</a>
+            <a href="categories.php">Catégories</a>
+            <a href="add_Innovation.php">Ajouter une Innovation</a>
+            <a href="list_Innovation.php?user=66">Mes innovations</a>
+        </nav>
+    </div>
 </header>
 
 <main>
+    <?php if ($catMode): ?>
+        <a href="categories.php" class="btn-return">
+            ← Retour aux catégories
+        </a>
+    <?php endif; ?>
 
     <?php if ($msg === 'added'): ?>
         <p class="msg-success">✅ Votre innovation a été soumise.</p>
