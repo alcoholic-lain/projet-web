@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46208b49-aa9e-422d-9a6e-1ccb6ca2c1c8" name="Changes" comment="modification de mot de passe par rapport a l email et le pseudo">
+    <list default="true" id="46208b49-aa9e-422d-9a6e-1ccb6ca2c1c8" name="Changes" comment="ajout de la creation de role et la mise a jour du dashboard">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/controller/resetPassword.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prj_webb/view/BackEnd/dashboard.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/css/dashboard.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/css/edit_user.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/css/login.css" beforeDir="false" />
@@ -20,7 +19,6 @@
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/profile.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/register.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/assets/js/resetpassword.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/badge.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/login.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/profile.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prj_webb/view/FrontOffice/register.html" beforeDir="false" />
@@ -73,7 +71,7 @@
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;user__branch&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zak/PhpstormProjects/projet-web/prj_webb/view/FrontOffice&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/zak/PhpstormProjects/projet-web/prj_webb/view/BackEnd&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -86,11 +84,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\FrontOffice" />
+      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\BackEnd" />
       <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\FrontOffice\assets\js" />
       <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\controller" />
+      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\FrontOffice" />
       <recent name="C:\Users\zak\PhpstormProjects\projet-web" />
-      <recent name="C:\Users\zak\PhpstormProjects\projet-web\prj_webb\view\FrontOffice\assets\css" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -126,6 +124,8 @@
       <workItem from="1763229765300" duration="667000" />
       <workItem from="1763334166342" duration="159000" />
       <workItem from="1763386218362" duration="235000" />
+      <workItem from="1763675158609" duration="120000" />
+      <workItem from="1763916291679" duration="863000" />
     </task>
     <task id="LOCAL-00001" summary="dfsdf">
       <option name="closed" value="true" />
@@ -255,7 +255,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763334377861</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="ajout de la creation de role et la mise a jour du dashboard">
+      <option name="closed" value="true" />
+      <created>1763675274446</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1763675274446</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,6 +282,7 @@
     <MESSAGE value="l ajout du resetpassword.js" />
     <MESSAGE value="l ajout du controller de resetpassword" />
     <MESSAGE value="modification de mot de passe par rapport a l email et le pseudo" />
-    <option name="LAST_COMMIT_MESSAGE" value="modification de mot de passe par rapport a l email et le pseudo" />
+    <MESSAGE value="ajout de la creation de role et la mise a jour du dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout de la creation de role et la mise a jour du dashboard" />
   </component>
 </project>
