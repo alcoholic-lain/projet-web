@@ -1,1 +1,0 @@
-why r u gay ? 
