@@ -1,154 +1,266 @@
-/* ============================================================
-   USER.JS — Galaxy Background + Solar Flare Hero compatible
-============================================================ */
+/* =========================================================
+   🌌 STARFIELD BACKGROUND
+========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+const canvas = document.getElementById('galaxyCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
-    /* ========================================================
-       DM POPUP
-    ========================================================= */
-    const dmBtn = document.getElementById("dm-btn");
-    const popup = document.getElementById("dm-popup");
+const stars = Array.from({ length: 450 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.7 + 0.4,
+    a: Math.random(),
+    s: Math.random() * 0.6 + 0.2
+}));
 
-    if (dmBtn && popup) {
-        dmBtn.addEventListener("click", () => {
-            popup.style.display = popup.style.display === "block" ? "none" : "block";
-        });
-    }
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255, ${
+            document.documentElement.classList.contains("dark") ? s.a : s.a * 0.3
+        })`;
+        ctx.fill();
 
-    /* ========================================================
-       GALAXY BACKGROUND (stars + shooting stars + tiny planet)
-    ========================================================= */
-
-    const canvas = document.getElementById("galaxyCanvas");
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    /* ---- Stars ---- */
-    const stars = [];
-    const STAR_COUNT = 260;
-
-    for (let i = 0; i < STAR_COUNT; i++) {
-        stars.push({
-            x: Math.random(),
-            y: Math.random(),
-            r: Math.random() * 1.5 + 0.4,
-            speed: Math.random() * 0.0008 + 0.0002,
-            twinkle: Math.random() * Math.PI * 2
-        });
-    }
-
-    /* ---- Shooting stars ---- */
-    const shooting = [];
-
-    function addShootingStar() {
-        shooting.push({
-            x: Math.random() * canvas.width,
-            y: -20,
-            len: Math.random() * 100 + 80,
-            speed: Math.random() * 7 + 4,
-            size: Math.random() * 1.7 + 0.4
-        });
-    }
-    setInterval(addShootingStar, 2800);
-
-    /* ---- Tiny planet (bottom-right) ---- */
-    const planet = {
-        baseX: 0.80,
-        baseY: 0.88,
-        radius: 30,
-        angle: 0,
-        amp: 0.015,
-        speed: 0.0006
-    };
-
-    /* ---- Parallax ---- */
-    let parallaxX = 0, parallaxY = 0;
-
-    document.addEventListener("mousemove", (e) => {
-        const cx = window.innerWidth / 2;
-        const cy = window.innerHeight / 2;
-        parallaxX = (e.clientX - cx) * 0.015;
-        parallaxY = (e.clientY - cy) * 0.015;
+        s.a += (Math.random() - 0.5) * 0.04;
+        s.a = Math.max(0.3, Math.min(1, s.a));
+        s.x += s.s;
+        if (s.x > canvas.width) s.x = 0;
     });
+    requestAnimationFrame(animate);
+}
+animate();
 
-    /* ========================================================
-       DRAW LOOP
-    ========================================================= */
-    function drawGalaxy() {
-        const w = canvas.width;
-        const h = canvas.height;
-
-        ctx.clearRect(0, 0, w, h);
-
-        ctx.save();
-        ctx.translate(parallaxX, parallaxY);
-
-        /* Stars */
-        stars.forEach(star => {
-            star.y -= star.speed;
-            if (star.y < 0) star.y = 1;
-
-            star.twinkle += 0.03;
-            const alpha = 0.35 + 0.3 * Math.sin(star.twinkle);
-
-            ctx.beginPath();
-            ctx.arc(star.x * w, star.y * h, star.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-            ctx.fill();
-        });
-
-        /* Shooting stars */
-        shooting.forEach((s, i) => {
-            ctx.beginPath();
-            ctx.moveTo(s.x, s.y);
-            ctx.lineTo(s.x - s.len, s.y + s.len / 3);
-            ctx.strokeStyle = "rgba(255,255,255,0.7)";
-            ctx.lineWidth = s.size;
-            ctx.stroke();
-
-            s.x += s.speed;
-            s.y += s.speed * 0.4;
-
-            if (s.x > w + 50 || s.y > h + 50) shooting.splice(i, 1);
-        });
-
-        /* Tiny planet */
-        planet.angle += planet.speed;
-        const px = (planet.baseX + Math.sin(planet.angle) * planet.amp) * w;
-        const py = (planet.baseY + Math.cos(planet.angle) * planet.amp) * h;
-
-        const gRadius = planet.radius * 2.2;
-        const gradient = ctx.createRadialGradient(
-            px, py, planet.radius * 0.2,
-            px, py, gRadius
-        );
-        gradient.addColorStop(0, "rgba(255,160,220,0.95)");
-        gradient.addColorStop(0.4, "rgba(255,140,200,0.6)");
-        gradient.addColorStop(1, "rgba(0,0,0,0)");
-
-        ctx.beginPath();
-        ctx.arc(px, py, gRadius, 0, Math.PI * 2);
-        ctx.fillStyle = gradient;
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.arc(px, py, planet.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255, 190, 230, 1)";
-        ctx.fill();
-
-        ctx.restore();
-
-        requestAnimationFrame(drawGalaxy);
-    }
-
-    drawGalaxy();
+window.addEventListener("resize", () => {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
 });
+
+/* =========================================================
+   🌗 THEME SWITCHER
+========================================================= */
+
+const themeSwitch = document.getElementById("theme-switch");
+
+if (localStorage.getItem("theme") === "light") {
+    document.documentElement.classList.remove("dark");
+}
+
+themeSwitch.checked = document.documentElement.classList.contains("dark");
+
+themeSwitch.addEventListener("change", () => {
+    document.documentElement.classList.toggle("dark");
+    localStorage.setItem(
+        "theme",
+        document.documentElement.classList.contains("dark") ? "dark" : "light"
+    );
+});
+
+/* =========================================================
+   👤 USER DROPDOWN
+========================================================= */
+
+document.getElementById("user-avatar").addEventListener("click", e => {
+    e.stopPropagation();
+    document.getElementById("user-dropdown").classList.toggle("show");
+});
+document.addEventListener("click", () =>
+    document.getElementById("user-dropdown").classList.remove("show")
+);
+
+/* =========================================================
+   🧭 PREVENT INDEX.HTML AJAX NAVIGATION
+========================================================= */
+
+const contentArea = document.getElementById("content-area");
+if (!contentArea) {
+    console.log("Navigation AJAX désactivée sur cette page.");
+}
+
+/* =========================================================
+   💬 POPUP MESSENGER + PERSISTENCE
+========================================================= */
+
+const dmPopup = document.getElementById("dm-popup");
+const conversationsPanel = document.getElementById("conversations-panel");
+const chatPanel = document.getElementById("chat-panel");
+const messagesDiv = document.getElementById("popup-messages");
+const backBtn = document.getElementById("back-to-list");
+const popupAvatar = document.getElementById("popup-avatar");
+const popupName = document.getElementById("popup-name");
+const popupStatus = document.getElementById("popup-status");
+const input = document.getElementById("popup-input");
+const dmBtn = document.getElementById("dm-btn");
+const minimizeBtn = document.getElementById("minimize-btn");
+const maximizeBtn = document.getElementById("maximize-btn");
+const closeBtn = document.getElementById("close-popup");
+
+let currentChat = null;
+
+/* =========================================================
+   💾 PERSISTENCE FUNCTIONS
+========================================================= */
+
+function saveDMState() {
+    const state = {
+        open: dmPopup.style.display === "flex",
+        minimized: dmPopup.classList.contains("minimized"),
+        maximized: dmPopup.classList.contains("maximized"),
+        currentChat: currentChat
+    };
+    localStorage.setItem("dm_state", JSON.stringify(state));
+}
+
+function loadDMState() {
+    const saved = localStorage.getItem("dm_state");
+    if (!saved) return;
+
+    const state = JSON.parse(saved);
+
+    if (state.open) dmPopup.style.display = "flex";
+    if (state.minimized) dmPopup.classList.add("minimized");
+    if (state.maximized) dmPopup.classList.add("maximized");
+    if (state.currentChat) openChat(state.currentChat);
+}
+
+/* =========================================================
+   🔄 LOAD PREVIOUS STATE AT STARTUP
+========================================================= */
+loadDMState();
+
+/* =========================================================
+   🚀 POPUP OPEN & CLOSE
+========================================================= */
+
+dmBtn.addEventListener("click", () => {
+    dmPopup.style.display = "flex";
+    saveDMState();
+});
+
+closeBtn.addEventListener("click", () => {
+    dmPopup.style.display = "none";
+    showList();
+    saveDMState();
+});
+
+minimizeBtn.addEventListener("click", () => {
+    dmPopup.classList.toggle("minimized");
+    saveDMState();
+});
+
+maximizeBtn.addEventListener("click", () => {
+    dmPopup.classList.toggle("maximized");
+    saveDMState();
+});
+
+/* =========================================================
+   📩 CHAT MANAGEMENT
+========================================================= */
+
+function showList() {
+    currentChat = null;
+    backBtn.style.display = "none";
+    popupAvatar.style.opacity = "0";
+    popupAvatar.src = "";
+    popupName.textContent = "Messages";
+    popupStatus.textContent = "";
+    conversationsPanel.classList.remove("hidden");
+    chatPanel.classList.add("hidden");
+    saveDMState();
+}
+backBtn.addEventListener("click", showList);
+
+function openChat(key) {
+    currentChat = key;
+    const c = conversations[key];
+
+    backBtn.style.display = "block";
+    popupAvatar.style.opacity = "1";
+    popupAvatar.src = c.avatar;
+
+    popupName.textContent = c.name;
+    popupStatus.textContent = c.online ? "En ligne" : "Hors ligne";
+
+    conversationsPanel.classList.add("hidden");
+    chatPanel.classList.remove("hidden");
+
+    messagesDiv.innerHTML = "";
+    c.messages.forEach(m => {
+        const div = document.createElement("div");
+        div.className = `message-item ${m.sent ? "sent" : ""}`;
+        const bubble = document.createElement("div");
+        bubble.className = "bubble";
+        bubble.textContent = m.text;
+        div.appendChild(bubble);
+        messagesDiv.appendChild(div);
+    });
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    saveDMState();
+}
+
+document.querySelectorAll(".contact-item").forEach(el =>
+    el.addEventListener("click", () => openChat(el.dataset.contact))
+);
+
+document.getElementById("popup-send").addEventListener("click", () => {
+    if (input.value.trim() && currentChat) {
+        conversations[currentChat].messages.push({
+            text: input.value,
+            sent: true
+        });
+
+        const div = document.createElement("div");
+        div.className = "message-item sent";
+
+        const bubble = document.createElement("div");
+        bubble.className = "bubble";
+        bubble.textContent = input.value;
+
+        div.appendChild(bubble);
+        messagesDiv.appendChild(div);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+        input.value = "";
+        saveDMState();
+    }
+});
+
+input.addEventListener("keypress", e => {
+    if (e.key === "Enter") document.getElementById("popup-send").click();
+});
+
+/* =========================================================
+   🗂️ CONVERSATION DATA
+========================================================= */
+
+const conversations = {
+    sarah: {
+        name: "Sarah Johnson",
+        avatar: "https://randomuser.me/api/portraits/women/32.jpg",
+        online: true,
+        messages: [
+            { text: "Hey! Comment ça va ?", sent: false },
+            { text: "Super et toi !", sent: true }
+        ]
+    },
+    mike: {
+        name: "Mike Chen",
+        avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+        online: false,
+        messages: [
+            { text: "Réunion à 15h", sent: false }
+        ]
+    },
+    emma: {
+        name: "Emma Davis",
+        avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+        online: true,
+        messages: [
+            { text: "Merci !", sent: false }
+        ]
+    }
+};

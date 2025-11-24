@@ -62,9 +62,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <!-- HEADER SOMBRE -->
 <header class="cs-header">
     <div class="cs-container">
-        <a href="../../index.php" class="cs-logo">Hichem Challakhi</a>
+        <a href="../../index.html" class="cs-logo">Hichem Challakhi</a>
         <nav class="cs-nav">
-            <a href="../../index.php">Accueil</a>
+            <a href="../../index.html">Accueil</a>
             <a href="categories.php">Catégories</a>
             <a href="list_Innovation.php">Innovations</a>
         </nav>

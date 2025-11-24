@@ -43,9 +43,9 @@ if (!empty($innovation["category_id"])) {
 
 <header class="cs-header">
     <div class="cs-container">
-        <a href="../../index.php" class="cs-logo">Innovation</a>
+        <a href="../../index.html" class="cs-logo">Innovation</a>
         <nav class="cs-nav">
-            <a href="../../index.php">Accueil</a>
+            <a href="../../index.html">Accueil</a>
             <a href="categories.php">Catégories</a>
             <a href="add_Innovation.php">Ajouter une Innovation</a>
             <a href="list_Innovation.php?user=66">Mes innovations</a>
