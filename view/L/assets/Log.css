@@ -1,0 +1,176 @@
+
+
+
+
+
+
+.body {
+    color: red;
+    background-color: cyan;
+    font-family: Verdana, sans-serif;
+    text-align: center;
+    padding: 50px;
+    margin: 200px 0;
+
+}
+
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #050814;
+    color: #f5f6ff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* Galaxy Canvas */
+#galaxyCanvas { position:fixed; inset:0; z-index:-3; pointer-events:none; }
+
+/* Aurora + Nebula */
+.bg-animation {
+    position:fixed; inset:0; z-index:-2;
+    background:
+            radial-gradient(circle at 60% 20%, rgba(90,50,180,.25), transparent 50%),
+            radial-gradient(circle at 20% 80%, rgba(255,80,120,.18), transparent 60%);
+    opacity:.7;
+}
+.bg-animation::before {
+    content:""; position:absolute; top:-20%; left:-10%; width:140%; height:70%;
+    background: linear-gradient(120deg,rgba(120,220,255,.25),rgba(190,140,255,.35),transparent 70%);
+    filter: blur(35px); opacity:.55;
+    animation: aurora 18s ease-in-out infinite alternate;
+}
+@keyframes aurora { from{transform:translateX(-8%) translateY(0%)} to{transform:translateX(8%) translateY(6%)} }
+
+/* Glass Card */
+.welcome-card {
+    background: rgba(20,25,50,.65);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 28px;
+    padding: 90px 50px 70px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    animation: fadeIn .9s ease-out;
+    max-width: 520px;
+    width: 90%;
+}
+@keyframes fadeIn { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+
+/* EXACT SAME "Mission Control" style as your original login.html */
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4.2rem;           /* huge again */
+    font-weight: 900;            /* maximum weight */
+    line-height: 1;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #ffefc0, #ffb27a, #ff7f2a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 60px rgba(255,127,42,.9);
+    margin-bottom: 50px;
+}
+
+.btn-role {
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    margin: 20px auto;
+    padding: 18px;
+    background: linear-gradient(to right, #ff7f2a, #ff2a7f);
+    color: white;
+    font-weight: 600;
+    font-size: 1.25rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(255,100,80,.5);
+    transition: all .3s ease;
+}
+.btn-role:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 18px 50px rgba(255,100,80,.7);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+html, body {
+    -ms-overflow-style: none;      /* IE + Edge */
+    scrollbar-width: none;         /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* Extra safety for some WebKit versions */
+* {
+    -webkit-overflow-scrolling: touch;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
