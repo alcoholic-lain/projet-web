@@ -1,0 +1,140 @@
+SPACE MESSENGER – DETAILED COMPONENT BEHAVIOR SPECIFICATIONS
+============================================================
+Focus:  1. Floating DM Popup (instagram-style)
+        2. Top-right User Avatar + Dropdown Menu
+Version: 2.1 | November 2025
+============================================================
+
+───────────────────────────────
+1. FLOATING DM POPUP (instagram VM)
+───────────────────────────────
+
+1.1 Trigger
+• Click on the big round neon button (#dm-btn) → toggles visibility of #dm-popup
+• Default state on page load: hidden (display:none)
+
+1.2 Positioning & Size
+• Fixed bottom-right corner
+• Default:      400 × 580 px   (bottom:110px, right:28px)
+• Maximized:    860 × 720 px
+• Minimized:    height 64 px (only header visible)
+
+1.3 States & Classes
+• .minimized  → height:64px, overflow:hidden
+• .maximized  → width:860px, height:720px
+• No class    → normal size
+
+1.4 Drag Behavior (window move)
+• Grab anywhere on the orange-pink gradient header (.drag-handle)
+• Cursor becomes “move”
+• Window follows mouse exactly (no lag, no snapping)
+• Position becomes absolute once dragged (style.left/top applied by JS)
+• Works in both normal and maximized mode
+
+1.5 Resize Behavior
+• Small diagonal grip in bottom-right corner (.resize-handle)
+• Cursor: se-resize
+• Minimum size: 320 × 340 px
+• Resizes smoothly in real time
+• Works in both normal and maximized mode
+
+1.6 Header Buttons (from left to right)
+← Back to contact list (only visible when a chat is open)
+− Minimize
+⤢ Maximize / Restore
+× Close (hides popup completely)
+
+1.7 Contact Sidebar (left panel)
+• Width: 320 px (desktop), hidden on mobile unless maximized
+• Clicking any .contact-item → opens that conversation
+• Selected contact gets .active class (orange glow background)
+
+1.8 Message Area
+• Scrolls independently
+• Sent messages → right side, orange-pink gradient bubble
+• Received → left side, glassmorphism bubble
+• Voice messages → Telegram-style animated waveform
+   • Click play button → plays real audio + waveform animates
+   • Click waveform → seek
+   • Timer shows current / total duration
+
+1.9 Input Bar
+• Attach button → triggers hidden <input type="file">
+• Emoji button → shows small picker
+• Text input + Send button (Enter also sends)
+• Image previews appear below input before sending
+
+1.10 Close / Hide Behavior
+• Clicking × or outside the popup → display:none
+• Minimizing → only header stays visible
+• Re-opening via #dm-btn always restores last size/state
+
+───────────────────────────────
+2. USER AVATAR + DROPDOWN MENU (Top-right)
+───────────────────────────────
+
+2.1 Avatar
+• 44 × 44 px circular image
+• Orange glowing border + subtle shadow
+• Hover → slight scale (1.12×) + stronger glow
+• Click → toggles dropdown (no page navigation)
+
+2.2 Dropdown Menu
+• Appears directly below avatar, right-aligned
+• Width: 260 px
+• Glassmorphism panel (blur 20px, semi-transparent dark)
+• Rounded 16 px, big drop shadow
+• Smooth fade + slide-down animation (300 ms)
+
+2.3 Menu Items (order & exact behavior)
+
+1. My Profile
+   • Icon: user
+   • Click → (you can link to /profile later)
+
+2. Dark Mode toggle (synced with header button)
+   • Icon: moon
+   • Custom styled switch (orange when dark)
+   • Checked = dark mode
+   • Clicking the switch OR the header moon/sun button instantly toggles the entire page theme
+   • State saved in localStorage → persists across refreshes and tabs
+
+3. Notifications
+   • Icon: bell
+   • Placeholder for future page/modal
+
+4. Settings
+   • Icon: cog
+   • Placeholder for future page/modal
+
+5. Horizontal divider (hr)
+
+6. Logout
+   • Red text + red icon
+   • Hover → red background
+   • Click → (you can add logout logic later)
+
+2.4 Close Behavior
+• Clicking anywhere outside the dropdown → instantly hides it
+• Clicking the avatar again → toggles (closes if open)
+• No item keeps the menu open after click (except the theme switch which just toggles theme)
+
+2.5 Mobile Behavior (≤ 640 px)
+• Avatar stays visible
+• Dropdown becomes full-width and appears centered below header
+• All interactions remain identical
+
+───────────────────────────────
+SUMMARY – What must stay 100 % functional
+───────────────────────────────
+• DM popup: drag, resize, minimize/maximize, voice playback, send/receive, contact switching
+• User avatar dropdown: open/close, dark mode toggle (both places), hover effects
+• All animations (solar flare, starfield, aurora, supernova footer) remain purely CSS/canvas
+
+Any developer or AI receiving:
+   • space-ui.css
+   • this specification sheet
+   • your original HTML + JavaScript
+→ will rebuild the exact same, fully working cosmic messenger in under 15 minutes.
+
+End of detailed component specification
