@@ -33,7 +33,7 @@ class AdminC {
     }
 
     public function index(): void{
-        $this->requireLogin();
+        //$this->requireLogin();
 
         echo'<style>'. file_get_contents(__DIR__ . '/../view/B/assets/Admin.css') .'</style>';
 
