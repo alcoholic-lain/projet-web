@@ -17,29 +17,6 @@ const LOG_CSS = '../view/L/assets/log.css';
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 session_start();
 
 
@@ -87,3 +64,4 @@ if (!method_exists($controller, $action)) {
 }
 
 $controller->$action();
+
