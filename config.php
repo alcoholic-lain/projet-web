@@ -1,39 +1,36 @@
 <?php
-/**
- * Database Configuration
- * Author: Hichem Challakhi
- */
 
-if (!class_exists('Database')) {
-    class Database
+if (!class_exists('config')) {
+
+    class config
     {
-        private $host = "localhost";
-        private $db_name = "tunispace_database";
-        private $username = "root";
-        private $password = "";
-        private $conn;
+        private static $pdo = null;
 
-        /**
-         * Get database connection
-         * @return PDO|null
-         */
-        public function getConnection()
+        public static function getConnexion()
         {
-            $this->conn = null;
+            if (self::$pdo === null) {
+                try {
+                    self::$pdo = new PDO(
+                        "mysql:host=localhost;dbname=tunispace_database;charset=utf8",
+                        "root",
+                        ""
+                    );
 
-            try {
-                $this->conn = new PDO(
-                    "mysql:host=" . $this->host . ";dbname=" . $this->db_name,
-                    $this->username,
-                    $this->password
-                );
-                $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $this->conn->exec("set names utf8");
-            } catch (PDOException $exception) {
-                die("❌ ERREUR PDO : " . $exception->getMessage());            }
+                    self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    self::$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-            return $this->conn;
+                } catch (Exception $e) {
+                    die('Erreur DB : ' . $e->getMessage());
+                }
+            }
+
+            return self::$pdo;
         }
     }
 }
-?>
+
+/* ✅ OBLIGATOIRE SELON TA DEMANDE :
+   appel automatique sécurisé */
+if (class_exists('config')) {
+    config::getConnexion();
+}

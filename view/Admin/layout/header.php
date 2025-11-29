@@ -6,7 +6,7 @@
                 <?= isset($pageTitleIcon) ? $pageTitleIcon . ' ' : '' ?>
                 <?= $pageTitle ?? 'Espace Administrateur' ?>
             </h1>
-            <p><?= $pageSubtitle ?? 'Backoffice - Innovation DB' ?></p>
+            <p><?= $pageSubtitle ?? 'Backoffice ' ?></p>
         </div>
     </div>
 
@@ -14,6 +14,6 @@
         <!-- 🌙 / ☀️ SWITCH --- LE PLUS IMPORTANT -->
         <div class="theme-toggle">🌙</div>
 
-        <a href="../../../Client/index.php">Front Office</a>
+        <a href="../../../Client/index.php">Home - Tunispace</a>
     </div>
 </header>

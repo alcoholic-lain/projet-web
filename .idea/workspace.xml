@@ -4,20 +4,56 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="Final update front &amp; back &amp; logics">
-      <change afterPath="$PROJECT_DIR$/view/Client/index.html" afterDir="false" />
+    <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="update et 1st integration with reclamation and message">
+      <change afterPath="$PROJECT_DIR$/controller/AdminC.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/ClientC.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/components/Innovation/CommentController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/components/Innovation/VoteController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/components/Innovation/voteAction.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/components/coms/conversationC.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/components/coms/messageC.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/security.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/Innovation/AttachmentModel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/Innovation/CommentModel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/Innovation/VoteModel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/src/edit_Innovation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/login/logout.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/components/Innovation/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/components/Innovation/CategoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/components/Innovation/InnovationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/components/Innovation/InnovationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Innovation/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Innovation/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Innovation/Innovation.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Innovation/Innovation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Innovation/tunispace_database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/model/Innovation/tunispace_database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/a_Innovation.css" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/a_Innovation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/add_Category.css" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/add_Category.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/add_Innovation.css" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/add_Innovation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/edit_Category.css" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/edit_Category.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/edit_Innovation.css" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/css/edit_Innovation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/assets/js/a_Innovation.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/assets/js/a_Innovation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/src/a_Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/a_Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/src/a_Innovation.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/a_Innovation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/src/add_Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/add_Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/src/add_Innovation.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/add_Innovation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/src/edit_Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/edit_Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/Innovation/src/edit_Innovation.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/Innovation/src/edit_Innovation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/assets/css/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/assets/css/admin.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/Admin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/layout/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/layout/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Admin/layout/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Admin/layout/sidebar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Client/Innovation/assets/css/add_innovation.css" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/css/add_innovation.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/Client/Innovation/assets/css/categories.css" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/css/categories.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Client/Innovation/assets/css/details_innovation.css" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/css/details_innovation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Client/Innovation/assets/css/list_innovation.css" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/css/list_innovation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Client/Innovation/assets/js/categories.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/js/categories.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Client/Innovation/assets/js/details_innovation.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/Innovation/assets/js/details_innovation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/Client/Innovation/src/add_Innovation.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/Innovation/src/add_Innovation.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/Client/Innovation/src/categories.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/Innovation/src/categories.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/Client/Innovation/src/details_Innovation.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/Innovation/src/details_Innovation.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/Client/Innovation/src/list_Innovation.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/Innovation/src/list_Innovation.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/Client/assets/css/user.css" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/assets/css/user.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/Client/assets/js/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/assets/js/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/Client/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/Client/navbar.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/Client/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/Client/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,15 +193,16 @@
       <workItem from="1763739364948" duration="29011000" />
       <workItem from="1763771577070" duration="3009000" />
       <workItem from="1763898600468" duration="24127000" />
-      <workItem from="1763963132417" duration="2933000" />
-    </task>
-    <task id="LOCAL-00002" summary="2st">
-      <option name="closed" value="true" />
-      <created>1762725087141</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1762725087141</updated>
+      <workItem from="1763963132417" duration="3005000" />
+      <workItem from="1763972693906" duration="3993000" />
+      <workItem from="1763978905134" duration="6004000" />
+      <workItem from="1763988722894" duration="3880000" />
+      <workItem from="1764021800691" duration="315000" />
+      <workItem from="1764022877365" duration="10610000" />
+      <workItem from="1764194125142" duration="14190000" />
+      <workItem from="1764234152593" duration="6587000" />
+      <workItem from="1764320785013" duration="6884000" />
+      <workItem from="1764414409479" duration="17426000" />
     </task>
     <task id="LOCAL-00003" summary="HTML relatives à ma partie et intégration des templates">
       <option name="closed" value="true" />
@@ -551,14 +588,21 @@
       <option name="project" value="LOCAL" />
       <updated>1763906775301</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="update et 1st integration with reclamation and message">
+      <option name="closed" value="true" />
+      <created>1763966142818</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1763966142818</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="categories.html frontend(user)" />
     <MESSAGE value="category js" />
     <MESSAGE value="c" />
     <MESSAGE value="details de category_details.html frontend" />
@@ -583,6 +627,7 @@
     <MESSAGE value="update" />
     <MESSAGE value="update MVC" />
     <MESSAGE value="Final update front &amp; back &amp; logics" />
-    <option name="LAST_COMMIT_MESSAGE" value="Final update front &amp; back &amp; logics" />
+    <MESSAGE value="update et 1st integration with reclamation and message" />
+    <option name="LAST_COMMIT_MESSAGE" value="update et 1st integration with reclamation and message" />
   </component>
 </project>

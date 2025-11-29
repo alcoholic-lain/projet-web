@@ -265,3 +265,29 @@ body {
         padding: 22px 18px 26px;
     }
 }
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+/* Bouton Annuler */
+.cs-btn-cancel {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: 0.3s;
+    opacity: 0.8;
+}
+
+.cs-btn-cancel:hover {
+    background: rgba(255,255,255,0.08);
+    opacity: 1;
+}
+

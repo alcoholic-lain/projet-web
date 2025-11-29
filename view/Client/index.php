@@ -1,3 +1,24 @@
+<?php
+require_once __DIR__ . "/../../controller/security.php";
+requireLogin();   // page réservée aux utilisateurs connectés
+?>
+<?php
+
+$avatar = $_SESSION['avatar'] ?? '';
+
+// Si l'avatar vient de la base avec ../ on nettoie
+$avatar = ltrim($avatar, './');
+
+// Chemin réel serveur
+$fullPath = $_SERVER['DOCUMENT_ROOT'] . '/projet-web/' . $avatar;
+
+// Si le fichier n'existe pas → image par défaut
+if (empty($avatar) || !file_exists($fullPath)) {
+    $avatar = 'view/Client/login/uploads/avatars/default.png';
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
@@ -23,9 +44,17 @@
             <a href="Reclamation/src/choix.php">Reclamation</a>
         </nav>
         <div style="position:relative">
-            <img id="user-avatar" src="https://randomuser.me/api/portraits/men/86.jpg" alt="You">
+            <img
+                    id="user-avatar"
+                    src="/projet-web/<?= $avatar ?>"
+                    alt="Avatar utilisateur"
+            >
+
+
             <div id="user-dropdown">
-                <div class="dropdown-item"><i class="fas fa-user"></i> My Profile</div>
+                <div class="dropdown-item" id="myProfileBtn">
+                    <i class="fas fa-user"></i> My Profile
+                </div>
                 <div class="dropdown-item"><i class="fas fa-moon"></i> Dark Mode
                     <label class="ml-auto"><input type="checkbox" id="theme-switch" class="toggle-checkbox" checked><span class="toggle-label"></span></label>
                 </div>

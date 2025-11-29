@@ -1,4 +1,11 @@
 <?php
+require_once __DIR__ . "/../../controller/security.php";
+requireAdmin();
+
+?>
+
+<?php
+$pageTitle = "Dashboard Admin";
 require_once __DIR__ . "/../../config.php";
 require_once __DIR__ . "/../../controller/components/Innovation/CategoryController.php";
 require_once __DIR__ . "/../../controller/components/Innovation/InnovationController.php";
@@ -22,29 +29,24 @@ foreach ($innovations as $inn) {
     }
 }
 /* === STATS FOR GRAPH === */
-
 // 1. Tableau : id => nom
 $categoryNames = [];
 foreach ($categories as $c) {
     $categoryNames[$c['id']] = $c['nom'];
 }
-
 // 2. Initialiser toutes les catégories à 0 (même si elles sont vides)
 $catCounts = [];
 foreach ($categories as $c) {
     $catCounts[$c['nom']] = 0;
 }
-
 // 3. Ajouter les innovations existantes
 foreach ($innovations as $inn) {
     $catId = $inn['category_id'];
     $catName = $categoryNames[$catId] ?? null;
-
     if ($catName) {
         $catCounts[$catName]++;
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -57,92 +59,27 @@ foreach ($innovations as $inn) {
 
 <body class="admin-dashboard with-sidebar">
 
-<!-- ==================== SIDEBAR ==================== -->
-<aside class="sidebar" id="sidebar">
-
-    <div class="sidebar-top">
-        <div class="user-info">
-            <h4>Espace Administrateur</h4>
-        </div>
-    </div>
-
-    <p class="menu-title">Navigation</p>
-
-    <ul class="menu">
-
-        <li>
-            <a href="index.php" class="menu-link active">
-                <span class="icon-large">📊</span>
-                <span class="text">Dashboard</span>
-            </a>
-        </li>
-
-        <li class="menu-dropdown">
-            <a class="menu-link">
-                <span class="icon-large">🗂️</span>
-                <span class="text">Catégories</span>
-                <i class="bi bi-chevron-down arrow"></i>
-            </a>
-            <ul class="submenu">
-                <li><a href="Innovation/src/a_Category.php">Liste</a></li>
-                <li><a href="Innovation/src/add_Category.php">Ajouter</a></li>
-            </ul>
-        </li>
-
-        <li class="menu-dropdown">
-            <a class="menu-link">
-                <span class="icon-large">🚀</span>
-                <span class="text">Innovations</span>
-                <i class="bi bi-chevron-down arrow"></i>
-            </a>
-            <ul class="submenu">
-                <li><a href="Innovation/src/a_Innovation.php">Toutes</a></li>
-                <li class="innovation-pending">
-                    <a href="Innovation/src/a_Innovation.php?pending">En attente</a>
-                </li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="../Client/index.php" class="menu-link">
-                <span class="icon-large">🌍</span>
-                <span class="text">Front Office</span>
-            </a>
-        </li>
-    </ul>
-
-    <p class="menu-title">Thème</p>
-
-    <div class="theme-switcher" id="themeToggle">
-        <span class="icon-large">☀️</span>
-        <span class="text">Mode Jour / Nuit</span>
-        <span class="icon-large">🌙</span>
-    </div>
-
-</aside>
-
-<!-- ==================== HEADER ==================== -->
-<header>
-    <div class="header-left">
-        <button id="sidebarToggle">☰</button>
-        <div class="header-text">
-            <h1>🚀 Espace Administrateur</h1>
-            <p>Tableau de bord - Innovation</p>
-        </div>
-    </div>
-
-    <div class="header-right">
-        <a href="../Client/index.php">Retour au Front Office</a>
-    </div>
-</header>
-
+<?php include __DIR__ . "/layout/sidebar.php"; ?>
+<?php include __DIR__ . "/layout/header.php"; ?>
 <!-- ==================== MAIN ==================== -->
 <main>
     <div class="dashboard-inner">
+        <!-- === SECTION BIENVENUE ADMIN === -->
+        <h2 class="section-title-main">Bienvenue, Admin <?= htmlspecialchars($_SESSION['pseudo']) ?></h2>
+
+        <p>
+            <a href="../Client/login/logout.php" class="link-logout">Déconnexion</a>
+        </p>
 
         <h2 class="section-title-main">Gestion du système</h2>
-
         <!-- Cards principales -->
+        <div class="card">
+            <div class="card-icon">👥</div>
+            <h3>Admin</h3>
+            <p>Dashboard de gestion des comptes (admin + équipe)</p>
+            <a href="login/src/dashboard.php">Accéder</a>
+        </div>
+
         <div class="cards-grid">
             <div class="card">
                 <div class="card-icon">🗂️</div>
@@ -150,7 +87,6 @@ foreach ($innovations as $inn) {
                 <p>Créer, modifier et supprimer des catégories</p>
                 <a href="Innovation/src/a_Category.php">Accéder</a>
             </div>
-
             <div class="card">
                 <div class="card-icon">🚀</div>
                 <h3>Innovations</h3>
@@ -158,11 +94,9 @@ foreach ($innovations as $inn) {
                 <a href="Innovation/src/a_Innovation.php">Accéder</a>
             </div>
         </div>
-
         <!-- Statistiques -->
         <section style="margin-top: 60px;">
             <h2 class="stats-title">📊 Statistiques du système</h2>
-
             <div class="cards-grid">
                 <div class="card">
                     <h3>Total Innovations</h3>
@@ -170,14 +104,12 @@ foreach ($innovations as $inn) {
                         <?= $totalInnovations ?>
                     </p>
                 </div>
-
                 <div class="card">
                     <h3>Total Catégories</h3>
                     <p style="font-size:32px; font-weight:bold; margin:10px 0 0;">
                         <?= $totalCategories ?>
                     </p>
                 </div>
-
                 <div class="card">
                     <h3>En attente</h3>
                     <p style="font-size:32px; font-weight:bold; margin:10px 0 0;">
@@ -185,7 +117,6 @@ foreach ($innovations as $inn) {
                     </p>
                 </div>
             </div>
-
             <div class="chart-wrapper">
                 <h3>Répartition des innovations par catégorie</h3>
                 <canvas id="chartCats"></canvas>

@@ -1,4 +1,9 @@
 <?php
+require_once __DIR__ . "/../../../../controller/security.php";
+requireAdmin();
+?>
+
+<?php
 require_once __DIR__ . "/../../../../config.php";
 require_once __DIR__ . "/../../../../controller/components/Innovation/CategoryController.php";
 require_once __DIR__ . "/../../../../controller/components/Innovation/InnovationController.php";
@@ -83,11 +88,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <!-- FORMULAIRE -->
-        <form method="post">
+        <form method="POST" id="addCategoryForm">
             <div class="section-box">
 
                 <label for="titre">Titre</label>
-                <input type="text" id="titre" name="titre" >
+                <input type="text" id="nom" name="nom" >
 
                 <label for="description">Description</label>
                 <textarea id="description" name="description" ></textarea>

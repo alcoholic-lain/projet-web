@@ -2,19 +2,21 @@
 
 require_once __DIR__ . "/../../../config.php";
 require_once __DIR__ . "/../../../model/Innovation/Innovation.php";
-require_once __DIR__ . "/../../../model/Innovation/Category.php";
 
 class InnovationController
 {
-    private PDO $db;
+    private $db;
 
     public function __construct()
     {
-        // Utilisation correcte de ta classe Database
-        $this->db = (new Database())->getConnection();
+        $this->db = config::getConnexion();
+
     }
 
-    /** Liste complète */
+
+    /**
+     * Lister TOUTES les innovations (pour la page générale)
+     */
     public function listInnovations(): array
     {
         $sql = "SELECT i.*, c.nom AS categorie_nom
@@ -25,75 +27,80 @@ class InnovationController
         $stmt = $this->db->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    /** Mes innovations */
-    public function listInnovationsByUser($userId): array
+    /**
+     * Lister les innovations d'une catégorie donnée
+     */
+    public function listInnovationsByCategory(int $category_id): array
     {
         $sql = "SELECT i.*, c.nom AS categorie_nom
-                FROM innovations i
-                LEFT JOIN categories c ON i.category_id = c.id
-                WHERE i.user_id = :user_id";
+        FROM innovations i
+        LEFT JOIN categories c ON i.category_id = c.id
+        WHERE i.category_id = :category_id
+        ORDER BY i.date_creation DESC";
 
-        $query = $this->db->prepare($sql);
-        $query->bindValue(':user_id', $userId);
-        $query->execute();
 
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':category_id' => $category_id]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    /** Par catégorie */
-    public function listInnovationsByCategory($catId): array
+    /**
+     * Lister les innovations d'un utilisateur donné
+     */
+    public function listInnovationsByUser(int $user_id): array
     {
         $sql = "SELECT i.*, c.nom AS categorie_nom
-                FROM innovations i
-                LEFT JOIN categories c ON i.category_id = c.id
-                WHERE i.category_id = :catId";
+        FROM innovations i
+        LEFT JOIN categories c ON i.category_id = c.id
+        WHERE i.user_id = :user_id
+        ORDER BY i.date_creation DESC";
 
-        $query = $this->db->prepare($sql);
-        $query->bindValue(':catId', $catId);
-        $query->execute();
 
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':user_id' => $user_id]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /** Récupérer une innovation */
+
     public function getInnovation(int $id): ?array
     {
         $sql = "SELECT * FROM innovations WHERE id = :id";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([ ':id' => $id ]);
+        $stmt->execute([':id' => $id]);
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row ?: null;
     }
 
-    /** Ajouter */
-    public function addInnovation(Innovation $inn): bool
+    public function addInnovation($innovation)
     {
-        $sql = "INSERT INTO innovations
-            (titre, category_id, description, date_creation, statut, user_id)
-            VALUES (:titre, :category_id, :description, NOW(), :statut, :user_id)";
+        $sql = "INSERT INTO innovations 
+    (user_id, titre, description, category_id, statut, date_creation, file)
+    VALUES 
+    (:user_id, :titre, :description, :category_id, :statut, NOW(), :file)";
 
         $stmt = $this->db->prepare($sql);
 
-        return $stmt->execute([
-            ':titre'        => $inn->getTitre(),
-            ':category_id'  => $inn->getCategoryId(),
-            ':description'  => $inn->getDescription(),
-            ':statut'       => $inn->getStatut(),
-            ':user_id'      => $inn->getUserId()   // ← IMPORTANT
+        $stmt->execute([
+            ':user_id'     => $innovation->getUserId(),
+            ':titre'       => $innovation->getTitre(),
+            ':description' => $innovation->getDescription(),
+            ':category_id' => $innovation->getCategoryId(),
+            ':statut'      => $innovation->getStatut(),
+            ':file'        => $innovation->getFile()   // ✅ LIGNE CRITIQUE
         ]);
     }
 
-    /** Modifier */
-    public function updateInnovation(Innovation $inn): bool
+
+    public function updateInnovation(Innovation $i): bool
     {
-        if ($inn->getId() === null) {
+        if ($i->getId() === null) {
             throw new Exception("ID innovation manquant.");
         }
 
-        $sql = "UPDATE innovations SET
-                    titre = :titre,
+        $sql = "UPDATE innovations
+                SET titre = :titre,
                     description = :description,
                     category_id = :category_id,
                     statut = :statut
@@ -102,19 +109,31 @@ class InnovationController
         $stmt = $this->db->prepare($sql);
 
         return $stmt->execute([
-            ':id'          => $inn->getId(),
-            ':titre'       => $inn->getTitre(),
-            ':description' => $inn->getDescription(),
-            ':category_id' => $inn->getCategoryId(),
-            ':statut'      => $inn->getStatut()
+            ':id'          => $i->getId(),
+            ':titre'       => $i->getTitre(),
+            ':description' => $i->getDescription(),
+            ':category_id' => $i->getCategoryId(),
+            ':statut'      => $i->getStatut()
         ]);
     }
 
-    /** Supprimer */
     public function deleteInnovation(int $id): bool
     {
+        $stmt = $this->db->prepare("SELECT file FROM innovations WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+        $file = $stmt->fetchColumn();
+
+        if ($file) {
+            $fullPath = $_SERVER['DOCUMENT_ROOT'] . "/projet-web/" . ltrim($file, '/');
+            if (file_exists($fullPath)) {
+                unlink($fullPath);
+            }
+        }
+
         $sql = "DELETE FROM innovations WHERE id = :id";
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute([ ':id' => $id ]);
+
+        return $stmt->execute([':id' => $id]);
     }
+
 }

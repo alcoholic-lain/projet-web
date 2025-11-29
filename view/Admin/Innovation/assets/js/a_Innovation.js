@@ -2,7 +2,8 @@
 
 console.log("a_Innovation.js chargé ✓");
 
-const body = document.body;
+var body = body || document.body;
+
 const sidebarToggle = document.getElementById("sidebarToggle");
 const themeToggle = document.getElementById("themeToggle");
 const dropdowns = document.querySelectorAll(".menu-dropdown");

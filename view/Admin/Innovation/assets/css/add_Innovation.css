@@ -1,7 +1,8 @@
 /* =======================================
-   LAYOUT COMPLET (OBLIGATOIRE POUR CHAQUE PAGE)
+   Page : add_iovatio.php – Style complet
 ======================================= */
 
+/* IMPORT LAYOUT STYLE (copie locale) */
 :root {
     --sidebar-width: 240px;
     --sidebar-bg: #0d1117;
@@ -14,16 +15,17 @@
     --accent: #b38cff;
 }
 
+/* Mode clair */
 body.light {
     --sidebar-bg: #f6f6f8;
     --sidebar-hover: #e9ecf3;
     --sidebar-text: #222;
-    --bg: #ffffff;
     --text: #000;
     --card-bg: rgba(255,255,255,0.65);
     --card-border: rgba(0,0,0,0.12);
 }
 
+* { box-sizing: border-box; }
 body {
     margin: 0;
     background: var(--bg);
@@ -31,72 +33,25 @@ body {
     font-family: "Inter", sans-serif;
 }
 
-/* ===== SIDEBAR ===== */
-.sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: var(--sidebar-width);
-    padding: 20px 18px;
-    background: var(--sidebar-bg);
-    color: var(--sidebar-text);
-    overflow-y: auto;
-    z-index: 1000;
-    transition: width .3s ease;
-}
-
-body.sidebar-collapsed .sidebar {
-    width: 80px;
-}
-
-/* ===== HEADER ===== */
-header {
-    position: fixed;
-    top: 0;
-    left: var(--sidebar-width);
-    right: 0;
-    height: 65px;
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--card-border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 30px;
-    z-index: 900;
-    transition: left .3s ease;
-}
-
-body.sidebar-collapsed header {
-    left: 80px;
-}
-
-/* ===== MAIN ===== */
+/* ===== MAIN LAYOUT ===== */
 main {
-    margin-top: 90px;
+    margin-top: 85px;
     margin-left: var(--sidebar-width);
     padding: 30px;
-    transition: margin-left .3s ease;
+    transition: margin-left 0.35s ease;
 }
-
 body.sidebar-collapsed main {
     margin-left: 80px;
 }
 
 .dashboard-inner {
     max-width: 900px;
-    margin: auto;
+    margin: 0 auto;
 }
-
-/* =======================================
-   PAGE ADD INNOVATION
-======================================= */
 
 .section-title-main {
     font-size: 26px;
-    margin-bottom: 10px;
-    font-weight: 700;
+    margin-bottom: 16px;
 }
 
 .page-header-row {
@@ -105,37 +60,21 @@ body.sidebar-collapsed main {
     align-items: center;
 }
 
-/* ====== BUTTON RETOUR ====== */
-.btn-add {
-    padding: 8px 16px;
-    background: linear-gradient(135deg,#555,#999);
-    color: #fff;
-    border-radius: 14px;
-    text-decoration: none;
-    transition: 0.25s ease;
-}
-
-.btn-add:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 14px rgba(0,0,0,.35);
-}
-
-/* ====== FORM ====== */
+/* ===== FORM BOX ===== */
 .section-box {
     background: var(--card-bg);
-    border: 1px solid var(--card-border);
     border-radius: 14px;
+    border: 1px solid var(--card-border);
     padding: 24px;
     margin-top: 16px;
 }
 
-label {
-    margin-top: 14px;
-    margin-bottom: 6px;
+.form-box label {
     display: block;
     font-weight: 600;
+    margin-top: 14px;
+    margin-bottom: 6px;
 }
-
 input, textarea, select {
     width: 100%;
     padding: 10px;
@@ -144,18 +83,35 @@ input, textarea, select {
     background: rgba(255,255,255,0.07);
     color: var(--text);
 }
-
 textarea { height: 120px; resize: vertical; }
+.form-box input,
+.form-box textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.07);
+    color: var(--text);
+    font-size: 14px;
+}
 
+.form-box textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+/* ===== SUBMIT BUTTON ===== */
 .btn-submit {
     margin-top: 20px;
-    padding: 12px;
     width: 100%;
+    padding: 12px;
     border-radius: 14px;
     border: none;
     cursor: pointer;
     font-weight: 600;
-    background: linear-gradient(135deg,#8a4bff,#c083ff);
+    font-size: 15px;
+
+    background: linear-gradient(135deg, #8a4bff, #c083ff);
     color: white;
     box-shadow: 0 6px 18px rgba(140,80,255,0.35);
     transition: 0.25s;
@@ -163,10 +119,31 @@ textarea { height: 120px; resize: vertical; }
 
 .btn-submit:hover {
     transform: scale(1.03);
-    box-shadow: 0 10px 28px rgba(140,80,255,0.55);
-}
-/* Ajustement du bouton menu */
-header .menu-toggle, header .menu-icon {
-    margin-left: -35px !important;
+    box-shadow: 0 12px 26px rgba(140,80,255,0.55);
 }
 
+/* Retour (btn-add style) */
+.btn-add {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 50px;
+    text-decoration: none;
+    background: linear-gradient(135deg, #555, #777);
+    color: #fff;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.btn-add:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+}
+
+/* Messages */
+.error {
+    color: #fb7185;
+}
+input,textarea, select  {
+    border :  1px solid black ;
+
+}

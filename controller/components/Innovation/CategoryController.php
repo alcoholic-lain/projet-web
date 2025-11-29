@@ -5,14 +5,14 @@ require_once __DIR__ . "/../../../model/Innovation/Category.php";
 
 class CategoryController
 {
-    private PDO $db;
+    private $db;
 
     public function __construct()
     {
-        $this->db = (new Database())->getConnection();
+        $this->db = config::getConnexion();
     }
 
-    /** Récupérer toutes les catégories */
+
     public function listCategories(): array
     {
         $sql = "SELECT * FROM categories ORDER BY date_creation DESC";
@@ -20,7 +20,6 @@ class CategoryController
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /** Récupérer une catégorie par ID */
     public function getCategory(int $id): ?array
     {
         $sql = "SELECT * FROM categories WHERE id = :id";
@@ -31,7 +30,6 @@ class CategoryController
         return $row ?: null;
     }
 
-    /** Ajouter une catégorie */
     public function addCategory(Category $cat): bool
     {
         $sql = "INSERT INTO categories (nom, description, date_creation)
@@ -45,7 +43,6 @@ class CategoryController
         ]);
     }
 
-    /** Modifier une catégorie */
     public function updateCategory(Category $cat): bool
     {
         if ($cat->getId() === null) {
@@ -66,7 +63,6 @@ class CategoryController
         ]);
     }
 
-    /** Supprimer une catégorie */
     public function deleteCategory(int $id): bool
     {
         $sql = "DELETE FROM categories WHERE id = :id";

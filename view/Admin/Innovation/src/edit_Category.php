@@ -1,4 +1,9 @@
 <?php
+require_once __DIR__ . "/../../../../controller/security.php";
+requireAdmin();
+?>
+
+<?php
 require_once __DIR__ . "/../../../../config.php";
 require_once __DIR__ . "/../../../../controller/components/Innovation/CategoryController.php";
 require_once __DIR__ . "/../../../../model/Innovation/Category.php";

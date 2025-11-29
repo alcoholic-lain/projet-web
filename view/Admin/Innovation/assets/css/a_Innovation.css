@@ -22,7 +22,6 @@ body.light {
     --sidebar-bg: #f6f6f8;
     --sidebar-hover: #e9ecf3;
     --sidebar-text: #222;
-    --bg: #ffffff;
     --text: #000;
     --card-bg: rgba(255,255,255,0.65);
     --card-border: rgba(0,0,0,0.12);
@@ -321,6 +320,7 @@ body.sidebar-collapsed main {
 
 /* Tables */
 table {
+    table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
@@ -334,6 +334,13 @@ th, td {
     padding: 10px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
     text-align: left;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+}
+td.description-col {
+    max-width: 350px;
+    overflow-wrap: break-word;
 }
 
 tr:hover td {
@@ -444,4 +451,35 @@ footer {
 
 body.sidebar-collapsed footer {
     margin-left: 80px;
+}
+/* Colonne fichier */
+td.file-col {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Miniature image */
+.innovation-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Lien fichier */
+.file-link {
+    text-decoration: none;
+    color: #6a5acd;
+    font-weight: 600;
+}
+
+.file-link:hover {
+    text-decoration: underline;
+}
+
+/* Aucun fichier */
+.no-file {
+    color: #999;
+    font-style: italic;
 }

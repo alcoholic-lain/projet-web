@@ -1,10 +1,14 @@
 <?php
+require_once __DIR__ . "/../../../../controller/security.php";
+requireLogin();
+?>
+
+<?php
 require_once __DIR__ . "/../../../../config.php";
 require_once __DIR__ . "/../../../../controller/components/Innovation/InnovationController.php";
 require_once __DIR__ . "/../../../../controller/components/Innovation/CategoryController.php";
 require_once __DIR__ . "/../../../../model/Innovation/Innovation.php";
 require_once __DIR__ . "/../../../../model/Innovation/Category.php";
-
 $innCtrl = new InnovationController();
 $catCtrl = new CategoryController();
 
@@ -70,10 +74,14 @@ $msg = $_GET['msg'] ?? null;
     </div>
     <div class="cs-container">
         <nav class="cs-nav">
-            <a href="../../index.html">Accueil</a>
+            <a href="../../index.php">Accueil</a>
             <a href="categories.php">Catégories</a>
             <a href="add_Innovation.php">Ajouter une Innovation</a>
-            <a href="list_Innovation.php?user=66">Mes innovations</a>
+            <?php session_start(); // si pas déjà fait tout en haut ?>
+
+            <a href="list_Innovation.php?user=<?= urlencode($_SESSION['user_id'] ?? 0) ?>">
+                Mes innovations
+            </a>
         </nav>
     </div>
 </header>
@@ -88,52 +96,75 @@ $msg = $_GET['msg'] ?? null;
     <?php if ($msg === 'added'): ?>
         <p class="msg-success">✅ Votre innovation a été soumise.</p>
     <?php endif; ?>
+    <?php if ($msg === 'updated'): ?>
+        <p class="msg-success">
+            ✅ Innovation modifiée et renvoyée pour validation.
+        </p>
+    <?php endif; ?>
 
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Titre</th>
-            <th>Catégorie</th>
-            <th>Date</th>
-            <th>Statut</th>
-            <th>Détails</th>
-        </tr>
 
-        <?php if (empty($innovations)): ?>
-            <tr>
-                <td colspan="6">Aucune innovation trouvée.</td>
-            </tr>
-        <?php else: ?>
-            <?php foreach ($innovations as $inn): ?>
-                <tr>
-                    <td><?= htmlspecialchars($inn['id']) ?></td>
+    <div class="cards-grid">
+        <?php foreach ($innovations as $inn): ?>
+            <article class="innovation-card">
 
-                    <td><?= htmlspecialchars($inn['titre']) ?></td>
+                <header class="card-header">
+                    <div class="card-title-id">
+                        <h2 class="card-title"><?= htmlspecialchars($inn['titre']) ?></h2>
+                    </div>
+                    <span class="card-category">
+                    <?= htmlspecialchars($inn['categorie_nom']) ?>
+                </span>
+                </header>
 
-                    <td><?= htmlspecialchars($inn['categorie_nom'] ?? '—') ?></td>
+                <div class="card-body">
+                    <div class="card-row">
+                        <span class="card-label">Date de création</span>
+                        <span class="card-value"><?= htmlspecialchars($inn['date_creation']) ?></span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Statut</span>
+                        <span class="card-value">
+        <?php
+        $statut = $inn['statut'] ?? 'Inconnu';
 
-                    <td><?= htmlspecialchars($inn['date_creation']) ?></td>
+        // Classe CSS en fonction du statut
+        $badgeClass = 'badge-refused';
+        if ($statut === 'Validée') {
+            $badgeClass = 'badge-valid';
+        } elseif ($statut === 'Refusée') {
+            $badgeClass = 'badge-refused';
+        } elseif ($statut === 'En attente') {
+            $badgeClass = 'badge-pending';
+        }
+        ?>
+        <span class="badge <?= $badgeClass ?>">
+            <?= htmlspecialchars($statut) ?>
+        </span>
+    </span>
+                    </div>
 
-                    <td>
-                        <?php if ($inn['statut'] === "Validée"): ?>
-                            <span class="badge badge-valid">Validée</span>
-                        <?php elseif ($inn['statut'] === "En attente"): ?>
-                            <span class="badge badge-pending">En attente</span>
-                        <?php else: ?>
-                            <span class="badge badge-refused">Refusée</span>
-                        <?php endif; ?>
-                    </td>
+                </div>
 
-                    <td>
-                        <a class="btn-primary"
-                           href="details_Innovation.php?id=<?= urlencode($inn['id']) ?>">
-                            Voir
+                <footer class="card-footer">
+
+                    <?php if ($userMode): ?>
+                        <a href="edit_Innovation.php?id=<?= $inn['id'] ?>" class="btn-primary">
+                            Modifier
                         </a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </table>
+                    <?php endif; ?>
+
+                    <a class="btn-primary"
+                       href="details_Innovation.php?id=<?= urlencode($inn['id']) ?>">
+                        Voir
+                    </a>
+
+                </footer>
+
+
+            </article>
+        <?php endforeach; ?>
+    </div>
+
 
 </main>
 

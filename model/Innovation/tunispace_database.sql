@@ -858,3 +858,12 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+CREATE TABLE reclamations (
+                              id INT AUTO_INCREMENT PRIMARY KEY,
+                              user VARCHAR(255) NOT NULL,
+                              sujet VARCHAR(255) NOT NULL,
+                              description TEXT NOT NULL,
+                              date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                              statut VARCHAR(50) NOT NULL DEFAULT 'en attente'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+

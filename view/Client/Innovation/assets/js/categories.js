@@ -170,3 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initGalaxy();
     setupCategoriesUI();
 });
+document.getElementById("myProfileBtn").addEventListener("click", () => {
+    window.location.href = "/projet-web/view/Client/login/profile.php";
+});

@@ -1,7 +1,17 @@
 <?php
+require_once __DIR__ . "/../../../../controller/security.php";
+requireAdmin();
+?>
+
+<?php
 require_once __DIR__ . "/../../../../config.php";
 require_once __DIR__ . "/../../../../controller/components/Innovation/CategoryController.php";
 require_once __DIR__ . "/../../../../model/Innovation/Category.php";
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
+    header('Location: ../../../Client/login/login.html');
+    exit;
+}
 
 $controller = new CategoryController();
 $error = null;
@@ -66,7 +76,7 @@ $activeSub     = 'categories_list';
                     <p class="error" style="margin:0;">❌ <?= htmlspecialchars($error) ?></p>
                 <?php endif; ?>
             </div>
-            <a href="add_Category.php" class="btn-add">➕ Ajouter une catégorie</a>
+            <a href="add_Category.php" class="btn-add">Ajouter une catégorie</a>
         </div>
 
         <section class="section-box">

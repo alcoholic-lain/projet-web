@@ -22,6 +22,10 @@ input, textarea, select {
     border: 1px solid rgba(255,255,255,0.15);
     color: var(--text);
 }
+input,textarea, select  {
+    border :  1px solid black ;
+
+}
 
 textarea {
     height: 140px;

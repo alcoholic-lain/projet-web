@@ -1,9 +1,19 @@
 <?php
+require_once __DIR__ . "/../../../../controller/security.php";
+requireAdmin();
+?>
+
+<?php
 require_once __DIR__ . "/../../../../config.php";
 require_once __DIR__ . "/../../../../controller/components/Innovation/CategoryController.php";
 require_once __DIR__ . "/../../../../controller/components/Innovation/InnovationController.php";
 require_once __DIR__ . "/../../../../model/Innovation/Category.php";
 require_once __DIR__ . "/../../../../model/Innovation/Innovation.php";
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
+    header('Location: ../../../Client/login/login.html');
+    exit;
+}
 
 $ctrl = new InnovationController();
 $error = null;
@@ -78,7 +88,7 @@ $msg = $_GET['msg'] ?? null;
 
         <div class="page-header-row">
             <h2 class="section-title-main">Liste des innovations</h2>
-            <a href="add_Innovation.php" class="btn-add">➕ Ajouter une innovation</a>
+            <a href="add_Innovation.php" class="btn-add"> Ajouter une innovation</a>
         </div>
 
         <?php if ($msg === 'deleted'): ?>
@@ -96,6 +106,7 @@ $msg = $_GET['msg'] ?? null;
                     <th>ID</th>
                     <th>Titre</th>
                     <th>Description</th>
+                    <th>Fichier</th>
                     <th>Catégorie</th>
                     <th>Statut</th>
                     <th>Date</th>
@@ -107,30 +118,71 @@ $msg = $_GET['msg'] ?? null;
                 <?php if (!empty($innovations)): ?>
                     <?php foreach ($innovations as $inn): ?>
                         <tr>
+
+                            <!-- ✅ ID -->
                             <td><?= htmlspecialchars($inn['id']) ?></td>
+
+                            <!-- ✅ Titre -->
                             <td><?= htmlspecialchars($inn['titre']) ?></td>
-                            <td><?= htmlspecialchars($inn['description']) ?></td>
+
+                            <!-- ✅ Description -->
+                            <td class="description-col">
+                                <?= htmlspecialchars($inn['description']) ?>
+                            </td>
+
+                            <!-- ✅ Fichier -->
+                            <td class="file-col">
+                                <?php if (!empty($inn['file'])):
+
+                                    $file = $inn['file'];
+                                    $ext  = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                                    $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                                    $fileUrl = "/projet-web/" . ltrim($file, '/');
+
+                                    if (in_array($ext, $imageExtensions)): ?>
+
+                                        <img src="<?= htmlspecialchars($fileUrl) ?>"
+                                             class="innovation-img"
+                                             alt="Image innovation">
+
+                                    <?php else: ?>
+
+                                        <a href="<?= htmlspecialchars($fileUrl) ?>"
+                                           target="_blank"
+                                           class="file-link">
+                                            📄 Voir le fichier
+                                        </a>
+
+                                    <?php endif; ?>
+
+                                <?php else: ?>
+                                    <span class="no-file">Aucun fichier</span>
+                                <?php endif; ?>
+                            </td>
+
+                            <!-- ✅ Catégorie -->
                             <td><?= htmlspecialchars($inn['categorie_nom']) ?></td>
+
+                            <!-- ✅ Statut -->
                             <td><?= htmlspecialchars($inn['statut']) ?></td>
+
+                            <!-- ✅ Date -->
                             <td><?= htmlspecialchars($inn['date_creation']) ?></td>
+
+                            <!-- ✅ Actions -->
                             <td class="actions-cell">
 
-                                <!-- Bouton Modifier -->
                                 <a href="edit_Innovation.php?id=<?= urlencode($inn['id']) ?>"
-                                   class="btn-icon edit" title="Modifier">
-                                    ✏️
-                                </a>
+                                   class="btn-icon edit" title="Modifier">✏️</a>
 
-                                <!-- Bouton Supprimer -->
                                 <a href="a_Innovation.php?delete=<?= urlencode($inn['id']) ?>"
                                    class="btn-icon delete"
-                                   title="Supprimer"
-                                   onclick="return confirm('Supprimer cette innovation ?');">
-                                    🗑️
-                                </a>
-
+                                   onclick="return confirm('Supprimer cette innovation ?');"
+                                   title="Supprimer">🗑️</a>
                             </td>
+
                         </tr>
+
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr><td colspan="7">Aucune innovation trouvée.</td></tr>

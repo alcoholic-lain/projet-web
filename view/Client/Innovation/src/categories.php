@@ -1,8 +1,24 @@
 <?php
+require_once __DIR__ . "/../../../../controller/security.php";
+requireLogin();
+?>
+
+<?php
 require_once __DIR__ . "/../../../../config.php";
 require_once __DIR__ . "/../../../../controller/components/Innovation/CategoryController.php";
 require_once __DIR__ . "/../../../../model/Innovation/Category.php";
+$avatar = $_SESSION['avatar'] ?? '';
 
+// Si l'avatar vient de la base avec ../ on nettoie
+$avatar = ltrim($avatar, './');
+
+// Chemin réel serveur
+$fullPath = $_SERVER['DOCUMENT_ROOT'] . '/projet-web/' . $avatar;
+
+// Si le fichier n'existe pas → image par défaut
+if (empty($avatar) || !file_exists($fullPath)) {
+    $avatar = 'view/Client/login/uploads/avatars/default.png';
+}
 $catCtrl = new CategoryController();
 $categories = $catCtrl->listCategories();
 ?>
@@ -35,32 +51,30 @@ $categories = $catCtrl->listCategories();
         <h1>Tunispace</h1>
 
         <nav>
-            <a href="../../../Client/index.html">Home</a>
+            <a href="../../index.php">Home</a>
             <a href="#" class="active">Categories</a>
             <a href="#messages">Messages</a>
             <a href="../../Reclamation/src/choix.php">Reclamation</a>
 
         </nav>
-
         <div style="position:relative">
-            <img id="user-avatar" src="https://randomuser.me/api/portraits/men/86.jpg" alt="You">
+            <img
+                    id="user-avatar"
+                    src="/projet-web/<?= $avatar ?>"
+                    alt="Avatar utilisateur"
+            >
+
 
             <div id="user-dropdown">
-                <div class="dropdown-item"><i class="fas fa-user"></i> My Profile</div>
-
-                <div class="dropdown-item">
-                    <i class="fas fa-moon"></i> Dark Mode
-                    <label class="ml-auto">
-                        <input type="checkbox" id="theme-switch" class="toggle-checkbox" checked>
-                        <span class="toggle-label"></span>
-                    </label>
+                <div class="dropdown-item" id="myProfileBtn">
+                    <i class="fas fa-user"></i> My Profile
                 </div>
-
+                <div class="dropdown-item"><i class="fas fa-moon"></i> Dark Mode
+                    <label class="ml-auto"><input type="checkbox" id="theme-switch" class="toggle-checkbox" checked><span class="toggle-label"></span></label>
+                </div>
                 <div class="dropdown-item"><i class="fas fa-bell"></i> Notifications</div>
                 <div class="dropdown-item"><i class="fas fa-cog"></i> Settings</div>
-
                 <hr class="border-gray-700 my-2">
-
                 <div class="dropdown-item logout"><i class="fas fa-sign-out-alt"></i> Logout</div>
             </div>
         </div>

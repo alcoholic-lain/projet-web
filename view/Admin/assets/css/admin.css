@@ -10,7 +10,7 @@
     --sidebar-text: #cbd5e1;
 
     --bg: #0c0f14;
-    --text: #e6edf3;
+    --text: #dbe6ff;
     --card-bg: rgba(255,255,255,0.06);
     --card-border: rgba(255,255,255,0.12);
 
@@ -23,7 +23,7 @@ body.light {
     --sidebar-hover: #e9ecf3;
     --sidebar-text: #222;
 
-    --bg: #ffffff;
+    --bg: linear-gradient(180deg, #f7f9ff, #eef3ff);;
     --text: #000;
     --card-bg: rgba(255,255,255,0.65);
     --card-border: rgba(0,0,0,0.12);
@@ -100,7 +100,7 @@ body {
 .theme-switcher:hover {
     background: rgba(150, 80, 255, 0.25);
     box-shadow: 0 0 12px rgba(150, 80, 255, 0.40);
-    color: #fff;
+    color: #dbe6ff;
     transform: translateY(-2px);
 }
 
@@ -172,7 +172,7 @@ body {
 }
 
 /* 2e lien non "en attente" = ➕ */
-.submenu li:nth-child(2):not(.innovation-pending) a::before {
+.submenu li:nth-child(2).categories_add a::before {
     content: "➕";
 }
 
@@ -361,7 +361,7 @@ body.sidebar-collapsed main {
     margin-top: 12px;
     border-radius: 50px;
     background: linear-gradient(135deg, #8a4bff, #c083ff);
-    color: #fff !important;
+    color: #dbe6ff !important;
     font-weight: 600;
     text-decoration: none;
     box-shadow: 0 6px 18px rgba(140,80,255,0.35);
@@ -511,7 +511,7 @@ select option:checked {
    🌞 LIGHT MODE (Thème clair)
    =========================================== */
 body.light-mode {
-    background: #f6f6f9 !important;
+    background: #dbe6ff !important;
     color: #222 !important;
 }
 
@@ -551,7 +551,7 @@ body.light-mode .card,
 body.light-mode main form,
 body.light-mode .dashboard-inner > div,
 body.light-mode table {
-    background: #ffffff !important;
+    background: #dbe6ff !important;
     color: #222;
     border: 1px solid rgba(0,0,0,0.08);
     box-shadow: 0 8px 20px rgba(0,0,0,0.06);
@@ -601,7 +601,7 @@ body.light-mode .btn-icon {
 }
 
 body.light-mode .btn-icon:hover {
-    background: #ececff !important;
+    background: #dbe6ff !important;
 }
 
 /* === Gros boutons violet === */
@@ -615,21 +615,20 @@ body.light-mode .gradient-btn {
 
 /* === Footer clair === */
 body.light-mode footer {
-    color: #777 !important;
+    color: #dbe6ff !important;
 }
 /* ============================
    LIGHT MODE — FORM FIX
 ============================ */
 
 body.light-mode {
-    background: #f5f5f5 !important;
-    color: #222;
+    background: #dbe6ff !important;
 }
 
 body.light-mode .section-box {
     background: rgba(255,255,255,0.7) !important;
     backdrop-filter: blur(10px);
-    border: 1px solid #e0e0e0;
+    border: 1px solid #dbe6ff;
     color: #000;
 }
 
@@ -637,8 +636,8 @@ body.light-mode .section-box {
 body.light-mode input,
 body.light-mode textarea,
 body.light-mode select {
-    background: #ffffff !important;
-    color: #222 !important;
+    background: #dbe6ff !important;
+    color: #dbe6ff !important;
     border: 1px solid #ccc !important;
 }
 
@@ -664,7 +663,7 @@ body.light-mode table th {
 }
 
 body.light-mode table td {
-    background: #fff !important;
+    background: #dbe6ff !important;
     color: #333 !important;
     border-color: #ddd !important;
 }
@@ -688,7 +687,7 @@ body.light-mode header {
 
 /* === SIDEBAR === */
 body.light-mode .sidebar {
-    background: #ffffff !important;
+    background: #dbe6ff !important;
     border-right: 1px solid #ddd;
 }
 

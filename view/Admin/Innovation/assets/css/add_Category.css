@@ -20,7 +20,6 @@ body.light {
     --sidebar-bg: #f6f6f8;
     --sidebar-hover: #e9ecf3;
     --sidebar-text: #222;
-    --bg: #ffffff;
     --text: #000;
     --card-bg: rgba(255,255,255,0.65);
     --card-border: rgba(0,0,0,0.12);
@@ -143,4 +142,8 @@ textarea { height: 120px; resize: vertical; }
 /* Messages */
 .error {
     color: #fb7185;
+}
+input,textarea, select  {
+    border :  1px solid black ;
+
 }
