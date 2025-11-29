@@ -1,0 +1,185 @@
+﻿/* === RESET LIMITÉ UNIQUEMENT AU CONTENU DE LA PAGE === */
+
+.choix-wrapper {
+    padding-top: 140px; /* pour laisser le header fixe */
+    width: 100%;
+
+}
+
+/* ===== FORM CONTAINER ===== */
+.choix-wrapper .form-container {
+    background: rgba(20, 25, 50, 0.45);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 28px;
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 60%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    overflow: visible !important;
+}
+
+.choix-wrapper .text-center {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.choix-wrapper .text-center h2 {
+    font-size: 2.3rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ffefc0, #ffb27a, #ff7f2a);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* ===== GRID DES IMAGES ===== */
+.choix-wrapper .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+    grid-template-columns: repeat(2, 1fr); /* 🔥 EXACTEMENT 2 COLONNES */
+
+}
+
+.choix-wrapper .img-box {
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid transparent;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.choix-wrapper .img-box:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255,127,42,0.6);
+}
+
+.choix-wrapper .img-box.selected {
+    border-color: #ff7f2a;
+    background: rgba(255, 127, 42, 0.18);
+}
+
+.choix-wrapper .img-box img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+/* ===== FORMULAIRE ===== */
+.choix-wrapper form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.choix-wrapper select {
+    padding: 15px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: white;
+    font-size: 1rem;
+}
+
+.choix-wrapper .btn-submit {
+    padding: 15px;
+    border-radius: 14px;
+    background: linear-gradient(to right, #ff7f2a, #ff2a7f);
+    color: white;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.choix-wrapper .btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 100, 80, 0.4);
+}
+
+/* Alerts */
+.choix-wrapper .alert {
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.choix-wrapper .alert.success {
+    background: rgba(34, 197, 94, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    color: #86efac;
+}
+
+.choix-wrapper .alert.error {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #fca5a5;
+}
+/* ================================
+   SELECT CUSTOM GALAXY
+===================================*/
+
+.custom-select {
+    position: relative;
+    width: 100%;
+    user-select: none;
+    margin-bottom: 20px;
+}
+
+.custom-select-trigger {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 15px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.22);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-select-trigger i {
+    color: #ff7f2a;
+    transition: 0.3s;
+}
+
+.custom-select.open .custom-select-trigger i {
+    transform: rotate(-180deg);
+}
+
+.custom-options {
+    position: absolute;
+    top: calc(100% + 10px) !important;
+    left: 0;
+    width: 100%;
+    background: rgba(20, 25, 50, 0.98);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 14px;
+    overflow: hidden;
+    padding: 6px 0;
+    display: none;
+    box-shadow: 0px 12px 30px rgba(0,0,0,0.45);
+    z-index: 999999 !important;
+}
+
+.custom-option {
+    padding: 12px 18px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.custom-option:hover {
+    background: rgba(255,127,42,0.25);
+}
+
+.custom-option.selected {
+    background: rgba(255,127,42,0.4);
+}
+
