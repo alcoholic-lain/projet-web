@@ -15,10 +15,6 @@ class ClientC{
 
 
 
-
-
-
-
         // this is how you include js files
 
         echo '<script>'.file_get_contents(__DIR__ . '/../view/F/assets/Client.js').' </script>';

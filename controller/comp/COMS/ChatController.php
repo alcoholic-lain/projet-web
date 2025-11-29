@@ -3,10 +3,6 @@
 
 require_once __DIR__ . '/Coms_Config.php';
 
-
-
-
-
 class ChatController
 {
     private function requireLogin()
@@ -17,19 +13,16 @@ class ChatController
         }
     }
 
-
     // ===== AUTH =====
 
     public function index()
     {
-
         if (isset($_SESSION['user_id'])) {
             header('Location: index.php?c=chatC&a=listConversations');
             exit;
         }
 
         $page = 'auth';
-
 
         echo '<style>'. file_get_contents(__DIR__ . '/../../../view/F/comp/COMS/assets/css/style.css') .'</style>';
         require __DIR__ . COMS2F_PATH;
@@ -62,7 +55,6 @@ class ChatController
         $user = new User();
         $user->setUsername($username);
         $user->setEmail($email);
-        // Demo only: plain password. Real app: password_hash().
         $user->setPasswordHash($password);
         $user->setRole($role);
         $user->setIsActive(true);
@@ -91,7 +83,6 @@ class ChatController
         if (!$user || !$user->isActive()) {
             $errors[] = 'Invalid credentials.';
         } else {
-            // Demo only: plain compare
             if ($user->getPasswordHash() !== $password) {
                 $errors[] = 'Invalid credentials.';
             }
@@ -100,7 +91,6 @@ class ChatController
         if (!empty($errors)) {
             $page = 'auth';
             $authErrors = $errors;
-
 
             echo '<style>'. file_get_contents(__DIR__ . '/../../../view/F/comp/COMS/assets/css/style.css') .'</style>';
             require __DIR__ . COMS2F_PATH;
@@ -138,13 +128,94 @@ class ChatController
 
         $page = 'listConversations';
 
-
         echo '<style>'. file_get_contents(__DIR__ . '/../../../view/F/comp/COMS/assets/css/style.css') .'</style>';
         require __DIR__ . COMS2F_PATH;
         echo '<script>'.file_get_contents(__DIR__ . '/../../../view/F/comp/COMS/assets/js/chat.js') . ' </script>';
     }
 
-    // Handles send/edit/delete + displays chat
+    /**
+     * AJAX endpoint to search users
+     */
+    public function searchUsers()
+    {
+        $this->requireLogin();
+
+        header('Content-Type: application/json');
+
+        $userId = (int)$_SESSION['user_id'];
+        $query = trim($_GET['q'] ?? '');
+
+        if ($query === '' || strlen($query) < 2) {
+            echo json_encode(['success' => false, 'message' => 'Query too short']);
+            exit;
+        }
+
+        try {
+            $users = User::search($query, $userId);
+
+            // Format users for JSON response
+            $formattedUsers = array_map(function($user) {
+                return [
+                    'id' => $user->getId(),
+                    'username' => $user->getUsername(),
+                    'email' => $user->getEmail()
+                ];
+            }, $users);
+
+            echo json_encode([
+                'success' => true,
+                'users' => $formattedUsers
+            ]);
+        } catch (Exception $e) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Error searching users'
+            ]);
+        }
+        exit;
+    }
+
+    /**
+     * AJAX endpoint to get messages for a conversation
+     */
+    public function getMessages()
+    {
+        $this->requireLogin();
+
+        header('Content-Type: application/json');
+
+        $userId         = (int)$_SESSION['user_id'];
+        $conversationId = (int)($_GET['id'] ?? 0);
+
+        if (!Conversation::userInConversation($conversationId, $userId)) {
+            echo json_encode(['error' => 'Access denied']);
+            exit;
+        }
+
+        $messages = Message::findByConversation($conversationId, 200);
+
+        // Format messages for JSON response
+        $formattedMessages = array_map(function($msg) use ($userId) {
+            return [
+                'id' => $msg['id'],
+                'content' => $msg['content'],
+                'user_id' => $msg['user_id'],
+                'username' => $msg['username'],
+                'created_at' => $msg['created_at'],
+                'is_own' => (int)$msg['user_id'] === $userId
+            ];
+        }, $messages);
+
+        echo json_encode([
+            'success' => true,
+            'messages' => $formattedMessages
+        ]);
+        exit;
+    }
+
+    /**
+     * Handles send/edit/delete + displays chat
+     */
     public function conversation()
     {
         $this->requireLogin();
@@ -156,7 +227,6 @@ class ChatController
             $error = "You are not a member of this conversation.";
             $page = 'error';
 
-
             echo '<style>'. file_get_contents(__DIR__ . '/../../../view/F/comp/COMS/assets/css/style.css') .'</style>';
             require __DIR__ . COMS2F_PATH;
             echo '<script>'.file_get_contents(__DIR__ . '/../../../view/F/comp/COMS/assets/js/chat.js') . ' </script>';
@@ -165,7 +235,7 @@ class ChatController
 
         // POST = send / edit / delete
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $mode = $_POST['mode'] ?? ''; // send | edit | delete
+            $mode = $_POST['mode'] ?? '';
 
             if ($mode === 'send') {
                 $content = trim($_POST['content'] ?? '');
@@ -175,6 +245,14 @@ class ChatController
                     $m->setUserId($userId);
                     $m->setContent($content);
                     $m->save();
+                }
+
+                // Return JSON for AJAX requests
+                if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+                    strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+                    header('Content-Type: application/json');
+                    echo json_encode(['success' => true]);
+                    exit;
                 }
             } elseif ($mode === 'edit') {
                 $msgId   = (int)($_POST['message_id'] ?? 0);
@@ -200,7 +278,7 @@ class ChatController
         $conversation  = Conversation::findById($conversationId);
         $messages      = Message::findByConversation($conversationId, 200);
         $participants  = $conversation->getParticipants();
-        $conversations = Conversation::findByUser($userId, true); // sidebar
+        $conversations = Conversation::findByUser($userId, true);
         $displayTitle  = $conversation->getDisplayTitleForUser($userId);
 
         $page = 'conversation';
@@ -231,7 +309,6 @@ class ChatController
         }
 
         $title = trim($_POST['title'] ?? '');
-        // Empty title allowed: will fall back to "other members" logic.
         $conv = Conversation::findById($conversationId);
         if ($conv) {
             $conv->setTitle($title);
@@ -263,13 +340,12 @@ class ChatController
             }
 
             if ($mode === 'create') {
-                $title    = trim($_POST['title'] ?? ''); // may be empty
+                $title    = trim($_POST['title'] ?? '');
                 $is_group = isset($_POST['is_group']);
 
                 $participantIds = isset($_POST['participants']) ? (array)$_POST['participants'] : [];
                 $participantIds = array_map('intval', $participantIds);
 
-                // Clean participant IDs: unique, >0, not current user
                 $clean = [];
                 foreach ($participantIds as $pid) {
                     if ($pid > 0 && $pid !== $userId && !in_array($pid, $clean, true)) {
@@ -282,15 +358,11 @@ class ChatController
                     $errorCreate = 'Please select at least one other user.';
                 } else {
                     $conv = new Conversation();
-                    // If title is '', we'll dynamically display other members later.
                     $conv->setTitle($title);
-                    // Consider group if checkbox checked OR more than one participant
                     $conv->setIsGroup($is_group || count($participantIds) > 1);
                     $conv->save();
 
-                    // Add current user as admin
                     $conv->addUser($userId, true);
-                    // Add selected users
                     foreach ($participantIds as $pid) {
                         $conv->addUser($pid, false);
                     }
@@ -304,13 +376,8 @@ class ChatController
         $conversations = Conversation::findByUser($userId, true);
         $page = 'newConversation';
 
-
         echo '<style>'. file_get_contents(__DIR__ . '/../../../view/F/comp/COMS/assets/css/style.css') .'</style>';
         require __DIR__ . COMS2F_PATH;
         echo '<script>'.file_get_contents(__DIR__ . '/../../../view/F/comp/COMS/assets/js/chat.js') . ' </script>';
     }
 }
-
-
-
-
