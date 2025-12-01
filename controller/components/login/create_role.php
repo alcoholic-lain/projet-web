@@ -3,12 +3,21 @@ session_start();
 require_once '../../../config.php';
 require_once '../../../model/login/role.php';
 
-// Vérification admin
-if(!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1){
-    header('Location: ../../Client/login.html');
-    exit;
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
+// Empêcher le cache (IMPORTANT)
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
+header("Expires: 0");
+
+// Vérification admin
+if(!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1){
+    header('Location: ../../../view/FrontOffice/login.html');
+    exit;
+}
 // --- Traitement AJAX ---
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
     header('Content-Type: application/json; charset=utf-8');
@@ -49,7 +58,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
 <head>
     <meta charset="UTF-8">
     <title>Créer un rôle</title>
-    <link rel="stylesheet" href="../../../view/Client/login/assets/css/edit_user.css">
+    <link rel="stylesheet" href="../../..//view/FrontOffice/assets/css/edit_user.css">
 </head>
 <body>
 <div class="dashboard-container">
@@ -65,9 +74,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
         <textarea name="description"></textarea>
 
         <button type="submit" class="btn-register">💾 Créer</button>
-        <a href="../../../view/Admin/login/src/dashboard.php" class="btn-logout">Annuler</a>
+        <a href="../../../view/BackEnd/dashboard.php" class="btn-logout">Annuler</a>
     </form>
 </div>
-<script src="../../../view/Client/login/assets/js/create_role.js"></script>
+<script src="../../../view/FrontOffice/assets/js/create_role.js"></script>
 </body>
 </html>

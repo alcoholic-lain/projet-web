@@ -5,6 +5,12 @@ requireAdmin();
 
 <?php
 require_once __DIR__ . "/../../../../config.php";
+
+require_once $_SERVER['DOCUMENT_ROOT'] . "/projet-web/vendor/autoload.php";
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 require_once __DIR__ . "/../../../../controller/components/Innovation/CategoryController.php";
 require_once __DIR__ . "/../../../../controller/components/Innovation/InnovationController.php";
 require_once __DIR__ . "/../../../../model/Innovation/Category.php";
@@ -35,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $description = trim($_POST["description"]);
     $categorie = intval($_POST["category_id"]);
     $statut = trim($_POST["statut"]);
-    $user_id = $data["user_id"]; // garder user original
+    $user_id = $data["user_id"];
 
     if ($titre === "" || $description === "" || $categorie <= 0) {
         $error = "⚠️ Tous les champs sont obligatoires.";
@@ -52,14 +58,87 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         );
 
         try {
+            // ✅ Ancien et nouveau statut
+            $oldStatut = trim($data["statut"]);
+            $newStatut = trim($statut);
+
+            // ✅ Update Base
             $innCtrl->updateInnovation($innovation);
+
+            // ✅ Envoi mail si changement de statut
+            if (strcasecmp($oldStatut, $newStatut) !== 0) {
+
+                file_put_contents(
+                        "C:/xampp/htdocs/projet-web/test_edit_mail.txt",
+                        "EMAIL TRY\n",
+                        FILE_APPEND
+                );
+
+                $db = config::getConnexion();
+                $sql = "
+                    SELECT u.email, u.pseudo, i.titre
+                    FROM innovations i
+                    JOIN user u ON i.user_id = u.id
+                    WHERE i.id = :id
+                ";
+                $stmt = $db->prepare($sql);
+                $stmt->execute([':id' => $id]);
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($user) {
+
+                    $mail = new PHPMailer(true);
+
+                    try {
+                        $mail->isSMTP();
+                        $mail->Host       = 'smtp.gmail.com';
+                        $mail->SMTPAuth   = true;
+                        $mail->Username   = SMTP_USER;
+                        $mail->Password   = SMTP_PASS;
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                        $mail->Port       = 587;
+
+                        $mail->setFrom(SMTP_USER, 'Tunispace');
+                        $mail->addAddress($user['email'], $user['pseudo']);
+                        $mail->isHTML(true);
+
+                        if ($newStatut === 'Validée') {
+                            $mail->Subject = "✅ Innovation validée";
+                            $mail->Body = "
+                                Bonjour <b>{$user['pseudo']}</b>,<br><br>
+                                Votre innovation <b>{$user['titre']}</b> a été
+                                <b style='color:green'>VALIDÉE</b> ✅.<br>
+                                Félicitations 🚀
+                            ";
+                        } elseif ($newStatut === 'Rejetée') {
+                            $mail->Subject = "❌ Innovation refusée";
+                            $mail->Body = "
+                                Bonjour <b>{$user['pseudo']}</b>,<br><br>
+                                Votre innovation <b>{$user['titre']}</b> a été
+                                <b style='color:red'>REFUSÉE</b> ❌.<br>
+                                Vous pouvez la modifier et la renvoyer.
+                            ";
+                        }
+
+                        $mail->send();
+
+                    } catch (Exception $e) {
+                        error_log("Erreur email edit_Innovation : " . $mail->ErrorInfo);
+                    }
+                }
+            }
+
+            // ✅ REDIRECTION FINALE OBLIGATOIRE
             header("Location: a_Innovation.php?msg=updated");
             exit;
+
         } catch (Exception $e) {
             $error = $e->getMessage();
         }
     }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">

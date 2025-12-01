@@ -3,7 +3,7 @@ session_start();
 
 // Vérification session et rôle admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
-    header('Location: ../view/Client/login.html');
+    header('Location: ../../../view/Client/login/login.html');
     exit;
 }
 
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $params = array_merge([$pseudo, $email, $statut, $role_id, $planet], $params, [$id]);
     $stmt->execute($params);
 
-    header("Location: ../../../view/Admin/login/src/dashboard.php");
+    header("Location: ../../../view/Client/index.php");
     exit;
 }
 ?>
@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <button type="submit" class="btn-register" <?= $readonly ? 'disabled title="Impossible de modifier un admin"' : '' ?>>💾 Enregistrer</button>
-        <a href="../../../view/Admin/login/src/dashboard.php" class="btn-logout">Annuler</a>
+        <a href="../../../view/Client/index.php" class="btn-logout">Annuler</a>
     </form>
 </div>
 </body>

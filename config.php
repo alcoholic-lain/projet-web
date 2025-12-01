@@ -1,4 +1,6 @@
 <?php
+define('SMTP_USER', 'challakhihichem1@gmail.com');
+define('SMTP_PASS', 'uewo ghxh rexd nxlo');
 
 if (!class_exists('config')) {
 

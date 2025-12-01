@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../../config.php";
+require_once __DIR__ . "/../../controller/components/Innovation/inns_Config.php";
 
 class CommentModel {
 

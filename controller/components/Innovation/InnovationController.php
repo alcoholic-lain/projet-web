@@ -1,7 +1,6 @@
 <?php
 
-require_once __DIR__ . "/../../../config.php";
-require_once __DIR__ . "/../../../model/Innovation/Innovation.php";
+require_once __DIR__ . "/inns_Config.php";
 
 class InnovationController
 {
@@ -19,14 +18,19 @@ class InnovationController
      */
     public function listInnovations(): array
     {
-        $sql = "SELECT i.*, c.nom AS categorie_nom
-                FROM innovations i
-                LEFT JOIN categories c ON i.category_id = c.id
-                ORDER BY i.date_creation DESC";
+        $sql = "SELECT 
+                i.*, 
+                u.pseudo AS utilisateur,
+                c.nom AS categorie_nom
+            FROM innovations i
+            LEFT JOIN categories c ON i.category_id = c.id
+            LEFT JOIN user u ON i.user_id = u.id
+            ORDER BY i.date_creation DESC";
 
         $stmt = $this->db->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * Lister les innovations d'une catégorie donnée
      */

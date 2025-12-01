@@ -255,9 +255,7 @@ textarea {
     border-style: solid;
 	border-color: inherit;
 	border-width: 2px;
-	background: ;
 	color: #f5f6ff;
-    border-image: url('') 1;
     padding: 14px 38px;
     border-radius: 50px;
     font-weight: 700;
@@ -299,7 +297,6 @@ textarea {
 
 .light .rejeter {
     color: var(--light-text);
-    border-image: url('') 1;
     }
 
 .light .rejeter:hover {

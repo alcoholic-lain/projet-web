@@ -20,7 +20,7 @@ body {
     background: radial-gradient(circle at top, #181b33 0%, var(--dark) 45%, var(--darker) 100%);
     color: var(--light);
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /* ===== CANVAS GALAXY ===== */

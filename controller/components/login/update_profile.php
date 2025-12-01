@@ -46,9 +46,8 @@ class UpdateProfileController {
         $update->execute([$pseudo, $email, $this->userId]);
 
         // --- ENREGISTRER L'ACTION DE MODIFICATION ---
-        $stmtAct = $this->db->prepare("INSERT INTO user_activity (user_id, action) VALUES (?, ?)");
+        $stmtAct = $this->db->prepare("INSERT INTO user_activity (user_id, action, created_at) VALUES (?, ?, NOW())");
         $stmtAct->execute([$this->userId, 'modification']);
-
 
         $this->sendJson(['success' => true]);
     }

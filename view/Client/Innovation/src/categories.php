@@ -4,9 +4,7 @@ requireLogin();
 ?>
 
 <?php
-require_once __DIR__ . "/../../../../config.php";
-require_once __DIR__ . "/../../../../controller/components/Innovation/CategoryController.php";
-require_once __DIR__ . "/../../../../model/Innovation/Category.php";
+require_once __DIR__ . "/../../../../controller/components/Innovation/inns_Config.php";
 $avatar = $_SESSION['avatar'] ?? '';
 
 // Si l'avatar vient de la base avec ../ on nettoie

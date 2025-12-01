@@ -35,12 +35,12 @@ class UpdateAvatarController {
         }
 
         // Chemins
-        $targetDir = dirname(__DIR__) . "../../../view/Client/login/uploads/avatars/"; // chemin serveur
-        $publicPath = "view/Client/login/uploads/avatars/";
+        $targetDir = dirname(__DIR__) . "/view/FrontOffice/uploads/avatars/"; // chemin serveur
+        $publicPath = "uploads/avatars/"; // chemin public pour <img>
 
         if (!is_dir($targetDir)) mkdir($targetDir, 0755, true);
 
-        $filename = uniqid() . 'controller.' . $ext;
+        $filename = uniqid() . '.' . $ext;
         $targetFile = $targetDir . $filename;
         $publicFile = $publicPath . $filename;
 
@@ -52,9 +52,8 @@ class UpdateAvatarController {
                 $stmt->execute([$publicFile, $_SESSION['user_id']]);
 
                 // --- ENREGISTRER L'ACTION ---
-                $stmtAct = $db->prepare("INSERT INTO user_activity (user_id, action) VALUES (?, ?)");
+                $stmtAct = $db->prepare("INSERT INTO user_activity (user_id, action, created_at) VALUES (?, ?, NOW())");
                 $stmtAct->execute([$_SESSION['user_id'], 'modification']);
-
 
                 $response['success'] = true;
                 $response['avatar'] = $publicFile;

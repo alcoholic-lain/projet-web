@@ -4,7 +4,7 @@ requireAdmin();
 ?>
 
 <?php
-require_once __DIR__ . "/../../../../config.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/projet-web/config.php";
 require_once __DIR__ . "/../../../../controller/components/Innovation/CategoryController.php";
 require_once __DIR__ . "/../../../../controller/components/Innovation/InnovationController.php";
 require_once __DIR__ . "/../../../../model/Innovation/Category.php";
@@ -103,7 +103,7 @@ $msg = $_GET['msg'] ?? null;
             <table>
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Utilisateur</th>
                     <th>Titre</th>
                     <th>Description</th>
                     <th>Fichier</th>
@@ -120,7 +120,7 @@ $msg = $_GET['msg'] ?? null;
                         <tr>
 
                             <!-- ✅ ID -->
-                            <td><?= htmlspecialchars($inn['id']) ?></td>
+                            <td><?= htmlspecialchars($inn['utilisateur'] ?? '—') ?></td>
 
                             <!-- ✅ Titre -->
                             <td><?= htmlspecialchars($inn['titre']) ?></td>
@@ -172,14 +172,41 @@ $msg = $_GET['msg'] ?? null;
                             <!-- ✅ Actions -->
                             <td class="actions-cell">
 
-                                <a href="edit_Innovation.php?id=<?= urlencode($inn['id']) ?>"
+                                <a href="edit_Innovation.php?id=<?= (int)$inn['id'] ?>"
                                    class="btn-icon edit" title="Modifier">✏️</a>
 
-                                <a href="a_Innovation.php?delete=<?= urlencode($inn['id']) ?>"
+                                <a href="a_Innovation.php?delete=<?= (int)$inn['id'] ?>"
                                    class="btn-icon delete"
                                    onclick="return confirm('Supprimer cette innovation ?');"
                                    title="Supprimer">🗑️</a>
+
+                                <?php if ($inn['statut'] === 'En attente'): ?>
+
+                                    <!-- ✅ Boutons quand c'est en attente -->
+                                    <button class="btn-icon validate"
+                                            onclick="confirmInnovation(<?= (int)$inn['id'] ?>, 'Validée')"
+                                            title="Valider">✅</button>
+
+                                    <button class="btn-icon reject"
+                                            onclick="confirmInnovation(<?= (int)$inn['id'] ?>, 'Rejetée')"
+                                            title="Refuser">❌</button>
+
+                                <?php elseif ($inn['statut'] === 'Validée'): ?>
+
+                                    <!-- ✅ Icône verte uniquement si vraiment validée -->
+                                    <span class="status-valid" title="Innovation validée">✅</span>
+
+                                <?php elseif ($inn['statut'] === 'Rejetée'): ?>
+
+                                    <!-- ❌ Icône rouge uniquement si rejetée -->
+                                    <span class="status-rejected" title="Innovation rejetée">❌</span>
+
+                                <?php endif; ?>
+
                             </td>
+
+
+
 
                         </tr>
 

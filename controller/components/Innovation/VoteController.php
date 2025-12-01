@@ -1,6 +1,5 @@
 <?php
-require_once __DIR__ . "/../../../config.php";
-require_once __DIR__ . "/../../../model/Innovation/VoteModel.php";
+require_once __DIR__ . "/inns_Config.php";
 
 class VoteController {
 

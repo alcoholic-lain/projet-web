@@ -9,8 +9,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
     exit;
 }
 
-require_once __DIR__ . "/../../../../config.php";
-require_once __DIR__ . "/../../../../model/login/role.php";
+require_once __DIR__ . "/../../../../controller/components/Innovation/inns_Config.php";
 
 $db = Config::getConnexion();
 

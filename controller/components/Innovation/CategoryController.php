@@ -1,7 +1,6 @@
 <?php
 
-require_once __DIR__ . "/../../../config.php";
-require_once __DIR__ . "/../../../model/Innovation/Category.php";
+require_once __DIR__ . "/inns_Config.php";
 
 class CategoryController
 {

@@ -4,9 +4,7 @@ requireLogin();
 ?>
 
 <?php
-require_once __DIR__ . "/../../../../config.php";
-require_once __DIR__ . "/../../../../controller/components/Innovation/InnovationController.php";
-require_once __DIR__ . "/../../../../controller/components/Innovation/CategoryController.php";
+require_once __DIR__ . "/../../../../controller/components/Innovation/inns_Config.php";
 if (!isset($_SESSION['user_id'])) {
     die("Utilisateur non connecté.");
 }

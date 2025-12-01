@@ -331,16 +331,20 @@ thead {
 }
 
 th, td {
-    padding: 10px;
+    padding: 12px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
     text-align: left;
     word-wrap: break-word;
     word-break: break-word;
     white-space: normal;
+    vertical-align: middle;
+
 }
 td.description-col {
-    max-width: 350px;
-    overflow-wrap: break-word;
+    max-height: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
 }
 
 tr:hover td {
@@ -352,6 +356,8 @@ tr:hover td {
     gap: 8px;
     justify-content: center;
     align-items: center;
+    min-width: 120px;
+
 }
 
 /* Bouton "Ajouter" */
@@ -436,6 +442,29 @@ tr:hover td {
             0 14px 28px rgba(255,50,50,0.55),
             inset 0 3px 6px rgba(255,255,255,0.25);
 }
+/*                                         */
+/* Modifier */
+.btn-icon.validate {
+    color: #38b609;
+}
+
+/* Supprimer */
+.btn-icon.reject {
+    color: #ff6b6b;
+}
+
+/* Ombre colorée */
+.btn-icon.validate:hover {
+    box-shadow:
+            0 14px 28px rgba(160, 246, 118, 0.55),
+            inset 0 3px 6px rgba(255,255,255,0.25);
+}
+
+.btn-icon.reject:hover {
+    box-shadow:
+            0 14px 28px rgba(255,50,50,0.55),
+            inset 0 3px 6px rgba(255,255,255,0.25);
+}
 
 /* =======================================
    FOOTER
@@ -463,7 +492,7 @@ td.file-col {
     width: 60px;
     height: 60px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 6px;
     border: 1px solid #ddd;
 }
 
@@ -482,4 +511,23 @@ td.file-col {
 .no-file {
     color: #999;
     font-style: italic;
+}
+.status-valid {
+    color: #2ecc71;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.status-rejected {
+    color: #e74c3c;
+    font-size: 20px;
+    font-weight: bold;
+}
+.actions-cell .btn-icon,
+.actions-cell span {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

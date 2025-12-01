@@ -4,11 +4,7 @@ requireLogin();
 ?>
 
 <?php
-require_once __DIR__ . "/../../../../config.php";
-require_once __DIR__ . "/../../../../controller/components/Innovation/InnovationController.php";
-require_once __DIR__ . "/../../../../controller/components/Innovation/CategoryController.php";
-require_once __DIR__ . "/../../../../model/Innovation/Innovation.php";
-require_once __DIR__ . "/../../../../model/Innovation/Category.php";
+require_once __DIR__ . "/../../../../controller/components/Innovation/inns_Config.php";
 $innCtrl = new InnovationController();
 $catCtrl = new CategoryController();
 
@@ -77,8 +73,6 @@ $msg = $_GET['msg'] ?? null;
             <a href="../../index.php">Accueil</a>
             <a href="categories.php">Catégories</a>
             <a href="add_Innovation.php">Ajouter une Innovation</a>
-            <?php session_start(); // si pas déjà fait tout en haut ?>
-
             <a href="list_Innovation.php?user=<?= urlencode($_SESSION['user_id'] ?? 0) ?>">
                 Mes innovations
             </a>

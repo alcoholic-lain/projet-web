@@ -6,11 +6,7 @@ requireAdmin();
 
 <?php
 $pageTitle = "Dashboard Admin";
-require_once __DIR__ . "/../../config.php";
-require_once __DIR__ . "/../../controller/components/Innovation/CategoryController.php";
-require_once __DIR__ . "/../../controller/components/Innovation/InnovationController.php";
-require_once __DIR__ . "/../../model/Innovation/Category.php";
-require_once __DIR__ . "/../../model/Innovation/Innovation.php";
+require_once __DIR__ . "/../../controller/components/Innovation/inns_Config.php";
 
 $catCtrl = new CategoryController();
 $innCtrl = new InnovationController();

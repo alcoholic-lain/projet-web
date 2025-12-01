@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 21 nov. 2025 à 14:42
+-- Généré le : sam. 29 nov. 2025 à 20:34
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -24,6 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `attachments`
+--
+
+CREATE TABLE `attachments` (
+  `id` int(11) NOT NULL,
+  `comment_id` int(11) NOT NULL,
+  `file_path` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `categories`
 --
 
@@ -39,45 +52,39 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `nom`, `description`, `date_creation`) VALUES
-(3, 'Habitats Lunaires', 'Conception et développement d\'habitats pour la Lune', '2025-11-12 23:48:06'),
-(4, 'Robotique Spatial', 'Robots et systèmes automatisés pour l\'espace', '2025-11-12 23:48:06'),
-(10, 'Robotique Spatiale', 'Robots et systèmes automatisés pour l\'espace', '2025-11-13 00:52:53'),
-(15, 'TOUTOU2', 'TEST_1', '2025-11-16 13:41:30'),
-(21, 'Exploration Spatiale', 'Projets liés à l\'exploration de l\'espace et des planètes', '2025-11-17 00:10:21'),
-(22, 'Énergie Orbitale', 'Solutions énergétiques pour l\'espace et les satellites', '2025-11-17 00:10:21'),
-(23, 'Habitats Lunaires', 'Conception et développement d\'habitats pour la Lune', '2025-11-17 00:10:21'),
-(24, 'Robotique Spatiale', 'Robots et systèmes automatisés pour l\'espace', '2025-11-17 00:10:21'),
-(25, 'Propulsion Avancée', 'Nouvelles technologies de propulsion spatiale', '2025-11-17 00:10:21'),
-(26, 'Exploration Spatiale', 'Projets liés à l\'exploration de l\'espace et des planètes', '2025-11-17 00:11:38'),
-(27, 'Énergie Orbitale', 'Solutions énergétiques pour l\'espace et les satellites', '2025-11-17 00:11:38'),
-(28, 'Habitats Lunaires', 'Conception et développement d\'habitats pour la Lune', '2025-11-17 00:11:38'),
-(29, 'Robotique Spatiale', 'Robots et systèmes automatisés pour l\'espace', '2025-11-17 00:11:38'),
-(30, 'Propulsion Avancée', 'Nouvelles technologies de propulsion spatiale', '2025-11-17 00:11:38'),
-(31, 'Exploration Spatiale', 'Projets liés à l\'exploration de l\'espace et des planètes', '2025-11-17 00:12:59'),
-(32, 'Énergie Orbitale', 'Solutions énergétiques pour l\'espace et les satellites', '2025-11-17 00:12:59'),
-(33, 'Habitats Lunaires', 'Conception et développement d\'habitats pour la Lune', '2025-11-17 00:12:59'),
-(34, 'Robotique Spatiale', 'Robots et systèmes automatisés pour l\'espace', '2025-11-17 00:12:59'),
-(35, 'Propulsion Avancée', 'Nouvelles technologies de propulsion spatiale', '2025-11-17 00:12:59'),
-(36, 'Exploration Spatiale', 'Projets liés à l\'exploration de l\'espace et des planète', '2025-11-17 00:24:33'),
-(37, 'Énergie Orbitale', 'Solutions énergétiques pour l\'espace et les satellites', '2025-11-17 00:24:33'),
-(38, 'Habitats Lunaires', 'Conception et développement d\'habitats pour la Lune', '2025-11-17 00:24:33'),
-(39, 'Robotique Spatiale', 'Robots et systèmes automatisés pour l\'espace', '2025-11-17 00:24:33'),
-(40, 'Propulsion Avancée', 'Nouvelles technologies de propulsion spatiale', '2025-11-17 00:24:33'),
-(43, 'lkm.m', '', '2025-11-20 20:04:53');
+(1, 'Exploration Spatiale', 'Projets liés à l\'exploration de l\'espace et des planètes', '2025-11-17 00:11:40'),
+(2, 'Énergie Orbitale', 'Solutions énergétiques pour l\'espace et les satellites', '2025-11-17 00:11:40'),
+(3, 'Habitats Lunaires', 'Conception et développement d\'habitats pour la Lune', '2025-11-17 00:11:40'),
+(5, 'Propulsion Avancée', 'Nouvelles technologies de propulsion spatiale', '2025-11-17 00:11:40'),
+(28, 'TEST', 'TEST', '2025-11-29 20:25:00');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `commentaires`
+-- Structure de la table `comments`
 --
 
-CREATE TABLE `commentaires` (
+CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `innovation_id` int(11) NOT NULL,
-  `auteur` varchar(100) NOT NULL,
-  `contenu` text NOT NULL,
-  `date_creation` datetime NOT NULL
+  `user_id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `comments`
+--
+
+INSERT INTO `comments` (`id`, `innovation_id`, `user_id`, `content`, `created_at`) VALUES
+(1, 43, 66, 'aaaa', '2025-11-25 00:42:31'),
+(2, 43, 66, 'qqqqq', '2025-11-25 00:42:35'),
+(3, 43, 66, 'asdsfghvjbkl', '2025-11-25 00:43:09'),
+(4, 43, 66, 'bravo', '2025-11-25 00:43:16'),
+(21, 54, 71, 'test', '2025-11-28 10:14:43'),
+(22, 54, 76, 'good', '2025-11-28 23:58:24'),
+(23, 54, 76, 'k.kkk;k.', '2025-11-29 00:09:40'),
+(24, 43, 76, 'aa', '2025-11-29 14:35:49');
 
 -- --------------------------------------------------------
 
@@ -269,21 +276,22 @@ CREATE TABLE `innovations` (
   `description` text DEFAULT NULL,
   `date_creation` datetime NOT NULL,
   `statut` varchar(50) DEFAULT 'En attente',
-  `category_id` int(11) NOT NULL
+  `category_id` int(11) NOT NULL,
+  `file` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `innovations`
 --
 
-INSERT INTO `innovations` (`id`, `user_id`, `titre`, `description`, `date_creation`, `statut`, `category_id`) VALUES
-(11, 66, 'TOUTOU2', 'TOUTOU2', '0000-00-00 00:00:00', 'Validée', 15),
-(22, 66, 'abcdef', 'weeweew', '2025-11-16 20:44:27', 'Rejetée', 18),
-(26, 66, 'TOUTOU1', 'testest', '2025-11-17 00:38:55', 'En attente', 41),
-(27, 66, 'm', ',.m.,k', '2025-11-17 13:09:38', 'Validée', 36),
-(28, 66, ',j,,j,j', '.m,.m,.m', '2025-11-20 19:45:00', 'Validée', 36),
-(29, 66, 'l;lm,.ém', 'klm,.m,.m', '2025-11-20 20:13:51', 'En attente', 21),
-(30, 66, 'sdsds', 'sdsd', '2025-11-21 10:18:26', 'En attente', 28);
+INSERT INTO `innovations` (`id`, `user_id`, `titre`, `description`, `date_creation`, `statut`, `category_id`, `file`) VALUES
+(42, 66, 'ddddd', 'asdfghjkl', '2025-11-24 14:54:02', 'Validée', 3, NULL),
+(43, 66, '12345678', '12345678123456781234567812345678123456781234567812345678123456781234567812345678123456781234567812345678', '2025-11-24 23:48:38', 'Validée', 1, NULL),
+(44, 66, 'abdefghi', 'abdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghi', '2025-11-24 23:48:59', 'Rejetée', 1, NULL),
+(54, 71, 'Hichem_test', 'TEST_TEST', '2025-11-28 11:12:38', 'Validée', 2, NULL),
+(55, 76, 'testtest2', 'sdfghjkd', '2025-11-29 01:01:47', 'En attente', 2, NULL),
+(56, 76, 'ásdfghjk', 'asdfghjkl;', '2025-11-29 01:10:51', 'Validée', 1, NULL),
+(60, 76, 'TEST1 modify modify', 'testest', '2025-11-29 14:55:12', 'Validée', 1, 'view/Client/Innovation/uploads/innovation_692afb40e88916.69750043.pdf');
 
 -- --------------------------------------------------------
 
@@ -426,7 +434,8 @@ INSERT INTO `messages` (`id`, `conversation_id`, `user_id`, `content`, `created_
 (91, 30, 1, 'CS Project deadline soon.', '2025-11-17 12:18:18'),
 (92, 30, 3, 'We\'re close.', '2025-11-17 12:18:18'),
 (93, 30, 6, 'Need more coffee.', '2025-11-17 12:18:18'),
-(94, 30, 10, 'Same 😂', '2025-11-17 12:18:18');
+(94, 30, 10, 'Same 😂', '2025-11-17 12:18:18'),
+(95, 30, 1, 'uyyyug', '2025-11-24 13:03:03');
 
 -- --------------------------------------------------------
 
@@ -502,22 +511,70 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 ('zak.thea@gmail.com', 'dbb6f331682d5b6cc57bebe2b1cc56805cdbddd2bd460a5a703211e743acd40c', '2025-11-16 00:02:01'),
 ('zak.thea@gmail.com', 'ea7a9b4485eba4e62f183c02e742a30c7c684560214a5271ee3927b035b561db', '2025-11-16 00:03:17'),
 ('nournour2862005@gmail.com', 'b02bc2dc5903e6c2d2b38b51ecc5be0edec5ba44f8460bcb08607a513fc08e0d', '2025-11-16 00:03:52'),
-('zak.thea@gmail.com', '8083e2b6a95b2a8ec1718226f9d9ea2b2d08c5ba97cf8a06f879da8b822cc9a0', '2025-11-16 00:04:26');
+('zak.thea@gmail.com', '8083e2b6a95b2a8ec1718226f9d9ea2b2d08c5ba97cf8a06f879da8b822cc9a0', '2025-11-16 00:04:26'),
+('nournour2862005@gmail.com', 'a8a5f3bfc63af5870a5af940f92c3d16a4c7f5494eb97ddcebdad6f344b75309', '2025-11-17 00:19:32'),
+('nournour2862005@gmail.com', 'f77ac0ed42f606e0ffcc345b46339a6d3290c1bf209535b75caebbe5f9f766cd', '2025-11-17 12:59:30'),
+('nournour2862005@gmail.com', '187d2a8d075907032d361425a17f16b85c8c91b40ce899c6c9a2e13cbada4177', '2025-11-17 14:45:29'),
+('nournour2862005@gmail.com', 'a8a5f3bfc63af5870a5af940f92c3d16a4c7f5494eb97ddcebdad6f344b75309', '2025-11-17 00:19:32'),
+('nournour2862005@gmail.com', 'f77ac0ed42f606e0ffcc345b46339a6d3290c1bf209535b75caebbe5f9f766cd', '2025-11-17 12:59:30'),
+('nournour2862005@gmail.com', '187d2a8d075907032d361425a17f16b85c8c91b40ce899c6c9a2e13cbada4177', '2025-11-17 14:45:29');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `pieces_jointes`
+-- Structure de la table `reclamations`
 --
 
-CREATE TABLE `pieces_jointes` (
+CREATE TABLE `reclamations` (
   `id` int(11) NOT NULL,
-  `innovation_id` int(11) NOT NULL,
-  `nom_fichier` varchar(255) NOT NULL,
-  `chemin` varchar(500) NOT NULL,
-  `type_fichier` varchar(100) DEFAULT NULL,
-  `date_upload` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `user` varchar(100) NOT NULL,
+  `sujet` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `date` datetime NOT NULL,
+  `statut` enum('en attente','confirmé','rejeté') DEFAULT 'en attente'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `reclamations`
+--
+
+INSERT INTO `reclamations` (`id`, `user`, `sujet`, `description`, `date`, `statut`) VALUES
+(1, 'John Doe', 'Problème de connexion', 'Impossible de se connecter au système', '2025-11-17 10:20:08', 'en attente'),
+(2, 'Jane Smith', 'Bug interface', 'Le bouton sauvegarder ne fonctionne pas', '2025-11-17 10:20:08', 'confirmé'),
+(3, 'Bob Wilson', 'Suggestion amélioration', 'Ajouter un export PDF', '2025-11-17 10:20:08', 'rejeté'),
+(4, 'Marie Dubois', 'Problème de connexion', 'Impossible de me connecter à mon compte depuis ce matin. Message d\'erreur : \"Identifiants incorrects\" alors qu\'ils sont bons.', '2025-01-15 09:30:00', 'en attente'),
+(5, 'Pierre Martin', 'Interface lente', 'L\'interface administrateur met plus de 10 secondes à charger certaines pages, particulièrement le tableau de bord.', '2025-01-15 10:15:00', 'en attente'),
+(6, 'Sophie Lambert', 'Données manquantes', 'Les statistiques du mois de décembre n\'apparaissent pas dans les rapports. Il manque les données du 15 au 31 décembre.', '2025-01-15 11:45:00', 'en attente'),
+(7, 'Thomas Moreau', 'Erreur export PDF', 'Lorsque j\'essaie d\'exporter un rapport en PDF, le fichier généré est corrompu et ne s\'ouvre pas.', '2025-01-16 08:20:00', 'en attente'),
+(8, 'Laura Petit', 'Bouton sauvegarder défectueux', 'Le bouton \"Sauvegarder\" dans le formulaire d\'édition des réclamations ne fonctionne pas. La page se recharge mais les modifications ne sont pas enregistrées.', '2025-01-10 14:30:00', 'confirmé'),
+(9, 'Marc Bernard', 'Problème de notification', 'Les notifications par email pour les nouvelles réclamations ne sont pas envoyées aux administrateurs.', '2025-01-11 16:45:00', 'confirmé'),
+(10, 'Nathalie Roux', 'Erreur 404 sur page statistiques', 'La page \"/admin/statistiques\" retourne une erreur 404 depuis la dernière mise à jour.', '2025-01-12 10:20:00', 'confirmé'),
+(11, 'David Leroy', 'Problème de timezone', 'Les dates des réclamations affichent un décalage de 2 heures. Il semble que le fuseau horaire ne soit pas correctement configuré.', '2025-01-13 15:10:00', 'confirmé'),
+(12, 'Julie Simon', 'Changement de couleur demandé', 'Je souhaiterais que la couleur du thème passe du bleu au vert. Le bleu actuel ne me plaît pas.', '2025-01-08 11:30:00', 'rejeté'),
+(13, 'Kevin Dupont', 'Ajout fonctionnalité personnelle', 'Pourriez-vous ajouter un module de chat en direct entre administrateurs ? Ce serait pratique pour communiquer.', '2025-01-09 13:45:00', 'rejeté'),
+(14, 'Amélie Laurent', 'Demande de suppression de limite', 'La limite de 100 réclamations affichées est trop restrictive. Pourriez-vous la supprimer ?', '2025-01-14 09:15:00', 'rejeté'),
+(15, 'Christophe Michel', 'Orthographe dans le titre', 'Il y a une faute d\'orthographe dans le titre de la page : \"Réclamation\" avec un \"c\" manquant.', '2025-01-05 14:20:00', ''),
+(16, 'Sandrine Garcia', 'Problème de responsive', 'Sur mobile, le tableau des réclamations dépasse de l\'écran et nécessite un défilement horizontal.', '2025-01-06 16:35:00', ''),
+(17, 'Alexandre Robert', 'Optimisation des performances', 'Les requêtes de recherche dans les réclamations sont très lentes lorsqu\'il y a beaucoup de données.', '2025-01-07 10:50:00', ''),
+(18, 'Isabelle Fournier', 'Problème de tri', 'Le tri par date ne fonctionne pas correctement. Les dates ne sont pas dans l\'ordre chronologique.', '2025-01-17 08:45:00', 'en attente'),
+(19, 'Patrick Mercier', 'Export Excel', 'L\'export Excel des réclamations ne inclut pas la colonne \"Description\".', '2025-01-17 10:30:00', 'confirmé'),
+(20, 'Céline Blanc', 'Double authentification', 'Pourriez-vous ajouter une option de double authentification pour sécuriser davantage l\'accès admin ?', '2025-01-16 14:20:00', 'en attente'),
+(21, 'Romain David', 'Sauvegarde automatique', 'Le système devrait sauvegarder automatiquement les brouillons de réclamations en cours de rédaction.', '2025-01-16 16:15:00', 'confirmé'),
+(22, 'Valérie Bertrand', 'Recherche avancée', 'La fonction de recherche ne permet pas de chercher par plage de dates. Ce serait utile d\'ajouter cette fonctionnalité.', '2025-01-15 13:40:00', ''),
+(25, 'zakaria ', 'Compte bloqué', 'aszdz', '2025-11-17 14:37:15', 'en attente'),
+(26, 'ayarimed', 'Problème technique', 'wlh man3ref', '2025-11-17 15:04:29', 'en attente'),
+(28, 'hicheem', 'Contenu incorrect', '00000000', '2025-11-17 21:18:56', 'confirmé'),
+(29, ',m,.m.', 'Compte bloqu�', '.m.mk.', '2025-11-24 07:04:33', 'en attente'),
+(30, ';kj;kj;kj', 'Compte bloqu�', ';lkl;kk;', '2025-11-24 07:04:40', 'en attente'),
+(31, 'aaaaaaa', 'Compte bloqu�', 'aaaaa', '2025-11-24 07:04:51', 'en attente'),
+(32, 'jkhkjjk', 'Compte bloqu�', 'hkbjj,m', '2025-11-24 07:06:20', 'en attente'),
+(33, 'hichem', 'Compte bloqu�', 'hichem', '2025-11-24 07:07:03', 'en attente'),
+(34, 'hichem', 'Compte bloqu�', 'hichem', '2025-11-24 07:07:24', 'en attente'),
+(35, 'hichem', 'Compte bloqu�', 'hichem', '2025-11-24 07:07:44', 'en attente'),
+(36, 'aaaaaaaaaaaa', 'Compte bloqu�', 'aaaaaaaaaaa', '2025-11-24 11:36:27', 'en attente'),
+(37, 'qss', 'Contenu incorrect', 'eqs', '2025-11-24 14:56:14', 'en attente'),
+(38, 'asdfghjkl', 'Probleme_de_securite', 'ascdvgbm,', '2025-11-24 23:08:01', 'en attente'),
+(39, 'zcvbm', 'Probleme_de_securit�', 'asdfghjk', '2025-11-29 12:12:25', 'en attente');
 
 -- --------------------------------------------------------
 
@@ -550,21 +607,29 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `pseudo` varchar(100) NOT NULL,
   `email` varchar(150) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `statut` enum('actif','inactif','banni') DEFAULT 'actif',
   `role_id` int(11) DEFAULT 2,
-  `planet` enum('terra','mars','venus','jupiter') NOT NULL
+  `planet` enum('terra','mars','venus','jupiter') NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `statut`, `role_id`, `planet`) VALUES
-(66, 'zak12', 'zakaria.benouirsane@esprit.tn', '$2y$10$DbExiga4ecL1SfXPfPUx..FOcq/LbIV473rNff2RKVcBCgLbuaVA.', 'actif', 1, 'mars'),
-(68, 'Zak', 'zakariabenouirane@esprit.tn', '$2y$10$jN95QpSpsLUturuobt.qqef4prcpYH6jI8uONPfCh/BTHTPetVx02', 'actif', 1, 'jupiter'),
-(69, 'zaktheastroA', 'zak.thea@gmail.com', '$2y$10$eZEcuHxVhmDdrExhohNgC.H2pPtQZQ6IBnAcHKCQ3FDGXGm.rNMLC', 'banni', 2, 'mars'),
-(70, 'Nour___', 'nournour2862005@gmail.com', '$2y$10$/lIqkE12ly./qzuRkErao.uTyxjnI61K4NGb8c.3JoxiQxP/DGFfS', 'actif', 2, 'mars');
+INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `statut`, `role_id`, `planet`, `avatar`, `created_at`) VALUES
+(66, 'zak12', 'zakaria.benouirsane@esprit.tn', '$2y$10$DbExiga4ecL1SfXPfPUx..FOcq/LbIV473rNff2RKVcBCgLbuaVA.', 'actif', 1, 'mars', NULL, '2025-11-27 00:23:17'),
+(68, 'zikou', 'zakariabenouirane@esprit.tn', '$2y$10$jN95QpSpsLUturuobt.qqef4prcpYH6jI8uONPfCh/BTHTPetVx02', 'actif', 1, 'jupiter', '../../../view/Client/login/uploads/avatars/6928142713cdfcontrollerjpg', '2025-11-27 00:23:17'),
+(69, 'zaktheastroA', 'zak.thea@gmail.com', '$2y$10$eZEcuHxVhmDdrExhohNgC.H2pPtQZQ6IBnAcHKCQ3FDGXGm.rNMLC', 'banni', 2, 'mars', NULL, '2025-11-27 00:23:17'),
+(70, 'Nour___', 'nournour2862005@gmail.com', '$2y$10$/lIqkE12ly./qzuRkErao.uTyxjnI61K4NGb8c.3JoxiQxP/DGFfS', 'actif', 2, 'mars', NULL, '2025-11-27 00:23:17'),
+(71, 'hichem', 'hichem@gmail.com', '$2y$10$mUSIGyj5mm9L4uBgyuH8I.zvJdbmw6VQxFQ/LsrpNyvfcoYrD7Zwm', 'actif', 1, 'mars', 'view/Client/login/uploads/avatars/69282b60c29c9controller.jpg', '2025-11-27 00:23:17'),
+(72, 'hichem1', 'hichem1@gmail.com', '$2y$10$GUdwLaQctJxavMIh7fwkj.2pUgc62tEkPinXWsIhDoDtTiSLvZcaa', 'actif', 2, 'mars', '../../../view/Client/login/uploads/avatars/6927abe55c338controllerpng', '2025-11-27 02:23:22'),
+(73, 'gass', 'gass@gmail.com', '$2y$10$.6BNZ6gFl8MZUDL/Z9UOtuI.yP5PxFLY1ZXcSlRnhc5YYaQmLyohW', 'actif', 1, 'mars', '../../../view/Client/login/uploads/avatars/6927aea543ac7controllerjpg', '2025-11-27 02:48:32'),
+(74, 'toutou', 'toutou@gmail.com', '$2y$10$MITlfVF2otWIgV9KuQn7H.zHW8GPjxWKPnCeOfW8a38CximpLMGTS', 'actif', 1, 'mars', '../../../view/Client/login/uploads/avatars/6928146fc8c54controllerjpg', '2025-11-27 10:01:15'),
+(75, 'anas', 'anas@gmail.com', '$2y$10$2CpYASG87vVe3P7uy6Rl2.8mCX/DiyIo32jqg8.V00hp99wyB4AnS', 'actif', 1, 'mars', '../../../view/Client/login/uploads/avatars/69281abf08c32controllerjpg', '2025-11-27 10:31:33'),
+(76, 'test', 'test@gmail.com', '$2y$10$rd/f47TfKlr5SsLHWsfGde2Y/dCiFfVByVXoIWE4GnBNQ348kqXpG', 'actif', 1, 'mars', NULL, '2025-11-29 00:57:20');
 
 -- --------------------------------------------------------
 
@@ -601,15 +666,104 @@ INSERT INTO `users` (`id`, `username`, `email`, `password_hash`, `role`, `is_act
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `user_activity`
+--
+
+CREATE TABLE `user_activity` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `action` varchar(255) NOT NULL,
+  `timestamp` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `user_activity`
+--
+
+INSERT INTO `user_activity` (`id`, `user_id`, `action`, `timestamp`) VALUES
+(1, 71, 'connexion', '2025-11-27 00:17:18'),
+(2, 71, 'connexion', '2025-11-27 00:27:41'),
+(3, 68, 'connexion', '2025-11-27 00:27:52'),
+(4, 71, 'connexion', '2025-11-27 00:31:21'),
+(5, 71, 'modification', '2025-11-27 00:31:25'),
+(6, 71, 'connexion', '2025-11-27 00:31:32'),
+(7, 68, 'connexion', '2025-11-27 00:31:41'),
+(8, 71, 'connexion', '2025-11-27 01:26:32'),
+(9, 68, 'connexion', '2025-11-27 01:26:42'),
+(10, 68, 'connexion', '2025-11-27 01:52:07'),
+(11, 68, 'connexion', '2025-11-27 01:54:04'),
+(12, 68, 'connexion', '2025-11-27 01:56:01'),
+(13, 71, 'connexion', '2025-11-27 01:59:38'),
+(14, 68, 'connexion', '2025-11-27 01:59:48'),
+(15, 71, 'connexion', '2025-11-27 02:03:28'),
+(16, 71, 'connexion', '2025-11-27 02:12:22'),
+(17, 72, 'connexion', '2025-11-27 02:23:43'),
+(18, 72, 'modification', '2025-11-27 02:39:49'),
+(19, 73, 'connexion', '2025-11-27 02:48:39'),
+(20, 73, 'connexion', '2025-11-27 02:51:18'),
+(21, 73, 'modification', '2025-11-27 02:51:33'),
+(22, 71, 'connexion', '2025-11-27 02:51:44'),
+(23, 73, 'connexion', '2025-11-27 02:53:04'),
+(24, 74, 'connexion', '2025-11-27 10:02:49'),
+(25, 68, 'connexion', '2025-11-27 10:04:01'),
+(26, 68, 'modification', '2025-11-27 10:04:39'),
+(27, 74, 'connexion', '2025-11-27 10:04:50'),
+(28, 74, 'modification', '2025-11-27 10:05:50'),
+(29, 74, 'modification', '2025-11-27 10:05:51'),
+(30, 74, 'modification', '2025-11-27 10:05:53'),
+(31, 74, 'modification', '2025-11-27 10:06:00'),
+(32, 71, 'connexion', '2025-11-27 10:10:07'),
+(33, 68, 'connexion', '2025-11-27 10:12:35'),
+(34, 68, 'modification', '2025-11-27 10:12:55'),
+(35, 71, 'connexion', '2025-11-27 10:28:43'),
+(36, 74, 'connexion', '2025-11-27 10:29:33'),
+(37, 75, 'connexion', '2025-11-27 10:31:40'),
+(38, 75, 'modification', '2025-11-27 10:32:47'),
+(39, 71, 'connexion', '2025-11-27 10:32:55'),
+(40, 75, 'connexion', '2025-11-27 10:33:58'),
+(41, 71, 'connexion', '2025-11-27 11:09:24'),
+(42, 71, 'modification', '2025-11-27 11:20:45'),
+(43, 71, 'connexion', '2025-11-27 11:33:48'),
+(44, 71, 'modification', '2025-11-27 11:43:44'),
+(45, 71, 'connexion', '2025-11-27 11:54:03'),
+(46, 71, 'connexion', '2025-11-27 21:11:39'),
+(47, 71, 'connexion', '2025-11-28 10:05:29'),
+(48, 76, 'connexion', '2025-11-29 00:57:36'),
+(49, 71, 'connexion', '2025-11-29 01:00:03'),
+(50, 76, 'connexion', '2025-11-29 01:00:49'),
+(51, 76, 'connexion', '2025-11-29 12:08:00'),
+(52, 76, 'connexion', '2025-11-29 16:57:57'),
+(53, 76, 'connexion', '2025-11-29 16:58:05'),
+(54, 76, 'connexion', '2025-11-29 17:01:46'),
+(55, 76, 'connexion', '2025-11-29 18:03:42'),
+(56, 76, 'connexion', '2025-11-29 18:06:56'),
+(57, 76, 'connexion', '2025-11-29 18:08:46'),
+(58, 71, 'connexion', '2025-11-29 19:35:15'),
+(59, 71, 'connexion', '2025-11-29 20:24:07');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `votes`
 --
 
 CREATE TABLE `votes` (
   `id` int(11) NOT NULL,
   `innovation_id` int(11) NOT NULL,
-  `type_vote` enum('up','down') NOT NULL,
-  `date_vote` datetime NOT NULL
+  `user_id` int(11) NOT NULL,
+  `vote_type` enum('up','down') NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `votes`
+--
+
+INSERT INTO `votes` (`id`, `innovation_id`, `user_id`, `vote_type`, `created_at`) VALUES
+(10, 43, 1, 'up', '2025-11-27 01:48:59'),
+(29, 54, 71, 'up', '2025-11-28 10:14:39'),
+(37, 54, 76, 'up', '2025-11-29 00:10:06'),
+(39, 43, 76, 'up', '2025-11-29 14:35:52');
 
 -- --------------------------------------------------------
 
@@ -625,6 +779,13 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Index pour la table `attachments`
+--
+ALTER TABLE `attachments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comment_id` (`comment_id`);
+
+--
 -- Index pour la table `categories`
 --
 ALTER TABLE `categories`
@@ -633,12 +794,12 @@ ALTER TABLE `categories`
   ADD KEY `idx_date` (`date_creation`);
 
 --
--- Index pour la table `commentaires`
+-- Index pour la table `comments`
 --
-ALTER TABLE `commentaires`
+ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_innovation` (`innovation_id`),
-  ADD KEY `idx_date` (`date_creation`);
+  ADD KEY `innovation_id` (`innovation_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Index pour la table `confirmations_email`
@@ -668,8 +829,8 @@ ALTER TABLE `innovations`
   ADD KEY `idx_titre` (`titre`),
   ADD KEY `idx_statut` (`statut`),
   ADD KEY `idx_date` (`date_creation`),
-  ADD KEY `fk_category_innov` (`category_id`),
-  ADD KEY `fk_innov_user` (`user_id`);
+  ADD KEY `fk_innov_user` (`user_id`),
+  ADD KEY `fk_categories_innovations` (`category_id`);
 
 --
 -- Index pour la table `logs_connexions`
@@ -687,11 +848,10 @@ ALTER TABLE `messages`
   ADD KEY `fk_messages_user` (`user_id`);
 
 --
--- Index pour la table `pieces_jointes`
+-- Index pour la table `reclamations`
 --
-ALTER TABLE `pieces_jointes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_innovation` (`innovation_id`);
+ALTER TABLE `reclamations`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `roles`
@@ -717,28 +877,41 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Index pour la table `user_activity`
+--
+ALTER TABLE `user_activity`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `votes`
 --
 ALTER TABLE `votes`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_vote` (`innovation_id`,`user_id`),
   ADD KEY `idx_innovation` (`innovation_id`),
-  ADD KEY `idx_type` (`type_vote`);
+  ADD KEY `idx_type` (`vote_type`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
+-- AUTO_INCREMENT pour la table `attachments`
+--
+ALTER TABLE `attachments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT pour la table `commentaires`
+-- AUTO_INCREMENT pour la table `comments`
 --
-ALTER TABLE `commentaires`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT pour la table `confirmations_email`
@@ -756,7 +929,7 @@ ALTER TABLE `conversations`
 -- AUTO_INCREMENT pour la table `innovations`
 --
 ALTER TABLE `innovations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT pour la table `logs_connexions`
@@ -768,13 +941,13 @@ ALTER TABLE `logs_connexions`
 -- AUTO_INCREMENT pour la table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
--- AUTO_INCREMENT pour la table `pieces_jointes`
+-- AUTO_INCREMENT pour la table `reclamations`
 --
-ALTER TABLE `pieces_jointes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `reclamations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT pour la table `roles`
@@ -786,7 +959,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT pour la table `users`
@@ -795,20 +968,33 @@ ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT pour la table `user_activity`
+--
+ALTER TABLE `user_activity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+
+--
 -- AUTO_INCREMENT pour la table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Contraintes pour les tables déchargées
 --
 
 --
--- Contraintes pour la table `commentaires`
+-- Contraintes pour la table `attachments`
 --
-ALTER TABLE `commentaires`
-  ADD CONSTRAINT `commentaires_ibfk_1` FOREIGN KEY (`innovation_id`) REFERENCES `innovations` (`id`) ON DELETE CASCADE;
+ALTER TABLE `attachments`
+  ADD CONSTRAINT `attachments_ibfk_1` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`innovation_id`) REFERENCES `innovations` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `confirmations_email`
@@ -827,6 +1013,7 @@ ALTER TABLE `conversation_users`
 -- Contraintes pour la table `innovations`
 --
 ALTER TABLE `innovations`
+  ADD CONSTRAINT `fk_categories_innovations` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_innov_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
@@ -858,12 +1045,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-CREATE TABLE reclamations (
-                              id INT AUTO_INCREMENT PRIMARY KEY,
-                              user VARCHAR(255) NOT NULL,
-                              sujet VARCHAR(255) NOT NULL,
-                              description TEXT NOT NULL,
-                              date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                              statut VARCHAR(50) NOT NULL DEFAULT 'en attente'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-

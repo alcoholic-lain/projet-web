@@ -1,33 +1,37 @@
-// === a_Innovation.js – JS spécifique à la page & layout ===
+function confirmInnovation(id, statut) {
 
-console.log("a_Innovation.js chargé ✓");
+    if (!confirm("Confirmer le changement de statut : " + statut + " ?")) {
+        return;
+    }
 
-var body = body || document.body;
+    fetch('/projet-web/controller/api/admin/confirm_innovation.php', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `innovation_id=${encodeURIComponent(id)}&statut=${encodeURIComponent(statut)}`
+    })
+        .then(response => response.text())
+        .then(text => {
+            console.log("Réponse brute API :", text);
 
-const sidebarToggle = document.getElementById("sidebarToggle");
-const themeToggle = document.getElementById("themeToggle");
-const dropdowns = document.querySelectorAll(".menu-dropdown");
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                alert("❌ Réponse invalide de l'API");
+                return;
+            }
 
-// Toggle sidebar
-if (sidebarToggle) {
-    sidebarToggle.addEventListener("click", () => {
-        body.classList.toggle("sidebar-collapsed");
-    });
+            if (data.success) {
+                alert("✅ Statut mis à jour + email envoyé !");
+                location.reload();
+            } else {
+                alert("❌ Erreur API : " + (data.error || "inconnue"));
+            }
+        })
+        .catch(err => {
+            console.error("Erreur réseau :", err);
+            alert("❌ Erreur réseau");
+        });
 }
-
-// Toggle thème (jour/nuit)
-if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-        body.classList.toggle("light");
-    });
-}
-
-// Dropdown (Catégories / Innovations)
-dropdowns.forEach(drop => {
-    const link = drop.querySelector(".menu-link");
-    if (!link) return;
-    link.addEventListener("click", (e) => {
-        e.preventDefault();
-        drop.classList.toggle("open");
-    });
-});

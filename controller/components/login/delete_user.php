@@ -3,11 +3,11 @@ session_start();
 
 // Vérification que l'utilisateur est admin
 if(!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1){
-    header('Location: ../../Client/login.html');
+    header('Location: ../../../view/Client/login/login.html');
     exit;
 }
 
-require_once '../../../config.php';
+require_once '../config.php';
 $db = Config::getConnexion();
 
 if(isset($_GET['id'])){
@@ -33,6 +33,6 @@ if(isset($_GET['id'])){
 }
 
 // Redirection vers le dashboard
-header("Location: ../../../view/Admin/login/src/dashboard.php");
+header("Location: ../../../iew/Client/login/login.html");
 exit;
 ?>

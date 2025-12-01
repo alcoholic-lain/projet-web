@@ -1,86 +1,79 @@
 <?php
+ob_start(); // ✅ empêche toute sortie parasite
+header('Content-Type: application/json; charset=utf-8');
+
 require_once '../../../config.php';
 require_once '../../../model/login/user.php';
 
 class RegisterController {
 
     public function handleRegister() {
-        if(isset($_POST['pseudo'], $_POST['email'], $_POST['psw'], $_POST['planet'])) {
 
-            $pseudo = trim($_POST['pseudo']);
-            $email = trim($_POST['email']);
-            $password = trim($_POST['psw']);
-            $planet = trim($_POST['planet']);
-
-            if(empty($pseudo) || empty($email) || empty($password) || empty($planet)) {
-                echo json_encode([
-                    'success' => false,
-                    'message' => "❌ Tous les champs sont obligatoires."
-                ]);
-                return;
+        try {
+            if(!isset($_POST['pseudo'], $_POST['email'], $_POST['psw'], $_POST['planet'])) {
+                throw new Exception("Formulaire incomplet.");
             }
 
-            // Vérifier si pseudo ou email existe déjà
+            $pseudo  = trim($_POST['pseudo']);
+            $email   = trim($_POST['email']);
+            $password = trim($_POST['psw']);
+            $planet  = strtolower(trim($_POST['planet'])); // ✅ enum OK
+
+            if(empty($pseudo) || empty($email) || empty($password) || empty($planet)) {
+                throw new Exception("Tous les champs sont obligatoires.");
+            }
+
             if ($this->existsUser($pseudo, $email)) {
-                echo json_encode([
-                    'success' => false,
-                    'message' => "❌ Pseudo ou email déjà utilisé !"
-                ]);
-                return;
+                throw new Exception("Pseudo ou email déjà utilisé !");
             }
 
             $user = new User(null, $pseudo, $email, $password, $planet);
             $this->addUser($user);
 
-        } else {
+        } catch (Exception $e) {
+            ob_clean(); // ✅ nettoie toute sortie HTML
             echo json_encode([
                 'success' => false,
-                'message' => "❌ Formulaire incomplet."
+                'message' => "❌ Erreur : " . $e->getMessage()
             ]);
+            exit;
         }
     }
 
     public function existsUser($pseudo, $email) {
-        try {
-            $db = Config::getConnexion();
-            $sql = "SELECT * FROM user WHERE pseudo = :pseudo OR email = :email";
-            $stmt = $db->prepare($sql);
-            $stmt->execute([':pseudo' => $pseudo, ':email' => $email]);
-            return $stmt->rowCount() > 0;
-        } catch (Exception $e) {
-            return false;
-        }
+        $db = Config::getConnexion();
+        $sql = "SELECT id FROM user WHERE pseudo = :pseudo OR email = :email";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([
+            ':pseudo' => $pseudo,
+            ':email'  => $email
+        ]);
+        return $stmt->rowCount() > 0;
     }
 
     public function addUser(User $user) {
-        try {
-            $db = Config::getConnexion();
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $sql = "INSERT INTO user (pseudo, email, password, planet)
-                    VALUES (:pseudo, :email, :password, :planet)";
-            $req = $db->prepare($sql);
-            $req->execute([
-                ':pseudo'   => $user->getPseudo(),
-                ':email'    => $user->getEmail(),
-                ':password' => password_hash($user->getPassword(), PASSWORD_BCRYPT),
-                ':planet'   => $user->getPlanet()
-            ]);
+        $db = Config::getConnexion();
 
-            echo json_encode([
-                'success' => true,
-                'message' => "✅ Inscription réussie ! Redirection vers login..."
-            ]);
+        $sql = "INSERT INTO user (pseudo, email, password, statut, role_id, planet)
+                VALUES (:pseudo, :email, :password, 'actif', 2, :planet)";
 
-        } catch (Exception $e) {
-            echo json_encode([
-                'success' => false,
-                'message' => "❌ Erreur lors de l'inscription : " . $e->getMessage()
-            ]);
-        }
+        $req = $db->prepare($sql);
+        $req->execute([
+            ':pseudo'   => $user->getPseudo(),
+            ':email'    => $user->getEmail(),
+            ':password' => password_hash($user->getPassword(), PASSWORD_BCRYPT),
+            ':planet'   => strtolower($user->getPlanet())
+        ]);
+
+        ob_clean(); // ✅ supprime tout HTML parasite
+        echo json_encode([
+            'success' => true,
+            'message' => "✅ Inscription réussie ! Redirection vers login..."
+        ]);
+        exit;
     }
 }
 
-// --- Point d’entrée ---
 $controller = new RegisterController();
 $controller->handleRegister();
