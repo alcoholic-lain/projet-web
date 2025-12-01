@@ -26,12 +26,16 @@ class AdminController
     {
         $this->requireAdmin();
 
-        // Replaced Database::getConnection() with config::getConnexion()
         $pdo = config::getConnexion();
 
+        // Existing counts
         $userCount = (int)$pdo->query("SELECT COUNT(*) FROM user")->fetchColumn();
         $conversationCount = (int)$pdo->query("SELECT COUNT(*) FROM conversations")->fetchColumn();
         $messageCount = (int)$pdo->query("SELECT COUNT(*) FROM messages")->fetchColumn();
+
+        // NEW: Get most active user and conversation
+        $mostActiveUser = User::getMostActive();
+        $mostActiveConversation = Conversation::getMostActive();
 
         $page = 'dashboard';
         require __DIR__ . COMS2B_PATH;

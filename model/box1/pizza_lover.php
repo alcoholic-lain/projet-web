@@ -82,3 +82,5 @@ class Pizza_lover{
         return $this;
     }
 }
+
+$pizza_lover = new Pizza_lover(1,'e','');

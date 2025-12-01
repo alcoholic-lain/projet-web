@@ -211,6 +211,30 @@ class Conversation
         $stmt = $pdo->prepare("DELETE FROM conversations WHERE id = :id");
         return $stmt->execute([':id' => $this->id]);
     }
+    public static function getMostActive(): ?array
+    {
+        $pdo = config::getConnexion();
+        $stmt = $pdo->query("
+            SELECT 
+                c.id,
+                c.title,
+                c.is_group,
+                c.created_at,
+                COUNT(DISTINCT m.id) as message_count,
+                COUNT(DISTINCT cu.user_id) as participant_count
+            FROM conversations c
+            LEFT JOIN messages m ON m.conversation_id = c.id
+            LEFT JOIN conversation_users cu ON cu.conversation_id = c.id
+            GROUP BY c.id
+            HAVING message_count > 0
+            ORDER BY message_count DESC
+            LIMIT 1
+        ");
+
+        $row = $stmt->fetch();
+        return $row ? $row : null;
+    }
+
 }
 
 

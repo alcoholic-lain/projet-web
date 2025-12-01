@@ -10,7 +10,7 @@ class User
     private ?int $id = null;
     private string $username = '';
     private string $email = '';
-    private string $password_hash = '';
+    private ?string $password_hash = null;
     private string $role = 'front';
     private string $created_at = '';
     private bool $is_active = true;
@@ -192,7 +192,29 @@ class User
         $stmt = $pdo->prepare("DELETE FROM user WHERE id = :id");
         return $stmt->execute([':id' => $this->id]);
     }
+    public static function getMostActive(): ?array
+    {
+        $pdo = config::getConnexion();
+        $stmt = $pdo->query("
+            SELECT 
+                u.id,
+                u.username,
+                u.email,
+                COUNT(DISTINCT m.id) as message_count,
+                COUNT(DISTINCT cu.conversation_id) as conversation_count
+            FROM user u
+            LEFT JOIN messages m ON m.user_id = u.id
+            LEFT JOIN conversation_users cu ON cu.user_id = u.id
+            WHERE u.is_active = 1
+            GROUP BY u.id
+            HAVING message_count > 0
+            ORDER BY message_count DESC
+            LIMIT 1
+        ");
 
+        $row = $stmt->fetch();
+        return $row ? $row : null;
+    }
 
 }
 

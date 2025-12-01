@@ -1,5 +1,5 @@
 <?php
-// controller/chatCController.php
+// controller/comp/COMS/ChatController.php
 
 require_once __DIR__ . '/Coms_Config.php';
 
@@ -17,10 +17,17 @@ class ChatController
 
     public function index()
     {
+        $this->requireLogin();
+
         if (isset($_SESSION['user_id'])) {
             header('Location: index.php?c=chatC&a=listConversations');
+            echo '<style>'. file_get_contents(__DIR__ . '/../../../view/F/comp/COMS/assets/css/style.css') .'</style>';
+            require __DIR__ . COMS2F_PATH;
+            echo '<script>'.file_get_contents(__DIR__ . '/../../../view/F/comp/COMS/assets/js/chat.js') . ' </script>';
+
             exit;
         }
+
 
         $page = 'auth';
 
@@ -153,7 +160,6 @@ class ChatController
         try {
             $users = User::search($query, $userId);
 
-            // Format users for JSON response
             $formattedUsers = array_map(function($user) {
                 return [
                     'id' => $user->getId(),
@@ -194,7 +200,6 @@ class ChatController
 
         $messages = Message::findByConversation($conversationId, 200);
 
-        // Format messages for JSON response
         $formattedMessages = array_map(function($msg) use ($userId) {
             return [
                 'id' => $msg['id'],
@@ -245,14 +250,17 @@ class ChatController
                     $m->setUserId($userId);
                     $m->setContent($content);
                     $m->save();
-                }
 
-                // Return JSON for AJAX requests
-                if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
-                    strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-                    header('Content-Type: application/json');
-                    echo json_encode(['success' => true]);
-                    exit;
+                    // Return message ID for WebSocket
+                    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+                        strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+                        header('Content-Type: application/json');
+                        echo json_encode([
+                            'success' => true,
+                            'message_id' => $m->getId()
+                        ]);
+                        exit;
+                    }
                 }
             } elseif ($mode === 'edit') {
                 $msgId   = (int)($_POST['message_id'] ?? 0);
@@ -261,12 +269,28 @@ class ChatController
                 if ($msg && $msg->getUserId() === $userId && $content !== '') {
                     $msg->setContent($content);
                     $msg->save();
+
+                    // Return success for WebSocket
+                    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+                        strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+                        header('Content-Type: application/json');
+                        echo json_encode(['success' => true]);
+                        exit;
+                    }
                 }
             } elseif ($mode === 'delete') {
                 $msgId = (int)($_POST['message_id'] ?? 0);
                 $msg   = Message::findById($msgId);
                 if ($msg && $msg->getUserId() === $userId) {
                     $msg->delete();
+
+                    // Return success for WebSocket
+                    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+                        strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+                        header('Content-Type: application/json');
+                        echo json_encode(['success' => true]);
+                        exit;
+                    }
                 }
             }
 
