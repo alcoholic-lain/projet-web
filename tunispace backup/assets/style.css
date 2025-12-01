@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300;400&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  background: url('background.jpg') center/cover fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 60px;
+  height: 100vh;
+  background: rgba(10, 10, 40, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  gap: 25px;
+  border-right: 1px solid rgba(160, 160, 255, 0.2);
+  z-index: 1000;
+}
+
+.side-item { font-size: 26px; cursor: pointer; color: #cdd1ff; transition: 0.3s; }
+.side-item:hover { color: white; text-shadow: 0 0 10px #8ab4ff; transform: scale(1.2); }
+
+.topbar {
+  margin-left: 60px;
+  height: 60px;
+  background: rgba(10, 10, 40, 0.75);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(160, 160, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  position: fixed;
+  width: calc(100% - 60px);
+  z-index: 999;
+}
+
+.topbar nav a { margin: 0 15px; color: #cdd1ff; text-decoration: none; font-size: 17px; transition: 0.3s; }
+.topbar nav a:hover, .topbar nav .active { color: white; text-shadow: 0 0 12px #9fc2ff; }
+
+.search-box input {
+  padding: 7px 12px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  width: 170px;
+  transition: 0.3s;
+}
+.search-box input:focus { width: 250px; background: rgba(255, 255, 255, 0.18); }
+
+/* TOP LEFT BUTTONS */
+.top-left-buttons {
+  position: fixed;
+  top: 70px;
+  left: 70px;
+  display: flex;
+  gap: 10px;
+  z-index: 1000;
+}
+.top-left-buttons button {
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid #00e1ff;
+  background: rgba(0,0,0,0.5);
+  color: #00e1ff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.top-left-buttons button:hover {
+  background: #00e1ff;
+  color: #000;
+}
+
+.content { margin-left: 60px; padding-top: 120px; text-align: center; }
+.content h1 { font-size: 70px; text-shadow: 0 0 20px #ffffff, 0 0 40px #8ab4ff; }
+
+.articles { max-width: 800px; margin: 20px auto; padding: 20px; }
+.article { text-align: center; margin-bottom: 50px; padding: 20px; border-radius: 15px; }
+.article.highlight { border: 2px solid #00e1ff; transition: 0.3s; }
+
+.article-title { font-size: 28px; color: #f1faee; text-shadow: 0 0 10px #03e9f4; }
+.article-image { width: 100%; border-radius: 15px; margin: 20px 0; box-shadow: 0 0 25px rgba(255, 255, 255, 0.2); }
+.article-text { font-size: 16px; line-height: 1.6; color: #dfe6e9; }
+
+.actions { margin-top: 15px; }
+.like-btn { background: none; border: 2px solid #00e1ff; border-radius: 25px; padding: 8px 20px; color: #00e1ff; cursor: pointer; font-weight: bold; transition: 0.3s; text-shadow: 0 0 10px #00ffff; }
+.like-btn:hover { background: #00e1ff; color: #000; transform: scale(1.1); }
+
+.article-comments { margin-top: 20px; text-align: left; }
+.article-comments h3 { border-bottom: 2px solid #00e1ff; padding-bottom: 5px; }
+.comments-list { margin-top: 10px; }
+.comment { background: rgba(255, 255, 255, 0.1); padding: 8px 12px; border-radius: 10px; margin-bottom: 8px; box-shadow: 0 0 6px rgba(255,255,255,0.1); opacity: 0; transform: translateY(-10px); animation: fadeIn 0.4s forwards; }
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+
+.add-comment { display: flex; gap: 10px; margin-top: 10px; }
+.commentInput { flex: 1; padding: 8px; border: none; border-radius: 10px; background: rgba(255,255,255,0.1); color: #fff; }
+.commentInput::placeholder { color: #ccc; }
+.commentBtn { background: #00e1ff; border: none; padding: 8px 15px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+.commentBtn:hover { background: #00b4d8; }
+
+footer { text-align: center; margin-top: 40px; font-size: 14px; color: #a8dadc; }
+/* Top-left buttons container */
+.top-buttons {
+  position: absolute;
+  top: 70px; /* slightly below top nav bar (60px height + 10px spacing) */
+  left: 70px; /* shifted right from the sidebar (60px) + margin */
+  display: flex;
+  gap: 10px;
+  z-index: 1001;
+}
+
+/* Style for each button */
+.top-btn {
+  color: #00e1ff;
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid #00e1ff;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+  background: rgba(0,0,0,0.3);
+}
+.top-btn:hover {
+  background: #00e1ff;
+  color: #000;
+}
