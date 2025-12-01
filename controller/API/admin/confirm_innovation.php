@@ -31,7 +31,7 @@ $stmt->execute([
     ':id' => $id
 ]);
 
-/* ✅ 2. Récupérer l’email depuis la table `user` */
+/* ✅ 2. Récupérer l’email ldepuis la table `user` */
 $sqlUser = "
 SELECT u.email, u.pseudo, i.titre
 FROM innovations i
