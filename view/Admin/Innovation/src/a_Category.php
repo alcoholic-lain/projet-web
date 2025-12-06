@@ -36,6 +36,18 @@ try {
     $categories = [];
     $error = $e->getMessage();
 }
+// Pagination
+$itemsPerPage = 4; // nombre d’éléments par page
+$totalItems   = count($categories);
+$totalPages   = ceil($totalItems / $itemsPerPage);
+
+$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($currentPage < 1) $currentPage = 1;
+if ($currentPage > $totalPages) $currentPage = $totalPages;
+
+// Découper les résultats
+$startIndex = ($currentPage - 1) * $itemsPerPage;
+$categoriesPage = array_slice($categories, $startIndex, $itemsPerPage);
 
 // Variables pour header + sidebar
 $pageTitle     = "🗂️ Gestion des Catégories";
@@ -80,19 +92,31 @@ $activeSub     = 'categories_list';
         </div>
 
         <section class="section-box">
-            <table>
+            <div class="export-btns">
+                <button class="export-btn excel" onclick="exportTableToExcel()">
+                    📄 Export Excel
+                </button>
+
+                <button class="export-btn pdf" onclick="exportTableToPDF()">
+                    📘 Export PDF
+                </button>
+            </div>
+
+
+            <table id="tableInno">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Description</th>
-                    <th>Date création</th>
+                    <th  onclick="sortInnovationTable(0)" >ID: </th>
+                    <th  onclick="sortInnovationTable(1)">Nom </th>
+                    <th onclick="sortInnovationTable(2)">Description </th>
+                    <th  onclick="sortInnovationTable(3)">Date </th>
                     <th>Actions</th>
+
                 </tr>
                 </thead>
                 <tbody>
                 <?php if (!empty($categories)): ?>
-                    <?php foreach ($categories as $cat): ?>
+                    <?php foreach ($categoriesPage as $cat): ?>
                         <tr>
                             <td><?= htmlspecialchars($cat['id']) ?></td>
                             <td><?= htmlspecialchars($cat['nom']) ?></td>
@@ -122,6 +146,22 @@ $activeSub     = 'categories_list';
                 <?php endif; ?>
                 </tbody>
             </table>
+            <!-- PAGINATION -->
+            <div class="pagination">
+                <?php if ($currentPage > 1): ?>
+                    <a class="pg-btn" href="?page=<?= $currentPage - 1 ?>">&laquo; Précédent</a>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a class="pg-btn <?= $i == $currentPage ? 'active' : '' ?>"
+                       href="?page=<?= $i ?>"><?= $i ?></a>
+                <?php endfor; ?>
+
+                <?php if ($currentPage < $totalPages): ?>
+                    <a class="pg-btn" href="?page=<?= $currentPage + 1 ?>">Suivant &raquo;</a>
+                <?php endif; ?>
+            </div>
+
         </section>
 
     </div>
@@ -134,8 +174,9 @@ $activeSub     = 'categories_list';
 <!-- JS GLOBAL ADMIN -->
 <script src="../../assets/js/admin.js"></script>
 
-<!-- JS SPÉCIFIQUE À CETTE PAGE -->
-<script src="../assets/js/a_Category.js"></script>
+<!-- JS SPÉCIFIQUE À CETTE PAGE (chargé EN DERNIER pour éviter les erreurs) -->
+<script defer src="../assets/js/a_Category.js"></script>
+
 
 </body>
 </html>

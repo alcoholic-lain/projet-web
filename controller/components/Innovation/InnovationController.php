@@ -48,6 +48,7 @@ class InnovationController
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * Lister les innovations d'un utilisateur donné
      */
@@ -87,12 +88,12 @@ class InnovationController
         $stmt = $this->db->prepare($sql);
 
         $stmt->execute([
-            ':user_id'     => $innovation->getUserId(),
-            ':titre'       => $innovation->getTitre(),
+            ':user_id' => $innovation->getUserId(),
+            ':titre' => $innovation->getTitre(),
             ':description' => $innovation->getDescription(),
             ':category_id' => $innovation->getCategoryId(),
-            ':statut'      => $innovation->getStatut(),
-            ':file'        => $innovation->getFile()   // ✅ LIGNE CRITIQUE
+            ':statut' => $innovation->getStatut(),
+            ':file' => $innovation->getFile()   // ✅ LIGNE CRITIQUE
         ]);
     }
 
@@ -113,11 +114,11 @@ class InnovationController
         $stmt = $this->db->prepare($sql);
 
         return $stmt->execute([
-            ':id'          => $i->getId(),
-            ':titre'       => $i->getTitre(),
+            ':id' => $i->getId(),
+            ':titre' => $i->getTitre(),
             ':description' => $i->getDescription(),
             ':category_id' => $i->getCategoryId(),
-            ':statut'      => $i->getStatut()
+            ':statut' => $i->getStatut()
         ]);
     }
 
@@ -140,4 +141,15 @@ class InnovationController
         return $stmt->execute([':id' => $id]);
     }
 
+    public function countInnovationsByUser($userId)
+    {
+        $sql = "SELECT COUNT(*) AS total FROM innovations WHERE user_id = :id AND statut = 'Validée'";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        return (int)$stmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+    }
 }
+
+

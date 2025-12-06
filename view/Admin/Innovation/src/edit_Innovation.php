@@ -88,6 +88,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if ($user) {
 
                     $mail = new PHPMailer(true);
+                    $linkInnovation = "http://localhost/projet-web/view/Client/Innovation/src/list_Innovation.php?user=" . $data['user_id'] . "&innovation=" . $id;
+
 
                     try {
                         $mail->isSMTP();
@@ -102,23 +104,83 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $mail->addAddress($user['email'], $user['pseudo']);
                         $mail->isHTML(true);
 
+                        $mail->CharSet = 'UTF-8';
+
+
                         if ($newStatut === 'Validée') {
-                            $mail->Subject = "✅ Innovation validée";
-                            $mail->Body = "
-                                Bonjour <b>{$user['pseudo']}</b>,<br><br>
-                                Votre innovation <b>{$user['titre']}</b> a été
-                                <b style='color:green'>VALIDÉE</b> ✅.<br>
-                                Félicitations 🚀
-                            ";
+
+                            $mail->Subject = "Innovation validée";
+
+                            $html = '
+    <html>
+    <body style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
+
+        <p>Bonjour <b>' . htmlspecialchars($user['pseudo']) . '</b>,</p>
+
+        <p>
+            Votre innovation <b>' . htmlspecialchars($user['titre']) . '</b> a été
+            <span style="color:green;font-weight:bold;">VALIDÉE</span> ✅
+        </p>
+
+        <p style="margin:20px 0;">
+            <a href="' . $linkInnovation . '"
+               style="display:inline-block;
+                      background:#0b5ed7;
+                      color:#ffffff;
+                      padding:12px 25px;
+                      text-decoration:none;
+                      border-radius:8px;
+                      font-weight:bold;">
+                👉 Accéder à mon innovation
+            </a>
+        </p>
+
+        <p>Félicitations 🚀</p>
+
+    </body>
+    </html>';
+
+                            $mail->msgHTML($html);
+
                         } elseif ($newStatut === 'Rejetée') {
-                            $mail->Subject = "❌ Innovation refusée";
-                            $mail->Body = "
-                                Bonjour <b>{$user['pseudo']}</b>,<br><br>
-                                Votre innovation <b>{$user['titre']}</b> a été
-                                <b style='color:red'>REFUSÉE</b> ❌.<br>
-                                Vous pouvez la modifier et la renvoyer.
-                            ";
+
+                            $mail->Subject = "Innovation refusée";
+
+                            $html = '
+    <html>
+    <body style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
+
+        <p>Bonjour <b>' . htmlspecialchars($user['pseudo']) . '</b>,</p>
+
+        <p>
+            Votre innovation <b>' . htmlspecialchars($user['titre']) . '</b> a été
+            <span style="color:red;font-weight:bold;">REFUSÉE</span> ❌
+        </p>
+
+        <p style="margin:20px 0;">
+        
+            <a href="' . $linkInnovation . '"
+               style="display:inline-block;
+                      background:#dc3545;
+                      color:#ffffff;
+                      padding:12px 25px;
+                      text-decoration:none;
+                      border-radius:8px;
+                      font-weight:bold;">
+                👉 Modifier mon innovation
+            </a>
+        </p>
+
+        <p>Vous pouvez la corriger puis la renvoyer.</p>
+
+    </body>
+    </html>';
+
+                            $mail->msgHTML($html);
                         }
+
+                        $mail->AltBody = "Connectez-vous à votre compte Tunispace pour consulter votre innovation.";
+
 
                         $mail->send();
 

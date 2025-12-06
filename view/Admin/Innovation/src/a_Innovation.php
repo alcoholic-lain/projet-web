@@ -57,6 +57,23 @@ try {
     $innovations = [];
     $error = $e->getMessage();
 }
+// ---------- PAGINATION SIMPLE ----------
+$itemsPerPage = 4; // nombre d'innovations par page (change si tu veux)
+
+$totalItems  = count($innovations);
+$totalPages  = max(1, ceil($totalItems / $itemsPerPage));
+
+// page actuelle (depuis l'URL ?page=2 par ex)
+$currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+if ($currentPage < 1) {
+    $currentPage = 1;
+} elseif ($currentPage > $totalPages) {
+    $currentPage = $totalPages;
+}
+
+// Découper le tableau pour cette page
+$startIndex      = ($currentPage - 1) * $itemsPerPage;
+$innovationsPage = array_slice($innovations, $startIndex, $itemsPerPage);
 
 $msg = $_GET['msg'] ?? null;
 
@@ -100,23 +117,30 @@ $msg = $_GET['msg'] ?? null;
         <?php endif; ?>
 
         <section class="section-box">
-            <table>
+            <div class="export-btns">
+                <button class="export-btn excel" onclick="exportTableToExcel('tableInno')">📄 Export Excel</button>
+                <button class="export-btn pdf" onclick="exportTableToPDF('tableInno')">📘 Export PDF</button>
+
+            </div>
+
+            <table id="tableInno">
                 <thead>
                 <tr>
-                    <th>Utilisateur</th>
-                    <th>Titre</th>
-                    <th>Description</th>
+                    <th onclick="sortInnovationTable(0)">Utilisateur</th>
+                    <th onclick="sortInnovationTable(1)">Titre</th>
+                    <th onclick="sortInnovationTable(2)">Description</th>
                     <th>Fichier</th>
-                    <th>Catégorie</th>
-                    <th>Statut</th>
-                    <th>Date</th>
-                    <th style="text-align:center;">Actions</th>
+                    <th onclick="sortInnovationTable(4)">Catégorie</th>
+                    <th onclick="sortInnovationTable(5)">Statut</th>
+                    <th onclick="sortInnovationTable(6)">Date</th>
+
                 </tr>
                 </thead>
 
                 <tbody>
-                <?php if (!empty($innovations)): ?>
-                    <?php foreach ($innovations as $inn): ?>
+                <?php if (!empty($innovationsPage)): ?>
+                    <?php foreach ($innovationsPage as $inn): ?>
+
                         <tr>
 
                             <!-- ✅ ID -->
@@ -216,6 +240,22 @@ $msg = $_GET['msg'] ?? null;
                 <?php endif; ?>
                 </tbody>
             </table>
+            <div class="pagination">
+                <?php if ($currentPage > 1): ?>
+                    <a class="pg-btn" href="?page=<?= $currentPage - 1 ?>">&laquo; Précédent</a>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a class="pg-btn <?= $i == $currentPage ? 'active' : '' ?>"
+                       href="?page=<?= $i ?>"><?= $i ?></a>
+                <?php endfor; ?>
+
+                <?php if ($currentPage < $totalPages): ?>
+                    <a class="pg-btn" href="?page=<?= $currentPage + 1 ?>">Suivant &raquo;</a>
+                <?php endif; ?>
+            </div>
+
+
         </section>
 
     </div>

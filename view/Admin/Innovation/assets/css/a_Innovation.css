@@ -1,22 +1,15 @@
-/* =======================================
-   Page : a_Innovation.php – Style complet
-======================================= */
-
 /* ===== THEME VARIABLES ===== */
 :root {
     --sidebar-width: 240px;
     --sidebar-bg: #0d1117;
     --sidebar-hover: #1e2633;
     --sidebar-text: #cbd5e1;
-
     --bg: #0c0f14;
     --text: #e6edf3;
     --card-bg: rgba(255,255,255,0.06);
     --card-border: rgba(255,255,255,0.12);
-
     --accent: #b38cff;
 }
-
 /* Mode clair si body.light */
 body.light {
     --sidebar-bg: #f6f6f8;
@@ -26,12 +19,10 @@ body.light {
     --card-bg: rgba(255,255,255,0.65);
     --card-border: rgba(0,0,0,0.12);
 }
-
 /* ===== GLOBAL ===== */
 * {
     box-sizing: border-box;
 }
-
 body {
     margin: 0;
     background: var(--bg);
@@ -39,7 +30,6 @@ body {
     font-family: "Inter", sans-serif;
     transition: background 0.25s, color 0.25s;
 }
-
 /* =======================================
    SIDEBAR (même style que dashboard)
 ======================================= */
@@ -56,20 +46,17 @@ body {
     transition: width 0.35s ease, background 0.25s;
     z-index: 1000;
 }
-
 .sidebar-top .user-info h4 {
     margin: 0;
     font-size: 18px;
     font-weight: 700;
 }
-
 .menu-title {
     font-size: 11px;
     opacity: 0.55;
     margin: 14px 0 6px;
     text-transform: uppercase;
 }
-
 /* Menu & sous-menu */
 .menu,
 .submenu {
@@ -77,7 +64,6 @@ body {
     margin: 0;
     padding: 0;
 }
-
 .menu-link,
 .theme-switcher {
     display: flex;
@@ -91,7 +77,6 @@ body {
     text-decoration: none;
     transition: background 0.25s, box-shadow 0.25s, transform 0.25s, color 0.25s;
 }
-
 .menu-link:hover,
 .menu-link.active,
 .theme-switcher:hover {
@@ -100,25 +85,21 @@ body {
     color: #fff;
     transform: translateY(-2px);
 }
-
 .icon-large {
     font-size: 18px;
 }
-
 /* THEME TOGGLE */
 .theme-switcher {
     justify-content: center;
     margin-top: 10px;
     cursor: pointer;
 }
-
 /* Sous-menus */
 .submenu {
     margin: 6px 0 10px 30px;
     padding-left: 0;
     border-left: 1px solid rgba(255, 255, 255, 0.06);
 }
-
 /* Slide-down animation */
 .menu-dropdown .submenu {
     max-height: 0;
@@ -126,16 +107,13 @@ body {
     opacity: 0;
     transition: max-height 0.35s ease, opacity 0.25s ease;
 }
-
 .menu-dropdown.open .submenu {
     max-height: 200px;
     opacity: 1;
 }
-
 .submenu li {
     margin: 2px 0;
 }
-
 .submenu a {
     display: flex;
     align-items: center;
@@ -148,7 +126,6 @@ body {
     text-decoration: none;
     transition: all 0.25s ease;
 }
-
 /* Emojis sous-menu */
 .submenu a::before {
     content: "👉";
@@ -158,25 +135,20 @@ body {
     transform: translateX(-4px);
     transition: all 0.25s ease;
 }
-
 .submenu li:first-child a::before {
     content: "📄";
 }
-
 .submenu li:nth-child(2):not(.innovation-pending) a::before {
     content: "➕";
 }
-
 .submenu li:nth-child(2).innovation-pending a::before {
     content: "⏳";
 }
-
 .submenu a:hover {
     padding-left: 10px;
     opacity: 1;
     color: var(--accent);
 }
-
 .submenu a.active-sub {
     color: #c59bff !important;
     font-weight: 700;
@@ -187,31 +159,26 @@ body {
     transform: translateX(0);
     opacity: 1;
 }
-
 /* Mode réduit */
 body.sidebar-collapsed .sidebar {
     width: 80px;
 }
-
 body.sidebar-collapsed .text,
 body.sidebar-collapsed .menu-title,
 body.sidebar-collapsed .user-info {
     display: none;
     opacity: 0;
 }
-
 body.sidebar-collapsed .menu-link,
 body.sidebar-collapsed .theme-switcher {
     justify-content: center;
     gap: 0;
 }
-
 body.sidebar-collapsed .submenu {
     max-height: 0 !important;
     opacity: 0 !important;
     display: none !important;
 }
-
 /* =======================================
    HEADER
 ======================================= */
@@ -230,7 +197,6 @@ header {
     padding: 0 30px;
     z-index: 900;
 }
-
 .header-left {
     display: flex;
     align-items: center;
@@ -238,11 +204,9 @@ header {
     margin-left: var(--sidebar-width);
     transition: margin-left 0.35s ease;
 }
-
 body.sidebar-collapsed .header-left {
     margin-left: 80px;
 }
-
 #sidebarToggle {
     font-size: 22px;
     border: none;
@@ -251,33 +215,27 @@ body.sidebar-collapsed .header-left {
     cursor: pointer;
     transition: transform 0.3s ease;
 }
-
 body.sidebar-collapsed #sidebarToggle {
     transform: rotate(180deg);
 }
-
 .header-text h1 {
     margin: 0;
     font-size: 20px;
     font-weight: 700;
 }
-
 .header-text p {
     margin: 0;
     font-size: 13px;
     opacity: 0.7;
 }
-
 .header-right a {
     color: #b38cff;
     text-decoration: none;
     font-weight: 500;
 }
-
 .header-right a:hover {
     text-decoration: underline;
 }
-
 /* =======================================
    MAIN + CONTENU
 ======================================= */
@@ -287,28 +245,23 @@ main {
     padding: 30px;
     transition: margin-left 0.35s ease;
 }
-
 body.sidebar-collapsed main {
     margin-left: 80px;
 }
-
 .dashboard-inner {
     max-width: 1100px;
     margin: 0 auto;
 }
-
 .section-title-main {
     font-size: 26px;
     margin-bottom: 10px;
 }
-
 .page-header-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 14px;
 }
-
 /* Box */
 .section-box {
     background: var(--card-bg);
@@ -317,7 +270,6 @@ body.sidebar-collapsed main {
     padding: 20px;
     margin-top: 10px;
 }
-
 /* Tables */
 table {
     table-layout: fixed;
@@ -325,11 +277,9 @@ table {
     border-collapse: collapse;
     font-size: 14px;
 }
-
 thead {
     background: rgba(255,255,255,0.05);
 }
-
 th, td {
     padding: 12px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -338,7 +288,6 @@ th, td {
     word-break: break-word;
     white-space: normal;
     vertical-align: middle;
-
 }
 td.description-col {
     max-height: 90px;
@@ -346,20 +295,16 @@ td.description-col {
     text-overflow: ellipsis;
     line-height: 1.4;
 }
-
 tr:hover td {
     background: rgba(255,255,255,0.02);
 }
-
 .actions-cell {
     display: flex;
     gap: 8px;
     justify-content: center;
     align-items: center;
     min-width: 120px;
-
 }
-
 /* Bouton "Ajouter" */
 .btn-add {
     display: inline-block;
@@ -494,6 +439,8 @@ td.file-col {
     object-fit: cover;
     border-radius: 6px;
     border: 1px solid #ddd;
+    display: block;
+    margin: 0 auto;
 }
 
 /* Lien fichier */
@@ -530,4 +477,223 @@ td.file-col {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+button.btn-icon {
+    border: none !important;
+    background: rgba(255,255,255,0.08) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    outline: none !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+}
+
+/* Empêche le gris au clic */
+button.btn-icon:focus,
+button.btn-icon:active {
+    outline: none !important;
+    box-shadow:
+            0 6px 12px rgba(0,0,0,0.35),
+            inset 0 2px 4px rgba(255,255,255,0.15) !important;
+}
+/* ✅ Fix largeur colonne Actions */
+th:last-child,
+td.actions-cell {
+    width: 140px;
+    min-width: 140px;
+    max-width: 140px;
+    text-align: center;
+}
+/* ✅ Centrage parfait des boutons dans la cellule */
+td.actions-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+/* --- Colonne triée --- */
+th.sorted {
+    color: #ff69b4;
+    text-shadow: 0 0 6px rgba(255, 105, 180, 0.8);
+}
+
+/* --- Flèches animées --- */
+.sort-arrow {
+    font-size: 14px;
+    margin-left: 6px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-2px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Pagination --- */
+#pagination {
+    margin-top: 18px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.page-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #999;
+    background: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.page-btn.active {
+    background: #ff69b4;
+    color: white;
+    border-color: #ff69b4;
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.6);
+}
+
+.page-btn:hover {
+    transform: scale(1.08);
+}
+th {
+    cursor: pointer;
+}
+
+th.sorted {
+    color: #ff4fcd;
+    text-shadow: 0 0 8px rgba(255, 79, 205, 0.7);
+}
+
+.sort-arrow {
+    font-size: 13px;
+    margin-left: 6px;
+    animation: fade 0.3s ease;
+}
+
+@keyframes fade {
+    from { opacity:0; transform: translateY(-3px); }
+    to { opacity:1; transform: translateY(0); }
+}
+
+#pagination {
+    margin-top: 18px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.page-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: white;
+    border: 1px solid #999;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.page-btn.active {
+    background: #ff4fcd;
+    color: white;
+    border-color: #ff4fcd;
+    box-shadow: 0 0 12px rgba(255, 79, 205, 0.6);
+}
+
+.page-btn:hover {
+    transform: scale(1.1);
+}
+/* --- EXPORT BUTTONS ULTRA MODERN --- */
+.export-btns {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.export-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #6a5acd, #845ef7);
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease;
+    box-shadow: 0 0 12px rgba(132, 94, 247, 0.5);
+}
+
+.export-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px rgba(132, 94, 247, 0.75);
+}
+
+/* Excel button color */
+.export-btn.excel {
+    background: linear-gradient(135deg, #00b894, #26de81);
+    box-shadow: 0 0 12px rgba(38, 222, 129, 0.5);
+}
+.export-btn.excel:hover {
+    box-shadow: 0 0 18px rgba(38, 222, 129, 0.75);
+}
+
+/* PDF button color */
+.export-btn.pdf {
+    background: linear-gradient(135deg, #ff6b6b, #ff4757);
+    box-shadow: 0 0 12px rgba(255, 71, 87, 0.5);
+}
+.export-btn.pdf:hover {
+    box-shadow: 0 0 18px rgba(255, 71, 87, 0.75);
+}
+/* =============================
+   PAGINATION PRO — SIMPLE & NETTE
+============================= */
+
+.pagination {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.pg-btn {
+    padding: 7px 14px;
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,0.12);
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.pg-btn:hover {
+    background: var(--sidebar-hover);
+    transform: translateY(-2px);
+}
+
+/* Bouton actif */
+.pg-btn.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 0 10px rgba(179,140,255,0.6);
+    transform: translateY(-2px);
+}
+
+/* Désactivé (si jamais tu veux l’utiliser) */
+.pg-btn.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* ↑ / ↓ responsive pour mobile */
+@media(max-width: 480px){
+    .pg-btn { padding: 6px 10px; font-size: 12px; }
 }

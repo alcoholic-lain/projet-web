@@ -173,3 +173,137 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById("myProfileBtn").addEventListener("click", () => {
     window.location.href = "/projet-web/view/Client/login/profile.php";
 });
+// --- IA SEARCH FINAL CLEAN VERSION ---
+/* ===========================
+   IA SEARCH CLEAN VERSION
+   =========================== */
+
+const chat = document.getElementById("aiChat");
+const input = document.getElementById("aiInput");
+const send = document.getElementById("aiSend");
+
+// --- ENVOI ---
+send.addEventListener("click", () => askAI(input.value.trim()));
+input.addEventListener("keypress", e => {
+    if (e.key === "Enter") askAI(input.value.trim());
+});
+
+// --- AFFICHAGE MESSAGES ---
+function addMessage(type, text) {
+    const div = document.createElement("div");
+    div.className = type === "user" ? "msg-user" : "msg-bot";
+    div.innerText = text;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+    return div;
+}
+
+function removeMessage(el) {
+    if (el && el.parentNode) el.parentNode.removeChild(el);
+}
+
+// --- REQUÊTE IA ---
+async function askAI(query) {
+
+    if (!query || query.length < 2) return;
+
+    addMessage("user", query);
+    input.value = "";
+
+    // Message de chargement
+    const loading = addMessage("bot", "✨ Analyse des données… 🚀");
+
+    try {
+        const url = `/projet-web/controller/API/client/ai_search.php?q=${encodeURIComponent(query)}`;
+        const response = await fetch(url);
+        const raw = await response.text();
+
+        let data;
+        try {
+            data = JSON.parse(raw);
+        } catch (e) {
+            removeMessage(loading);
+            addMessage("bot", "❌ Erreur : réponse invalide de l'IA.");
+            console.error("RAW RESPONSE:", raw);
+            return;
+        }
+
+        removeMessage(loading);
+
+        if (!data.success) {
+            addMessage("bot", "❌ Erreur : " + (data.message || "Impossible de traiter la requête."));
+            return;
+        }
+
+        addMessage("bot", `Voici les résultats pour « ${query} » 👇`);
+        displayAIResults(data);
+
+    } catch (error) {
+        removeMessage(loading);
+        addMessage("bot", "❌ Erreur de connexion à l'IA.");
+        console.error(error);
+    }
+}
+
+
+/* ===========================
+   AFFICHAGE DES RÉSULTATS IA
+   =========================== */
+
+function displayAIResults(data) {
+
+    const cats = data.categories;
+    const inn = data.innovations;
+
+    const box = document.getElementById("aiResultsBox");      // Conteneur global
+    const catBox = document.getElementById("aiCategories");    // Catégories
+    const innBox = document.getElementById("aiInnovations");   // Innovations
+    const empty = document.getElementById("aiNoResults");      // Aucun résultat
+
+    // Reset
+    box.classList.remove("hidden");
+    catBox.innerHTML = "";
+    innBox.innerHTML = "";
+    empty.classList.add("hidden");
+
+    let found = false;
+
+    /* === Catégories trouvées === */
+    if (cats.length > 0) {
+        found = true;
+        cats.forEach(c => {
+            catBox.innerHTML += `
+                <div class="result-card">
+                    <div class="result-card-title">${c.nom}</div>
+                    <div class="result-card-desc">${c.description}</div>
+                    <a class="cs-btn-link" href="list_Innovation.php?categorie=${c.id}">
+                        Voir les innovations →
+                    </a>
+                </div>`;
+        });
+    }
+    /* === Innovations === */
+    if (inn.length > 0) {
+        found = true;
+        inn.forEach(i => {
+            innBox.innerHTML += `
+            <div class="result-card">
+                <div class="result-card-title">${i.titre}</div>
+                <div class="result-card-desc">${i.description}</div>
+                <div class="ai-cat">Catégorie : ${i.categorie}</div>
+
+                <a class="cs-btn-link"
+                   href="/projet-web/view/Client/Innovation/src/details_Innovation.php?id=${i.id}">
+                    Ouvrir →
+                </a>
+            </div>`;
+        });
+    }
+
+
+    /* === Aucun résultat === */
+    if (!found) {
+        empty.classList.remove("hidden");
+    }
+}
+

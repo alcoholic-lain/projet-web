@@ -31,9 +31,9 @@ $stmt->execute([
     ':id' => $id
 ]);
 
-/* ✅ 2. Récupérer l’email ldepuis la table `user` */
+/* ✅ 2. Récupérer user + innovation */
 $sqlUser = "
-SELECT u.email, u.pseudo, i.titre
+SELECT u.id AS user_id, u.email, u.pseudo, i.titre
 FROM innovations i
 JOIN user u ON i.user_id = u.id
 WHERE i.id = :id
@@ -48,15 +48,19 @@ if (!$user) {
     exit;
 }
 
-/* ✅ 3. Envoi de l’email */
+/* ✅ 3. Lien dynamique vers SON innovation */
+$baseUrl = "http://localhost/projet-web/view/Client/Innovation/src/list_Innovation.php";
+$linkInnovation = $baseUrl . "?user=" . $user['user_id'] . "&innovation=" . $id;
+
+/* ✅ 4. Envoi de l’email */
 $mail = new PHPMailer(true);
 
 try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
-    $mail->Username = SMTP_USER;
-    $mail->Password = SMTP_PASS;
+    $mail->Username  = SMTP_USER;
+    $mail->Password  = SMTP_PASS;
 
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
@@ -65,26 +69,89 @@ try {
     $mail->addAddress($user['email'], $user['pseudo']);
 
     $mail->isHTML(true);
+    $mail->AltBody = "Connectez-vous à votre compte Tunispace pour consulter votre innovation.";
+
+    $mail->CharSet = 'UTF-8';
 
     if ($statut === 'Validée') {
-        $mail->Subject = "✅ Innovation validée";
-        $mail->Body = "
-            Bonjour <b>{$user['pseudo']}</b>,<br><br>
-            Votre innovation <b>{$user['titre']}</b> a été <span style='color:green'>VALIDÉE</span> ✅.<br>
-            Elle est maintenant visible sur la plateforme Tunispace.<br><br>
-            Félicitations 🚀
-        ";
+
+        $mail->Subject = "Innovation Validee";
+
+        $mail->Body = '
+<html>
+<body style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
+
+<p>Bonjour <b>' . htmlspecialchars($user['pseudo']) . '</b>,</p>
+
+<p>
+Votre innovation <b>' . htmlspecialchars($user['titre']) . '</b> a été 
+<span style="color:green;font-weight:bold;">VALIDÉE</span> ✅.
+</p>
+
+<p style="margin:20px 0;">
+<a href="' . $linkInnovation . '" 
+   style="display:inline-block;
+          background:#0b5ed7;
+          color:#ffffff;
+          padding:12px 25px;
+          text-decoration:none;
+          border-radius:8px;
+          font-weight:bold;">
+    👉 Accéder à mon innovation
+</a>
+</p>
+
+<p>
+Elle est maintenant visible sur la plateforme <b>Tunispace</b> 🚀
+</p>
+
+<p>Félicitations ✨</p>
+
+</body>
+</html>';
+
+
     } else {
-        $mail->Subject = "❌ Innovation refusée";
-        $mail->Body = "
-            Bonjour <b>{$user['pseudo']}</b>,<br><br>
-            Votre innovation <b>{$user['titre']}</b> a été <span style='color:red'>REFUSÉE</span> ❌.<br>
-            Vous pouvez la modifier puis la renvoyer.<br><br>
-            Bon courage 💪
-        ";
+
+        $mail->Subject = "Innovation Refusee";
+
+        $mail->Body = '
+<html>
+<body style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
+
+<p>Bonjour <b>' . htmlspecialchars($user['pseudo']) . '</b>,</p>
+
+<p>
+Votre innovation <b>' . htmlspecialchars($user['titre']) . '</b> a été 
+<span style="color:red;font-weight:bold;">REFUSÉE</span> ❌.
+</p>
+
+<p style="margin:20px 0;">
+<a href="' . $linkInnovation . '" 
+   style="display:inline-block;
+          background:#dc3545;
+          color:#ffffff;
+          padding:12px 25px;
+          text-decoration:none;
+          border-radius:8px;
+          font-weight:bold;">
+    👉 Modifier mon innovation
+</a>
+</p>
+
+<p>
+Vous pouvez la corriger puis la renvoyer.
+</p>
+
+<p>Bon courage 💪</p>
+
+</body>
+</html>';
+
     }
 
     $mail->send();
+
     echo json_encode(['success' => true]);
 
 } catch (Exception $e) {

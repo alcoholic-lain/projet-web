@@ -53,3 +53,186 @@
             0 14px 28px rgba(255,50,50,0.55),
             inset 0 3px 6px rgba(255,255,255,0.25);
 }
+/* --- PAGINATION --- */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.pg-btn {
+    padding: 8px 14px;
+    background: #1d1f27;
+    border: 1px solid #3d3f4a;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.2s;
+    font-size: 14px;
+}
+
+.pg-btn:hover {
+    background: #4b5dff;
+    border-color: #4b5dff;
+}
+
+.pg-btn.active {
+    background: #4b5dff;
+    border-color: #4b5dff;
+    font-weight: bold;
+    box-shadow: 0 0 8px rgba(75,93,255,0.5);
+}
+/* --- Highlight de la colonne en cours de tri --- */
+th.sorted {
+    color: #ff69b4;
+    text-shadow: 0 0 6px rgba(255, 105, 180, 0.8);
+}
+
+
+/* Reset */
+th {
+    cursor: pointer;
+    transition: 0.25s;
+}
+/* Highlight colonne triée */
+th.sorted-asc {
+    background: rgba(80, 200, 255, 0.18);
+    color: #00d0ff;
+}
+
+th.sorted-desc {
+    background: rgba(255, 120, 200, 0.18);
+    color: #ff4fd6;
+}
+
+/* Icônes tri */
+th.sortable {
+    position: relative;
+    padding-right: 24px;
+}
+
+th.sortable .sort-icon {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    opacity: 0.6;
+    transition: 0.2s;
+}
+
+th.sorted-asc .sort-icon {
+    opacity: 1;
+    color: #00d0ff;
+    content: "▲";
+}
+
+th.sorted-desc .sort-icon {
+    opacity: 1;
+    color: #ff4fd6;
+    content: "▼";
+}
+
+/* Animation smooth quand le tri réorganise */
+tbody tr {
+    transition: transform 0.35s ease-in-out, background 0.25s;
+}
+
+tbody tr.reorder {
+    background: rgba(255,255,255,0.05);
+}
+/* --- EXPORT BUTTONS ULTRA MODERN --- */
+.export-btns {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.export-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #6a5acd, #845ef7);
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease;
+    box-shadow: 0 0 12px rgba(132, 94, 247, 0.5);
+}
+
+.export-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px rgba(132, 94, 247, 0.75);
+}
+
+/* Excel button color */
+.export-btn.excel {
+    background: linear-gradient(135deg, #00b894, #26de81);
+    box-shadow: 0 0 12px rgba(38, 222, 129, 0.5);
+}
+.export-btn.excel:hover {
+    box-shadow: 0 0 18px rgba(38, 222, 129, 0.75);
+}
+
+/* PDF button color */
+.export-btn.pdf {
+    background: linear-gradient(135deg, #ff6b6b, #ff4757);
+    box-shadow: 0 0 12px rgba(255, 71, 87, 0.5);
+}
+.export-btn.pdf:hover {
+    box-shadow: 0 0 18px rgba(255, 71, 87, 0.75);
+}
+/* =============================
+   PAGINATION PRO — SIMPLE & NETTE
+============================= */
+
+.pagination {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.pg-btn {
+    padding: 7px 14px;
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,0.12);
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.pg-btn:hover {
+    background: var(--sidebar-hover);
+    transform: translateY(-2px);
+}
+
+/* Bouton actif */
+.pg-btn.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 0 10px rgba(179,140,255,0.6);
+    transform: translateY(-2px);
+}
+
+/* Désactivé (si jamais tu veux l’utiliser) */
+.pg-btn.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* ↑ / ↓ responsive pour mobile */
+@media(max-width: 480px){
+    .pg-btn { padding: 6px 10px; font-size: 12px; }
+}

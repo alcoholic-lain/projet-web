@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/google-api-php-client/src" isTestSource="false" packagePrefix="Google\" />
       <sourceFolder url="file://$MODULE_DIR$/phpmailer/src" isTestSource="false" packagePrefix="PHPMailer\PHPMailer\" />
       <sourceFolder url="file://$MODULE_DIR$/phpmailer/test" isTestSource="true" packagePrefix="PHPMailer\Test\" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/phpmailer/phpmailer/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/google-api-php-client/vendor/PHPMailer-master/language" />
       <excludeFolder url="file://$MODULE_DIR$/google-api-php-client/vendor/PHPMailer-master/src" />
       <excludeFolder url="file://$MODULE_DIR$/google-api-php-client/vendor/composer" />
