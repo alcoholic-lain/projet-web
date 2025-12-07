@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 29 nov. 2025 à 20:34
+-- Généré le : dim. 07 déc. 2025 à 21:30
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -52,11 +52,17 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `nom`, `description`, `date_creation`) VALUES
-(1, 'Exploration Spatiale', 'Projets liés à l\'exploration de l\'espace et des planètes', '2025-11-17 00:11:40'),
-(2, 'Énergie Orbitale', 'Solutions énergétiques pour l\'espace et les satellites', '2025-11-17 00:11:40'),
-(3, 'Habitats Lunaires', 'Conception et développement d\'habitats pour la Lune', '2025-11-17 00:11:40'),
-(5, 'Propulsion Avancée', 'Nouvelles technologies de propulsion spatiale', '2025-11-17 00:11:40'),
-(28, 'TEST', 'TEST', '2025-11-29 20:25:00');
+(30, 'Énergie & Propulsion', 'Systèmes de propulsion avancés (ionique, plasma, hybride) et solutions énergétiques spatiales (panneaux orbitaux, réacteurs, batteries haute performance) pour les voyages interplanétaires.', '2025-12-01 01:17:04'),
+(31, 'Télécommunications & Satellites', 'Description :\r\nInnovation dans les satellites de communication, relais laser, antennes intelligentes et réseaux orbitaux pour assurer une connectivité fiable entre la Terre et l’espace.', '2025-12-01 01:17:17'),
+(32, 'Astro-Robotique', 'Robots autonomes pour l’exploration, la maintenance en orbite et la collecte de ressources spatiales. Inclut drones martiens, rovers intelligents et robots de réparation.', '2025-12-01 01:17:29'),
+(33, 'Astrophysique & Recherche', 'Études scientifiques sur les phénomènes cosmiques, les exoplanètes, les étoiles, les ondes gravitationnelles et les structures de l’univers.', '2025-12-01 01:17:41'),
+(34, 'Climat, Terre & Environnement', 'Analyses et solutions basées sur des données satellites pour surveiller le climat, la biodiversité, les catastrophes naturelles et les changements environnementaux.', '2025-12-01 01:17:57'),
+(35, 'Aéronautique & Drones', 'Technologies destinées au vol atmosphérique : drones autonomes, avions à propulsion innovante, systèmes de navigation avancés et véhicules de transport aérien.', '2025-12-01 01:18:13'),
+(36, 'Systèmes de Navigation', 'Développement de systèmes de positionnement et de navigation (GNSS, navigation stellaire, radars 3D) pour applications spatiales, aériennes ou terrestres.', '2025-12-01 01:18:28'),
+(37, 'Technologies Quantiques', 'Applications de la physique quantique pour le calcul, la communication sécurisée, la détection ultra-précise et les capteurs de nouvelle génération.', '2025-12-01 01:18:46'),
+(38, 'IA & Vision Spatiale', 'Systèmes d’intelligence artificielle capable d’analyser des images satellites, détecter des anomalies, cartographier des surfaces et piloter des modules autonomes.', '2025-12-01 01:18:59'),
+(39, 'Matériaux Avancés', 'Création de matériaux légers, résistants à la chaleur, à la radiation ou adaptés aux structures spatiales : composites, métamatériaux, nanotextures.', '2025-12-01 01:19:11'),
+(40, 'Santé & Médecine Spatiale', 'Innovations dédiées à la santé en microgravité : diagnostic embarqué, thérapies adaptées, nanotechnologies médicales et suivi physiologique d’astronautes.', '2025-12-01 01:19:23');
 
 -- --------------------------------------------------------
 
@@ -77,14 +83,14 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `innovation_id`, `user_id`, `content`, `created_at`) VALUES
-(1, 43, 66, 'aaaa', '2025-11-25 00:42:31'),
-(2, 43, 66, 'qqqqq', '2025-11-25 00:42:35'),
-(3, 43, 66, 'asdsfghvjbkl', '2025-11-25 00:43:09'),
-(4, 43, 66, 'bravo', '2025-11-25 00:43:16'),
-(21, 54, 71, 'test', '2025-11-28 10:14:43'),
-(22, 54, 76, 'good', '2025-11-28 23:58:24'),
-(23, 54, 76, 'k.kkk;k.', '2025-11-29 00:09:40'),
-(24, 43, 76, 'aa', '2025-11-29 14:35:49');
+(26, 95, 71, 'good', '2025-12-01 01:07:55'),
+(27, 94, 71, 'wow', '2025-12-01 01:08:09'),
+(28, 93, 71, 'nice', '2025-12-01 01:08:21'),
+(29, 86, 71, 'good', '2025-12-01 01:08:55'),
+(30, 86, 78, 'perfect', '2025-12-01 01:09:22'),
+(31, 86, 85, 'nice idea', '2025-12-01 01:13:07'),
+(33, 68, 71, 'A', '2025-12-01 13:52:35'),
+(34, 86, 77, '.', '2025-12-06 11:48:40');
 
 -- --------------------------------------------------------
 
@@ -285,13 +291,39 @@ CREATE TABLE `innovations` (
 --
 
 INSERT INTO `innovations` (`id`, `user_id`, `titre`, `description`, `date_creation`, `statut`, `category_id`, `file`) VALUES
-(42, 66, 'ddddd', 'asdfghjkl', '2025-11-24 14:54:02', 'Validée', 3, NULL),
-(43, 66, '12345678', '12345678123456781234567812345678123456781234567812345678123456781234567812345678123456781234567812345678', '2025-11-24 23:48:38', 'Validée', 1, NULL),
-(44, 66, 'abdefghi', 'abdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghiabdefghi', '2025-11-24 23:48:59', 'Rejetée', 1, NULL),
-(54, 71, 'Hichem_test', 'TEST_TEST', '2025-11-28 11:12:38', 'Validée', 2, NULL),
-(55, 76, 'testtest2', 'sdfghjkd', '2025-11-29 01:01:47', 'En attente', 2, NULL),
-(56, 76, 'ásdfghjk', 'asdfghjkl;', '2025-11-29 01:10:51', 'Validée', 1, NULL),
-(60, 76, 'TEST1 modify modify', 'testest', '2025-11-29 14:55:12', 'Validée', 1, 'view/Client/Innovation/uploads/innovation_692afb40e88916.69750043.pdf');
+(66, 68, 'Moteur ionique Neutrino-Drive', 'Propulsion ionique de nouvelle génération consommant 15× moins d’énergie et permettant des missions longues sans ravitaillement.', '2025-12-01 01:28:43', 'Validée', 30, 'view/Client/Innovation/uploads/innovation_692ce13bc27703.93938782.jpg'),
+(68, 68, 'Propulseur plasma Storm-Pulse', 'Propulsion plasma compacte pour manœuvres rapides en orbite basse, idéale pour satellites agiles.', '2025-12-01 01:29:26', 'Validée', 30, 'view/Client/Innovation/uploads/innovation_692ce166a27af5.51144930.webp'),
+(69, 73, 'Nano-satellite ComSat-N5', 'Nanosatellite de communication capable de fournir du haut débit dans les zones isolées via réseau orbital maillé.', '2025-12-01 01:31:10', 'Validée', 31, 'view/Client/Innovation/uploads/innovation_692ce1ce35b3a9.72981099.webp'),
+(70, 73, '8. Antenne autonome FoldWave', 'Antenne spatiale flexible capable de se déployer automatiquement en orbite, augmentant la portée d’un satellite de 40%.', '2025-12-01 01:31:27', 'Validée', 31, 'view/Client/Innovation/uploads/innovation_692ce1df5f0de4.99723839.webp'),
+(71, 73, 'Laser-Link ORB-Connect', 'Système de transmission entre satellites via laser, atteignant 100 Gbps sans interférences.', '2025-12-01 01:31:45', 'Validée', 31, 'view/Client/Innovation/uploads/innovation_692ce1f1257bb4.79892758.webp'),
+(72, 74, 'Rover minier Terra-Droid', 'Robot autonome capable d’extraire des minerais lunaires et martiens, avec navigation intelligente.', '2025-12-01 01:33:02', 'Validée', 32, 'view/Client/Innovation/uploads/innovation_692ce23e496be5.15074880.jpg'),
+(73, 74, 'Drone atmosphérique SKY-Mars', 'Drone conçu pour voler dans l’atmosphère martienne, équipé d’ailes adaptatives.', '2025-12-01 01:33:26', 'Validée', 32, 'view/Client/Innovation/uploads/innovation_692ce256ba3cc1.60411287.webp'),
+(74, 74, 'Robot de réparation ORBIT-Fix', 'Robot orbital spécialisé dans la maintenance et la réparation de satellites en fonctionnement.', '2025-12-01 01:33:46', 'Validée', 32, 'view/Client/Innovation/uploads/innovation_692ce26a594401.02981481.jpg'),
+(75, 78, 'Détecteur d’ondes gravitationnelles MINERVA', 'Version miniaturisée d’un détecteur d’ondes gravitationnelles pouvant être embarqué sur orbiteur.', '2025-12-01 01:38:48', 'Validée', 33, 'view/Client/Innovation/uploads/innovation_692ce398ed0c88.15050161.png'),
+(76, 78, 'Analyseur de poussières stellaires STAR-Lab', 'Instrument permettant d’étudier la composition des comètes et des astéroïdes.', '2025-12-01 01:39:10', 'Validée', 33, 'view/Client/Innovation/uploads/innovation_692ce3ae028139.26359572.jpg'),
+(77, 78, 'Imager spectral HyperNova', 'Caméra hyperspectrale ultra sensible pour observer les phénomènes cosmiques en haute résolution.', '2025-12-01 01:39:36', 'Validée', 33, 'view/Client/Innovation/uploads/innovation_692ce3c8a23716.40782722.webp'),
+(78, 79, 'Satellite climat ERGO-Climate', 'Satellite de nouvelle génération capable de cartographier le CO₂ et les micro-particules atmosphériques.', '2025-12-01 01:41:09', 'Validée', 34, 'view/Client/Innovation/uploads/innovation_692ce425d16604.89645601.jpg'),
+(79, 79, 'Drone de reforestation AERO-Seed', 'Drone capable d’ensemencer automatiquement 2 000 graines par heure sur zones dégradées.', '2025-12-01 01:41:26', 'Validée', 34, 'view/Client/Innovation/uploads/innovation_692ce436441f55.60739667.jpg'),
+(80, 79, 'Bouclier anti-tempête Stratos-Shield', 'Technologie conceptuelle analysant et perturbant la formation de tempêtes extrêmes.', '2025-12-01 01:41:56', 'En attente', 34, 'view/Client/Innovation/uploads/innovation_692ce454f08999.84406192.jpg'),
+(81, 79, 'Nanobot médical HELIX-Care', 'Nanorobot thérapeutique capable de réparer tissus et cellules durant les missions spatiales.', '2025-12-01 01:42:32', 'Rejetée', 40, NULL),
+(82, 79, 'Patch de régénération cellulaire Bio-Skin', 'Patch médical accélérant la guérison en environnements extrêmes.', '2025-12-01 01:43:03', 'Validée', 40, 'view/Client/Innovation/uploads/innovation_692ce4974f1498.95052208.webp'),
+(83, 80, 'Jet électrique HYDRAX-E', 'Jet hybride hydrogène-électrique réduisant de 80% les émissions.', '2025-12-01 01:44:21', 'Validée', 35, 'view/Client/Innovation/uploads/innovation_692ce4e5821bb1.34553409.jpg'),
+(84, 80, 'Drone cargo SKY-Lift 360', 'Drone industriel capable de transporter jusqu’à 350 kg dans des zones difficiles d’accès.', '2025-12-01 01:44:42', 'Validée', 35, 'view/Client/Innovation/uploads/innovation_692ce4faeeb5a6.49308305.jpg'),
+(85, 80, 'Système anti-collision AERO-Safe', 'Module IA analysant l’environnement 200 fois par seconde pour éviter collisions en vol.', '2025-12-01 01:45:00', 'Validée', 35, 'view/Client/Innovation/uploads/innovation_692ce50cb308b4.04659836.png'),
+(86, 80, 'Scanner micro-gravité MED-Scan', 'Scanner corporel adapté à la microgravité pour la surveillance des astronautes.', '2025-12-01 01:45:27', 'Validée', 40, 'view/Client/Innovation/uploads/innovation_692ce527458db2.41924150.jpg'),
+(87, 81, 'Navigation spatiale autonome ASTR-Nav', 'Système autonome utilisant les étoiles pour la navigation spatiale sans GPS.', '2025-12-01 01:46:57', 'Validée', 36, 'view/Client/Innovation/uploads/innovation_692ce5815297e0.10373734.jpg'),
+(88, 81, 'Radar 3D AutoMap-Terra', 'Radar géospatial qui cartographie automatiquement le terrain pour drones et rovers.', '2025-12-01 01:47:10', 'Validée', 36, 'view/Client/Innovation/uploads/innovation_692ce58e162a06.86854890.png'),
+(89, 81, 'Navigation quantique Q-Navigator', 'Système révolutionnaire basé sur l’intrication quantique, insensible aux perturbations électromagnétiques.', '2025-12-01 01:47:35', 'Validée', 36, 'view/Client/Innovation/uploads/innovation_692ce5a7dfe260.56380827.jpg'),
+(90, 81, 'Accélérateur quantique ORION-Q', 'Processeur quantique compact multipliant par 25 la vitesse de calcul scientifique.', '2025-12-01 01:47:57', 'Validée', 37, 'view/Client/Innovation/uploads/innovation_692ce5bd959c09.49542866.jpg'),
+(91, 82, 'Clé de chiffrement Q-Secure', 'Système de cryptographie quantique impossible à intercepter.', '2025-12-01 01:49:19', 'Validée', 37, 'view/Client/Innovation/uploads/innovation_692ce60f317d99.94880331.jpg'),
+(92, 82, 'Capteur quantique TEMPUS', 'Instrument ultra précis capable de mesurer le temps avec exactitude atomique.', '2025-12-01 01:49:46', 'Validée', 37, 'view/Client/Innovation/uploads/innovation_692ce62a9cc4f0.92802778.jpg'),
+(93, 82, 'Analyseur AstroVision-AI', 'IA analysant automatiquement les images satellites pour détecter anomalies et phénomènes.', '2025-12-01 01:50:50', 'Validée', 38, 'view/Client/Innovation/uploads/innovation_692ce66ad005f0.85044058.jpg'),
+(94, 82, 'IA de pilotage STELLAR-Mind', 'Système pilotant un satellite entièrement de manière autonome.', '2025-12-01 01:51:10', 'Validée', 38, 'view/Client/Innovation/uploads/innovation_692ce67e8c2ce8.15103819.webp'),
+(95, 83, 'Reconnaissance planétaire Geo-AI', 'IA capable de cartographier automatiquement les surfaces extraterrestres.', '2025-12-01 01:52:05', 'Validée', 38, 'view/Client/Innovation/uploads/innovation_692ce6b5afdc48.11629797.jpg'),
+(96, 83, 'Composite TITAN-FIBER', 'Matériau 4× plus léger que l’acier et résistant aux radiations spatiales.', '2025-12-01 01:52:30', 'Validée', 39, 'view/Client/Innovation/uploads/innovation_692ce6ce6880a9.74299384.jpg'),
+(97, 83, 'Revêtement thermique Solar-Guard', 'Traitement protégeant les surfaces des températures extrêmes >1 000°C.', '2025-12-01 01:52:43', 'Validée', 39, 'view/Client/Innovation/uploads/innovation_692ce6db2c5547.37873578.webp'),
+(98, 83, 'Métamatériau Flex-Nano', 'Matériau programmable à mémoire de forme utilisé pour structures pliables.', '2025-12-01 01:53:16', 'Validée', 39, 'view/Client/Innovation/uploads/innovation_692ce6fc0a5641.45386804.jpg'),
+(107, 77, 'TEST', 'TEST MODIFY', '2025-12-01 14:53:09', 'Validée', 40, NULL);
 
 -- --------------------------------------------------------
 
@@ -612,24 +644,34 @@ CREATE TABLE `user` (
   `role_id` int(11) DEFAULT 2,
   `planet` enum('terra','mars','venus','jupiter') NOT NULL,
   `avatar` varchar(255) DEFAULT NULL,
-  `created_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT current_timestamp(),
+  `google_id` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `statut`, `role_id`, `planet`, `avatar`, `created_at`) VALUES
-(66, 'zak12', 'zakaria.benouirsane@esprit.tn', '$2y$10$DbExiga4ecL1SfXPfPUx..FOcq/LbIV473rNff2RKVcBCgLbuaVA.', 'actif', 1, 'mars', NULL, '2025-11-27 00:23:17'),
-(68, 'zikou', 'zakariabenouirane@esprit.tn', '$2y$10$jN95QpSpsLUturuobt.qqef4prcpYH6jI8uONPfCh/BTHTPetVx02', 'actif', 1, 'jupiter', '../../../view/Client/login/uploads/avatars/6928142713cdfcontrollerjpg', '2025-11-27 00:23:17'),
-(69, 'zaktheastroA', 'zak.thea@gmail.com', '$2y$10$eZEcuHxVhmDdrExhohNgC.H2pPtQZQ6IBnAcHKCQ3FDGXGm.rNMLC', 'banni', 2, 'mars', NULL, '2025-11-27 00:23:17'),
-(70, 'Nour___', 'nournour2862005@gmail.com', '$2y$10$/lIqkE12ly./qzuRkErao.uTyxjnI61K4NGb8c.3JoxiQxP/DGFfS', 'actif', 2, 'mars', NULL, '2025-11-27 00:23:17'),
-(71, 'hichem', 'hichem@gmail.com', '$2y$10$mUSIGyj5mm9L4uBgyuH8I.zvJdbmw6VQxFQ/LsrpNyvfcoYrD7Zwm', 'actif', 1, 'mars', 'view/Client/login/uploads/avatars/69282b60c29c9controller.jpg', '2025-11-27 00:23:17'),
-(72, 'hichem1', 'hichem1@gmail.com', '$2y$10$GUdwLaQctJxavMIh7fwkj.2pUgc62tEkPinXWsIhDoDtTiSLvZcaa', 'actif', 2, 'mars', '../../../view/Client/login/uploads/avatars/6927abe55c338controllerpng', '2025-11-27 02:23:22'),
-(73, 'gass', 'gass@gmail.com', '$2y$10$.6BNZ6gFl8MZUDL/Z9UOtuI.yP5PxFLY1ZXcSlRnhc5YYaQmLyohW', 'actif', 1, 'mars', '../../../view/Client/login/uploads/avatars/6927aea543ac7controllerjpg', '2025-11-27 02:48:32'),
-(74, 'toutou', 'toutou@gmail.com', '$2y$10$MITlfVF2otWIgV9KuQn7H.zHW8GPjxWKPnCeOfW8a38CximpLMGTS', 'actif', 1, 'mars', '../../../view/Client/login/uploads/avatars/6928146fc8c54controllerjpg', '2025-11-27 10:01:15'),
-(75, 'anas', 'anas@gmail.com', '$2y$10$2CpYASG87vVe3P7uy6Rl2.8mCX/DiyIo32jqg8.V00hp99wyB4AnS', 'actif', 1, 'mars', '../../../view/Client/login/uploads/avatars/69281abf08c32controllerjpg', '2025-11-27 10:31:33'),
-(76, 'test', 'test@gmail.com', '$2y$10$rd/f47TfKlr5SsLHWsfGde2Y/dCiFfVByVXoIWE4GnBNQ348kqXpG', 'actif', 1, 'mars', NULL, '2025-11-29 00:57:20');
+INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `statut`, `role_id`, `planet`, `avatar`, `created_at`, `google_id`) VALUES
+(66, 'zak12', 'zakaria.benouirsane@esprit.tn', '$2y$10$DbExiga4ecL1SfXPfPUx..FOcq/LbIV473rNff2RKVcBCgLbuaVA.', 'actif', 1, 'mars', NULL, '2025-11-27 00:23:17', NULL),
+(68, 'zikou', 'zakariabenouirane@esprit.tn', '$2y$10$jN95QpSpsLUturuobt.qqef4prcpYH6jI8uONPfCh/BTHTPetVx02', 'actif', 1, 'jupiter', '../../../view/Client/login/uploads/avatars/6928142713cdfcontrollerjpg', '2025-11-27 00:23:17', NULL),
+(70, 'Nour___', 'nournour2862005@gmail.com', '12345', 'actif', 2, 'mars', NULL, '2025-11-27 00:23:17', NULL),
+(71, 'hichem', 'hichem@gmail.com', '$2y$10$mUSIGyj5mm9L4uBgyuH8I.zvJdbmw6VQxFQ/LsrpNyvfcoYrD7Zwm', 'actif', 1, 'mars', 'view/Client/login/uploads/avatars/69282b60c29c9controller.jpg', '2025-11-27 00:23:17', NULL),
+(72, 'hichem1', 'hichem1@gmail.com', '$2y$10$GUdwLaQctJxavMIh7fwkj.2pUgc62tEkPinXWsIhDoDtTiSLvZcaa', 'actif', 2, 'mars', '../../../view/Client/login/uploads/avatars/6927abe55c338controllerpng', '2025-11-27 02:23:22', NULL),
+(73, 'gass', 'gass@gmail.com', '$2y$10$.6BNZ6gFl8MZUDL/Z9UOtuI.yP5PxFLY1ZXcSlRnhc5YYaQmLyohW', 'actif', 1, 'mars', '../../../view/Client/login/uploads/avatars/6927aea543ac7controllerjpg', '2025-11-27 02:48:32', NULL),
+(74, 'toutou', 'toutou@gmail.com', '$2y$10$MITlfVF2otWIgV9KuQn7H.zHW8GPjxWKPnCeOfW8a38CximpLMGTS', 'actif', 1, 'mars', '../../../view/Client/login/uploads/avatars/6928146fc8c54controllerjpg', '2025-11-27 10:01:15', NULL),
+(75, 'anas', 'anas@gmail.com', '$2y$10$2CpYASG87vVe3P7uy6Rl2.8mCX/DiyIo32jqg8.V00hp99wyB4AnS', 'actif', 1, 'mars', '../../../view/Client/login/uploads/avatars/69281abf08c32controllerjpg', '2025-11-27 10:31:33', NULL),
+(76, 'test', 'test@gmail.com', '$2y$10$rd/f47TfKlr5SsLHWsfGde2Y/dCiFfVByVXoIWE4GnBNQ348kqXpG', 'actif', 1, 'mars', NULL, '2025-11-29 00:57:20', NULL),
+(77, 'Hichem “Hichem” Challakhi', 'challakhihichem1@gmail.com', NULL, 'actif', 2, 'terra', 'https://lh3.googleusercontent.com/a/ACg8ocJrtDeI5evcnR9B8au-ZOjwy-dA-_2l-lvsAhxOqj0iWdAmaJA=s96-c', '2025-12-01 00:11:19', '100107621442434398153'),
+(78, 'asma', 'asma@gmail.com', '$2y$10$Sct.EehC9sHQZFMUJ9K5he0aI1sO.Hm8euBiFnNQbIUyChBDLfn3S', 'actif', 2, 'venus', NULL, '2025-12-01 01:35:49', NULL),
+(79, 'ghada', 'ghada@gmail.com', '$2y$10$U3VVVdLSyYTIMfUpqcnTs.uxJqBmSsGnlseyb2Fd/xJ6DpfACdQba', 'actif', 2, 'jupiter', NULL, '2025-12-01 01:40:28', NULL),
+(80, 'amal', 'amal@gmail.com', '$2y$10$H867rqq97tegfW9mI2h4d.CvEmqWhXJfr7d9fo2R8hsZfFkZzMR7O', 'actif', 2, 'terra', NULL, '2025-12-01 01:43:44', NULL),
+(81, 'ahlem', 'ahlem@gmail.com', '$2y$10$6zoqNeE/Hcg5t2uPf5YOS.WaisF.B.TNbdDipVtFSPuBCm1lFSbVe', 'actif', 2, 'mars', NULL, '2025-12-01 01:46:11', NULL),
+(82, 'ahmed', 'ahmed@gmail.com', '$2y$10$3yfdnrDMt1GGNtlz8wHMhuGCMqrpEG8sRyEE9XI95DhwkgW/l0r3i', 'actif', 2, 'venus', NULL, '2025-12-01 01:48:46', NULL),
+(83, 'mourad', 'mourad@gmail.com', '$2y$10$d/XWALOI6Uc2IbD9GrzMK.elrPL2RjXdMGleHZfVHovTxnzGVj0gW', 'actif', 1, 'mars', NULL, '2025-12-01 01:51:39', NULL),
+(84, 'bob', 'bob@gmail.com', '$2y$10$alRajwrIMTaehCXPkmfkruwMKRgtYpTy55FTe34RuBJNL9Zhnu.nK', 'actif', 2, 'mars', NULL, '2025-12-01 02:12:18', NULL),
+(85, 'riby', 'riby@gmail.com', '$2y$10$UgQ.Q3KZrPW8V2grTuuXbuxSgrNjgHGldabJimsAbI0uhG2r.QHRi', 'actif', 2, 'venus', NULL, '2025-12-01 02:12:41', NULL),
+(86, 'ghassen', 'jabbari.gaston2004@gmail.com', '$2y$10$4N0GfxD6UJVIrCu0KKFv6ewGdb.fGBB.B/..sCoYV18DYe1ToY.iW', 'actif', 2, 'mars', NULL, '2025-12-01 03:49:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -739,7 +781,43 @@ INSERT INTO `user_activity` (`id`, `user_id`, `action`, `timestamp`) VALUES
 (56, 76, 'connexion', '2025-11-29 18:06:56'),
 (57, 76, 'connexion', '2025-11-29 18:08:46'),
 (58, 71, 'connexion', '2025-11-29 19:35:15'),
-(59, 71, 'connexion', '2025-11-29 20:24:07');
+(59, 71, 'connexion', '2025-11-29 20:24:07'),
+(60, 71, 'connexion', '2025-11-30 23:38:41'),
+(61, 71, 'connexion', '2025-11-30 23:39:09'),
+(62, 71, 'connexion', '2025-12-01 01:00:33'),
+(63, 71, 'connexion', '2025-12-01 01:00:41'),
+(64, 71, 'connexion', '2025-12-01 01:01:45'),
+(65, 68, 'connexion', '2025-12-01 01:28:11'),
+(66, 73, 'connexion', '2025-12-01 01:29:35'),
+(67, 74, 'connexion', '2025-12-01 01:32:06'),
+(68, 78, 'connexion', '2025-12-01 01:36:19'),
+(69, 79, 'connexion', '2025-12-01 01:40:35'),
+(70, 80, 'connexion', '2025-12-01 01:43:49'),
+(71, 81, 'connexion', '2025-12-01 01:46:16'),
+(72, 82, 'connexion', '2025-12-01 01:48:53'),
+(73, 83, 'connexion', '2025-12-01 01:51:44'),
+(74, 71, 'connexion', '2025-12-01 01:53:23'),
+(75, 78, 'connexion', '2025-12-01 02:09:07'),
+(76, 85, 'connexion', '2025-12-01 02:12:48'),
+(77, 84, 'connexion', '2025-12-01 02:13:25'),
+(78, 71, 'connexion', '2025-12-01 02:36:05'),
+(79, 71, 'connexion', '2025-12-01 02:42:03'),
+(80, 71, 'connexion', '2025-12-01 03:08:39'),
+(81, 71, 'connexion', '2025-12-01 03:33:33'),
+(82, 86, 'connexion', '2025-12-01 03:49:43'),
+(83, 71, 'connexion', '2025-12-01 03:50:12'),
+(84, 86, 'connexion', '2025-12-01 03:51:20'),
+(85, 71, 'connexion', '2025-12-01 03:51:54'),
+(86, 71, 'connexion', '2025-12-01 11:57:21'),
+(87, 71, 'connexion', '2025-12-01 12:18:02'),
+(88, 71, 'connexion', '2025-12-01 14:51:07'),
+(89, 71, 'connexion', '2025-12-01 14:53:28'),
+(90, 71, 'connexion', '2025-12-06 14:35:49'),
+(91, 71, 'connexion', '2025-12-06 15:35:26'),
+(92, 83, 'connexion', '2025-12-06 15:36:31'),
+(93, 71, 'connexion', '2025-12-07 00:14:11'),
+(94, 71, 'connexion', '2025-12-07 21:26:05'),
+(95, 71, 'connexion', '2025-12-07 21:30:03');
 
 -- --------------------------------------------------------
 
@@ -760,10 +838,19 @@ CREATE TABLE `votes` (
 --
 
 INSERT INTO `votes` (`id`, `innovation_id`, `user_id`, `vote_type`, `created_at`) VALUES
-(10, 43, 1, 'up', '2025-11-27 01:48:59'),
-(29, 54, 71, 'up', '2025-11-28 10:14:39'),
-(37, 54, 76, 'up', '2025-11-29 00:10:06'),
-(39, 43, 76, 'up', '2025-11-29 14:35:52');
+(44, 97, 71, 'up', '2025-12-01 01:06:05'),
+(45, 95, 71, 'up', '2025-12-01 01:07:50'),
+(46, 94, 71, 'up', '2025-12-01 01:08:03'),
+(47, 93, 71, 'up', '2025-12-01 01:08:15'),
+(48, 98, 71, 'down', '2025-12-01 01:08:35'),
+(49, 86, 71, 'up', '2025-12-01 01:08:47'),
+(50, 86, 78, 'up', '2025-12-01 01:09:12'),
+(51, 98, 78, 'down', '2025-12-01 01:09:31'),
+(52, 86, 85, 'up', '2025-12-01 01:13:14'),
+(53, 86, 84, 'up', '2025-12-01 01:15:28'),
+(56, 107, 77, 'up', '2025-12-01 13:54:54'),
+(59, 86, 77, 'up', '2025-12-06 11:48:56'),
+(63, 98, 83, 'up', '2025-12-06 23:12:42');
 
 -- --------------------------------------------------------
 
@@ -867,6 +954,7 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `pseudo` (`pseudo`),
   ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `google_id` (`google_id`),
   ADD KEY `fk_role` (`role_id`);
 
 --
@@ -905,13 +993,13 @@ ALTER TABLE `attachments`
 -- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT pour la table `confirmations_email`
@@ -929,7 +1017,7 @@ ALTER TABLE `conversations`
 -- AUTO_INCREMENT pour la table `innovations`
 --
 ALTER TABLE `innovations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT pour la table `logs_connexions`
@@ -959,7 +1047,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT pour la table `users`
@@ -971,13 +1059,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT pour la table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- Contraintes pour les tables déchargées

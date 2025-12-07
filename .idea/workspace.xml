@@ -4,7 +4,46 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="metier recherche avec ia,pagination,sorting" />
+    <list default="true" id="18850f59-839a-45e1-8db4-0167b2436c8e" name="Changes" comment="metier recherche avec ia,pagination,sorting">
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692cc7c34b57a5.43285798.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce01f768ac5.75265108.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce0f3af05f0.53087215.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce104aecf17.26174996.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce13bc27703.93938782.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce14d581582.27095813.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce166a27af5.51144930.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce1ce35b3a9.72981099.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce1df5f0de4.99723839.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce1f1257bb4.79892758.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce23e496be5.15074880.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce256ba3cc1.60411287.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce26a594401.02981481.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce398ed0c88.15050161.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce3ae028139.26359572.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce3c8a23716.40782722.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce425d16604.89645601.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce436441f55.60739667.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce454f08999.84406192.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce4974f1498.95052208.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce4e5821bb1.34553409.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce4faeeb5a6.49308305.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce50cb308b4.04659836.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce527458db2.41924150.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce5815297e0.10373734.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce58e162a06.86854890.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce5a7dfe260.56380827.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce5bd959c09.49542866.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce60f317d99.94880331.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce62a9cc4f0.92802778.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce66ad005f0.85044058.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce67e8c2ce8.15103819.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce6b5afdc48.11629797.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce6ce6880a9.74299384.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce6db2c5547.37873578.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/Client/Innovation/uploads/innovation_692ce6fc0a5641.45386804.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Innovation/tunispace_database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/model/Innovation/tunispace_database.sql" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -190,14 +229,7 @@
       <workItem from="1764880913793" duration="2459000" />
       <workItem from="1765021673660" duration="5048000" />
       <workItem from="1765028164547" duration="10360000" />
-    </task>
-    <task id="LOCAL-00008" summary="SUPP LALA">
-      <option name="closed" value="true" />
-      <created>1762781399164</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1762781399164</updated>
+      <workItem from="1765139232717" duration="1036000" />
     </task>
     <task id="LOCAL-00009" summary="CSS ADD_Innovation">
       <option name="closed" value="true" />
@@ -583,7 +615,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765038584028</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="metier recherche avec ia,pagination,sorting">
+      <option name="closed" value="true" />
+      <created>1765139249172</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1765139249172</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
