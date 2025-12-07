@@ -1,0 +1,936 @@
+
+<!Doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Admin – Innovation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    <style>
+        /* ======================================================
+           ADMIN PANEL – GLOBAL LAYOUT & SIDEBAR (PREMIUM)
+        ====================================================== */
+
+        /* THEME VARIABLES */
+        :root {
+            --sidebar-width: 240px;
+            --sidebar-bg: #0d1117;
+            --sidebar-hover: #1e2633;
+            --sidebar-text: #cbd5e1;
+
+            --bg: #0c0f14;
+            --text: #dbe6ff;
+            --card-bg: rgba(255,255,255,0.06);
+            --card-border: rgba(255,255,255,0.12);
+
+            --accent: #b38cff;
+        }
+
+        /* LIGHT MODE */
+        body.light {
+            --sidebar-bg: #f6f6f8;
+            --sidebar-hover: #e9ecf3;
+            --sidebar-text: #222;
+
+            --bg: linear-gradient(180deg, #f7f9ff, #eef3ff);;
+            --text: #000;
+            --card-bg: rgba(255,255,255,0.65);
+            --card-border: rgba(0,0,0,0.12);
+        }
+
+        /* GLOBAL */
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Inter", sans-serif;
+            transition: background 0.25s, color 0.25s;
+        }
+
+        /* ======================================================
+           SIDEBAR
+        ====================================================== */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            padding: 20px 18px;
+            background: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            overflow-y: auto;
+            transition: width 0.35s ease, background 0.25s;
+            z-index: 1000;
+        }
+
+        .sidebar-top .user-info h4 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* MENU TITLES */
+        .menu-title {
+            font-size: 11px;
+            opacity: 0.55;
+            margin: 14px 0 6px;
+            text-transform: uppercase;
+        }
+
+        /* MENU & SUBMENU LISTS */
+        .menu,
+        .submenu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* MENU LINKS & THEME SWITCHER */
+        .menu-link,
+        .theme-switcher {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            margin-bottom: 4px;
+            border-radius: 10px;
+            font-weight: 500;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            transition: background 0.25s, box-shadow 0.25s, transform 0.25s, color 0.25s;
+        }
+
+        /* Neon Hover principal */
+        .menu-link:hover,
+        .menu-link.active,
+        .theme-switcher:hover {
+            background: rgba(150, 80, 255, 0.25);
+            box-shadow: 0 0 12px rgba(150, 80, 255, 0.40);
+            color: #dbe6ff;
+            transform: translateY(-2px);
+        }
+
+        .icon-large {
+            font-size: 18px;
+        }
+
+        /* THEME TOGGLE BUTTON */
+        .theme-switcher {
+            justify-content: center;
+            margin-top: 10px;
+            cursor: pointer !important;
+        }
+
+        /* ======================================================
+           SOUS-MENUS (STRUCTURE + SLIDE + ICONES)
+        ====================================================== */
+
+        .submenu {
+            margin: 6px 0 10px 30px;
+            padding-left: 0;
+            border-left: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* Slide-down animation */
+        .menu-dropdown .submenu {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.35s ease, opacity 0.25s ease;
+        }
+
+        .menu-dropdown.open .submenu {
+            max-height: 200px;
+            opacity: 1;
+        }
+
+        .submenu li {
+            margin: 2px 0;
+        }
+
+        /* Lien sous-menu */
+        .submenu a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 0 4px 4px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--sidebar-text);
+            opacity: 0.85;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        /* Emojis par défaut + espacement propre */
+        .submenu a::before {
+            content: "👉";
+            font-size: 12px;
+            opacity: 0.8;
+            margin-right: 6px;
+            transform: translateX(-4px);
+            transition: all 0.25s ease;
+        }
+
+        /* 1er lien de chaque sous-menu = 📄 */
+        .submenu li:first-child a::before {
+            content: "📄";
+        }
+
+        /* 2e lien non "en attente" = ➕ */
+        .submenu li:nth-child(2):not(.innovation-pending) a::before {
+            content: "➕";
+        }
+
+        /* 2e lien En attente = ⏳ */
+        .submenu li:nth-child(2).innovation-pending a::before {
+            content: "⏳";
+        }
+
+        /* Hover sous-menu */
+        .submenu a:hover {
+            padding-left: 10px;
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        /* Sous-menu actif */
+        .submenu a.active-sub {
+            color: #c59bff !important;
+            font-weight: 700;
+            padding-left: 12px;
+        }
+
+        .submenu a.active-sub::before {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* ======================================================
+           SIDEBAR COLLAPSED
+        ====================================================== */
+        body.sidebar-collapsed .sidebar {
+            width: 80px;
+        }
+
+        /* Masquer texte/titres en mode réduit */
+        body.sidebar-collapsed .text,
+        body.sidebar-collapsed .menu-title,
+        body.sidebar-collapsed .user-info {
+            display: none;
+            opacity: 0;
+        }
+
+        /* Recentrer les icônes */
+        body.sidebar-collapsed .menu-link,
+        body.sidebar-collapsed .theme-switcher {
+            justify-content: center;
+            gap: 0;
+        }
+
+        /* Masquer les sous-menus complètement */
+        body.sidebar-collapsed .submenu {
+            max-height: 0 !important;
+            opacity: 0 !important;
+            display: none !important;
+        }
+
+        /* ======================================================
+           HEADER GLOBAL
+        ====================================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 65px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 30px;
+            z-index: 900;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-left: var(--sidebar-width);
+            transition: margin-left 0.35s ease;
+        }
+
+        body.sidebar-collapsed .header-left {
+            margin-left: 80px;
+        }
+
+        #sidebarToggle {
+            font-size: 22px;
+            border: none;
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        /* Rotation du bouton ☰ quand réduit */
+        body.sidebar-collapsed #sidebarToggle {
+            transform: rotate(180deg);
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .header-text p {
+            margin: 0;
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+        .header-right a {
+            color: #b38cff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .header-right a:hover {
+            text-decoration: underline;
+        }
+
+        /* ======================================================
+           MAIN GLOBAL
+        ====================================================== */
+        main {
+            margin-top: 85px;
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            transition: margin-left 0.35s ease;
+        }
+
+        body.sidebar-collapsed main {
+            margin-left: 80px;
+        }
+
+        .dashboard-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title-main {
+            font-size: 26px;
+            margin-bottom: 22px;
+        }
+
+        /* ======================================================
+           CARDS – STYLE GLOBAL PREMIUM
+        ====================================================== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 22px;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+            transition: transform 0.35s, box-shadow 0.35s;
+        }
+
+        /* Card hover animation 3D */
+        .card:hover {
+            transform: translateY(-10px) scale(1.04);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+        }
+
+        .card-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        /* Bouton "Accéder" premium */
+        .card a {
+            display: inline-block;
+            padding: 8px 22px;
+            margin-top: 12px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #8a4bff, #c083ff);
+            color: #dbe6ff !important;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 6px 18px rgba(140,80,255,0.35);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card a:hover {
+            transform: scale(1.12);
+            box-shadow: 0 10px 24px rgba(140,80,255,0.55);
+        }
+
+        /* ======================================================
+           TABLES GENERIQUES
+        ====================================================== */
+        .section-box {
+            background: var(--card-bg);
+            border-radius: 14px;
+            border: 1px solid var(--card-border);
+            padding: 20px;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead {
+            background: rgba(255,255,255,0.05);
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            text-align: left;
+        }
+
+        tr:hover td {
+            background: rgba(255,255,255,0.02);
+        }
+
+        /* Bouton "Ajouter" générique */
+        .btn-add {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #8a4bff, #c083ff);
+            color: #fff !important;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(140,80,255,0.35);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-1px) scale(1.05);
+            box-shadow: 0 10px 24px rgba(140,80,255,0.55);
+        }
+
+        /* Messages */
+        .success {
+            color: #4ade80;
+        }
+        .error {
+            color: #fb7185;
+        }
+
+        /* ======================================================
+           FOOTER
+        ====================================================== */
+        footer {
+            margin-left: var(--sidebar-width);
+            text-align: center;
+            opacity: 0.55;
+            padding: 20px 0;
+            font-size: 13px;
+            transition: margin-left 0.35s ease;
+        }
+
+        body.sidebar-collapsed footer {
+            margin-left: 80px;
+        }
+
+        /* Ajustement du bouton menu (hamburger) */
+        .menu-icon {
+            margin-left: -10px !important;
+        }
+        /* Ajustement de la position du bouton menu (hamburger) */
+        header .menu-toggle,
+        header .menu-icon {
+            margin-left: -25px !important;
+        }
+
+        /* ===== SELECT GLASSMORPHISM ===== */
+        select {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 16px;
+
+            /* Glass effect */
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            /* Borders & text */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            outline: none;
+
+            /* Animation */
+            transition: all 0.25s ease;
+        }
+
+        /* Hover */
+        select:hover {
+            border-color: rgba(160, 70, 255, 0.55);
+            box-shadow: 0 0 10px rgba(160, 70, 255, 0.35);
+        }
+
+        /* Focus (when opened) */
+        select:focus {
+            border-color: rgba(160, 70, 255, 0.8);
+            box-shadow: 0 0 18px rgba(160, 70, 255, 0.6);
+        }
+
+        /* Dropdown items */
+        select option {
+            background: #1a1a1f;       /* Couleur de fond du dropdown */
+            color: #fff;               /* Couleur du texte */
+            padding: 12px;
+        }
+
+        /* Option hover (Chrome/Brave/Edge) */
+        select option:hover {
+            background: #7a37ff !important;
+            color: white;
+        }
+
+        /* Option selected */
+        select option:checked {
+            background: #9c57ff !important;
+            color: white;
+        }
+
+        /* ===========================================
+           🌞 LIGHT MODE (Thème clair)
+           =========================================== */
+        body.light-mode {
+            background: #dbe6ff !important;
+            color: #222 !important;
+        }
+
+        /* === Sidebar clair === */
+        body.light-mode .sidebar {
+            background: #ffffff !important;
+            border-right: 1px solid rgba(0,0,0,0.08);
+        }
+
+        body.light-mode .sidebar a {
+            color: #222 !important;
+        }
+
+        body.light-mode .sidebar a:hover {
+            background: rgba(0,0,0,0.06) !important;
+        }
+
+        body.light-mode .sidebar .menu-dropdown.open > .submenu {
+            background: rgba(0,0,0,0.04) !important;
+        }
+
+        /* === Header clair === */
+        body.light-mode header {
+            background: #ffffff !important;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        body.light-mode header h1,
+        body.light-mode header p,
+        body.light-mode header a {
+            color: #222 !important;
+        }
+
+        /* === Cartes & Box === */
+        body.light-mode .section-box,
+        body.light-mode .card,
+        body.light-mode main form,
+        body.light-mode .dashboard-inner > div,
+        body.light-mode table {
+            background: #dbe6ff !important;
+            color: #222;
+            border: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        /* === Titres === */
+        body.light-mode .section-title-main {
+            color: #111 !important;
+        }
+
+        /* === Inputs & Textarea === */
+        body.light-mode input,
+        body.light-mode textarea,
+        body.light-mode select {
+            background: #ffffff !important;
+            border: 1px solid rgba(0,0,0,0.2) !important;
+            color: #222 !important;
+        }
+
+        body.light-mode input:focus,
+        body.light-mode textarea:focus,
+        body.light-mode select:focus {
+            border-color: #9e4bff !important;
+            box-shadow: 0 0 4px rgba(158,75,255,0.5);
+        }
+
+        /* === Tableau === */
+        body.light-mode table thead {
+            background: #fafafa !important;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        body.light-mode table tbody tr:nth-child(even) {
+            background: #f5f5f5 !important;
+        }
+
+        body.light-mode table tbody tr:hover {
+            background: #ececff !important;
+        }
+
+        /* === Boutons icon === */
+        body.light-mode .btn-icon {
+            background: #ffffff !important;
+            border: 1px solid rgba(0,0,0,0.08) !important;
+            color: #444 !important;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        body.light-mode .btn-icon:hover {
+            background: #dbe6ff !important;
+        }
+
+        /* === Gros boutons violet === */
+        body.light-mode .btn-add,
+        body.light-mode button,
+        body.light-mode .gradient-btn {
+            color: white !important;
+            background: linear-gradient(90deg, #9d4bff, #c07bff) !important;
+            box-shadow: 0 10px 25px rgba(157,75,255,0.25) !important;
+        }
+
+        /* === Footer clair === */
+        body.light-mode footer {
+            color: #dbe6ff !important;
+        }
+
+        /* ============================
+           LIGHT MODE — FORM FIX
+        ============================ */
+
+        body.light-mode {
+            background: #dbe6ff !important;
+        }
+
+        body.light-mode .section-box {
+            background: rgba(255,255,255,0.7) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid #dbe6ff;
+            color: #000;
+        }
+
+        /* === INPUTS === */
+        body.light-mode input,
+        body.light-mode textarea,
+        body.light-mode select {
+            background: #dbe6ff !important;
+            color: #dbe6ff !important;
+            border: 1px solid #ccc !important;
+        }
+
+        body.light-mode input::placeholder,
+        body.light-mode textarea::placeholder {
+            color: #777 !important;
+        }
+
+        /* === SELECT === */
+        body.light-mode select {
+            background-image: none !important;
+        }
+
+        /* === TABLE === */
+        body.light-mode table {
+            background: #ffffff !important;
+            color: #222 !important;
+        }
+
+        body.light-mode table th {
+            background: #fafafa !important;
+            color: #111 !important;
+        }
+
+        body.light-mode table td {
+            background: #dbe6ff !important;
+            color: #333 !important;
+            border-color: #ddd !important;
+        }
+
+        /* === ACTION BUTTONS (edit/delete) === */
+        body.light-mode .btn-icon {
+            background: #fff;
+            border: 1px solid #ddd;
+        }
+
+        body.light-mode .btn-icon:hover {
+            background: #f0f0f0;
+        }
+
+        /* === HEADER === */
+        body.light-mode header {
+            background: #ffffff !important;
+            color: #111 !important;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* === SIDEBAR === */
+        body.light-mode .sidebar {
+            background: #dbe6ff !important;
+            border-right: 1px solid #ddd;
+        }
+
+        body.light-mode .sidebar a {
+            color: #222 !important;
+        }
+
+        body.light-mode .sidebar a:hover {
+            background: rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+
+<body class="admin-dashboard with-sidebar">
+
+<!-- ==================== SIDEBAR ==================== -->
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-top">
+        <div class="user-info">
+            <h4>Espace Administrateur</h4>
+        </div>
+    </div>
+
+    <p class="menu-title">Navigation</p>
+
+    <ul class="menu">
+
+        <li>
+            <a href="index.html" class="menu-link active">
+                <span class="icon-large">📊</span>
+                <span class="text">Dashboard</span>
+            </a>
+        </li>
+
+        <li class="menu-dropdown">
+            <a class="menu-link">
+                <span class="icon-large">🗂️</span>
+                <span class="text">Catégories</span>
+                <i class="bi bi-chevron-down arrow"></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="Innovation/src/a_Category.php">Liste</a></li>
+                <li><a href="Innovation/src/add_Category.php">Ajouter</a></li>
+            </ul>
+        </li>
+
+        <li class="menu-dropdown">
+            <a class="menu-link">
+                <span class="icon-large">🚀</span>
+                <span class="text">Innovations</span>
+                <i class="bi bi-chevron-down arrow"></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="Innovation/src/a_Innovation.php">Toutes</a></li>
+                <li class="innovation-pending">
+                    <a href="Innovation/src/a_Innovation.php?pending">En attente</a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="../Client/index.html" class="menu-link">
+                <span class="icon-large">🌍</span>
+                <span class="text">Front Office</span>
+            </a>
+        </li>
+    </ul>
+
+    <p class="menu-title">Thème</p>
+
+    <div class="theme-switcher" id="themeToggle">
+        <span class="icon-large">☀️</span>
+        <span class="text">Mode Jour / Nuit</span>
+        <span class="icon-large">🌙</span>
+    </div>
+</aside>
+
+<!-- ==================== HEADER ==================== -->
+<header>
+    <div class="header-left">
+        <button id="sidebarToggle">☰</button>
+        <div class="header-text">
+            <h1>🚀 Espace Administrateur</h1>
+            <p>Tableau de bord - Innovation</p>
+        </div>
+    </div>
+    <div class="header-right">
+        <a href="index.php?c=log&a=logout">LOG OUT</a>
+    </div>
+</header>
+
+<!-- ==================== MAIN ==================== -->
+<main>
+    <div class="dashboard-inner">
+        <h2 class="section-title-main">Gestion du système</h2>
+
+        <!-- Cards principales -->
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🗂️</div>
+                <h3>Catégories</h3>
+                <p>Créer, modifier et supprimer des catégories</p>
+                <a href="Innovation/src/a_Category.php">Accéder</a>
+            </div>
+            <div class="card">
+                <div class="card-icon">🚀</div>
+                <h3>Innovations</h3>
+                <p>Gérer les innovations soumises par les utilisateurs</p>
+                <a href="Innovation/src/a_Innovation.php">Accéder</a>
+            </div>
+        </div>
+
+        <!-- Statistiques -->
+        <section style="margin-top: 60px;">
+            <h2 class="stats-title">📊 Statistiques du système</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Total Innovations</h3>
+                    <p style="font-size:32px; font-weight:bold; margin:10px 0 0;">
+                        <?= $totalInnovations ?>
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Total Catégories</h3>
+                    <p style="font-size:32px; font-weight:bold; margin:10px 0 0;">
+                        <?= $totalCategories ?>
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>En attente</h3>
+                    <p style="font-size:32px; font-weight:bold; margin:10px 0 0;">
+                        <?= $totalPending ?>
+                    </p>
+                </div>
+            </div>
+            <div class="chart-wrapper" style="margin-top:30px;">
+                <h3>Répartition des innovations par catégorie</h3>
+                <canvas id="chartCats"></canvas>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+    <p>&copy; 2025 - Innovation - Hichem Challakhi</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // ====== CHART JS (avec données PHP) ======
+    const labels = <?= json_encode(array_keys($catCounts)) ?>;
+    const data   = <?= json_encode(array_values($catCounts)) ?>;
+
+    const ctx = document.getElementById('chartCats');
+    if (ctx) {
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Nombre d'innovations",
+                    data: data,
+                    backgroundColor: '#8A8DFF'
+                }]
+            }
+        });
+    }
+</script>
+
+<script>
+    // === Sidebar toggle ===
+    const body = document.body;
+    const sidebarToggle = document.getElementById("sidebarToggle");
+    const themeToggle = document.getElementById("themeToggle");
+    const dropdowns = document.querySelectorAll(".menu-dropdown");
+
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener("click", () => {
+            body.classList.toggle("sidebar-collapsed");
+        });
+    }
+
+    // === Theme toggle (jour / nuit) ===
+    const themeSwitch = document.querySelector(".theme-switcher");
+
+    if (themeSwitch) {
+        themeSwitch.addEventListener("click", () => {
+            body.classList.toggle("light");
+
+            // Sauvegarde du thème
+            localStorage.setItem(
+                "theme",
+                body.classList.contains("light") ? "light" : "dark"
+            );
+        });
+    }
+
+    // Charger thème sauvegardé
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+        body.classList.add("light");
+    }
+
+    // === Dropdown menus (Catégories / Innovations) ===
+    dropdowns.forEach(drop => {
+        const link = drop.querySelector(".menu-link");
+        if (!link) return;
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            drop.classList.toggle("open");
+        });
+    });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+<div id="div2" style="border:1px solid black ">
+    <h1> wanna log out ?</h1>
+    <a class="btn btn-outline-light btn-sm"
+       href="index.php?c=log&a=logout">log out</a>">
+        LOGOUT
+    </a>
+
+</div>
