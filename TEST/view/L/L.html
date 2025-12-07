@@ -37,7 +37,7 @@
         <h1 class="title">Mission Control</h1>
         <p class="subtitle">Connectez-vous pour commencer votre aventure cosmique</p>
 
-        <form id="loginForm" class="login-form" method="post" action="index.php?c=logC&a=login">
+        <form id="loginForm" class="login-form" method="post" action="index.php?c=chatC&a=login">
             <!-- Bandeau messages -->
             <div id="messageBox" class="message-box"></div>
 
@@ -70,30 +70,12 @@
                 Pas encore astronaute ? <a href="../FrontOffice/register.html">Créez votre compte</a>
             </p>
 
-        <p>— ou —</p>
 
-            <button type="button" id="loginAndChatBtn" class="btn-role">
-                Try out the chat
-            </button>
 
-            <script>
-                document.getElementById('loginAndChatBtn').addEventListener('click', function () {
-                    // Change the form action to go straight to chat after successful login
-                    document.getElementById('loginForm').action = 'index.php?c=chatC&a=login';
-                    // (or if your ChatController expects a specific action: 'index.php?c=chatC&a=show')
 
-                    // Optional nice message
-                    const msg = document.getElementById('messageBox');
-                    msg.textContent = 'Connexion et ouverture du chat…';
-                    msg.className = 'message-box success';
-                    msg.style.display = 'block';
 
-                    // Submit the real form with real credentials
-                    document.getElementById('loginForm').submit();
-                });
-            </script>
-        <a href="index.php?c=ClientC"   class="btn-role">client</a>
-        <a href="index.php?c=AdminC"   class="btn-role">admin</a>
+
+
         </form>
     </div>
 

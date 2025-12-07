@@ -10,9 +10,14 @@
     <link rel="stylesheet" href="view/F/assets/css/style.css">
     <script>
         // ===== CONFIGURATION =====
-        const WS_URL = 'ws://localhost:8080';
+        // Use current hostname so it works on both PC and phone
+        const WS_URL = `ws://${window.location.hostname}:8080`;
         const CURRENT_USER_ID = <?= $_SESSION['user_id'] ?? 0 ?>;
         const CURRENT_USERNAME = '<?= addslashes($_SESSION['username'] ?? 'Guest') ?>';
+
+        console.log('[CONFIG] WebSocket URL:', WS_URL);
+        console.log('[CONFIG] User ID:', CURRENT_USER_ID);
+        console.log('[CONFIG] Username:', CURRENT_USERNAME);
     </script>
     <style>
         /* User Avatar and Dropdown Styles */

@@ -944,5 +944,81 @@ if (searchConvInput && convList) {
     });
 }
 
+// ===== CREATE CONVERSATION =====
+if (createConvBtn) {
+    createConvBtn.addEventListener('click', async () => {
+        if (selectedUsers.length === 0) {
+            alert('Please select at least one user');
+            return;
+        }
+
+        // Disable button during creation
+        createConvBtn.disabled = true;
+        const originalText = createConvBtn.innerHTML;
+        createConvBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+
+        try {
+            const formData = new FormData();
+            formData.append('mode', 'create');
+
+            // Add selected user IDs
+            selectedUsers.forEach(user => {
+                formData.append('participants[]', user.id);
+            });
+
+            // Add title if provided
+            const title = convTitleInput ? convTitleInput.value.trim() : '';
+            if (title) {
+                formData.append('title', title);
+            }
+
+            // Add group flag - automatically set if multiple users
+            const isGroup = (isGroupCheck && isGroupCheck.checked) || selectedUsers.length > 1;
+            if (isGroup) {
+                formData.append('is_group', '1');
+            }
+
+            console.log('[CREATE] Creating conversation with:', {
+                users: selectedUsers.map(u => u.username),
+                title,
+                isGroup
+            });
+
+            // Send request to create conversation
+            const response = await fetch('index.php?c=chatC&a=newConversation', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.redirected) {
+                // Server redirected us to the new conversation
+                console.log('[CREATE] Redirecting to:', response.url);
+                window.location.href = response.url;
+            } else {
+                const text = await response.text();
+                console.log('[CREATE] Response:', text);
+
+                // Try to extract conversation ID from response
+                const match = text.match(/conversation&id=(\d+)/);
+                if (match) {
+                    const convId = match[1];
+                    console.log('[CREATE] Success! Conversation ID:', convId);
+                    window.location.href = `index.php?c=chatC&a=conversation&id=${convId}`;
+                } else {
+                    console.log('[CREATE] Created but no ID found, reloading...');
+                    window.location.reload();
+                }
+            }
+        } catch (error) {
+            console.error('[CREATE] Error:', error);
+            alert('Failed to create conversation. Please try again.');
+
+            // Re-enable button
+            createConvBtn.disabled = false;
+            createConvBtn.innerHTML = originalText;
+        }
+    });
+}
+
 // ===== INITIALIZE =====
 connectWebSocket();
