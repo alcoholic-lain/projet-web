@@ -46,7 +46,7 @@ if ($_POST['content'] ?? false) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Admin Comment - TUNISPACE</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../../../../Users/nadhem/PhpstormProjects/projet-web/tunispace%20backup/assets/style.css">
     <style>
         body { background: #0f0f1a; color: #e0f0ff; font-family: 'Segoe UI'; padding: 40px; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
         .card { background: #151525; padding: 40px; border-radius: 20px; border: 3px solid #00e1ff; width: 600px; box-shadow: 0 0 40px rgba(0,225,255,0.2); }

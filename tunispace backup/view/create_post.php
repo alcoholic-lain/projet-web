@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Create Post - TUNISPACE</title>
-  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../../../../Users/nadhem/PhpstormProjects/projet-web/tunispace%20backup/assets/style.css">
 </head>
 <body>
 
@@ -37,7 +37,7 @@
     <p>Fill out the fields to add a new article.</p>
 
     <div class="create-post-form" style="max-width: 600px; margin: 0 auto; padding: 20px; background: rgba(10,10,40,0.75); border-radius: 15px;">
-      <form action="../controller/PostController.php" method="POST">
+      <form action="../../../../Users/nadhem/PhpstormProjects/projet-web/tunispace%20backup/controller/PostController.php" method="POST">
         <label>Title:</label>
         <input type="text" name="title" placeholder="Article title" required>
 

@@ -1,4 +1,6 @@
 <?php
+use model\Article;
+
 session_start();
 if (!isset($_SESSION['admin'])) {
     header("Location: login.php");
@@ -16,7 +18,7 @@ $article = $articleModel->getById($_GET['id']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Post - TUNISPACE</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../../../../Users/nadhem/PhpstormProjects/projet-web/tunispace%20backup/assets/style.css">
     <style>
         body {
             background: #0f0f1a;
@@ -134,7 +136,7 @@ $article = $articleModel->getById($_GET['id']);
 <div class="edit-container">
     <h2>✏️ Edit Post</h2>
 
-    <form action="../controller/updatepost.php" method="POST" enctype="multipart/form-data">
+    <form action="../../../../Users/nadhem/PhpstormProjects/projet-web/tunispace%20backup/controller/updatepost.php" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $article['id'] ?>">
 
         <div>
