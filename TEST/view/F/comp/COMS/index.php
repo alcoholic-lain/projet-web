@@ -296,7 +296,7 @@
                 <div class="typing-dots">
                     <span></span><span></span><span></span>
                 </div>
-                <span id="typingText">Someone is typing...</span>
+                <span id="typingText"></span>
             </div>
 
             <div id="editBanner" class="edit-banner" style="display:none;">
