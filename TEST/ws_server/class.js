@@ -18,20 +18,11 @@ class ChatRTC {
         let sent = 0;
 
         console.log(`[BROADCAST] To conversation ${conversationId}, excluding ${excludeClientId}`);
-        console.log(`[BROADCAST] Data:`, data);
 
         this.clients.forEach((client, clientId) => {
             const isInConversation = client.conversationId == conversationId;
             const isNotExcluded = clientId !== excludeClientId;
             const isOpen = client.ws.readyState === WebSocket.OPEN;
-
-            console.log(`[BROADCAST] Client ${clientId} (${client.username}):`, {
-                isInConversation,
-                isNotExcluded,
-                isOpen,
-                clientConv: client.conversationId,
-                targetConv: conversationId
-            });
 
             if (isOpen && isInConversation && isNotExcluded) {
                 client.ws.send(msg);
@@ -256,6 +247,7 @@ class ChatRTC {
                             username: client.username,
                             content: msg.content.trim(),
                             conversationId: client.conversationId,
+                            replyToId: msg.replyToId || null,
                             timestamp: new Date().toISOString()
                         };
 
@@ -322,6 +314,22 @@ class ChatRTC {
                         }
                         break;
 
+                    case 'reaction_update':
+                        // NEW: Reaction updated
+                        if (client.conversationId && msg.messageId) {
+                            console.log(`[WS] 😊 Reaction on message ${msg.messageId} by ${client.username}`);
+
+                            this.broadcast(client.conversationId, {
+                                type: 'reaction_updated',
+                                messageId: msg.messageId,
+                                reactions: msg.reactions,
+                                userId: client.userId,
+                                conversationId: client.conversationId,
+                                timestamp: new Date().toISOString()
+                            }, clientId);
+                        }
+                        break;
+
                     case 'ping':
                         // Respond to ping
                         ws.send(JSON.stringify({ type: 'pong', timestamp: new Date().toISOString() }));
@@ -366,14 +374,14 @@ class ChatRTC {
             clearInterval(heartbeat);
         });
 
-        console.log('╔════════════════════════════════════╗');
+        console.log('╔═══════════════════════════════════╗');
         console.log('║   🚀 TuniSpace Chat Server         ║');
         console.log('║                                    ║');
         console.log(`║   Port: ${this.port}                       ║`);
         console.log(`║   URL: ws://localhost:${this.port}         ║`);
         console.log('║                                    ║');
         console.log('║   Status: ✅ Running                ║');
-        console.log('╚════════════════════════════════════╝');
+        console.log('╚═══════════════════════════════════╝');
     }
 }
 

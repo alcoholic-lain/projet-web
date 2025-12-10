@@ -24,17 +24,3 @@ require_once __DIR__ . COMS2Message_PATH;
 
 
 
-function buildUrl($controller, $action, $params = []) {
-    $url = "index.php?c=$controller&a=$action";
-
-    // Add session_name if it exists
-    if (isset($_SESSION['_session_name_suffix'])) {
-        $params['session_name'] = $_SESSION['_session_name_suffix'];
-    }
-
-    foreach ($params as $key => $value) {
-        $url .= "&$key=" . urlencode($value);
-    }
-
-    return $url;
-}

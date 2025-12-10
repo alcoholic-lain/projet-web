@@ -24,13 +24,10 @@ class ChatController
             echo '<style>'. file_get_contents(__DIR__ . '/../../../view/F/comp/COMS/assets/css/style.css') .'</style>';
             require __DIR__ . COMS2F_PATH;
             echo '<script>'.file_get_contents(__DIR__ . '/../../../view/F/comp/COMS/assets/js/chat.js') . ' </script>';
-
             exit;
         }
 
-
         $page = 'auth';
-
         echo '<style>'. file_get_contents(__DIR__ . '/../../../view/F/comp/COMS/assets/css/style.css') .'</style>';
         require __DIR__ . COMS2F_PATH;
         echo '<script>'.file_get_contents(__DIR__ . '/../../../view/F/comp/COMS/assets/js/chat.js') . ' </script>';
@@ -201,13 +198,21 @@ class ChatController
         $messages = Message::findByConversation($conversationId, 200);
 
         $formattedMessages = array_map(function($msg) use ($userId) {
+            // Parse reactions from JSON
+            $reactions = [];
+            if (!empty($msg['reaction'])) {
+                $reactions = json_decode($msg['reaction'], true) ?? [];
+            }
+
             return [
                 'id' => $msg['id'],
                 'content' => $msg['content'],
                 'user_id' => $msg['user_id'],
                 'username' => $msg['username'],
                 'created_at' => $msg['created_at'],
-                'is_own' => (int)$msg['user_id'] === $userId
+                'is_own' => (int)$msg['user_id'] === $userId,
+                'reactions' => $reactions,
+                'reply_to_id' => $msg['reply_to_id']
             ];
         }, $messages);
 
@@ -215,6 +220,79 @@ class ChatController
             'success' => true,
             'messages' => $formattedMessages
         ]);
+        exit;
+    }
+
+    /**
+     * NEW: Toggle reaction on a message
+     */
+    public function toggleReaction()
+    {
+        $this->requireLogin();
+        header('Content-Type: application/json');
+
+        $userId = (int)$_SESSION['user_id'];
+        $messageId = (int)($_POST['message_id'] ?? 0);
+        $emoji = trim($_POST['emoji'] ?? '');
+
+        if (!$messageId || !$emoji) {
+            echo json_encode(['success' => false, 'message' => 'Invalid data']);
+            exit;
+        }
+
+        try {
+            $message = Message::findById($messageId);
+            if (!$message) {
+                echo json_encode(['success' => false, 'message' => 'Message not found']);
+                exit;
+            }
+
+            // Check if user has access to this conversation
+            $conversationId = $message->getConversationId();
+            if (!Conversation::userInConversation($conversationId, $userId)) {
+                echo json_encode(['success' => false, 'message' => 'Access denied']);
+                exit;
+            }
+
+            // Get current reactions
+            $reactions = $message->getReactions();
+
+            // Toggle user's reaction for this emoji
+            if (!isset($reactions[$emoji])) {
+                $reactions[$emoji] = [];
+            }
+
+            $userIdStr = (string)$userId;
+            $key = array_search($userIdStr, $reactions[$emoji]);
+
+            if ($key !== false) {
+                // Remove reaction
+                unset($reactions[$emoji][$key]);
+                $reactions[$emoji] = array_values($reactions[$emoji]); // Re-index
+
+                // Remove emoji key if no users reacted with it
+                if (empty($reactions[$emoji])) {
+                    unset($reactions[$emoji]);
+                }
+            } else {
+                // Add reaction
+                $reactions[$emoji][] = $userIdStr;
+            }
+
+            // Update message
+            $message->setReactions($reactions);
+            $message->save();
+
+            echo json_encode([
+                'success' => true,
+                'reactions' => $reactions
+            ]);
+        } catch (Exception $e) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Error toggling reaction: ' . $e->getMessage()
+            ]);
+        }
         exit;
     }
 
@@ -244,11 +322,16 @@ class ChatController
 
             if ($mode === 'send') {
                 $content = trim($_POST['content'] ?? '');
+                $replyToId = isset($_POST['reply_to_id']) ? (int)$_POST['reply_to_id'] : null;
+
                 if ($content !== '') {
                     $m = new Message();
                     $m->setConversationId($conversationId);
                     $m->setUserId($userId);
                     $m->setContent($content);
+                    if ($replyToId) {
+                        $m->setReplyToId($replyToId);
+                    }
                     $m->save();
 
                     // Return message ID for WebSocket

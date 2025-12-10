@@ -1,11 +1,7 @@
 <?php
 // model/Message.php
 
-
-
-
 require_once __DIR__ . '/../../config/config.php';
-
 
 class Message
 {
@@ -14,6 +10,8 @@ class Message
     private int $user_id = 0;
     private string $content = '';
     private string $created_at = '';
+    private array $reactions = []; // emoji => [userId1, userId2, ...]
+    private ?int $reply_to_id = null;
 
     // Getters & Setters
     public function getId(): ?int
@@ -61,6 +59,26 @@ class Message
         $this->created_at = $created_at;
     }
 
+    public function getReactions(): array
+    {
+        return $this->reactions;
+    }
+
+    public function setReactions(array $reactions): void
+    {
+        $this->reactions = $reactions;
+    }
+
+    public function getReplyToId(): ?int
+    {
+        return $this->reply_to_id;
+    }
+
+    public function setReplyToId(?int $reply_to_id): void
+    {
+        $this->reply_to_id = $reply_to_id;
+    }
+
     private static function fromArray(array $row): self
     {
         $m = new self();
@@ -69,6 +87,16 @@ class Message
         $m->user_id = (int)$row['user_id'];
         $m->content = $row['content'];
         $m->created_at = $row['created_at'];
+        $m->reply_to_id = isset($row['reply_to_id']) ? (int)$row['reply_to_id'] : null;
+
+        // Parse reactions from JSON
+        if (!empty($row['reaction'])) {
+            $reactions = json_decode($row['reaction'], true);
+            $m->reactions = is_array($reactions) ? $reactions : [];
+        } else {
+            $m->reactions = [];
+        }
+
         return $m;
     }
 
@@ -120,13 +148,15 @@ class Message
     {
         $pdo = config::getConnexion();
         $stmt = $pdo->prepare("
-            INSERT INTO messages (conversation_id, user_id, content)
-            VALUES (:conversation_id, :user_id, :content)
+            INSERT INTO messages (conversation_id, user_id, content, reaction, reply_to_id)
+            VALUES (:conversation_id, :user_id, :content, :reaction, :reply_to_id)
         ");
         $ok = $stmt->execute([
             ':conversation_id' => $this->conversation_id,
             ':user_id' => $this->user_id,
             ':content' => $this->content,
+            ':reaction' => json_encode($this->reactions),
+            ':reply_to_id' => $this->reply_to_id
         ]);
         if ($ok) $this->id = (int)$pdo->lastInsertId();
         return $ok;
@@ -136,9 +166,17 @@ class Message
     {
         if (!$this->id) return false;
         $pdo = config::getConnexion();
-        $stmt = $pdo->prepare("UPDATE messages SET content = :content WHERE id = :id");
+        $stmt = $pdo->prepare("
+            UPDATE messages 
+            SET content = :content, 
+                reaction = :reaction,
+                reply_to_id = :reply_to_id
+            WHERE id = :id
+        ");
         return $stmt->execute([
             ':content' => $this->content,
+            ':reaction' => json_encode($this->reactions),
+            ':reply_to_id' => $this->reply_to_id,
             ':id' => $this->id
         ]);
     }
@@ -151,5 +189,3 @@ class Message
         return $stmt->execute([':id' => $this->id]);
     }
 }
-
-

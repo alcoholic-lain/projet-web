@@ -234,7 +234,7 @@
             </div>
         </div>
         <div class="header-btns">
-            <button id="maximizeBtn">▢</button>
+
             <button id="closeBtn">✕</button>
         </div>
     </div>
@@ -308,6 +308,9 @@
                     <i class="fas fa-times"></i> Cancel
                 </button>
             </div>
+
+
+
 
             <form class="input-bar" id="messageForm">
                 <textarea name="content" id="messageInput" placeholder="Type a message..." rows="1"></textarea>
