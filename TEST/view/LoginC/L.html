@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TuniSpace - Connexion</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    <link rel="stylesheet" href="<?=LOGIN_CSS?>">
+    <link rel="stylesheet" href="<?=LOG_CSS?>">
+
+
+
+
+
+
+
+</head>
+
+
+
+
+<body>
+
+<canvas id="galaxyCanvas"></canvas>
+<div class="bg-animation"></div>
+
+<div class="login-container">
+
+    <div class="login-card">
+        <h1 class="title">Mission Control</h1>
+        <p class="subtitle">Connectez-vous pour commencer votre aventure cosmique</p>
+
+        <form id="loginForm" class="login-form" method="post" action="index.php?c=logC&a=login">
+            <!-- Bandeau messages -->
+            <div id="messageBox" class="message-box"></div>
+
+            <div class="input-group">
+                <label for="email">E-mail :</label>
+                <input type="email" id="email" name="email" placeholder="exemple@tunisspace.com">
+            </div>
+
+            <div class="input-group">
+                <label for="password">Mot de passe :</label>
+                <input type="password" id="password" name="password" placeholder="••••••••••">
+            </div>
+
+            <button type="submit" class="btn-login">Se connecter</button>
+
+            <div class="google-login">
+                <p>— ou —</p>
+
+                <a  class="btn-google">
+                    <img src="<?= GOOGLE_ICON_PATH ?>"  width="20" height="20">
+                    Se connecter avec Google
+                </a>
+            </div>
+
+            <p class="forgot">
+                Vous avez oublié votre mot de passe ? <a href="updatepsw.html">Cliquez ici</a>
+            </p>
+
+            <p class="signup">
+                Pas encore astronaute ? <a href="../FrontOffice/register.html">Créez votre compte</a>
+            </p>
+
+
+
+
+
+
+
+        </form>
+    </div>
+
+
+</div>
+
+<!-- Galaxy animation script (from Template F) -->
+<script>
+    const canvas = document.getElementById('galaxyCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const stars = Array.from({length: 450}, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.7 + 0.4,
+        a: Math.random(),
+        s: Math.random() * 0.6 + 0.2
+    }));
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        stars.forEach(s => {
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255,255,255,${s.a})`;
+            ctx.fill();
+            s.a += (Math.random() - 0.5) * 0.04;
+            s.a = Math.max(0.3, Math.min(1, s.a));
+            s.x += s.s;
+            if (s.x > canvas.width) s.x = 0;
+        });
+        requestAnimationFrame(animate);
+    }
+    animate();
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+</script>
+
+
+</body>
+</html>
+
+
+

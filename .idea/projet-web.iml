@@ -2,8 +2,12 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/controller/components" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/model" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/projet-web/google-api-php-client/src" isTestSource="false" packagePrefix="Google" />
+      <sourceFolder url="file://$MODULE_DIR$/projet-web/model" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/projet-web/phpmailer/src" isTestSource="false" packagePrefix="PHPMailer\PHPMailer\" />
+      <sourceFolder url="file://$MODULE_DIR$/projet-web/phpmailer/test" isTestSource="true" packagePrefix="PHPMailer\Test\" />
+      <excludeFolder url="file://$MODULE_DIR$/projet-web/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/projet-web/vendor/phpmailer/phpmailer" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

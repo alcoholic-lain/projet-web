@@ -62,7 +62,7 @@ class Conversation
 
     public static function findAll(): array
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->query("SELECT * FROM conversations ORDER BY id ASC");
         $list = [];
         foreach ($stmt->fetchAll() as $row) {
@@ -73,7 +73,7 @@ class Conversation
 
     public static function findById(int $id): ?self
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("SELECT * FROM conversations WHERE id = :id");
         $stmt->execute([':id' => $id]);
         $row = $stmt->fetch();
@@ -82,7 +82,7 @@ class Conversation
 
     public static function findByUser(int $userId, bool $withDisplayTitle = false): array
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $sql = "SELECT c.id, c.title, c.is_group, cu.is_admin
                 FROM conversations c
                 JOIN conversation_users cu ON cu.conversation_id = c.id
@@ -103,7 +103,7 @@ class Conversation
 
     public static function userInConversation(int $conversationId, int $userId): bool
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("SELECT 1 FROM conversation_users WHERE conversation_id = :cid AND user_id = :uid");
         $stmt->execute([':cid' => $conversationId, ':uid' => $userId]);
         return $stmt->fetch() !== false;
@@ -111,7 +111,7 @@ class Conversation
 
     public static function isUserAdmin(int $conversationId, int $userId): bool
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("SELECT is_admin FROM conversation_users WHERE conversation_id = :cid AND user_id = :uid");
         $stmt->execute([':cid' => $conversationId, ':uid' => $userId]);
         $row = $stmt->fetch();
@@ -121,7 +121,7 @@ class Conversation
     public function getParticipants(): array
     {
         if (!$this->id) return [];
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("
             SELECT u.id AS user_id, u.username, u.email, cu.is_admin
             FROM conversation_users cu
@@ -154,7 +154,7 @@ class Conversation
     public function addUser(int $userId, bool $isAdmin = false): bool
     {
         if (!$this->id) return false;
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("
             INSERT INTO conversation_users (conversation_id, user_id, is_admin)
             VALUES (:cid, :uid, :is_admin)
@@ -170,7 +170,7 @@ class Conversation
     public function removeUser(int $userId): bool
     {
         if (!$this->id) return false;
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("DELETE FROM conversation_users WHERE conversation_id = :cid AND user_id = :uid");
         return $stmt->execute([':cid' => $this->id, ':uid' => $userId]);
     }
@@ -182,7 +182,7 @@ class Conversation
 
     private function insert(): bool
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("INSERT INTO conversations (title, is_group) VALUES (:title, :is_group)");
         $ok = $stmt->execute([
             ':title' => $this->title,
@@ -195,7 +195,7 @@ class Conversation
     private function update(): bool
     {
         if (!$this->id) return false;
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("UPDATE conversations SET title = :title, is_group = :is_group WHERE id = :id");
         return $stmt->execute([
             ':title' => $this->title,
@@ -207,13 +207,13 @@ class Conversation
     public function delete(): bool
     {
         if (!$this->id) return false;
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("DELETE FROM conversations WHERE id = :id");
         return $stmt->execute([':id' => $this->id]);
     }
     public static function getMostActive(): ?array
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->query("
             SELECT 
                 c.id,

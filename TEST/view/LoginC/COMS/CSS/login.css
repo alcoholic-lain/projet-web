@@ -1,0 +1,206 @@
+/* assets/css/login.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #050814;
+    color: #f5f6ff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;        /* ← This fixes it */
+    overflow-x: hidden;
+    padding: 20px 0;
+}
+/* Galaxy background & effects from Template F */
+#galaxyCanvas { position:fixed; inset:0; z-index:-3; pointer-events:none; }
+.bg-animation {
+    position:fixed; inset:0; z-index:-2;
+    background: radial-gradient(circle at 60% 20%,rgba(90,50,180,.25),transparent 50%),
+    radial-gradient(circle at 20% 80%,rgba(255,80,120,.18),transparent 60%);
+    opacity:.7;
+}
+.bg-animation::before {
+    content:""; position:absolute; top:-20%; left:-10%; width:140%; height:70%;
+    background: linear-gradient(120deg,rgba(120,220,255,.25),rgba(190,140,255,.35),transparent 70%);
+    filter: blur(35px); opacity:.55;
+    animation: aurora 18s ease-in-out infinite alternate;
+}
+@keyframes aurora { from{transform:translateX(-8%) translateY(0%)} to{transform:translateX(8%) translateY(6%)} }
+
+.login-container {
+    z-index: 1;
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+}
+
+.login-card {
+    background: rgba(20,25,50,.65);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 28px;
+    padding: 50px 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    animation: fadeIn .8s ease-out;
+    text-align: center;
+}
+@keyframes fadeIn { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(90deg,#ffefc0,#ffb27a,#ff7f2a);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 10px;
+    text-shadow: 0 0 40px rgba(255,127,42,.7);
+}
+
+.subtitle {
+    font-size: 15px;
+    color: #ccd6f6;
+    margin-bottom: 30px;
+    opacity: .85;
+}
+
+#messageBox {
+    margin-bottom: 20px;
+    padding: 12px 20px;
+    border-radius: 16px;
+    font-size: 14px;
+    display: none;
+}
+
+#messageBox.success {
+    background: rgba(134,239,172,.2);
+    color: #86efac;
+    border: 1px solid rgba(134,239,172,.3);
+}
+
+#messageBox.error {
+    background: rgba(255,107,107,.2);
+    color: #ff6b6b;
+    border: 1px solid rgba(255,107,107,.3);
+}
+
+.input-group {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #ccd6f6;
+    font-size: 14px;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 14px 20px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 16px;
+    color: white;
+    font-size: 15px;
+    outline: none;
+    transition: .3s;
+}
+
+input::placeholder { color: rgba(255,255,255,.5); }
+
+input:focus { border-color:#ff7f2a; box-shadow:0 0 20px rgba(255,127,42,.4); }
+
+.btn-login {
+    width: 100%;
+    background: linear-gradient(to right,#ff7f2a,#ff2a7f);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 10px 30px rgba(255,100,80,.5);
+    transition: .3s;
+    margin-top: 10px;
+}
+
+.btn-login:hover { transform:translateY(-4px); box-shadow:0 15px 40px rgba(255,100,80,.7); }
+
+.google-login {
+    margin: 20px 0;
+    color: #ccd6f6;
+}
+
+.google-login p {
+    margin-bottom: 10px;
+    position: relative;
+    text-align: center;
+}
+
+.google-login p::before,
+.google-login p::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: rgba(255,255,255,.15);
+}
+
+.google-login p::before { left: 0; }
+.google-login p::after { right: 0; }
+
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: rgba(255,255,255,.08);
+    color: #e2e8f0;
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 16px;
+    padding: 14px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.btn-google:hover {
+    background: rgba(255,255,255,.12);
+    border-color: #ff7f2a;
+    box-shadow: 0 0 20px rgba(255,127,42,.3);
+}
+
+.btn-google img {
+    width: 20px;
+    height: 20px;
+}
+
+.forgot,
+.signup {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ccd6f6;
+}
+
+.forgot a,
+.signup a {
+    color: #ff7f2a;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.forgot a:hover,
+.signup a:hover {
+    color: #ffb27a;
+    text-shadow: 0 0 15px rgba(255,127,42,.6);
+}

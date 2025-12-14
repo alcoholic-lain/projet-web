@@ -102,7 +102,7 @@ class Message
 
     public static function findAll(int $limit = 200): array
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("SELECT * FROM messages ORDER BY created_at DESC LIMIT :limit");
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->execute();
@@ -115,7 +115,7 @@ class Message
 
     public static function findById(int $id): ?self
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("SELECT * FROM messages WHERE id = :id");
         $stmt->execute([':id' => $id]);
         $row = $stmt->fetch();
@@ -124,7 +124,7 @@ class Message
 
     public static function findByConversation(int $conversationId, int $limit = 200): array
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("
             SELECT m.*, u.username
             FROM messages m
@@ -146,7 +146,7 @@ class Message
 
     private function insert(): bool
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("
             INSERT INTO messages (conversation_id, user_id, content, reaction, reply_to_id)
             VALUES (:conversation_id, :user_id, :content, :reaction, :reply_to_id)
@@ -165,7 +165,7 @@ class Message
     private function update(): bool
     {
         if (!$this->id) return false;
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("
             UPDATE messages 
             SET content = :content, 
@@ -184,7 +184,7 @@ class Message
     public function delete(): bool
     {
         if (!$this->id) return false;
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("DELETE FROM messages WHERE id = :id");
         return $stmt->execute([':id' => $this->id]);
     }

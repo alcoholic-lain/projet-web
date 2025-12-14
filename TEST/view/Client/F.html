@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Space - Cosmic Messenger</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050814;
+            color: #f5f6ff;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+
+        .light body,
+        .light {
+            background: #f8fafc !important;
+            color: #1e293b !important;
+        }
+
+        /* Galaxy background */
+        #galaxyCanvas {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            pointer-events: none;
+        }
+
+        .bg-animation {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: radial-gradient(circle at 60% 20%, rgba(90, 50, 180, 0.25), transparent 50%),
+            radial-gradient(circle at 20% 80%, rgba(255, 80, 120, 0.18), transparent 60%);
+            opacity: 0.7;
+        }
+
+        .bg-animation::before {
+            content: "";
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 140%;
+            height: 70%;
+            background: linear-gradient(120deg, rgba(120, 220, 255, 0.25), rgba(190, 140, 255, 0.35), transparent 70%);
+            filter: blur(35px);
+            opacity: 0.55;
+            animation: aurora 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes aurora {
+            from { transform: translateX(-8%) translateY(0%); }
+            to { transform: translateX(8%) translateY(6%); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 0;
+            background: rgba(5, 8, 20, 0.45);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            z-index: 9999;
+        }
+
+        .light header {
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom-color: rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff7f2a, #ff2a7f);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        header nav a {
+            color: #fff;
+            margin-left: 28px;
+            font-weight: 500;
+            opacity: 0.85;
+            transition: all 0.25s;
+            text-decoration: none;
+        }
+
+        .light header nav a {
+            color: #1e293b;
+        }
+
+        header nav a:hover,
+        .active {
+            color: #ff7f2a;
+            opacity: 1;
+            text-shadow: 0 0 15px rgba(255, 127, 42, 0.6);
+        }
+
+        /* User dropdown */
+        #user-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2.5px solid rgba(255, 127, 42, 0.6);
+            box-shadow: 0 0 20px rgba(255, 127, 42, 0.4);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #user-avatar:hover {
+            transform: scale(1.1);
+        }
+
+        #user-dropdown {
+            position: absolute;
+            top: 68px;
+            right: 20px;
+            width: 260px;
+            background: rgba(20, 25, 50, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            z-index: 10000;
+        }
+
+        #user-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: #e2e8f0;
+            font-size: 14.5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(255, 127, 42, 0.2);
+            color: white;
+        }
+
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .dropdown-item.logout {
+            color: #ff6b6b;
+        }
+
+        .dropdown-item.logout:hover {
+            background: rgba(255, 107, 107, 0.2);
+        }
+
+        .toggle-checkbox {
+            display: none;
+        }
+
+        .toggle-label {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+            background: #334155;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        .toggle-label::after {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 4px;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle-checkbox:checked + .toggle-label {
+            background: #ff7f2a;
+        }
+
+        .toggle-checkbox:checked + .toggle-label::after {
+            transform: translateX(20px);
+        }
+
+        .ml-auto {
+            margin-left: auto;
+        }
+
+        /* Main content */
+        main {
+            flex: 1;
+            position: relative;
+            overflow-y: auto;
+            padding: 90px 0 100px;
+            z-index: 1;
+        }
+
+        .content-layer {
+            position: relative;
+            width: 100%;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .content-card {
+            background: rgba(20, 25, 50, 0.65);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 28px;
+            padding: 60px 80px;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .left-aligned {
+            text-align: left !important;
+        }
+
+        .left-aligned h2,
+        .left-aligned h3 {
+            text-align: left;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-card h2 {
+            font-size: 4.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ffefc0, #ffb27a, #ff7f2a);
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 50px rgba(255, 127, 42, 0.8);
+        }
+
+        .content-card h3 {
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, #ff7f2a, #ff2a7f);
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline;
+        }
+
+        .content-card p {
+            font-size: 1.7rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding: 50px 20px 30px;
+            text-align: center;
+            background: rgba(10, 12, 26, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(16px);
+            position: relative;
+            z-index: 1;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            width: 160%;
+            height: 6px;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, transparent, #ffc850, #ff7878, #b450ff, transparent);
+            filter: blur(5px);
+            animation: nova 6s ease-in-out infinite;
+        }
+
+        @keyframes nova {
+            0%, 100% {
+                transform: translateX(-52%) scaleX(0.9);
+            }
+            50% {
+                transform: translateX(-48%) scaleX(1.4);
+            }
+        }
+
+        footer p {
+            font-size: 15px;
+        }
+
+        footer span {
+            background: linear-gradient(90deg, #ff7f2a, #ff2a7f, #a46bff);
+            -webkit-background-clip: text;
+            color: transparent;
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .border-gray-700 {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .my-2 {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="dark">
+
+<header>
+    <h1>TuniSpace</h1>
+    <div style="display:flex;align-items:center;gap:20px">
+        <nav>
+            <a href="#home" class="active">Home</a>
+            <a href="Innovation/src/categories.php">Categorie</a>
+            <a href="#messages">Messages</a>
+            <a href="Reclamation/src/choix.php">Reclamation</a>
+        </nav>
+
+        <div class="connection-status" id="wsStatus">
+            <span class="connection-dot connecting"></span>
+            <span id="wsStatusText">Connecting...</span>
+        </div>
+
+        <div style="position:relative">
+            <div id="user-avatar">
+                <?php
+                $firstLetter = isset($_SESSION['username'])
+                        ? strtoupper(substr($_SESSION['username'], 0, 1))
+                        : 'G';
+                echo $firstLetter;
+                ?>
+            </div>
+
+            <div id="user-dropdown">
+                <div class="dropdown-item" style="pointer-events:none;opacity:0.95;background:rgba(255,127,42,0.1)">
+                    <i class="fas fa-user-circle"></i>
+                    <div>
+                        <div style="font-weight:600;font-size:15px">
+                            <?= htmlspecialchars($_SESSION['username'] ?? 'Guest') ?>
+                        </div>
+                        <div style="font-size:12px;opacity:0.7">
+                            <?= $_SESSION['role'] ?? 'front' ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown-divider"></div>
+
+                <div class="dropdown-item" id="profileBtn">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </div>
+
+                <div class="dropdown-item" id="darkModeToggle">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                    <div class="toggle-wrapper">
+                        <input type="checkbox" id="theme-switch" class="toggle-checkbox" checked>
+                        <label for="theme-switch" class="toggle-label"></label>
+                    </div>
+                </div>
+
+                <div class="dropdown-item" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
+
+                <?php if (isset($_SESSION['user_id']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'back')): ?>
+                <div class="dropdown-divider"></div>
+
+                <a href="index.php?c=chatA&a=index" class="dropdown-item">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Back Office</span>
+                </a>
+                <?php endif; ?>
+
+                <div class="dropdown-divider"></div>
+
+                <a href="index.php?c=chatC&a=logout" class="dropdown-item logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+<main>
+    <canvas id="galaxyCanvas"></canvas>
+    <div class="bg-animation"></div>
+    <div class="content-layer" id="content-area">
+        <div class="content-card">
+            <h2>idk sth cool to read...</h2>
+            <h3>Welcome have fun ></h3>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>Crafted with <span>♥</span> in the cosmos – <span>Space</span> © 2025</p>
+</footer>
+
+<script>
+    // Galaxy starfield animation
+    const canvas = document.getElementById('galaxyCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const stars = Array.from({length: 450}, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.7 + 0.4,
+        a: Math.random(),
+        s: Math.random() * 0.6 + 0.2
+    }));
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        stars.forEach(s => {
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            const isDark = document.documentElement.classList.contains('dark');
+            ctx.fillStyle = `rgba(255, 255, 255, ${isDark ? s.a : s.a * 0.3})`;
+            ctx.fill();
+            s.a += (Math.random() - 0.5) * 0.04;
+            s.a = Math.max(0.3, Math.min(1, s.a));
+            s.x += s.s;
+            if (s.x > canvas.width) s.x = 0;
+        });
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+
+    // Theme switcher
+    const themeSwitch = document.getElementById('theme-switch');
+    if (localStorage.getItem('theme') === 'light') {
+        document.documentElement.classList.remove('dark');
+    }
+    themeSwitch.checked = document.documentElement.classList.contains('dark');
+    themeSwitch.addEventListener('change', () => {
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // User dropdown toggle
+    document.getElementById('user-avatar').addEventListener('click', e => {
+        e.stopPropagation();
+        document.getElementById('user-dropdown').classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => {
+        document.getElementById('user-dropdown').classList.remove('show');
+    });
+
+    // SPA navigation
+    const contentArea = document.getElementById('content-area');
+    const pages = {
+        home: `<div class="content-card"><h2>Private. Fast. Beautiful.</h2><p>Messaging, reimagined in the cosmos.</p></div>`,
+        categories: `<div class="content-card"><h2>Orbit</h2><p>AI coming soon....</p></div>`,
+        messages: `<div class="content-card left-aligned">
+                        <h2>Messages</h2>
+                        <div style="margin-top:40px; font-size:1.5rem; line-height:1.9; opacity:0.95;">
+                            <h3 style="font-size:1.8rem; background:linear-gradient(90deg,#ff7f2a,#ff2a7f);-webkit-background-clip:text;color:transparent; display:inline;">
+                                Messages coming soon
+                            </h3>
+                            <br><br>
+                            Stay tuned for our messaging feature!
+                        </div>
+                    </div>`
+    };
+
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', e => {
+            const href = link.getAttribute('href');
+
+            // If it's a PHP link, let the browser handle it
+            if (!href.startsWith('#')) {
+                return;
+            }
+
+            // Otherwise it's SPA navigation
+            e.preventDefault();
+            const page = href.substring(1);
+
+            if (!pages[page]) return;
+
+            contentArea.innerHTML = pages[page];
+
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+</script>
+
+
+
+
+<script>
+
+    // Wait for DOM and all scripts to load
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('[DEBUG] DOM Loaded, checking for DMPopup...');
+
+        // Add a small delay to ensure inline script is parsed
+        setTimeout(function() {
+            console.log('[DEBUG] Checking DMPopup availability...');
+            console.log('[DEBUG] typeof DMPopup:', typeof DMPopup);
+            console.log('[DEBUG] window.DMPopup:', window.DMPopup);
+
+            if (typeof DMPopup === 'undefined') {
+                console.error('[ERROR] DMPopup class not loaded!');
+                console.error('[ERROR] Check if ChatController renderView() is being called');
+                return;
+            }
+
+            console.log('[DEBUG] DMPopup class found');
+            console.log('[DEBUG] Conversations data:', <?= json_encode($conversations ?? []) ?>);
+
+            const chat = new DMPopup({
+                wsUrl: WS_URL,
+                userId: CURRENT_USER_ID,
+                username: CURRENT_USERNAME,
+                apiBaseUrl: 'index.php?c=chatC&a=',
+
+            });
+            console.log('[DEBUG] DMPopup instance created:', chat);
+
+            // Load conversations data
+            const conversationsData = <?= json_encode($conversations ?? []) ?>;
+
+            // Initialize the chat system
+            chat.init(conversationsData);
+
+            console.log('[DEBUG] DMPopup initialized');
+
+            // Check if elements were created
+            setTimeout(() => {
+                const dmBtn = document.getElementById('dm-btn');
+                const dmPopup = document.getElementById('dm-popup');
+                const canvas = document.getElementById('galaxyCanvas');
+
+                console.log('[DEBUG] Elements check:');
+                console.log('  - dm-btn:', dmBtn);
+                console.log('  - dm-popup:', dmPopup);
+                console.log('  - galaxyCanvas:', canvas);
+
+                if (!dmBtn) {
+                    console.error('[ERROR] Floating button not created!');
+                } else {
+                    console.log('[DEBUG] Button display:', window.getComputedStyle(dmBtn).display);
+                    console.log('[DEBUG] Button z-index:', window.getComputedStyle(dmBtn).zIndex);
+                }
+            }, 500);
+
+            // Make globally available for inline handlers
+            window.dmPopup = chat;
+
+        }, 100); // Small delay to ensure script injection is complete
+    });
+</script>
+
+
+</body>
+</html>

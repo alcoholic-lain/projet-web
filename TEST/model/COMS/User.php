@@ -97,7 +97,7 @@ class User
 
     public static function findAll(): array
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->query("SELECT * FROM user ORDER BY id ASC");
         $users = [];
         foreach ($stmt->fetchAll() as $row) {
@@ -108,7 +108,7 @@ class User
 
     public static function findById(int $id): ?self
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("SELECT * FROM user WHERE id = :id");
         $stmt->execute([':id' => $id]);
         $row = $stmt->fetch();
@@ -117,7 +117,7 @@ class User
 
     public static function findByEmail(string $email): ?self
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("SELECT * FROM user WHERE email = :email");
         $stmt->execute([':email' => $email]);
         $row = $stmt->fetch();
@@ -126,7 +126,7 @@ class User
 
     public static function search(string $term, int $excludeUserId = 0): array
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $sql = "SELECT * FROM user WHERE ( username LIKE :term OR email LIKE :term)";
         if ($excludeUserId > 0) $sql .= " AND id <> :exclude";
         $sql .= " ORDER BY username ASC LIMIT 50";
@@ -150,7 +150,7 @@ class User
 
     private function insert(): bool
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("
             INSERT INTO user (username, email, password, chat_role, is_active)
             VALUES (:username, :email, :password_hash, :role, :is_active)
@@ -169,7 +169,7 @@ class User
     private function update(): bool
     {
         if ($this->id === null) return false;
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("
             UPDATE user SET username = :username, email = :email,
                 password = :password_hash, chat_role = :role, is_active = :is_active
@@ -188,13 +188,13 @@ class User
     public function delete(): bool
     {
         if ($this->id === null) return false;
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->prepare("DELETE FROM user WHERE id = :id");
         return $stmt->execute([':id' => $this->id]);
     }
     public static function getMostActive(): ?array
     {
-        $pdo = config::getConnexion();
+        $pdo = COMS_config::getConnexion();
         $stmt = $pdo->query("
             SELECT 
                 u.id,

@@ -1,6 +1,6 @@
 <?php
 
-const C2L_PATH = '/../view/L/L_index.php';
+const C2L_PATH = '/../view/LoginC/L_index.php';
 const C2F_PATH = '/../view/F/F_index.php';
 
 const C2B_PATH = '/../view/B/B_index.php';
@@ -63,9 +63,9 @@ class LogC {
         $_SESSION['role']     = $user->getRole();
 
         if ($user->getRole() === 'back') {
-            header('Location: index.php?c=ClientC&a=index');
+            header('Location: index.php?c=chatA&a=index');
         } else {
-            header('Location: index.php?c=AdminC&a=index');
+            header('Location: index.php?c=chatC&a=index');
         }
         exit;
 

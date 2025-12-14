@@ -2,7 +2,7 @@
 const WebSocket = require('ws');
 
 class ChatRTC {
-    constructor(port = 8080) {
+    constructor(port = 9090) {
         this.port = port;
         this.clients = new Map(); // clientId → { ws, conversationId, userId, username }
         this.typingTimers = new Map(); // conversationId → Map<userId, timeout>

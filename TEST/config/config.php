@@ -28,7 +28,7 @@ const DB_USER = 'root';
 const DB_PASS = ''; // your password here
 
 
-class config
+class COMS_config
 {
     private static $pdo = null;
 
@@ -58,4 +58,4 @@ class config
     }
 }
 
-config::getConnexion();
+COMS_config::getConnexion();

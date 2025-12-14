@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            overflow: hidden;
+            background-image: linear-gradient(90deg, #ff8a00, #e52e71);
+            background-size: 400% 400%;
+            -webkit-animation: background 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            animation: background 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        }
+        body,
+        .css-tricks {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .css-tricks {
+            transition: 0.35s transform ease;
+            -webkit-animation: spin 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            animation: spin 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        }
+        .css-tricks div,
+        .css-tricks::before {
+            transition: 0.25s opacity ease;
+        }
+        .css-tricks:hover div,
+        .css-tricks:hover::before {
+            opacity: 0.8;
+        }
+        .css-tricks::before {
+            content: '';
+            background-color: #fff;
+            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+        }
+        .css-tricks div {
+            position: absolute;
+            perspective: 500px;
+        }
+        .css-tricks div::before {
+            content: '';
+            display: block;
+            transform: rotateX(-70deg);
+            transform-origin: top center;
+            width: 80px;
+            height: 380px;
+            background-color: #fff;
+            border-radius: 40px 40px 0 0/60px 60px 0 0;
+            -webkit-animation: shrink 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            animation: shrink 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        }
+        .css-tricks div:not(:nth-child(3n + 1))::before {
+            zoom: 1.05;
+        }
+        div:nth-child(2) {
+            transform: rotate(60deg);
+        }
+        div:nth-child(3) {
+            transform: rotate(120deg);
+        }
+        div:nth-child(4) {
+            transform: rotate(180deg);
+        }
+        div:nth-child(5) {
+            transform: rotate(240deg);
+        }
+        div:nth-child(6) {
+            transform: rotate(300deg);
+        }
+        @-webkit-keyframes background {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        @keyframes background {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        @-webkit-keyframes spin {
+            0% {
+                transform: rotate(0) scale(1);
+            }
+            50% {
+                transform: rotate(360deg) scale(0.4);
+            }
+            100% {
+                transform: rotate(720deg) scale(1);
+            }
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0) scale(1);
+            }
+            50% {
+                transform: rotate(360deg) scale(0.4);
+            }
+            100% {
+                transform: rotate(720deg) scale(1);
+            }
+        }
+        @-webkit-keyframes shrink {
+            100%, 0% {
+                height: 380px;
+                width: 80px;
+            }
+            40% {
+                height: 0;
+            }
+        }
+        @keyframes shrink {
+            100%, 0% {
+                height: 380px;
+                width: 80px;
+            }
+            40% {
+                height: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<a class="css-tricks" href="https://twitter.com/bourhaouta" target="_blank">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</a>
+
+</body>
+</html>

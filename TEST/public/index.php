@@ -10,13 +10,11 @@ session_start();
 
 
 // paths
-const GOOGLE_ICON_PATH = '../view/L/assets/img/g_icon.png';
+const GOOGLE_ICON_PATH = '../view/LoginC/COMS/img/g_icon.png';
 
-const LOGIN_CSS = '../view/L/assets/CSS/login.css';
+const LOGIN_CSS = '../view/LoginC/COMS/CSS/login.css';
 
-const LOG_CSS = '../view/L/assets/log.css';
-
-
+const LOG_CSS = '../view/LoginC/COMS/log.css';
 
 
 
@@ -33,15 +31,16 @@ const LOG_CSS = '../view/L/assets/log.css';
 
 
 
-require_once __DIR__ . '/../controller/AdminC.php';
-require_once __DIR__ . '/../controller/ClientC.php';
+
+
+
 require_once __DIR__ . '/../controller/LogC.php';
-require_once __DIR__ . '/../controller/comp/COMS/AdminController.php';
-require_once __DIR__ . '/../controller/comp/COMS/ChatController.php';
+require_once __DIR__ . '/../controller/components/COMS/AdminController.php';
+require_once __DIR__ . '/../controller/components/COMS/ChatController.php';
 
 
 $controllerName = $_GET['c'] ?? 'log';
-$action         = $_GET['a'] ?? 'index';
+$action         = $_GET['a'] ?? 'login';
 
 switch ($controllerName) {
 
@@ -52,12 +51,6 @@ switch ($controllerName) {
         $controller = new AdminController();
         break;
 
-    case 'AdminC':
-        $controller = new AdminC();
-        break;
-    case 'ClientC':
-        $controller = new ClientC();
-        break;
 
 
     case 'log':
