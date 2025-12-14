@@ -39,7 +39,7 @@ Cette section décrit les étapes nécessaires pour installer et configurer le p
     * Démarrez Apache et MySQL depuis l'interface de WAMP/XAMPP.
     * Accédez au projet via `http://localhost/projet-web`.
 
-3.  **[À Personnaliser] Installation des dépendances et base de données :**
+3.  **Installation des dépendances et base de données :**
     * **Dépendances Backend :** Exécutez la commande d'installation de dépendances de votre langage (ex: `composer install`).
     * **Dépendances Frontend :** Installez les paquets JS/CSS (ex: `npm install` puis `npm run dev/build`).
     * **Base de données :** Lancez les migrations (si applicable) et importez les données initiales.
