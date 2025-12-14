@@ -69,8 +69,8 @@ Le projet nécessite l'installation de **[Langage/Techno Principal, ex: PHP, Nod
 | **COMS** | Admin | Basic CRUD OPS, Dashboard UI, Message-conv links. |
 | **INOVATION** | Client | Basic CRUD OPS, Chatbot, Search inno & category, Add innovation with attached file, My innovation(s), Comment innovation, Vote for innovation, Download attached file in innovation, Just see confirmed innovation. |
 | **INOVATION** | Admin | Basic CRUD OPS, API send mail for confirmed or rejected innovation, Pagging liste of categories and innovations, Sort by of categories and innovations, Download excel or pdf for categories and innovations, Statistic on dasheboard. |
-| **FEED** | Client | **Ceci est à définir** (pour Nadhem). |
-| **FEED** | Admin | **Ceci est à définir** (pour Nadhem). |
+| **FEED** | Client | **Créer/Consulter/Répondre à des sujets, Rechercher et Filtrer les posts (par catégorie, date), Liker/Réagir aux publications, Voir les profils d'utilisateurs.** |
+| **FEED** | Admin | **Modérer les publications et les commentaires (édition, suppression, archivage), Gérer les catégories du forum, Bannir temporairement ou définitivement les utilisateurs du forum (outils de modération).** |
 | **RECLAMATION** | Client | Créer une nouvelle réclamation, Consulter la liste de ses réclamations, Voir le détail et le statut d’une réclamation, Ajouter un commentaire, Joindre des fichiers (preuves), Clôturer sa réclamation, Recevoir des notifications. |
 | **RECLAMATION** | Admin/Med | Voir la liste de toutes les réclamations, Filtrer, Affecter à un agent/admin, Modifier le statut, Répondre (commentaires internes ou publics), Consulter l’historique complet, Supprimer (avec justification), Imprimer et télécharger en PDF et CSV. |
 
