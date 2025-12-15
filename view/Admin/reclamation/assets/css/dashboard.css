@@ -1,0 +1,392 @@
+/* même style que a_Category pour les boutons Modifier / Supprimer */
+
+/* Boutons 3D pour actions */
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
+    font-size: 18px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow:
+            0 6px 12px rgba(0,0,0,0.35),
+            inset 0 2px 4px rgba(255,255,255,0.15);
+}
+
+.btn-icon:hover {
+    transform: translateY(-5px) scale(1.12);
+    box-shadow:
+            0 14px 28px rgba(0,0,0,0.45),
+            inset 0 3px 6px rgba(255,255,255,0.25);
+}
+
+.btn-icon.edit {
+    color: #bb8bff;
+}
+
+.btn-icon.delete {
+    color: #ff6b6b;
+}
+
+.btn-icon.edit:hover {
+    box-shadow:
+            0 14px 28px rgba(140,80,255,0.55),
+            inset 0 3px 6px rgba(255,255,255,0.25);
+}
+
+.btn-icon.delete:hover {
+    box-shadow:
+            0 14px 28px rgba(255,50,50,0.55),
+            inset 0 3px 6px rgba(255,255,255,0.25);
+}
+
+/* Petit style pour le lien de déco */
+.link-logout {
+    color: #ff6b6b;
+    text-decoration: underline;
+}
+/*-----------------*/
+/* ======================================================
+   STYLES SPÉCIFIQUES POUR LA PAGE REPONDRE.PHP
+====================================================== */
+
+/* En-tête de section */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.section-header h2 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Filtres */
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-section h3 {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--text);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.filter-btn:hover {
+    background: rgba(150, 80, 255, 0.1);
+    border-color: rgba(150, 80, 255, 0.4);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #8a4bff, #c083ff);
+    border-color: transparent;
+    color: white;
+}
+
+/* Tableau des réponses */
+.reponses-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reponses-table th {
+    background: rgba(255, 255, 255, 0.05);
+    font-weight: 600;
+    padding: 15px 12px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.reponses-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    vertical-align: top;
+}
+
+.reponses-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Cellules spéciales */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sujet-cell {
+    max-width: 200px;
+    word-wrap: break-word;
+}
+
+.reponse-preview {
+    max-width: 250px;
+}
+
+.reponse-text {
+    opacity: 0.9;
+    font-style: italic;
+}
+
+/* Liste des réclamations en attente */
+.pending-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.pending-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.pending-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 179, 71, 0.3);
+}
+
+.pending-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pending-info strong {
+    color: var(--text);
+}
+
+.pending-user {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.pending-more {
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.page-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--text);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.page-btn:hover:not(.disabled) {
+    background: rgba(150, 80, 255, 0.1);
+    border-color: rgba(150, 80, 255, 0.4);
+}
+
+.page-btn.active {
+    background: linear-gradient(135deg, #8a4bff, #c083ff);
+    border-color: transparent;
+    color: white;
+}
+
+.page-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Bouton désactivé */
+.btn-dashboard.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Statuts avec icônes */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .reponses-table {
+        font-size: 14px;
+    }
+    
+    .reponses-table th,
+    .reponses-table td {
+        padding: 10px 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .section-actions {
+        align-self: flex-end;
+    }
+    
+    .filter-buttons {
+        justify-content: center;
+    }
+    
+    .pending-item {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .reponses-table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .filter-btn {
+        text-align: center;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .btn-icon {
+        width: 40px;
+        height: 40px;
+    }
+}
+/*   ------------------*/ 
+/* ======================================================
+   STYLES SPÉCIFIQUES POUR L'ENVOI D'EMAILS
+====================================================== */
+
+/* Affichage de l'email */
+.email-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(138, 75, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(138, 75, 255, 0.3);
+}
+
+.email-notification {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(74, 255, 139, 0.1);
+    border: 1px solid rgba(74, 255, 139, 0.3);
+    border-radius: 10px;
+    margin: 20px 0;
+    color: #4aff8b;
+}
+
+.email-notification i {
+    font-size: 18px;
+}
+
+/* Statuts pour les emails */
+.status-resolu {
+    background: rgba(74, 255, 139, 0.2);
+    color: #4AFF8B;
+    border: 1px solid rgba(74, 255, 139, 0.3);
+}
+
+.status-confirmé {
+    background: rgba(74, 255, 139, 0.2);
+    color: #4AFF8B;
+    border: 1px solid rgba(74, 255, 139, 0.3);
+}
+
+.status-rejeté {
+    background: rgba(255, 107, 107, 0.2);
+    color: #FF6B6B;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.status-en-attente {
+    background: rgba(255, 179, 71, 0.2);
+    color: #FFB347;
+    border: 1px solid rgba(255, 179, 71, 0.3);
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TuniSpace - Connexion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+    <!-- reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcoLSMsAAAAAHVy43IaNYMSESN7Xc-8MYGty6Zd"></script>
+</head>
+<body>
+
+<canvas id="galaxyCanvas"></canvas>
+<div class="bg-animation"></div>
+
+<div class="login-container">
+    <div class="login-card">
+        <h1 class="title">Mission Control</h1>
+        <p class="subtitle">Connectez-vous pour commencer votre aventure cosmique</p>
+
+        <form id="loginForm" class="login-form">
+            <!-- Bandeau messages -->
+            <div id="messageBox" class="message-box"></div>
+
+            <div class="input-group">
+                <label for="email">E-mail :</label>
+                <input type="email" id="email" name="email" placeholder="exemple@tunisspace.com" >
+            </div>
+
+            <div class="input-group">
+                <label for="password">Mot de passe :</label>
+                <input type="password" id="password" name="password" placeholder="••••••••••" >
+            </div>
+
+            <!-- CAPTCHA visuel créatif -->
+            <div class="captcha-container">
+                <span id="captchaQuestion" class="captcha-question"></span>
+                <input type="text" id="captchaAnswer" placeholder="Résultat" >
+                <button type="button" id="refreshCaptcha" class="btn-refresh">🔄</button>
+            </div>
+
+            <label>
+                <input type="checkbox" id="rememberMe" name="rememberMe" value="1"> Se souvenir de moi
+            </label>
+
+            <button type="submit" class="btn-login">Se connecter</button>
+
+            <div class="google-login">
+                <p>— ou —</p>
+                <a href="../../controller/UserC/GoogleLoginController.php" class="btn-google">
+                    <img src="assets/img/google-icon.png" alt="Google Icon">
+                    Se connecter avec Google
+                </a>
+            </div>
+
+            <p class="forgot">
+                Vous avez oublié votre mot de passe ? <a href="forgot_password.php">Cliquez ici</a>
+            </p>
+
+            <p class="signup">
+                Pas encore astronaute ? <a href="register.html">Créez votre compte</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+<script src="assets/js/login.js" defer></script>
+</body>
+</html>

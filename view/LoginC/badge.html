@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Badges Utilisateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b0e2e;
+            color: white;
+            padding: 30px;
+        }
+
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .badge {
+            background: #14173d;
+            border-radius: 12px;
+            padding: 20px;
+            width: 130px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+
+        .badge:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255,255,255,0.4);
+        }
+
+        .badge-icon {
+            font-size: 40px;
+        }
+
+        .badge-name {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .level-bronze { color: #cd7f32; }
+        .level-silver { color: #c0c0c0; }
+        .level-gold { color: #ffd700; }
+    </style>
+</head>
+<body>
+
+<h1>🎖️ Vos badges</h1>
+
+<div id="badgeContainer" class="badge-container"></div>
+
+<script>
+    // Exemple de badges de l'utilisateur (simulé)
+    const userBadges = [
+        { icon: "🔥", name: "Actif", level: "bronze" },
+        { icon: "⚡", name: "Ultra Actif", level: "gold" },
+        { icon: "💬", name: "Communicateur", level: "silver" }
+    ];
+
+    const container = document.getElementById("badgeContainer");
+
+    userBadges.forEach(badge => {
+        container.innerHTML += `
+        <div class="badge">
+            <div class="badge-icon">${badge.icon}</div>
+            <div class="badge-name level-${badge.level}">
+                ${badge.name}
+            </div>
+        </div>
+    `;
+    });
+</script>
+
+</body>
+</html>

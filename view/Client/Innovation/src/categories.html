@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}}</title>
+    <link rel="stylesheet" href="../../assets/css/user.css">
+    <link rel="stylesheet" href="../assets/css/categories.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="dark">
+
+<header>
+    <div class="container">
+        <h1>TuniSpace</h1>
+        <nav>
+            <a href="../../F_index.php">Home</a>
+            <a href="#Innovation/src/categories.php" class="active">Categorie</a>
+        </nav>
+        <div style="position:relative">
+            <img id="user-avatar" src="{{AVATAR}}" alt="{{USERNAME}}" style="cursor:pointer;">
+            <div id="user-dropdown">
+                <div class="dropdown-item" onclick="window.location.href='{{PROFILE_LINK}}';">{{USERNAME}}</div>
+                <div class="dropdown-item logout">
+                    <a href="{{LOGOUT_LINK}}">get out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    {{CONTENT}}
+</main>
+
+<footer class="cs-footer">&copy; 2025 – {{TITLE}} – Tunispace</footer>
+<script src="../assets/js/categories.js"></script>
+</body>
+</html>

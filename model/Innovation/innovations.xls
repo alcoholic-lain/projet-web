@@ -1,0 +1,86 @@
+<table id="tableInno">
+                <thead>
+                <tr>
+                    <th onclick="sortInnovationTable(0)">ID: </th>
+                    <th onclick="sortInnovationTable(1)">Nom </th>
+                    <th onclick="sortInnovationTable(2)">Description </th>
+                    <th onclick="sortInnovationTable(3)">Date </th>
+                    <th>Actions</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                                                            <tr>
+                            <td>40</td>
+                            <td>Santé &amp; Médecine Spatiale</td>
+                            <td>Innovations dédiées à la santé en microgravité : diagnostic embarqué, thérapies adaptées, nanotechnologies médicales et suivi physiologique d’astronautes.</td>
+                            <td>2025-12-01 01:19:23</td>
+                            <td>
+                                <a href="edit_Category.php?id=40" class="btn-icon edit" title="Modifier">
+                                    ✏️
+                                </a>
+
+                                <a href="a_Category.php?delete=40" class="btn-icon delete" onclick="return confirm('Supprimer cette catégorie ?');" title="Supprimer">
+                                    🗑️
+                                </a>
+
+
+
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td>39</td>
+                            <td>Matériaux Avancés</td>
+                            <td>Création de matériaux légers, résistants à la chaleur, à la radiation ou adaptés aux structures spatiales : composites, métamatériaux, nanotextures.</td>
+                            <td>2025-12-01 01:19:11</td>
+                            <td>
+                                <a href="edit_Category.php?id=39" class="btn-icon edit" title="Modifier">
+                                    ✏️
+                                </a>
+
+                                <a href="a_Category.php?delete=39" class="btn-icon delete" onclick="return confirm('Supprimer cette catégorie ?');" title="Supprimer">
+                                    🗑️
+                                </a>
+
+
+
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td>38</td>
+                            <td>IA &amp; Vision Spatiale</td>
+                            <td>Systèmes d’intelligence artificielle capable d’analyser des images satellites, détecter des anomalies, cartographier des surfaces et piloter des modules autonomes.</td>
+                            <td>2025-12-01 01:18:59</td>
+                            <td>
+                                <a href="edit_Category.php?id=38" class="btn-icon edit" title="Modifier">
+                                    ✏️
+                                </a>
+
+                                <a href="a_Category.php?delete=38" class="btn-icon delete" onclick="return confirm('Supprimer cette catégorie ?');" title="Supprimer">
+                                    🗑️
+                                </a>
+
+
+
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td>37</td>
+                            <td>Technologies Quantiques</td>
+                            <td>Applications de la physique quantique pour le calcul, la communication sécurisée, la détection ultra-précise et les capteurs de nouvelle génération.</td>
+                            <td>2025-12-01 01:18:46</td>
+                            <td>
+                                <a href="edit_Category.php?id=37" class="btn-icon edit" title="Modifier">
+                                    ✏️
+                                </a>
+
+                                <a href="a_Category.php?delete=37" class="btn-icon delete" onclick="return confirm('Supprimer cette catégorie ?');" title="Supprimer">
+                                    🗑️
+                                </a>
+
+
+
+                            </td>
+                        </tr>
+                                                    </tbody>
+            </table>

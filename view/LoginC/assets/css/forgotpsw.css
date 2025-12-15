@@ -1,0 +1,343 @@
+/* assets/css/forgotpsw.css  (also use for resetpassword.css) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #050814;
+    color: #f5f6ff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Galaxy background from Template F */
+#galaxyCanvas { position:fixed; inset:0; z-index:-3; pointer-events:none; }
+.bg-animation {
+    position:fixed; inset:0; z-index:-2;
+    background: radial-gradient(circle at 60% 20%,rgba(90,50,180,.25),transparent 50%),
+    radial-gradient(circle at 20% 80%,rgba(255,80,120,.18),transparent 60%);
+    opacity:.7;
+}
+.bg-animation::before {
+    content:""; position:absolute; top:-20%; left:-10%; width:140%; height:70%;
+    background: linear-gradient(120deg,rgba(120,220,255,.25),rgba(190,140,255,.35),transparent 70%);
+    filter: blur(35px); opacity:.55;
+    animation: aurora 18s ease-in-out infinite alternate;
+}
+@keyframes aurora { from{transform:translateX(-8%) translateY(0%)} to{transform:translateX(8%) translateY(6%)} }
+
+.reset-container, .forgot-container {
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+}
+
+.reset-card, .forgot-card {
+    background: rgba(20,25,50,.65);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 28px;
+    padding: 50px 45px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    animation: fadeIn .9s ease-out;
+    text-align: center;
+}
+@keyframes fadeIn { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+
+.title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: linear-gradient(90deg,#ffefc0,#ffb27a,#ff7f2a);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 12px;
+    text-shadow: 0 0 40px rgba(255,127,42,.7);
+}
+
+.subtitle {
+    font-size: 15.5px;
+    color: #ccd6f6;
+    margin-bottom: 35px;
+    opacity: .9;
+}
+
+.input-group {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #ccd6f6;
+    font-size: 14.5px;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 16px;
+    color: white;
+    font-size: 15px;
+    outline: none;
+    transition: .3s;
+}
+
+input::placeholder { color: rgba(255,255,255,.5); }
+
+input:focus {
+    border-color: #ff7f2a;
+    box-shadow: 0 0 22px rgba(255,127,42,.4);
+}
+
+.btn-forgot,
+.btn-reset {
+    width: 100%;
+    background: linear-gradient(to right,#ff7f2a,#ff2a7f);
+    color: white;
+    padding: 16px;
+    border: none;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255,100,80,.5);
+    transition: .3s;
+    margin-top: 10px;
+}
+
+.btn-forgot:hover,
+.btn-reset:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(255,100,80,.7);
+}
+
+#message {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    min-height: 20px;
+}
+
+#message.success { background: rgba(134,239,172,.2); color:#86efac; border:1px solid rgba(134,239,172,.3); }
+#message.error   { background: rgba(255,107,107,.2); color:#ff6b6b; border:1px solid rgba(255,107,107,.3); }
+
+.login-link {
+    margin-top: 30px;
+    font-size: 14.5px;
+    color: #ccd6f6;
+}
+
+.login-link a {
+    color: #ff7f2a;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.login-link a:hover {
+    color: #ffb27a;
+    text-shadow: 0 0 15px rgba(255,127,42,.6);
+}
+
+
+
+.field { margin-bottom: 25px; position: relative; }
+input {
+    width: 100%; padding: 16px; border-radius: 12px; border: 2px solid #444;
+    background: #0f0f1a; color: white; font-size: 16px; transition: all 0.3s;
+}
+input.valid   { border-color: #00ff88; box-shadow: 0 0 12px rgba(0,255,136,0.4); }
+input.invalid { border-color: #ff4444; box-shadow: 0 0 12px rgba(255,68,68,0.4); }
+
+.msg {
+    position: absolute; left: 0; right: 0; top: 100%; margin-top: 6px;
+    font-size: 0.9em; opacity: 0; transition: opacity 0.3s;
+}
+.msg.show { opacity: 1; }
+.msg.success { color: #00ff88; }
+.msg.error   { color: #ff4444; }
+
+button {
+    width: 100%;
+    background: linear-gradient(to right, #ff7f2a, #ff2a7f);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 10px 30px rgba(255, 100, 80, .5);
+    transition: .3s;
+    margin-top: 10px;
+}
+button:hover {background: linear-gradient(to right, #ff7f2a, #ff2a7f);
+    transform:translateY(-4px); box-shadow:0 15px 40px rgba(255,100,80,.7);
+}
+
+
+.requirements { font-size: 0.85em; color: #888; text-align: center; margin-top: 20px; }
+
+/* ===== MESSAGE DE SUCCÈS – DESIGN PARFAIT ===== */
+.success-container {
+    text-align: center;
+    padding: 50px 20px;
+}
+.success-message {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #00ff88;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+    margin-bottom: 40px;
+    line-height: 1.3;
+}
+.success-btn {
+    display: inline-block;
+    background: #8b5cf6;
+    color: white;
+    border-radius: 50px;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+    transition: all 0.3s;
+}
+.success-btn:hover {
+    background: #9d6efc;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(139, 92, 246, 0.6);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ——— SUCCESS SCREEN – VERSION SÉPARÉE & ULTRA-BELLE ——— */
+.success-block {
+    text-align: center;
+    padding: 90px 20px 100px;
+    animation: fadeIn 1s ease-out;
+}
+
+.success-check {
+    font-size: 6em;
+    color: #00ff88;
+    margin-bottom: 15px;
+    display: inline-block;
+    animation: checkPop 0.9s ease-out;
+}
+
+.success-text {
+    font-size: 2.6em;
+    font-weight: 900;
+    background: linear-gradient(135deg, #00ff88, #00ffc8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 50px 0;
+    line-height: 1.3;
+}
+.btenv{
+    width: 100%;
+    background: linear-gradient(to right, #ff7f2a, #ff2a7f);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 10px 30px rgba(255, 100, 80, .5);
+    transition: .3s;
+    margin-top: 10px;
+}
+.btn-success {
+    display: inline-block;
+    background: #8b5cf6;
+    color: white;
+    padding: 16px 52px;
+    border-radius: 50px;
+    font-size: 1.35em;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 10px 35px rgba(139,92,246,0.45);
+    transition: all 0.35s ease;
+}
+
+.btn-success:hover {
+    background: #9d6efc;
+    transform: translateY(-5px);
+    box-shadow: 0 18px 45px rgba(139,92,246,0.6);
+}
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes checkPop { 0% { transform: scale(0); } 70% { transform: scale(1.2); } 100% { transform: scale(1); } }
+
+/* Mobile */
+@media (max-width: 480px) {
+    .success-check { font-size: 4.5em; }
+    .success-text { font-size: 2.1em; }
+    .btn-success { padding: 14px 40px; font-size: 1.25em; }
+}
+
+
+#btg {
+    background: linear-gradient(135deg, #ff4b4b, #e63838); /* dégradé rouge vif */
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 15px;            /* coins arrondis généreux */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(230,56,56,0.4), 0 0 10px rgba(255,75,75,0.5);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Effet hover : glow + légère translation */
+#btg:hover {
+    background: linear-gradient(135deg, #ff6161, #ff2a2a);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 25px rgba(255,75,75,0.6), 0 0 20px rgba(255,75,75,0.8);
+}
+
+/* Effet clic : bouton s'enfonce */
+#btg:active {
+    background: linear-gradient(135deg, #c93030, #a82828);
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2), 0 0 10px rgba(200,40,40,0.6);
+}
+

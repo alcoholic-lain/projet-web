@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TuniSpace - Lancement de Mission</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/register.css">
+</head>
+<body>
+
+<canvas id="galaxyCanvas"></canvas>
+<div class="bg-animation"></div>
+
+<div class="register-container">
+    <div class="register-card">
+        <h1 class="title">Lancement de Mission</h1>
+        <p class="subtitle">Rejoignez l’équipage TuniSpace et créez votre identité cosmique</p>
+
+        <form id="registerForm" class="register-form">
+            <p id="globalMessage"></p>
+
+            <div class="input-group">
+                <label for="pseudo">Pseudo cosmique</label>
+                <input type="text" id="pseudo" name="pseudo" placeholder="Ex : AstroZak">
+            </div>
+
+            <div class="input-group">
+                <label for="email">Adresse e-mail</label>
+                <input type="email" id="email" name="email" placeholder="exemple@tunisspace.com">
+            </div>
+
+            <div class="input-group">
+                <label for="psw">Mot de passe</label>
+                <input type="password" id="psw" name="psw" placeholder="••••••••••">
+            </div>
+
+            <div class="input-group">
+                <label for="planet">Planète d’origine</label>
+                <select id="planet" name="planet">
+                    <option value="" disabled selected>Choisissez votre planète</option>
+                    <option value="Terra">Terra (Earth)</option>
+                    <option value="Mars">Mars (Red Planet)</option>
+                    <option value="Venus">Venus (Hot Planet)</option>
+                    <option value="Jupiter">Jupiter (Gas Giant)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-register">Rejoindre la mission</button>
+
+            <p class="login-link">
+                Déjà astronaute ? <a href="login.html">Connectez-vous ici</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+<script src="assets/js/reg.js"></script>
+</body>
+</html>

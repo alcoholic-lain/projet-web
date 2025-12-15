@@ -1,0 +1,243 @@
+/* assets/css/profile.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #050814;
+    color: #f5f6ff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Galaxy background & effects from Template F */
+#galaxyCanvas { position:fixed; inset:0; z-index:-3; pointer-events:none; }
+.bg-animation {
+    position:fixed; inset:0; z-index:-2;
+    background: radial-gradient(circle at 60% 20%,rgba(90,50,180,.25),transparent 50%),
+    radial-gradient(circle at 20% 80%,rgba(255,80,120,.18),transparent 60%);
+    opacity:.7;
+}
+.bg-animation::before {
+    content:""; position:absolute; top:-20%; left:-10%; width:140%; height:70%;
+    background: linear-gradient(120deg,rgba(120,220,255,.25),rgba(190,140,255,.35),transparent 70%);
+    filter: blur(35px); opacity:.55;
+    animation: aurora 18s ease-in-out infinite alternate;
+}
+@keyframes aurora { from{transform:translateX(-8%) translateY(0%)} to{transform:translateX(8%) translateY(6%)} }
+
+.profile-wrapper {
+    max-width: 900px;
+    margin: 120px auto 100px;
+    padding: 0 20px;
+}
+
+.profile-card {
+    background: rgba(20,25,50,.65);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 28px;
+    padding: 50px 70px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    animation: fadeIn .8s ease-out;
+}
+@keyframes fadeIn { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+.profile-card h1 {
+    font-size: 3.8rem;
+    font-weight: 800;
+    text-align: center;
+    background: linear-gradient(90deg,#ffefc0,#ffb27a,#ff7f2a);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 40px;
+    text-shadow: 0 0 50px rgba(255,127,42,.8);
+}
+
+/* Avatar */
+.avatar-section { text-align:center; margin-bottom:40px; }
+#avatarPreview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #ff7f2a;
+    box-shadow: 0 0 40px rgba(255,127,42,.7);
+    transition: .3s;
+}
+#avatarPreview:hover { transform:scale(1.06); }
+
+.upload-btn {
+    margin-top: 18px;
+    background: linear-gradient(135deg,#ff7f2a,#ff2a7f);
+    padding: 12px 32px;
+    color: white;
+    border-radius: 16px;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(255,100,80,.5);
+    transition: .3s;
+}
+.upload-btn:hover { transform:translateY(-4px); box-shadow:0 15px 40px rgba(255,100,80,.7); }
+
+/* Forms */
+label {
+    display: block;
+    margin: 20px 0 8px;
+    font-weight: 600;
+    color: #ccd6f6;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 16px;
+    color: white;
+    font-size: 15px;
+    outline: none;
+    transition: .3s;
+}
+input::placeholder { color: rgba(255,255,255,.5); }
+input:focus { border-color:#ff7f2a; box-shadow:0 0 20px rgba(255,127,42,.4); }
+
+.btn-save {
+    background: linear-gradient(to right,#ff7f2a,#ff2a7f);
+    color: white;
+    padding: 14px 40px;
+    border: none;
+    border-radius: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 10px 30px rgba(255,100,80,.5);
+    transition: .3s;
+    margin-top: 20px;
+}
+.btn-save:hover { transform:translateY(-4px); box-shadow:0 15px 40px rgba(255,100,80,.7); }
+
+.btn-logout {
+    background: #ff4444;
+    margin-top: 50px;
+    width: 100%;
+}
+.btn-logout:hover { background:#e63838; }
+
+.input-error {
+    color: #ff6b6b;
+    font-size: 13.5px;
+    margin-top: 6px;
+}
+.error-input { border-color:#ff4444 !important; }
+.success-input { border-color:#86efac !important; }
+
+/* === Section Statut === */
+.status-section {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px;
+}
+
+.status-section p {
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+/* === Dropdown stylé === */
+.status-section select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+    width: 140px;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><polygon points='0,0 10,0 5,6' fill='white'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px 6px;
+}
+
+.status-section select:hover,
+.status-section select:focus {
+    border-color: #ff7f2a;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.status-section option {
+    background-color: #141932; /* couleur sombre pour les options */
+    color: #fff;
+}
+
+/* === Bouton modifier === */
+.status-section button {
+    margin-left: 10px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    background: #ff7f2a;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.status-section button:hover {
+    background: #ff2a7f;
+}
+
+/* === Badge de statut === */
+#statusBadge {
+    transition: background 0.3s ease;
+}
+
+
+/* Styles pour les badges */
+.badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+.badge {
+    background: #14173d;
+    border-radius: 12px;
+    padding: 20px;
+    width: 130px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    transition: 0.3s;
+}
+.badge:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+.badge img {
+    display: block;
+    margin: 0 auto;
+    width: 48px;
+    height: 48px;
+}
+.badge-name {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #fff;
+}

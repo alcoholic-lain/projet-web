@@ -1,0 +1,208 @@
+/* assets/css/register.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #050814;
+    color: #f5f6ff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Galaxy background & effects from Template F */
+#galaxyCanvas { position:fixed; inset:0; z-index:-3; pointer-events:none; }
+.bg-animation {
+    position:fixed; inset:0; z-index:-2;
+    background: radial-gradient(circle at 60% 20%,rgba(90,50,180,.25),transparent 50%),
+    radial-gradient(circle at 20% 80%,rgba(255,80,120,.18),transparent 60%);
+    opacity:.7;
+}
+.bg-animation::before {
+    content:""; position:absolute; top:-20%; left:-10%; width:140%; height:70%;
+    background: linear-gradient(120deg,rgba(120,220,255,.25),rgba(190,140,255,.35),transparent 70%);
+    filter: blur(35px); opacity:.55;
+    animation: aurora 18s ease-in-out infinite alternate;
+}
+@keyframes aurora { from{transform:translateX(-8%) translateY(0%)} to{transform:translateX(8%) translateY(6%)} }
+
+.register-container {
+    z-index: 1;
+    max-width: 420px;
+    width: 100%;
+    padding: 20px;
+}
+
+.register-card {
+    background: rgba(20,25,50,.65);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 28px;
+    padding: 50px 45px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    animation: fadeIn .9s ease-out;
+    text-align: center;
+}
+@keyframes fadeIn { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+
+.title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: linear-gradient(90deg,#ffefc0,#ffb27a,#ff7f2a);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 12px;
+    text-shadow: 0 0 40px rgba(255,127,42,.7);
+}
+
+.subtitle {
+    font-size: 15.5px;
+    color: #ccd6f6;
+    margin-bottom: 35px;
+    opacity: .9;
+}
+
+#globalMessage {
+    margin: 15px 0;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.input-group {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #ccd6f6;
+    font-size: 14.5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 16px;
+    color: white;
+    font-size: 15px;
+    outline: none;
+    transition: .3s;
+}
+
+input::placeholder, select option {
+    color: rgba(255,255,255,.5);
+}
+
+input:focus, select:focus {
+    border-color: #ff7f2a;
+    box-shadow: 0 0 22px rgba(255,127,42,.4);
+}
+
+/* Style pour le bouton de fichier (si tu veux un avatar plus tard) */
+input[type="file"]::file-selector-button {
+    background: linear-gradient(135deg,#ff7f2a,#ff2a7f);
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-register {
+    width: 100%;
+    background: linear-gradient(to right,#ff7f2a,#ff2a7f);
+    color: white;
+    padding: 16px;
+    border: none;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255,100,80,.5);
+    transition: .3s;
+    margin-top: 15px;
+}
+
+.btn-register:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(255,100,80,.7);
+}
+
+.login-link {
+    margin-top: 25px;
+    font-size: 14.5px;
+    color: #ccd6f6;
+}
+
+.login-link a {
+    color: #ff7f2a;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.login-link a:hover {
+    color: #ffb27a;
+    text-shadow: 0 0 15px rgba(255,127,42,.6);
+}
+
+/* Messages d’erreur/succès */
+.error-label { color: #ff6b6b; font-size: 13px; margin-top: 5px; }
+.success-label { color: #86efac; font-size: 13px; margin-top: 5px; }
+
+
+
+/* Select visible sur fond galaxie/planète */
+.select-wrapper {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+select {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(30, 35, 70, 0.85); /* plus opaque pour se détacher du fond */
+    border: 1px solid rgba(255, 255, 255, 0.4); /* bordure plus visible */
+    border-radius: 16px;
+    color: #ffffff; /* texte blanc */
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+/* Placeholder option grisé */
+select option[disabled] {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Focus : bordure orange + ombre douce */
+select:focus {
+    border-color: #ff7f2a;
+    box-shadow: 0 0 20px rgba(255, 127, 42, 0.5);
+}
+
+/* Flèche personnalisée pour le select */
+.select-wrapper::after {
+    content: '▾';
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    color: #ffefc0;
+    pointer-events: none;
+    font-size: 14px;
+}
