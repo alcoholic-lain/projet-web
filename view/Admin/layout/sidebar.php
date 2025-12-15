@@ -72,16 +72,52 @@ if (!isset($activeSub)) $activeSub = '';
 
         <!-- Administration -->
         <li>
-            <a href="/projet-web/view/Admin/login/src/dashboard.php"
+            <a href="/projet-web/view/Admin/UserB/dashboard.php"
                class="menu-link <?= $activeMenu === 'users' ? 'active' : '' ?>">
                 <span class="icon-large">👥</span>
-                <span class="text">Utilisateurs</span>
+                <span class="text">Gestion des utilisateurs</span>
             </a>
+            <ul class="submenu">
+                <li>
+                    <a href="/projet-web/controller/UserC/create_role.php"
+                       class="<?= $activeSub === 'innovations_all' ? 'active-sub' : '' ?>">
+                        Créer un rôle
+                    </a>
+                </li>
+            </ul>
         </li>
+        <!-- Reclamation -->
 
+        <p class="menu-title">Reclamation</p>
+
+        <!-- reclamation -->
+        <li class="menu-dropdown" class="menu-title ">
+            <a class="menu-link">
+                <span class="icon-large">🗂️</span>
+                <span class="text">Reclamation</span>
+                <i class="bi bi-chevron-down arrow"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="/projet-web/view/Admin/reclamation/src/dashboard.php" class="menu-link">
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a href="/projet-web/view/Admin/reclamation/src/liste.php" class="menu-link">
+                        Liste
+                    </a>
+                </li>
+                <li>
+                    <a href="/projet-web/view/Admin/reclamation/src/reponse.php" class="menu-link">
+                        Reponse
+                    </a>
+                </li>
+            </ul>
+        </li>
         <!-- Front Office -->
         <li>
-            <a href="/projet-web/view/Client/index.php" class="menu-link">
+            <a href="/projet-web/view/Client/F.html" class="menu-link">
                 <span class="icon-large">🌍</span>
                 <span class="text">Home - Tunispace</span>
             </a>

@@ -70,7 +70,7 @@ $msg = $_GET['msg'] ?? null;
     </div>
     <div class="cs-container">
         <nav class="cs-nav">
-            <a href="../../index.php">Accueil</a>
+            <a href="../../F_index.php">Accueil</a>
             <a href="categories.php">Catégories</a>
             <a href="add_Innovation.php">Ajouter une Innovation</a>
             <a href="list_Innovation.php?user=<?= urlencode($_SESSION['user_id'] ?? 0) ?>">

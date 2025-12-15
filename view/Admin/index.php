@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . "/../../controller/security.php";
-requireAdmin();
 
 ?>
 
@@ -61,11 +60,8 @@ foreach ($innovations as $inn) {
 <main>
     <div class="dashboard-inner">
         <!-- === SECTION BIENVENUE ADMIN === -->
-        <h2 class="section-title-main">Bienvenue, Admin <?= htmlspecialchars($_SESSION['pseudo']) ?></h2>
+        <h2 class="section-title-main">Bienvenue ></h2>
 
-        <p>
-            <a href="../Client/login/logout.php" class="link-logout">Déconnexion</a>
-        </p>
 
         <h2 class="section-title-main">Gestion du système</h2>
         <!-- Cards principales -->
@@ -73,10 +69,16 @@ foreach ($innovations as $inn) {
             <div class="card-icon">👥</div>
             <h3>Admin</h3>
             <p>Dashboard de gestion des comptes (admin + équipe)</p>
-            <a href="login/src/dashboard.php">Accéder</a>
+            <a href="UserB/dashboard.php">Accéder</a>
         </div>
 
         <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🗂️</div>
+                <h3>Réclamations</h3>
+                <p>Créer, modifier et supprimer des réclamations</p>
+                <a href="reclamation/src/dashboard.php">Accéder</a>
+            </div>
             <div class="card">
                 <div class="card-icon">🗂️</div>
                 <h3>Catégories</h3>

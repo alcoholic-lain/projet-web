@@ -11,9 +11,6 @@
     </div>
 
     <div class="header-right">
-        <!-- 🌙 / ☀️ SWITCH --- LE PLUS IMPORTANT -->
-        <div class="theme-toggle">🌙</div>
-
-        <a href="../../../Client/index.php">Home - Tunispace</a>
+        <a href="../../logout.php">LOG OUT</a>
     </div>
 </header>

@@ -306,6 +306,7 @@ document.addEventListener("DOMContentLoaded", () => {
        🔄 LOAD STATE AT START
     ============================= */
     loadDMState();
+    initCountdowns();
 
 }); // FIN DOMContentLoaded
 document.getElementById("myProfileBtn").addEventListener("click", () => {
@@ -333,5 +334,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+function initCountdowns() {
+    document.querySelectorAll('.countdown').forEach(el => {
+        const target = new Date(el.dataset.date).getTime();
+
+        function update() {
+            const now = Date.now();
+            let diff = target - now;
+
+            if (diff <= 0) { el.textContent = "now"; return; }
+
+            const days = Math.floor(diff / (1000*60*60*24));
+            diff -= days * (1000*60*60*24);
+            const hours = Math.floor(diff / (1000*60*60));
+            diff -= hours * (1000*60*60);
+            const mins = Math.floor(diff / (1000*60));
+            diff -= mins * (1000*60);
+            const secs = Math.floor(diff / 1000);
+
+            el.textContent = `${days}d ${hours}h ${mins}m ${secs}s`;
+        }
+
+        update();
+        setInterval(update, 1000);
+    });
+}
 
 

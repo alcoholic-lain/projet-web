@@ -470,7 +470,7 @@ select {
 
     /* Borders & text */
     border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #fff;
+    color: #0B0E26;
     outline: none;
 
     /* Animation */
@@ -567,8 +567,8 @@ body.light-mode input,
 body.light-mode textarea,
 body.light-mode select {
     background: #ffffff !important;
-    border: 1px solid rgba(0,0,0,0.2) !important;
-    color: #222 !important;
+    color: #222222 !important;   /* TEXTE VISIBLE */
+    border: 1px solid #ccc !important;
 }
 
 body.light-mode input:focus,
@@ -699,3 +699,35 @@ body.light-mode .sidebar a:hover {
     background: rgba(0,0,0,0.05);
 }
 
+/* =========================
+   FIX TEXTAREA (TAILLE + BORDURE)
+========================= */
+
+.admin-form .form-group {
+    width: 100%;
+}
+
+.admin-form textarea {
+    width: 100%;
+    min-height: 140px;          /* TAILLE */
+    padding: 14px 16px;         /* ESPACE INTERNE */
+    border-radius: 12px;        /* ARRONDI */
+    border: 1.5px solid #8a4bff; /* BORDURE VISIBLE */
+
+    background: rgba(255,255,255,0.08);
+    color: var(--text);
+
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    line-height: 1.6;
+
+    resize: vertical;           /* redimensionnable */
+    box-sizing: border-box;
+}
+
+/* FOCUS (quand tu cliques dedans) */
+.admin-form textarea:focus {
+    outline: none;
+    border-color: #b38cff;
+    box-shadow: 0 0 0 3px rgba(179,140,255,0.25);
+}

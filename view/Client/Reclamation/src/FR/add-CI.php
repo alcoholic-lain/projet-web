@@ -1,28 +1,85 @@
 <?php
-include_once __DIR__ . '../../../../../../../config.php';
-include_once __DIR__ . '../../../../../model/Reclamtion/reclam.php';
-include_once __DIR__ . '../../../../../../controller/components/ReclamationController.php';
+include_once __DIR__ . '../../../../../../config.php';
+include_once __DIR__ . '../../../../../../model/Reclamtion/reclam.php';
+include_once __DIR__ . '../../../../../../controller/components/Reclamtion/ReclamationController.php';
+
+// Fonction d'envoi de notification email
+function envoyerNotificationUrgente($sujet, $description, $email_utilisateur) {
+    $to = "ayarimed50@gmail.com";
+    $subject = "🚨 RÉCLAMATION URGENTE DÉTECTÉE";
+    
+    $message = "
+    <html>
+    <head>
+        <title>Notification Réclamation Urgente</title>
+        <style>
+            body { font-family: Arial, sans-serif; }
+            .urgent { color: #FF0000; font-weight: bold; }
+            .info { background-color: #f8f9fa; padding: 10px; border-left: 4px solid #dc3545; }
+        </style>
+    </head>
+    <body>
+        <h2 class='urgent'>⚠️ RÉCLAMATION URGENTE</h2>
+        <div class='info'>
+            <p><strong>Sujet :</strong> " . htmlspecialchars($sujet) . "</p>
+            <p><strong>Description :</strong><br>" . nl2br(htmlspecialchars($description)) . "</p>
+            <p><strong>Utilisateur :</strong> " . htmlspecialchars($email_utilisateur) . "</p>
+            <p><strong>Date :</strong> " . date('d/m/Y H:i:s') . "</p>
+        </div>
+        <p>Cette réclamation a été marquée comme urgente par l'utilisateur.</p>
+        <hr>
+        <p><small>Ceci est une notification automatique, merci de ne pas répondre.</small></p>
+    </body>
+    </html>
+    ";
+    
+    // Headers pour email HTML
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers .= "From: systeme-reclamations@votredomaine.com" . "\r\n";
+    $headers .= "X-Priority: 1 (Highest)" . "\r\n";
+    $headers .= "X-MSMail-Priority: High" . "\r\n";
+    $headers .= "Importance: High" . "\r\n";
+    
+    // Envoi de l'email
+    return mail($to, $subject, $message, $headers);
+}
 
 $error = "";
 $success = "";
+$notification_envoyee = false;
 
 if($_POST) {
     $user = $_POST['user'] ?? '';
     $sujet = $_POST['sujet'] ?? '';
     $description = $_POST['description'] ?? '';
     $statut = $_POST['statut'] ?? 'en attente';
+    $urgent = isset($_POST['urgent']) ? 1 : 0;
     
     // Validation
     $errors = validateReclamation($user, $sujet, $description);
     
     if(empty($errors)) {
         $controller = new ReclamationController();
-        if($controller->addReclamation($user, $sujet, $description, $statut)) {
-            $success = "RÃƒÆ’Ã‚Â©clamation ajoutÃƒÆ’Ã‚Â©e avec succÃƒÆ’Ã‚Â¨s!";
-            // RÃƒÆ’Ã‚Â©initialiser le formulaire
+        
+        // Ajouter le champ urgent dans l'appel
+        if($controller->addReclamation($user, $sujet, $description, $statut, $urgent)) {
+            $success = "Réclamation ajoutée avec succès!";
+            
+            // Si la réclamation est marquée comme urgente, envoyer une notification
+            if($urgent) {
+                if(envoyerNotificationUrgente($sujet, $description, $user)) {
+                    $success .= " Une notification d'urgence a été envoyée à l'administrateur.";
+                    $notification_envoyee = true;
+                } else {
+                    $success .= " (Note : La notification d'urgence n'a pas pu être envoyée)";
+                }
+            }
+            
+            // Réinitialiser le formulaire
             $_POST = array();
         } else {
-            $error = "Erreur lors de l'ajout de la rÃƒÆ’Ã‚Â©clamation";
+            $error = "Erreur lors de l'ajout de la réclamation";
         }
     } else {
         $error = implode("<br>", $errors);
@@ -33,73 +90,180 @@ if($_POST) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Ajouter une Reclamation</title>
-    <link rel="stylesheet" href="../../assets/css/add.css">
+    <title>Signalement de Contenu Inapproprié</title>
+    <link rel="stylesheet" href="../../assets/css/rec.css">
 </head>
 <body>
 
-<header>
-    <h1>&#128640; Ajouter une Reclamation</h1>
-</header>
+<div class="main-container">
+    <!-- HEADER -->
+    <header class="header">
+        <h1>🚨 Signalement de Contenu</h1>
+        <p>Sujet : Contenu Incorrect ou Inapproprié</p>
+    </header>
 
-<main>
-    <div class="text-center">
-        <h2 style="margin-top:30px;">Nouvelle reclamation</h2>
-    </div>
-
-    <section style="width: 60%; margin: 0 auto;">
+    <!-- CONTENT -->
+    <div class="content">
         <?php if($error): ?>
-            <div style="background: #FF6B6B; color: white; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-                <?php echo $error; ?>
+            <div class="alert alert-error">
+                <strong>⚠️ Erreur :</strong> <?php echo htmlspecialchars($error); ?>
             </div>
         <?php endif; ?>
         
         <?php if($success): ?>
-            <div style="background: #4AFF8B; color: #0B0E26; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-                <?php echo $success; ?>
+            <div class="alert alert-success">
+                <strong>✅ Succès !</strong> <?php echo htmlspecialchars($success); ?>
+                <?php if($notification_envoyee): ?>
+                    <div style="margin-top: 10px; padding: 10px; background: rgba(255, 0, 0, 0.1); border-radius: 5px; border-left: 4px solid #ff0000;">
+                        <span style="color: #ff0000; font-weight: bold;">⚠️ Notification envoyée à l'administrateur</span>
+                    </div>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
 
         <form method="POST" action="">
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Nom_Utilisateur:</label>
-                <input type="text" name="user" value="<?php echo $_POST['user'] ?? ''; ?>" required 
-                       style="width: 100%; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--purple); color: white;">
+            <!-- SUJET (READONLY) -->
+            <div class="form-group">
+                <label class="form-label">Sujet :</label>
+                <input type="text" name="sujet" value="Contenu incorrect" readonly class="form-input">
             </div>
 
-            <div style="margin-bottom: 20px;">
-
-                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Sujet:</label>
-                <input type="text" name="sujet" value="Contenu incorrect" readonly
-                       style="width: 100%; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--purple); color: white;">
+            <!-- DESCRIPTION -->
+            <div class="form-group">
+                <label class="form-label">Description détaillée :</label>
+                <textarea name="description" required rows="5" class="form-textarea" placeholder="Décrivez le contenu problématique en détail (URL, capture d'écran, raison du signalement)..."><?php echo htmlspecialchars($_POST['description'] ?? ''); ?></textarea>
+                <div class="char-counter">
+                    <span id="charCount">0</span> / 1000 caractères
+                </div>
             </div>
 
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Description:</label>
-                <textarea name="description" required rows="5"
-                          style="width: 100%; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--purple); color: white;"><?php echo $_POST['description'] ?? ''; ?></textarea>
+            <!-- EMAIL -->
+            <div class="form-group">
+                <label class="form-label">Votre Email :</label>
+                <input type="email" name="user" value="<?php echo htmlspecialchars($_POST['mail'] ?? $_POST['user'] ?? ''); ?>" required class="form-input" placeholder="votre@email.com">
             </div>
 
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Mail:</label>
-                <input type="text" name="user" value="<?php echo $_POST['mail'] ?? ''; ?>" required 
-                       style="width: 100%; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--purple); color: white;">
+            <!-- OPTION URGENT -->
+            <div class="notification-section">
+                <div class="notification-header">
+                    <h3>🚨 Option Urgence</h3>
+                </div>
+                
+                <div class="toggle-wrapper">
+                    <label class="toggle-container" id="urgentToggle">
+                        <input type="checkbox" name="urgent" value="1" class="toggle-checkbox" id="urgentCheckbox">
+                        <div class="toggle-label">
+                            <span class="toggle-title">
+                                Marquer comme URGENT
+                                <span class="notification-badge">ALERTE</span>
+                            </span>
+                            <span class="toggle-desc">
+                                Une notification immédiate sera envoyée à l'administrateur.
+                                À utiliser uniquement pour les contenus dangereux, illégaux ou extrêmement préjudiciables.
+                            </span>
+                        </div>
+                    </label>
+                    
+                    <div class="urgent-warning" id="urgentWarning" style="display: none;">
+                        <strong>⚠️ ATTENTION :</strong> Cette option ne doit être utilisée que pour les cas critiques nécessitant une intervention immédiate. Un abus de cette fonctionnalité peut entraîner la suspension de votre compte.
+                    </div>
+                </div>
             </div>
 
-            <div style="text-align: center;">
-                <button type="submit" class="valider">Ajouter la reclamation</button>
-                <a href="../choix.php" class="rejeter" style="margin-left: 10px;">Annuler</a>
+            <!-- BOUTONS -->
+            <div class="button-group">
+                <button type="submit" class="btn btn-submit" id="submitBtn">
+                    <span>🚨 Signaler le Contenu</span>
+                </button>
+                <a href="../choix.php" class="btn btn-cancel">
+                    <span>❌ Annuler</span>
+                </a>
             </div>
         </form>
-    </section>
-</main>
 
-<footer>
-    <p>Powered by —
-	<span style="color: rgb(215, 218, 252); font-family: Inter, sans-serif; font-size: 18.4px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none; background-color: rgba(10, 12, 26, 0.4)">
-	&nbsp;</span><span style="margin: 0px; padding: 0px; box-sizing: border-box; --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; border-width: 0px; border-style: solid; border-color: rgb(229, 231, 235); background: linear-gradient(90deg, rgb(255, 127, 42), rgb(255, 42, 127), rgb(164, 107, 255)) text rgba(10, 12, 26, 0.4); color: transparent; font-weight: 600; text-shadow: rgba(255, 127, 42, 0.4) 0px 0px 18px; font-family: Inter, sans-serif; font-size: 18.4px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Tunispace 
-	Galaxy</span></p>
-</footer>
+        <!-- INFO SUPPLEMENTAIRE -->
+        <div class="alert alert-info">
+            <strong>ℹ️ Note importante :</strong> 
+            Tous les signalements sont traités avec confidentialité. 
+            Nous nous engageons à examiner chaque cas dans les plus brefs délais.
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>Powered by <strong>Tunispace Galaxy</strong> | Modération de Contenu</p>
+    </footer>
+</div>
+
+<script>
+    // Compteur de caractères
+    const textarea = document.querySelector('textarea[name="description"]');
+    const charCount = document.getElementById('charCount');
+    const urgentToggle = document.getElementById('urgentToggle');
+    const urgentCheckbox = document.getElementById('urgentCheckbox');
+    const urgentWarning = document.getElementById('urgentWarning');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    // Compteur de caractères
+    textarea.addEventListener('input', function() {
+        const length = this.value.length;
+        charCount.textContent = length;
+        
+        if (length > 900) {
+            charCount.style.color = '#ff6b6b';
+        } else if (length > 800) {
+            charCount.style.color = '#ffd166';
+        } else {
+            charCount.style.color = '#94a3b8';
+        }
+    });
+    
+    // Initialiser le compteur
+    charCount.textContent = textarea.value.length;
+    
+    // Gestion du toggle urgent
+    urgentToggle.addEventListener('click', function(e) {
+        if (e.target !== urgentCheckbox) {
+            urgentCheckbox.checked = !urgentCheckbox.checked;
+        }
+        
+        updateUrgentUI();
+    });
+    
+    urgentCheckbox.addEventListener('change', updateUrgentUI);
+    
+    function updateUrgentUI() {
+        if (urgentCheckbox.checked) {
+            urgentToggle.classList.add('active');
+            urgentWarning.style.display = 'block';
+            submitBtn.innerHTML = '<span>🚨 ENVOYER L\'ALERTE URGENTE</span>';
+            submitBtn.style.background = 'linear-gradient(135deg, #dc2626, #b91c1c)';
+        } else {
+            urgentToggle.classList.remove('active');
+            urgentWarning.style.display = 'none';
+            submitBtn.innerHTML = '<span>🚨 Signaler le Contenu</span>';
+            submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+        }
+    }
+    
+    // Initialiser l'UI
+    updateUrgentUI();
+    
+    // Confirmation pour les urgences
+    document.querySelector('form').addEventListener('submit', function(e) {
+        if (urgentCheckbox.checked) {
+            if (!confirm("🚨 ATTENTION - ALERTE URGENTE\n\nVous êtes sur le point d'envoyer une alerte urgente.\n\nCette alerte sera immédiatement transmise à l'administrateur.\n\nConfirmez-vous que ce contenu nécessite une intervention immédiate ?")) {
+                e.preventDefault();
+                return false;
+            }
+        } else {
+            if (!confirm("Confirmez-vous l'envoi de ce signalement ?")) {
+                e.preventDefault();
+                return false;
+            }
+        }
+    });
+</script>
 
 </body>
 </html>

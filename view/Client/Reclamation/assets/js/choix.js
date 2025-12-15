@@ -20,6 +20,61 @@ document.querySelectorAll('.img-box').forEach(box => {
         validateForm();
     });
 });
+/********************************
+ *  VALIDATION captcha
+ *********************************/
+
+
+// Fonction pour générer un captcha aléatoire
+function generateCaptcha() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+    let captcha = '';
+    for (let i = 0; i < 6; i++) {
+        captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return captcha;
+}
+
+// Initialiser le captcha
+let currentCaptcha = generateCaptcha();
+document.getElementById('captchaText').textContent = currentCaptcha;
+
+// Rafraîchir le captcha
+document.getElementById('refreshCaptcha').addEventListener('click', function() {
+    currentCaptcha = generateCaptcha();
+    document.getElementById('captchaText').textContent = currentCaptcha;
+    document.getElementById('captcha').value = '';
+    document.getElementById('captchaError').style.display = 'none';
+});
+
+// Validation du captcha avant soumission
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    const captchaInput = document.getElementById('captcha').value;
+    const errorDiv = document.getElementById('captchaError');
+    
+    // Vérifier si le captcha est correct
+    if (captchaInput.toUpperCase() !== currentCaptcha.toUpperCase()) {
+        e.preventDefault(); // Empêcher l'envoi du formulaire
+        errorDiv.textContent = 'Code de vérification incorrect. Veuillez réessayer.';
+        errorDiv.style.display = 'block';
+        
+        // Générer un nouveau captcha
+        currentCaptcha = generateCaptcha();
+        document.getElementById('captchaText').textContent = currentCaptcha;
+        document.getElementById('captcha').value = '';
+        
+        // Animation d'erreur
+        document.getElementById('captcha').style.borderColor = '#ef4444';
+        setTimeout(() => {
+            document.getElementById('captcha').style.borderColor = '';
+        }, 1000);
+    }
+});
+
+// Masquer l'erreur quand l'utilisateur commence à taper
+document.getElementById('captcha').addEventListener('input', function() {
+    document.getElementById('captchaError').style.display = 'none';
+});
 
 /********************************
  *  VALIDATION FORM
@@ -42,25 +97,50 @@ function validateForm() {
 }
 
 /********************************
- *  REDIRECTION
+ *  REDIRECTION (avec validation captcha)
  *********************************/
-form.addEventListener('submit', e => {
+form.addEventListener('submit', function(e) {
     e.preventDefault();
+    
+    // Valider d'abord le formulaire de base
     if (!validateForm()) return;
-
+    
+    // Valider le captcha
+    const captchaInput = document.getElementById('captcha').value;
+    const errorDiv = document.getElementById('captchaError');
+    
+    if (captchaInput.toUpperCase() !== currentCaptcha.toUpperCase()) {
+        errorDiv.textContent = 'Code de vérification incorrect. Veuillez réessayer.';
+        errorDiv.style.display = 'block';
+        
+        // Générer un nouveau captcha
+        currentCaptcha = generateCaptcha();
+        document.getElementById('captchaText').textContent = currentCaptcha;
+        document.getElementById('captcha').value = '';
+        
+        // Animation d'erreur
+        document.getElementById('captcha').style.borderColor = '#ef4444';
+        setTimeout(() => {
+            document.getElementById('captcha').style.borderColor = '';
+        }, 1000);
+        
+        return; // Bloquer la redirection
+    }
+    
+    // Si tout est valide, procéder à la redirection
     const type = selectedProblemType.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     let page = "";
-
+    
     switch(type) {
         case "contenu incorrect": page = "add-CI.php"; break;
         case "probleme technique": page = "add-PT.php"; break;
         case "probleme de securite": page = "add-PS.php"; break;
         case "compte bloque": page = "add-CB.php"; break;
     }
-
+    
     const lang = document.getElementById('language').value;
-    const folder = lang === "fr" ? "FR" : (lang === "en" ? "ANG" : "AR");
-
+    const folder = (lang === "fr" ? "FR" : lang === "en" ? "ANG" : lang === "ar" ? "AR" : "");
+    
     window.location.href = `../src/${folder}/${page}`;
 });
 
@@ -192,6 +272,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // Close dropdown
             select.classList.remove("open");
             options.style.display = "none";
+            
+            // Valider le formulaire
+            validateForm();
         });
     });
 

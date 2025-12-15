@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . "/../../security.php";
 requireAdmin();
-
+define('SMTP_USER', 'challakhihichem1@gmail.com');
+define('SMTP_PASS', 'tyqxsbdamxbusljt');
 require_once $_SERVER['DOCUMENT_ROOT'] . "/projet-web/config.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/projet-web/vendor/autoload.php";
 

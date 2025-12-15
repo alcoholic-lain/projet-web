@@ -1,30 +1,27 @@
 <?php
-require_once __DIR__ . '/../../../../../config.php';
-require_once __DIR__ . '/../../../../../model/Reclamtion/reclam.php';
-require_once __DIR__ . '/../../../../../controller/components/Reclamtion/ReclamationController.php';
-
+include_once __DIR__ . '../../../../../../config.php';
+include_once __DIR__ . '../../../../../../model/Reclamtion/reclam.php';
+include_once __DIR__ . '../../../../../../controller/components/Reclamtion/ReclamationController.php';
 $error = "";
 $success = "";
 
 if($_POST) {
-
     $user = $_POST['user'] ?? '';
-    $mail = $_POST['mail'] ?? '';
     $sujet = $_POST['sujet'] ?? '';
     $description = $_POST['description'] ?? '';
     $statut = $_POST['statut'] ?? 'en attente';
-
+    
     // Validation
     $errors = validateReclamation($user, $sujet, $description);
-
+    
     if(empty($errors)) {
         $controller = new ReclamationController();
-
         if($controller->addReclamation($user, $sujet, $description, $statut)) {
-            $success = "RÃ©clamation ajoutÃ©e avec succÃ¨s!";
-            $_POST = array(); // reset form
+            $success = "Réclamation ajoutée avec succès!";
+            // Réinitialiser le formulaire
+            $_POST = array();
         } else {
-            $error = "Erreur lors de l'ajout de la rÃ©clamation";
+            $error = "Erreur lors de l'ajout de la réclamation";
         }
     } else {
         $error = implode("<br>", $errors);
@@ -35,77 +32,106 @@ if($_POST) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Ajouter une RÃ©clamation</title>
-    <link rel="stylesheet" href="../../assets/css/add.css">
+    <title>Ajouter une Réclamation</title>
+    <link rel="stylesheet" href="../../assets/css/rec.css">
 </head>
 <body>
 
-<header>
-    <h1>ðŸš€ Ajouter une RÃ©clamation</h1>
-</header>
+<div class="main-container">
+    <!-- HEADER -->
+    <header class="header">
+        <h1>&#128640; Ajouter une Réclamation</h1>
+        <p>Sujet : Problème de Sécurité</p>
+    </header>
 
-<main>
-    <div class="text-center">
-        <h2 style="margin-top:30px;">Nouvelle rÃ©clamation</h2>
-    </div>
-
-    <section style="width: 60%; margin: 0 auto;">
-
+    <!-- CONTENT -->
+    <div class="content">
         <?php if($error): ?>
-            <div class="alert error">
-                <?= $error ?>
+            <div class="alert alert-error">
+                <strong>&#9888;&#65039; Erreur :</strong> <?php echo htmlspecialchars($error); ?>
             </div>
         <?php endif; ?>
-
+        
         <?php if($success): ?>
-            <div class="alert success">
-                <?= $success ?>
+            <div class="alert alert-success">
+                <strong>&#9989; Succès !</strong> <?php echo htmlspecialchars($success); ?>
             </div>
         <?php endif; ?>
 
         <form method="POST" action="">
-
-            <!-- User -->
-            <div>
-                <label>Utilisateur :</label>
-                <input type="text" name="user" required
-                       value="<?= $_POST['user'] ?? '' ?>">
+            <!-- SUJET (READONLY) -->
+            <div class="form-group">
+                <label class="form-label">Sujet :</label>
+                <input type="text" name="sujet" value="Probleme_de_securité" readonly class="form-input">
             </div>
 
-            <!-- Sujet -->
-            <div>
-                <label>Sujet :</label>
-                <input type="text" name="sujet" value="Probleme_de_securite" readonly>
+            <!-- DESCRIPTION -->
+            <div class="form-group">
+                <label class="form-label">Description :</label>
+                <textarea name="description" required rows="5" class="form-textarea" placeholder="Décrivez le problème de sécurité rencontré..."><?php echo htmlspecialchars($_POST['description'] ?? ''); ?></textarea>
+                <div class="char-counter">
+                    <span id="charCount">0</span> / 500 caractères
+                </div>
             </div>
 
-            <!-- Description -->
-            <div>
-                <label>Description :</label>
-                <textarea name="description" required rows="5"><?= $_POST['description'] ?? '' ?></textarea>
+            <!-- EMAIL -->
+            <div class="form-group">
+                <label class="form-label">Email :</label>
+                <input type="email" name="user" value="<?php echo htmlspecialchars($_POST['mail'] ?? $_POST['user'] ?? ''); ?>" required class="form-input" placeholder="votre@email.com">
             </div>
 
-            <!-- Mail -->
-            <div>
-                <label>Email :</label>
-                <input type="email" name="mail" required
-                       value="<?= $_POST['mail'] ?? '' ?>">
+            <!-- BOUTONS -->
+            <div class="button-group">
+                <button type="submit" class="btn btn-submit">
+                    <span>&#128228; Envoyer la Réclamation</span>
+                </button>
+                <a href="../choix.php" class="btn btn-cancel">
+                    <span>&#10060; Annuler</span>
+                </a>
             </div>
-
-            <input type="hidden" name="statut" value="en attente">
-
-            <div style="text-align:center;">
-                <button type="submit" class="valider">Ajouter la rÃ©clamation</button>
-                <a href="../choix.php" class="rejeter">Annuler</a>
-            </div>
-
         </form>
 
-    </section>
-</main>
+        <!-- INFO SUPPLEMENTAIRE -->
+        <div class="alert alert-info">
+            <strong>&#8505;&#65039; Note :</strong> Les problèmes de sécurité sont traités avec la plus haute priorité. 
+            Un accusé de réception vous sera envoyé dans les 24 heures.
+        </div>
+    </div>
 
-<footer>
-    <p>Powered by <span>Tunispace Galaxy</span></p>
-</footer>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>Powered by <strong>Tunispace Galaxy</strong> | Sécurité & Confidentialité</p>
+    </footer>
+</div>
+
+<script>
+    // Compteur de caractères pour la description
+    const textarea = document.querySelector('textarea[name="description"]');
+    const charCount = document.getElementById('charCount');
+    
+    textarea.addEventListener('input', function() {
+        const length = this.value.length;
+        charCount.textContent = length;
+        
+        if (length > 450) {
+            charCount.style.color = '#ff6b6b';
+        } else if (length > 400) {
+            charCount.style.color = '#ffd166';
+        } else {
+            charCount.style.color = '#94a3b8';
+        }
+    });
+    
+    // Initialiser le compteur
+    charCount.textContent = textarea.value.length;
+    
+    // Confirmation avant soumission
+    document.querySelector('form').addEventListener('submit', function(e) {
+        if (!confirm("Confirmez-vous l'envoi de cette réclamation de sécurité ?")) {
+            e.preventDefault();
+        }
+    });
+</script>
 
 </body>
 </html>

@@ -1,34 +1,51 @@
 <?php
+session_start();
 include_once __DIR__ . '/../../../../config.php';
 include_once __DIR__ . '/../../../../model/Reclamtion/reclam.php';
 
+// Vérifier que l'utilisateur est connecté
+$userId = $_SESSION['user_id'] ?? null;
+if (!$userId) {
+    header("Location: ../../LoginC/login.html");
+    exit;
+}
+
+// Connexion à la base
+$db = config::getConnexion();
+
+// Récupérer les infos utilisateur
+$stmt = $db->prepare("SELECT pseudo, avatar FROM user WHERE id = ?");
+$stmt->execute([$userId]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Définir le pseudo et avatar
+$username = $user['pseudo'] ?? "Utilisateur";
+$avatarFromDB = $user['avatar'] ?? '';
+$avatarDir = '/projet-web/view/Client/uploads/avatars/';
+$defaultAvatar = $avatarDir . 'default.jpg';
+$avatarPathServer = $_SERVER['DOCUMENT_ROOT'] . $avatarDir . ltrim($avatarFromDB, '/');
+
+// Vérifier si l’avatar existe sinon mettre par défaut
+$avatarUrl = (!empty($avatarFromDB) && file_exists($avatarPathServer))
+        ? $avatarDir . ltrim($avatarFromDB, '/')
+        : $defaultAvatar;
+
+// Gestion du formulaire
 $error = "";
 $success = "";
-$avatar = $_SESSION['avatar'] ?? '';
 
-// Si l'avatar vient de la base avec ../ on nettoie
-$avatar = ltrim($avatar, './');
-
-// Chemin réel serveur
-$fullPath = $_SERVER['DOCUMENT_ROOT'] . '/projet-web/' . $avatar;
-
-// Si le fichier n'existe pas → image par défaut
-if (empty($avatar) || !file_exists($fullPath)) {
-    $avatar = 'view/Client/login/uploads/avatars/default.png';
-}
-if($_POST) {
-    $user = "Utilisateur Anonyme";
+if ($_POST) {
     $sujet = $_POST['sujet_type'] ?? '';
     $description = $_POST['description'] ?? '';
     $statut = $_POST['statut'] ?? 'en attente';
 
     // Validation
-    $errors = validateReclamation($user, $sujet, $description);
+    $errors = validateReclamation($username, $sujet, $description);
 
-    if(empty($errors)) {
+    if (empty($errors)) {
         $controller = new ReclamationController();
-        if($controller->addReclamation($user, $sujet, $description, $statut)) {
-            $success = "Réclamation ajoutée avec succès!";
+        if ($controller->addReclamation($username, $sujet, $description, $statut)) {
+            $success = "Réclamation ajoutée avec succès !";
             $_POST = array();
         } else {
             $error = "Erreur lors de l'ajout de la réclamation";
@@ -43,7 +60,7 @@ if($_POST) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Nouvelle Réclamation</title>
+    <title>Nouvelle RÃ©clamation</title>
 
     <!-- CSS du header -->
     <link rel="stylesheet" href="../../assets/css/user.css">
@@ -51,7 +68,7 @@ if($_POST) {
     <!-- CSS du formulaire choix -->
     <link rel="stylesheet" href="../assets/css/choix.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 
@@ -62,34 +79,53 @@ if($_POST) {
 
 <header>
     <div class="container">
-        <h1>Tunispace</h1>
-        <nav>
-            <a href="/projet-web/view/Client/index.php">Home</a>
-            <a href="/projet-web/view/Client/Innovation/src/categories.php">Categories</a>
-            <a href="#messages">Messages</a>
-            <a href="/projet-web/view/Client/Reclamation/src/choix.php" class="active">Reclamation</a>
-        </nav>
-        <div style="position:relative">
-            <img
-                    id="user-avatar"
-                    src="/projet-web/<?= $avatar ?>"
-                    alt="Avatar utilisateur"
-            >
+        <h1>TuniSpace</h1>
 
+        <nav>
+            <a href="../../index.php">Home</a>
+            <a href="../../Innovation/src/categories.php" ">Categorie</a>
+            <a href="#messages">Messages</a>
+            <a href="#" class="active">Reclamation </a>
+        </nav>
+
+        <div style="position:relative">
+
+            <img id="user-avatar"
+                 src="<?= htmlspecialchars($avatarUrl) ?>"
+                 alt="<?= htmlspecialchars($username) ?>"
+                 style="cursor:pointer;">
 
             <div id="user-dropdown">
-                <div class="dropdown-item" id="myProfileBtn">
-                    <i class="fas fa-user"></i> My Profile
+
+                <div class="dropdown-item"
+                     onclick="window.location.href='../../profile.php';"
+                     style="cursor:pointer;">
+                    <?= htmlspecialchars($username) ?>
                 </div>
-                <div class="dropdown-item"><i class="fas fa-moon"></i> Dark Mode
-                    <label class="ml-auto"><input type="checkbox" id="theme-switch" class="toggle-checkbox" checked><span class="toggle-label"></span></label>
+
+                <div class="dropdown-item">
+                    Dark Mode
+                    <label class="ml-auto">
+                        <input type="checkbox" id="theme-switch" class="toggle-checkbox" checked>
+                        <span class="toggle-label"></span>
+                    </label>
                 </div>
-                <div class="dropdown-item"><i class="fas fa-bell"></i> Notifications</div>
-                <div class="dropdown-item"><i class="fas fa-cog"></i> Settings</div>
+
+                <div class="dropdown-item">Notifications</div>
+                <div class="dropdown-item">Settings</div>
+
                 <hr class="border-gray-700 my-2">
-                <div class="dropdown-item logout"><i class="fas fa-sign-out-alt"></i> Logout</div>
+
+                <div class="dropdown-item logout">
+                    <a href="/projet-web/logout.php"
+                       style="color:#ff002d;text-decoration:none;">
+                        get out
+                    </a>
+                </div>
+
             </div>
         </div>
+
     </div>
 </header>
 
@@ -98,7 +134,7 @@ if($_POST) {
 
 <main class="choix-wrapper">
     <div class="text-center">
-        <h2>Nouvelle réclamation</h2>
+        <h2>Nouvelle reclamation</h2>
     </div>
 
     <?php if($success): ?>
@@ -115,16 +151,16 @@ if($_POST) {
                 <img src="../assets/img/CI.jpg" alt="Contenu incorrect">
             </div>
             <div class="img-box" data-type="Probleme technique">
-                <label>Problème technique</label>
-                <img src="../assets/img/PT.jpg" alt="Problème technique">
+                <label>Probleme technique</label>
+                <img src="../assets/img/PT.jpg" alt="Probleme technique">
             </div>
             <div class="img-box" data-type="probleme de securite">
-                <label>Problème de sécurité</label>
-                <img src="../assets/img/PS.jpg" alt="Problème sécurité">
+                <label>Probleme de securite</label>
+                <img src="../assets/img/PS.jpg" alt="Probleme sÃ©curite">
             </div>
-            <div class="img-box" data-type="Compte bloqué">
-                <label>Compte bloqué</label>
-                <img src="../assets/img/CB.jpg" alt="Compte bloqué">
+            <div class="img-box" data-type="Compte bloque">
+                <label>Compte bloque</label>
+                <img src="../assets/img/CB.jpg" alt="Compte bloque">
             </div>
         </div>
 
@@ -140,13 +176,34 @@ if($_POST) {
                 </div>
 
                 <div class="custom-options">
-                    <span class="custom-option" data-value="fr">Français</span>
+                    <span class="custom-option" data-value="fr">Francais</span>
                     <span class="custom-option" data-value="en">Anglais</span>
                     <span class="custom-option" data-value="ar">Arabe</span>
                 </div>
             </div>
 
-            <!-- champ réel pour POST -->
+
+			<!-- captcha-->
+			<!-- Ajoutez ceci APRÈS le champ hidden "language" dans votre formulaire -->
+<input type="hidden" name="language" id="language">
+
+<!-- AJOUT DU CAPTCHA ICI -->
+<div class="captcha-container">
+    <label for="captcha">Vérification de sécurité</label>
+    <div class="captcha-box">
+        <div class="captcha-code" id="captchaText"></div>
+        <button type="button" class="captcha-refresh" id="refreshCaptcha">
+            <i class="fas fa-redo"></i>
+        </button>
+    </div>
+    <input type="text" id="captcha" name="captcha" placeholder="Entrez le code ci-dessus" required>
+    <div class="captcha-error" id="captchaError"></div>
+</div>
+
+
+<!-- ------------- -->
+
+            <!-- champ rÃ©el pour POST -->
             <input type="hidden" name="language" id="language">
 
 
@@ -158,7 +215,7 @@ if($_POST) {
 </main>
 
 <footer>
-    <p>© 2025 — Tunispace Galaxy</p>
+    <p>© 2025 ” Tunispace Galaxy</p>
 </footer>
 
 <!-- JS -->

@@ -9,7 +9,7 @@ if($_POST) {
     $user = $_POST['user'] ?? '';
     $sujet = $_POST['sujet'] ?? '';
     $description = $_POST['description'] ?? '';
-    $statut = $_POST['statut'] ?? 'en attente';
+    $statut = $_POST['statut'] ?? 'pending';
     
     // Validation
     $errors = validateReclamation($user, $sujet, $description);
@@ -17,11 +17,11 @@ if($_POST) {
     if(empty($errors)) {
         $controller = new ReclamationController();
         if($controller->addReclamation($user, $sujet, $description, $statut)) {
-            $success = "RÃƒÂ©clamation ajoutÃƒÂ©e avec succÃƒÂ¨s!";
-            // RÃƒÂ©initialiser le formulaire
+            $success = "Claim added successfully!";
+            // Reset the form
             $_POST = array();
         } else {
-            $error = "Erreur lors de l'ajout de la rÃƒÂ©clamation";
+            $error = "Error while adding the claim";
         }
     } else {
         $error = implode("<br>", $errors);
@@ -29,76 +29,111 @@ if($_POST) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ajouter une R�clamation</title>
-    <link rel="stylesheet" href="../../assets/css/add.css">
+    <title>Report Technical Problem</title>
+    <link rel="stylesheet" href="../../assets/css/rec.css">
 </head>
 <body>
 
-<header>
-    <h1>&#128640;Add a Claim</h1>
-	</header>
+<div class="main-container">
+    <!-- HEADER -->
+    <header class="header">
+        <h1>&#128295; Technical Problem</h1>
+        <p>Report a malfunction or technical bug</p>
+    </header>
 
-<main>
-    <div class="text-center">
-        <h2 style="margin-top:30px;">New claim</h2>
-    </div>
-
-    <section style="width: 60%; margin: 0 auto;">
+    <!-- CONTENT -->
+    <div class="content">
         <?php if($error): ?>
-            <div style="background: #FF6B6B; color: white; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-                <?php echo $error; ?>
+            <div class="alert alert-error">
+                <strong>&#9888;&#65039; Error:</strong> <?php echo htmlspecialchars($error); ?>
             </div>
         <?php endif; ?>
         
         <?php if($success): ?>
-            <div style="background: #4AFF8B; color: #0B0E26; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-                <?php echo $success; ?>
+            <div class="alert alert-success">
+                <strong>&#9989; Success!</strong> <?php echo htmlspecialchars($success); ?>
             </div>
         <?php endif; ?>
 
         <form method="POST" action="">
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Username:</label>
-                <input type="text" name="user" value="<?php echo $_POST['user'] ?? ''; ?>" required 
-                       style="width: 100%; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--purple); color: white;">
+            <!-- SUBJECT (READONLY) -->
+            <div class="form-group">
+                <label class="form-label">Problem Type:</label>
+                <input type="text" name="sujet" value="Technical problem" readonly class="form-input">
             </div>
 
-            <div style="margin-bottom: 20px;">
-
-                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Subject:</label>
-                <input type="text" name="sujet" value="Probleme technique" readonly
-                       style="width: 100%; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--purple); color: white;">
+            <!-- DESCRIPTION -->
+            <div class="form-group">
+                <label class="form-label">Detailed Description:</label>
+                <textarea name="description" required rows="5" class="form-textarea" placeholder="Describe the technical problem encountered (steps to reproduce, error message, browser used, etc.)..."><?php echo htmlspecialchars($_POST['description'] ?? ''); ?></textarea>
+                <div class="char-counter">
+                    <span id="charCount">0</span> / 1000 characters
+                </div>
             </div>
 
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Description:</label>
-                <textarea name="description" required rows="5"
-                          style="width: 100%; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--purple); color: white;"><?php echo $_POST['description'] ?? ''; ?></textarea>
+            <!-- EMAIL -->
+            <div class="form-group">
+                <label class="form-label">Your Email (for follow-up):</label>
+                <input type="email" name="user" value="<?php echo htmlspecialchars($_POST['mail'] ?? $_POST['user'] ?? ''); ?>" required class="form-input" placeholder="example@email.com">
             </div>
 
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Email:</label>
-                <input type="text" name="user" value="<?php echo $_POST['mail'] ?? ''; ?>" required 
-                       style="width: 100%; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--purple); color: white;">
-            </div>
-
-            <div style="text-align: center;">
-                <button type="submit" class="valider">Add claim</button>
-                <a href="../choix.php" class="rejeter" style="margin-left: 10px;">Cancel</a>
+          
+            <!-- BUTTONS -->
+            <div class="button-group">
+                <button type="submit" class="btn btn-submit">
+                    <span>&#128295; Submit Technical Report</span>
+                </button>
+                <a href="../choix.php" class="btn btn-cancel">
+                    <span>&#10060; Cancel</span>
+                </a>
             </div>
         </form>
-    </section>
-</main>
 
-<footer>
-    <p>Powered by �
-	<span style="color: rgb(215, 218, 252); font-family: Inter, sans-serif; font-size: 18.4px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none; background-color: rgba(10, 12, 26, 0.4)">
-	&nbsp;</span><span style="margin: 0px; padding: 0px; box-sizing: border-box; --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; border-width: 0px; border-style: solid; border-color: rgb(229, 231, 235); background: linear-gradient(90deg, rgb(255, 127, 42), rgb(255, 42, 127), rgb(164, 107, 255)) text rgba(10, 12, 26, 0.4); color: transparent; font-weight: 600; text-shadow: rgba(255, 127, 42, 0.4) 0px 0px 18px; font-family: Inter, sans-serif; font-size: 18.4px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Tunispace 
-	Galaxy</span></p>
-</footer>
+        <!-- ADDITIONAL INFO -->
+        <div class="alert alert-info">
+            <strong>&#8505;&#65039; Note:</strong> 
+            Our technical team will review your report as soon as possible.
+            You will receive an update by email once the problem is analyzed.
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>Powered by <strong>Tunispace Galaxy</strong> | Technical Support</p>
+    </footer>
+</div>
+
+<script>
+    // Character counter
+    const textarea = document.querySelector('textarea[name="description"]');
+    const charCount = document.getElementById('charCount');
+    
+    textarea.addEventListener('input', function() {
+        const length = this.value.length;
+        charCount.textContent = length;
+        
+        if (length > 900) {
+            charCount.style.color = '#ff6b6b';
+        } else if (length > 800) {
+            charCount.style.color = '#ffd166';
+        } else {
+            charCount.style.color = '#94a3b8';
+        }
+    });
+    
+    // Initialize counter
+    charCount.textContent = textarea.value.length;
+    
+    // Loading animation on submission
+    document.querySelector('form').addEventListener('submit', function() {
+        const submitBtn = document.querySelector('.btn-submit');
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+    });
+</script>
 
 </body>
 </html>

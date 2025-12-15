@@ -110,3 +110,265 @@ footer::before{content:"";position:absolute;top:-1px;left:50%;width:160%;height:
 footer p{font-size:15px}
 footer span{background:linear-gradient(90deg,#ff7f2a,#ff2a7f,#a46bff);-webkit-background-clip:text;color:transparent;font-weight:600}
 .hidden{display:none !important}
+.timeline {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+}
+
+.timeline-item {
+    padding: 20px 24px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+}
+
+.timeline-item h3 {
+    font-size: 1.6rem;
+    margin-bottom: 6px;
+}
+
+.timeline-item.future {
+    border-left: 4px solid #ff7f2a;
+}
+
+.countdown {
+    font-weight: 600;
+    background: linear-gradient(90deg,#ff7f2a,#ff2a7f);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.content-card {
+    margin-top: 60px;
+}
+.timeline-item.future {
+    box-shadow: 0 0 30px rgba(255,127,42,0.25);
+}
+.nasa-event {
+    border-left: 4px solid rgba(120,220,255,.65);
+    box-shadow: 0 0 24px rgba(120,220,255,.18);
+}
+
+.event-sub{
+    font-size: 1.05rem;
+    opacity: .9;
+    margin-top: 6px;
+}
+
+.countdown-line{
+    margin-top: 10px;
+}
+
+.event-link{
+    display:inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: .85;
+    text-decoration: none;
+    color: #cbd5ff;
+}
+.event-link:hover{
+    opacity: 1;
+    text-decoration: underline;
+}
+.home-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.events-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-top: 40px;
+}
+
+.event {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 16px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    backdrop-filter: blur(10px);
+}
+
+.event .countdown {
+    font-size: 1.1rem;
+}
+
+.event small {
+    opacity: 0.7;
+    font-size: 13px;
+}
+
+.event.highlight {
+    border-left: 4px solid #ff7f2a;
+    box-shadow: 0 0 30px rgba(255,127,42,.25);
+}
+.timeline-item {
+    transition: transform .35s ease, box-shadow .35s ease;
+}
+.timeline-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 45px rgba(255,127,42,0.35);
+}
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.timeline-item {
+    position: relative;
+    padding: 22px 26px;
+    border-radius: 20px;
+    background: linear-gradient(
+            135deg,
+            rgba(255,255,255,0.08),
+            rgba(255,255,255,0.03)
+    );
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(16px);
+    overflow: hidden;
+}
+
+/* halo cosmique */
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background: radial-gradient(
+            circle,
+            rgba(255,127,42,0.25),
+            transparent 70%
+    );
+    opacity: 0;
+    transition: opacity .4s;
+}
+
+.timeline-item:hover::before {
+    opacity: 1;
+}
+.countdown {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg,#ff7f2a,#ff2a7f,#ffc850);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: glowText 3s ease-in-out infinite;
+}
+
+@keyframes glowText {
+    0%,100% { filter: drop-shadow(0 0 8px rgba(255,127,42,0.4)); }
+    50% { filter: drop-shadow(0 0 18px rgba(255,127,42,0.9)); }
+}
+.timeline-item.unknown {
+    border: 2px dashed rgba(255,127,42,0.6);
+    animation: pulseUnknown 4s ease-in-out infinite;
+}
+
+@keyframes pulseUnknown {
+    0%,100% { box-shadow: 0 0 20px rgba(255,127,42,0.3); }
+    50% { box-shadow: 0 0 50px rgba(255,127,42,0.7); }
+}
+.timeline-item.moon::before {
+    background: radial-gradient(circle, rgba(200,200,255,0.3), transparent 70%);
+}
+.timeline-item.sun::before {
+    background: radial-gradient(circle, rgba(255,180,60,0.4), transparent 70%);
+}
+.timeline-item.mars::before {
+    background: radial-gradient(circle, rgba(255,90,90,0.35), transparent 70%);
+}
+.timeline-item.earth::before {
+    background: radial-gradient(circle, rgba(80,180,255,0.35), transparent 70%);
+}
+.home-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: start;
+    padding: 40px 80px;
+}
+.content-card h2 {
+    font-size: 4.6rem;
+    line-height: 1.05;
+    text-shadow: 0 0 60px rgba(255,127,42,0.6);
+}
+.content-card p {
+    margin-top: 30px;
+    font-size: 1.4rem;
+    line-height: 1.8;
+    opacity: 0.85;
+}
+.timeline-item.now {
+    margin-top: 40px;
+    padding: 22px 26px;
+    border-radius: 18px;
+    background: linear-gradient(
+            135deg,
+            rgba(255,127,42,0.18),
+            rgba(255,255,255,0.05)
+    );
+    box-shadow: 0 0 30px rgba(255,127,42,0.25);
+}
+.events-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+.event {
+    position: relative;
+    padding: 22px 24px;
+    border-radius: 20px;
+    background: linear-gradient(
+            135deg,
+            rgba(255,255,255,0.10),
+            rgba(255,255,255,0.03)
+    );
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(16px);
+    transition: transform .35s, box-shadow .35s;
+}
+
+.event:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 20px 50px rgba(255,127,42,0.35);
+}
+.event .countdown {
+    display: block;
+    margin-top: 8px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg,#ff7f2a,#ff2a7f,#ffc850);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: glowTime 2.5s ease-in-out infinite;
+}
+
+@keyframes glowTime {
+    0%,100% { filter: drop-shadow(0 0 8px rgba(255,127,42,.5)); }
+    50% { filter: drop-shadow(0 0 18px rgba(255,127,42,.9)); }
+}
+.event.highlight {
+    border: 2px dashed rgba(255,127,42,0.7);
+    animation: pulseUnknown 4s ease-in-out infinite;
+}
+
+@keyframes pulseUnknown {
+    0%,100% { box-shadow: 0 0 25px rgba(255,127,42,0.4); }
+    50% { box-shadow: 0 0 60px rgba(255,127,42,0.8); }
+}
+.event.moon { border-left: 4px solid #c7d2fe; }
+.event.sun { border-left: 4px solid #facc15; }
+.event.mars { border-left: 4px solid #fb7185; }
+.event.earth { border-left: 4px solid #38bdf8; }
+
